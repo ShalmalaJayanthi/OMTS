@@ -28,12 +28,7 @@ public class Show {
 			this.screenId = screenId;
 			this.theatreId = theatreId;
 		}
-		@Override
-		public String toString() {
-			return "Show [showId=" + showId + ", showStartTime=" + showStartTime + ", showEndTime=" + showEndTime
-					+ ", seats=" + Arrays.toString(seats) + ", showName=" + showName + ", movieName=" + movieName
-					+ ", screenId=" + screenId + ", theatreId=" + theatreId + "]";
-		}
+		
 		public int getShowId() {
 			return showId;
 		}
@@ -83,5 +78,10 @@ public class Show {
 			this.theatreId = theatreId;
 		}
 		
-		
+		@Override
+		public String toString() {
+			return "Show [showId=" + showId + ", showStartTime=" + showStartTime + ", showEndTime=" + showEndTime
+					+ ", seats=" + Arrays.toString(seats) + ", showName=" + showName + ", movieName=" + movieName
+					+ ", screenId=" + screenId + ", theatreId=" + theatreId + "]";
+		}
 }

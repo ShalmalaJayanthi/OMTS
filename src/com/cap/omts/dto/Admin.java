@@ -22,11 +22,7 @@ public class Admin {
 			this.dateOfBirth = dateOfBirth;
 			this.adminContact = adminContact;
 		}
-		@Override
-		public String toString() {
-			return "Admin [adminId=" + adminId + ", adminName=" + adminName + ", adminPassword=" + adminPassword
-					+ ", dateOfBirth=" + dateOfBirth + ", adminContact=" + adminContact + "]";
-		}
+		
 		public String getAdminId() {
 			return adminId;
 		}
@@ -58,5 +54,9 @@ public class Admin {
 			this.adminContact = adminContact;
 		}
 		
-		
+		@Override
+		public String toString() {
+			return "Admin [adminId=" + adminId + ", adminName=" + adminName + ", adminPassword=" + adminPassword
+					+ ", dateOfBirth=" + dateOfBirth + ", adminContact=" + adminContact + "]";
+		}
 }

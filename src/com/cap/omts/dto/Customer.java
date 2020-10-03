@@ -24,12 +24,7 @@ public class Customer {
 			this.myTickets = myTickets;
 			this.customerContact = customerContact;
 		}
-		@Override
-		public String toString() {
-			return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerPassword="
-					+ customerPassword + ", dateOfBirth=" + dateOfBirth + ", myTickets=" + myTickets
-					+ ", customerContact=" + customerContact + "]";
-		}
+		
 		public String getCustomerId() {
 			return customerId;
 		}
@@ -67,4 +62,10 @@ public class Customer {
 			this.customerContact = customerContact;
 		}
 		
+		@Override
+		public String toString() {
+			return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerPassword="
+					+ customerPassword + ", dateOfBirth=" + dateOfBirth + ", myTickets=" + myTickets
+					+ ", customerContact=" + customerContact + "]";
+		}
 }

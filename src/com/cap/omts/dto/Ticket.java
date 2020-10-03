@@ -6,7 +6,7 @@ public class Ticket {
 		private int ticketId;
 		private int noOfSeats;
 		private String[] seatName;
-		private Booking bookingref;
+		private Booking bookingRef;
 		private boolean ticketStatus;
 		private String screenName;
 		
@@ -15,13 +15,13 @@ public class Ticket {
 			// TODO Auto-generated constructor stub
 		}
 		//constructor
-		public Ticket(int ticketId, int noOfSeats, String[] seatName, Booking bookingref, boolean ticketStatus,
+		public Ticket(int ticketId, int noOfSeats, String[] seatName, Booking bookingRef, boolean ticketStatus,
 				String screenName) {
 			super();
 			this.ticketId = ticketId;
 			this.noOfSeats = noOfSeats;
 			this.seatName = seatName;
-			this.bookingref = bookingref;
+			this.bookingRef = bookingRef;
 			this.ticketStatus = ticketStatus;
 			this.screenName = screenName;
 		}
@@ -44,11 +44,11 @@ public class Ticket {
 		public void setSeatName(String[] seatName) {
 			this.seatName = seatName;
 		}
-		public Booking getBookingref() {
-			return bookingref;
+		public Booking getBookingRef() {
+			return bookingRef;
 		}
-		public void setBookingref(Booking bookingref) {
-			this.bookingref = bookingref;
+		public void setBookingRef(Booking bookingRef) {
+			this.bookingRef = bookingRef;
 		}
 		public boolean isTicketStatus() {
 			return ticketStatus;
@@ -66,7 +66,7 @@ public class Ticket {
 		@Override
 		public String toString() {
 			return "Ticket [ticketId=" + ticketId + ", noOfSeats=" + noOfSeats + ", seatName="
-					+ Arrays.toString(seatName) + ", bookingref=" + bookingref + ", ticketStatus=" + ticketStatus
+					+ Arrays.toString(seatName) + ", bookingRef=" + bookingRef + ", ticketStatus=" + ticketStatus
 					+ ", screenName=" + screenName + "]";
 		}
 		

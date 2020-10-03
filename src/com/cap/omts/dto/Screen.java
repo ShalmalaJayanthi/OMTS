@@ -26,12 +26,7 @@ public class Screen {
 			this.rows = rows;
 			this.columns = columns;
 		}
-		@Override
-		public String toString() {
-			return "Screen [screenId=" + screenId + ", theatreId=" + theatreId + ", screenName=" + screenName
-					+ ", showList=" + Arrays.toString(showList) + ", movieEndDate=" + movieEndDate + ", rows=" + rows
-					+ ", columns=" + columns + "]";
-		}
+		
 		public int getScreenId() {
 			return screenId;
 		}
@@ -74,6 +69,11 @@ public class Screen {
 		public void setColumns(int columns) {
 			this.columns = columns;
 		}
-		
+		@Override
+		public String toString() {
+			return "Screen [screenId=" + screenId + ", theatreId=" + theatreId + ", screenName=" + screenName
+					+ ", showList=" + Arrays.toString(showList) + ", movieEndDate=" + movieEndDate + ", rows=" + rows
+					+ ", columns=" + columns + "]";
+		}
 		
 }

@@ -24,12 +24,7 @@ public class Movie {
 			this.languages = languages;
 			this.movieReleaseDate = movieReleaseDate;
 		}
-		@Override
-		public String toString() {
-			return "Movie [movieId=" + movieId + ", movieName=" + movieName + ", movieGenre="
-					+ Arrays.toString(movieGenre) + ", movieLength=" + movieLength + ", languages="
-					+ Arrays.toString(languages) + ", movieReleaseDate=" + movieReleaseDate + "]";
-		}
+		
 		public int getMovieId() {
 			return movieId;
 		}
@@ -66,6 +61,11 @@ public class Movie {
 		public void setMovieReleaseDate(LocalDate movieReleaseDate) {
 			this.movieReleaseDate = movieReleaseDate;
 		}
-		
+		@Override
+		public String toString() {
+			return "Movie [movieId=" + movieId + ", movieName=" + movieName + ", movieGenre="
+					+ Arrays.toString(movieGenre) + ", movieLength=" + movieLength + ", languages="
+					+ Arrays.toString(languages) + ", movieReleaseDate=" + movieReleaseDate + "]";
+		}
 		
 }

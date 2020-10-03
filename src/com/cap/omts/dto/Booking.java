@@ -30,12 +30,7 @@ public class Booking {
 			this.seatList = seatList;
 			this.ticket = ticket;
 		}
-		@Override
-		public String toString() {
-			return "Booking [bookingId=" + bookingId + ", movieId=" + movieId + ", showId=" + showId + ", showRef="
-					+ showRef + ", bookingDate=" + bookingDate + ", transactionId=" + transactionId + ", totalCost="
-					+ totalCost + ", seatList=" + Arrays.toString(seatList) + ", ticket=" + ticket + "]";
-		}
+		
 		public int getBookingId() {
 			return bookingId;
 		}
@@ -90,6 +85,12 @@ public class Booking {
 		public void setTicket(Ticket ticket) {
 			this.ticket = ticket;
 		}
-		 
+		
+		@Override
+		public String toString() {
+			return "Booking [bookingId=" + bookingId + ", movieId=" + movieId + ", showId=" + showId + ", showRef="
+					+ showRef + ", bookingDate=" + bookingDate + ", transactionId=" + transactionId + ", totalCost="
+					+ totalCost + ", seatList=" + Arrays.toString(seatList) + ", ticket=" + ticket + "]";
+		} 
 		 
 }

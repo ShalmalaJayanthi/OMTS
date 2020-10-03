@@ -25,12 +25,7 @@ public class Theatre {
 			this.managerName = managerName;
 			this.managerContact = managerContact;
 		}
-		@Override
-		public String toString() {
-			return "Theatre [theatreId=" + theatreId + ", theatreName=" + theatreName + ", theatreCity=" + theatreCity
-					+ ", movies=" + Arrays.toString(movies) + ", listOfScreens=" + Arrays.toString(listOfScreens)
-					+ ", managerName=" + managerName + ", managerContact=" + managerContact + "]";
-		}
+		
 		public int getTheatreId() {
 			return theatreId;
 		}
@@ -74,5 +69,10 @@ public class Theatre {
 			this.managerContact = managerContact;
 		}
 		
-		
+		@Override
+		public String toString() {
+			return "Theatre [theatreId=" + theatreId + ", theatreName=" + theatreName + ", theatreCity=" + theatreCity
+					+ ", movies=" + Arrays.toString(movies) + ", listOfScreens=" + Arrays.toString(listOfScreens)
+					+ ", managerName=" + managerName + ", managerContact=" + managerContact + "]";
+		}
 }
