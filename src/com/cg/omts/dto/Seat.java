@@ -1,4 +1,4 @@
-package com.cap.omts.dto;
+package com.cg.omts.dto;
 enum BookingState {
 	Available, Blocked, Booked; 
 }

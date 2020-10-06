@@ -1,4 +1,4 @@
-package com.cap.omts.dto;
+package com.cg.omts.dto;
 
 public class User {
 		private int userId;

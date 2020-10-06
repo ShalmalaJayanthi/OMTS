@@ -1,4 +1,4 @@
-package com.cap.omts.utility;
+package com.cg.omts.utility;
 
 
 import java.sql.Connection;
@@ -6,7 +6,8 @@ import java.sql.Connection;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import com.cap.omts.exceptions.OMTSException;
+
+import com.cg.omts.exceptions.OMTSException;
 
 import oracle.jdbc.OracleDriver;
 

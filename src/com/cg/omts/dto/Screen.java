@@ -1,4 +1,4 @@
-package com.cap.omts.dto;
+package com.cg.omts.dto;
 
 import java.time.LocalDate;
 import java.util.Arrays;

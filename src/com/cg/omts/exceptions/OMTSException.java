@@ -1,4 +1,4 @@
-package com.cap.omts.exceptions;
+package com.cg.omts.exceptions;
 
 public class OMTSException extends Exception {
 	public OMTSException(String message){

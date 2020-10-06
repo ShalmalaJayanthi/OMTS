@@ -1,18 +1,18 @@
-package com.cap.omts.dto;
+package com.cg.omts.dto;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 
 public class Booking {
-		 private int bookingId;
-		 private int movieId;
-		 private int showId;
-		 private Show showRef;
-		 private LocalDate bookingDate;
-		 private int transactionId;
-		 private double totalCost;
-		 private Seat[] seatList;
-		 private Ticket ticket;
+		private int bookingId;
+		private int movieId;
+		private int showId;
+		private Show showRef;
+		private LocalDate bookingDate;
+		private int transactionId;
+		private double totalCost;
+		private Seat[] seatList;
+		private Ticket ticket;
 		public Booking() {
 			super();
 			// TODO Auto-generated constructor stub

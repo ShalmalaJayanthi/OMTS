@@ -1,5 +1,8 @@
-package com.cap.omts.service;
+package com.cg.omts.service;
+
 
 public interface IAdminService {
+	
+
 
 }

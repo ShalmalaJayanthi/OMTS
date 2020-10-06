@@ -1,4 +1,4 @@
-package com.cap.omts.utility;
+package com.cg.omts.utility;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,7 @@ public class DBConnection {
 		Connection con = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/KnowledgePark","root","root");			
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/MovieDocument?ssl=true","root","root");			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
