@@ -129,7 +129,7 @@ public class UserDaoImpl implements IUserDao{
 				movie.setLanguage(resultSet.getString(6));
 				movie.setMovieReleaseDate(resultSet.getDate(7));
 				movieList.add(movie);
-				System.out.println(movie);
+				
 			}	
 		}catch(SQLException e) {
 			throw new OMTSException("problem occured while creating PS object"+e.getMessage());
