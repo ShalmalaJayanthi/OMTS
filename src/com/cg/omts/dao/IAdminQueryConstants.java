@@ -7,5 +7,5 @@ public interface IAdminQueryConstants {
 	
 	String ADD_THEATRE = "insert into theatre valules(?,?,?,?,?)";
 	
-	public static String DELETE_THEATRE = "DELETE FROM THEATRE WHERE THEATREID=?";
+	String DELETE_THEATRE = "DELETE FROM THEATRE WHERE THEATREID=?";
 }
