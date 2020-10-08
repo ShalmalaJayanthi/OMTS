@@ -17,4 +17,5 @@ public interface IAdminDao {
 	
 	public List<Theatre> getTheatreByName(String theatreName) throws OMTSException;
 	public Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException;
+	//jayanthi added
 }
