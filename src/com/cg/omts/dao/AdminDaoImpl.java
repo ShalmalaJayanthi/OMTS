@@ -77,7 +77,6 @@ public class AdminDaoImpl implements IAdminDao{
 	
 
 	@Override
-	//deleteTheatre method
 	public int deleteTheatre(int theatreId) throws OMTSException {
 		int isDeleted = 0;
 		try {
