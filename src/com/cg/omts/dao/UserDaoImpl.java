@@ -143,6 +143,7 @@ public class UserDaoImpl implements IUserDao{
 		}
 		return movieList;
 	}
+	
 	@Override
 	public List<Integer> getTheatresByCity(String city) throws OMTSException {
 		List<Integer> theatreIdList = new ArrayList<>();
