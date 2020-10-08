@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.cg.omts.dto.Movie;
+import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.utility.DBConnection;
 
@@ -21,12 +24,12 @@ public class UserDaoImpl implements IUserDao{
 		Movie movie = null;
 		Boolean isFound = false;
 		try {
+			
 			connection = DBConnection.getConnection();
-
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_MOVIE_DETAILS);
 			prepareStatement.setInt(1, movieId);
-			
 			resultSet = prepareStatement.executeQuery();
+			
 			isFound = resultSet.next();
 			if(isFound == true) {
 				movie = new Movie();
@@ -51,8 +54,64 @@ public class UserDaoImpl implements IUserDao{
 		}
 		return movie;
 	}
+	
+	@Override
+	public List<Integer> getTheatresByMovie(int movieId) throws OMTSException {
+		// TODO Auto-generated method stub
+		List<Integer> theatreIdList = new ArrayList<Integer>();
+		try {
+			
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_THEATRES_BY_MOVIE);
+			prepareStatement.setInt(1, movieId);
+			resultSet = prepareStatement.executeQuery();
+			while(resultSet.next()) {
+				theatreIdList.add(resultSet.getInt(1));
+			}
+		} catch (SQLException e) {
+			throw new OMTSException("problem while creating PS object"+e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new OMTSException("problem while closing");
+			}
+		}
+		
+		return theatreIdList;
+	}
+
+	@Override
+	public List<String> getTheatreNames(List<Integer> theatreIdList) throws OMTSException {
+		// TODO Auto-generated method stub
+		List<String> theatreNamesList = new ArrayList<String>();
+		try {
+			
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_THEATRE_NAME_BY_ID);
+			
+			for(Integer theatreId : theatreIdList) {
+				prepareStatement.setInt(1, theatreId);
+				resultSet = prepareStatement.executeQuery();
+					while(resultSet.next()) {
+						theatreNamesList.add(resultSet.getString(1));
+					}
+			}
+		} catch (SQLException e) {
+			throw new OMTSException("problem while creating PS object"+e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new OMTSException("problem while closing");
+			}
+		}
+		return theatreNamesList;
+	}	
 	/*
-	 * public static void main(String[] args) { System.out.println(new
-	 * UserDaoImpl().getMovieDetails(1)); }
+	 * public static void main(String[] args) throws OMTSException { List<String>
+	 * theatreNamesList =
+	 * UserDaoImpl.getTheatreNames(UserDaoImpl.getTheatresByMovie(2)); for(String s
+	 * : theatreNamesList) System.out.println(s); }
 	 */
 }
