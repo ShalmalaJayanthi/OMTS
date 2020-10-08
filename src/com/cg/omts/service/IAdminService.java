@@ -11,4 +11,8 @@ public interface IAdminService {
 	
 	public  int addTheatre(Theatre theatre) throws OMTSException;
 
+	public int deleteTheatre(int id) throws OMTSException;
+
+	public List<Theatre> getTheatreByName(String theatreName) throws OMTSException;
+
 }

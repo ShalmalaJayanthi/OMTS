@@ -11,4 +11,5 @@ public interface IUserQueryConstants {
 	String GET_ALL_MOVIES = "selct * from movie";
 	
 	String GET_THEATREID = "select theatreId from theatre WHERE theatreCity=?";
+
 }

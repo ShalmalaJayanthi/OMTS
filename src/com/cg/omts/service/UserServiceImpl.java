@@ -34,6 +34,7 @@ public class UserServiceImpl implements IUserService{
 	public List<Movie> getAllMovies() throws OMTSException {
 		// TODO Auto-generated method stub
 		return userDao.getAllMovies();
+
 	}
 
 }
