@@ -15,11 +15,23 @@ public class AdminServiceImpl implements IAdminService{
 		// TODO Auto-generated method stub
 		return adminDao.getTheatreDetails();
 	}
+<<<<<<< HEAD
 
 	@Override
 	public int addTheatre(Theatre theatre) throws OMTSException {
 		// TODO Auto-generated method stub
 		return adminDao.addTheatre(theatre);
+=======
+	@Override
+	public int addTheatre(Theatre theatre) throws OMTSException {
+		// TODO Auto-generated method stub
+		return adminDao.addTheatre(theatre);
+	}
+	@Override
+	public int deleteTheatre(int theatreId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return adminDao.deleteTheatre(theatreId);
+>>>>>>> branch 'master' of https://github.com/PLaxmiPrasanna/OnlineMovieTicketSystem
 	}
 
 	
