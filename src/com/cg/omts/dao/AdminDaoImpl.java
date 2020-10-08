@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.utility.DBConnection;
@@ -125,5 +126,11 @@ public class AdminDaoImpl  implements IAdminDao {
 			}
 				
 		return theatreList;
+	}
+
+	@Override
+	public Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
