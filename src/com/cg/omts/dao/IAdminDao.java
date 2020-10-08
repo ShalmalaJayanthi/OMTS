@@ -9,5 +9,5 @@ import com.cg.omts.exceptions.OMTSException;
 public interface IAdminDao {
 	public List<Theatre> getTheatreDetails() throws OMTSException;
 	public  int addTheatre(Theatre theatre) throws OMTSException;
-	public int deleteTheatre(int id) throws OMTSException;
+	public int deleteTheatre(int theatreId) throws OMTSException;
 }
