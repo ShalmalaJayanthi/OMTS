@@ -75,22 +75,13 @@ public class AdminDaoImpl  implements IAdminDao {
 		return isInserted;
 	}
 	
-	
-	/*
-	 * public static void main(String[] args) throws OMTSException {
-	 * //System.out.println(AdminDAOImpl.getTheatreDetails());
-	 * //System.out.println(AdminDAOImpl.addTheatre(new
-	 * Theatre(123,"Game","Tokyo","James","9028384756"))); }
-	 */
-	 
-	 
 	@Override
 	public int deleteTheatre(int theatreId) throws OMTSException {
 		int isDeleted = 0;
 		try {
 		// TODO Auto-generated method stub
 		connection = DBConnection.getConnection();
-		prepareStatement=connection.prepareStatement("delete from Theatre where theatreId=?");    
+		prepareStatement=connection.prepareStatement(IAdminQueryConstants.DELETE_THEATRE);    
 		prepareStatement.setInt(1,theatreId);  
 		isDeleted = prepareStatement.executeUpdate();  
 		}catch(SQLException e){ 
@@ -111,7 +102,7 @@ public class AdminDaoImpl  implements IAdminDao {
 		List<Theatre> theatreList = new ArrayList<Theatre>();
 		try {
 			connection  = DBConnection.getConnection();
-			prepareStatement =connection.prepareStatement("select * from theatre where theatreName=?"); 
+			prepareStatement =connection.prepareStatement(IAdminQueryConstants.GET_THEATRE_BY_NAME); 
 			prepareStatement.setString(1, theatreName);
 			resultSet = prepareStatement.executeQuery();  
 				while(resultSet.next())   {
