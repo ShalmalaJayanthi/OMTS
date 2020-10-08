@@ -96,5 +96,36 @@ public class AdminDaoImpl implements IAdminDao{
 		}
 	return isDeleted;
 	}
+
+	@Override
+	public List<Theatre> getTheatreByName(String theatreName) throws OMTSException {
+		// TODO Auto-generated method stub
+		List<Theatre> theatreList = new ArrayList<Theatre>();
+		try {
+			connection  = DBConnection.getConnection();
+			prepareStatement =connection.prepareStatement("select * from theatre where theatreName=?"); 
+			prepareStatement.setString(1, theatreName);
+			resultSet = prepareStatement.executeQuery();  
+				while(resultSet.next())   {
+					Theatre theatre = new Theatre();
+					theatre.setTheatreId(resultSet.getInt(1));
+					theatre.setTheatreName(resultSet.getString(2));
+					theatre.setTheatreCity(resultSet.getString(3));
+					theatre.setManagerName(resultSet.getString(4));
+					theatre.setManagerContact(resultSet.getString(5));
+					theatreList.add(theatre); 
+				}
+			}catch(SQLException e){ 
+				throw new OMTSException("problem while displaying Theatre Data from Database");
+			}finally {
+				try {
+					connection.close();
+				}catch(SQLException e) {
+					throw new OMTSException("problem while closing Database");
+				}
+			}
+				
+		return theatreList;
+	}
 }
 

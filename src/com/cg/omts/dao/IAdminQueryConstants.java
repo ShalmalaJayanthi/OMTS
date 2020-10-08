@@ -4,4 +4,5 @@ public interface IAdminQueryConstants {
 	public static String GET_THEATRE_DETAILS= "SELECT * FROM THEATRE"; 
 	public static String ADD_THEATRE="INSERT INTO THEATRE VALUES(?,?,?,?,?)";
 	public static String DELETE_THEATRE = "DELETE FROM THEATRE WHERE THEATREID=?";
+	public static String GET_THEATRE_By_NAME="SELECT * FROM THEATRE WHERE THEATRENAME=?";
 }

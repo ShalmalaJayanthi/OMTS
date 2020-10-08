@@ -9,4 +9,5 @@ public interface IAdminService {
 	public List<Theatre> getTheatreDetails() throws OMTSException;
 	public  int addTheatre(Theatre theatre) throws OMTSException;
 	public int deleteTheatre(int id) throws OMTSException;
+	public List<Theatre> getTheatreByName(String theatreName) throws OMTSException;
 }
