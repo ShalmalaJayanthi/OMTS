@@ -12,6 +12,8 @@ import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.utility.DBConnection;
 
+import sun.security.pkcs11.Secmod.DbMode;
+
 public class UserDaoImpl implements IUserDao{
 
 	static Connection connection = null;
@@ -107,6 +109,64 @@ public class UserDaoImpl implements IUserDao{
 			}
 		}
 		return theatreNamesList;
+	}	
+	
+	@Override
+	public List<Movie> getAllMovies() throws OMTSException{
+		List<Movie> movieList = new ArrayList<Movie>();
+		Movie movie = null;
+		try {
+			connection =  DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_ALL_MOVIES);
+			resultSet = prepareStatement.executeQuery();	
+			while(resultSet.next()) {
+				movie = new Movie();
+				movie.setMovieId(resultSet.getInt(1));
+				movie.setMovieName(resultSet.getString(2));
+				movie.setMovieGenre(resultSet.getString(3));
+				movie.setMovieDirector(resultSet.getString(4));
+				movie.setMovieLength(resultSet.getInt(5));
+				movie.setLanguage(resultSet.getString(6));
+				movie.setMovieReleaseDate(resultSet.getDate(7));
+				movieList.add(movie);
+				System.out.println(movie);
+			}	
+		}catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object"+e.getMessage());
+		}
+		finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing connection");
+			}
+		}
+		return movieList;
+	}
+	@Override
+	public List<Integer> getTheatresByCity(String city) throws OMTSException {
+		List<Integer> theatreIdList = new ArrayList<>();
+		Theatre theatre = null;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_THEATREID);
+			prepareStatement.setString(1, city);
+			resultSet = prepareStatement.executeQuery();
+			while(resultSet.next()) {
+				theatre = new Theatre();
+				theatreIdList.add(resultSet.getInt(1));
+			}
+		}catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object");
+		}
+		finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing connection");
+			}
+		}
+		return theatreIdList;			
 	}	
 	/*
 	 * public static void main(String[] args) throws OMTSException { List<String>

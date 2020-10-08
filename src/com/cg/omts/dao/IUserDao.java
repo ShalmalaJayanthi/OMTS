@@ -14,4 +14,7 @@ public interface IUserDao {
 	
 	public List<String> getTheatreNames(List<Integer> theatreIdList) throws OMTSException;
 	
+	public List<Integer> getTheatresByCity(String city) throws OMTSException;
+	
+	public List<Movie> getAllMovies() throws OMTSException;
 }
