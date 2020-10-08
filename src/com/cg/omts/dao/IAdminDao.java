@@ -1,8 +1,11 @@
 package com.cg.omts.dao;
 
 import java.util.List;
+
+import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
+
 
 public interface IAdminDao {
 	
@@ -13,4 +16,5 @@ public interface IAdminDao {
 	public int deleteTheatre(int theatreId) throws OMTSException;
 	
 	public List<Theatre> getTheatreByName(String theatreName) throws OMTSException;
+	public Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException;
 }
