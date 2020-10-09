@@ -9,15 +9,16 @@ public class Show {
 		private Time showEndTime;
 		private Seat[] seats;
 		private String showName;
-		private Movie movieName;
+		private String movieName;
 		private int screenId;
 		private int theatreId;
+		private int movieId;
 		public Show() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
-		public Show(int showId, Time showStartTime, Time showEndTime, Seat[] seats, String showName, Movie movieName,
-				int screenId, int theatreId) {
+		public Show(int showId, Time showStartTime, Time showEndTime, Seat[] seats, String showName, String movieName,
+				int screenId, int theatreId, int movieId) {
 			super();
 			this.showId = showId;
 			this.showStartTime = showStartTime;
@@ -27,6 +28,7 @@ public class Show {
 			this.movieName = movieName;
 			this.screenId = screenId;
 			this.theatreId = theatreId;
+			this.movieId = movieId;
 		}
 		
 		public int getShowId() {
@@ -59,10 +61,10 @@ public class Show {
 		public void setShowName(String showName) {
 			this.showName = showName;
 		}
-		public Movie getMovieName() {
+		public String getMovieName() {
 			return movieName;
 		}
-		public void setMovieName(Movie movieName) {
+		public void setMovieName(String movieName) {
 			this.movieName = movieName;
 		}
 		public int getScreenId() {
@@ -77,11 +79,17 @@ public class Show {
 		public void setTheatreId(int theatreId) {
 			this.theatreId = theatreId;
 		}
-		
+		public int getMovieId() {
+			return movieId;
+		}
+		public void setMovieId(int movieId) {
+			this.movieId = movieId;
+		}
 		@Override
 		public String toString() {
 			return "Show [showId=" + showId + ", showStartTime=" + showStartTime + ", showEndTime=" + showEndTime
 					+ ", seats=" + Arrays.toString(seats) + ", showName=" + showName + ", movieName=" + movieName
-					+ ", screenId=" + screenId + ", theatreId=" + theatreId + "]";
+					+ ", screenId=" + screenId + ", theatreId=" + theatreId + ", movieId=" + movieId + "]";
 		}
+		
 }

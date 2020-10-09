@@ -4,11 +4,14 @@ public interface IAdminQueryConstants {
 
 
 	
-	String GET_THEATRE_DETAILS = "select * from theatre";
+	String GET_THEATRE_DETAILS = "SELECT * FROM THEATRE";
 	
-	String ADD_THEATRE = "insert into theatre valules(?,?,?,?,?)";
+	String ADD_THEATRE = "INSERT INTO THEATRE VALUES(?,?,?,?,?)";
 	
 	String DELETE_THEATRE = "DELETE FROM THEATRE WHERE THEATREID=?";
 	
 	String GET_THEATRE_BY_NAME="SELECT * FROM THEATRE WHERE THEATRENAME=?";
+	
+	String GET_SHOW_DETAILS = "SELECT * FROM SHOWDETAILS";
+	
 }

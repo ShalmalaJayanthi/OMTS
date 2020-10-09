@@ -5,10 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.cg.omts.dto.Movie;
+import com.cg.omts.dto.Show;
 import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.utility.DBConnection;
@@ -127,9 +130,62 @@ public class AdminDaoImpl  implements IAdminDao {
 				
 		return theatreList;
 	}
-
+	
 	@Override
 	public Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Show> getShowDetails() throws OMTSException {
+		// TODO Auto-generated method stub
+		List<Show> showList = new ArrayList<Show>();
+		try {
+			connection  = DBConnection.getConnection();
+			statement = connection.createStatement();  
+			resultSet = statement.executeQuery(IAdminQueryConstants.GET_SHOW_DETAILS);  
+			
+			while(resultSet.next())   {
+					Show show = new Show();
+					show.setShowId(resultSet.getInt(1));
+					show.setShowStartTime(resultSet.getTime(2));
+					show.setShowEndTime(resultSet.getTime(3));
+					show.setShowName(resultSet.getString(4));
+					show.setMovieName(resultSet.getString(5));
+					show.setScreenId(resultSet.getInt(6));
+					show.setTheatreId(resultSet.getInt(7));
+					show.setMovieId(resultSet.getInt(8));
+					showList.add(show); 
+			}
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while displaying Show Data from Database");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+			
+		return showList;
+		
+	}
+
+	@Override
+	public int addShow(Show show) throws OMTSException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteShow(int showId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Show> getShowByName() throws OMTSException {
 		// TODO Auto-generated method stub
 		return null;
 	}
