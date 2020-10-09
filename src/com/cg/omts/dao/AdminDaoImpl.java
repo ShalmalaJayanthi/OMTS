@@ -184,7 +184,7 @@ public class AdminDaoImpl implements IAdminDao {
 			prepareStatement.setInt(1,show.getShowId()); 
 			prepareStatement.setTime(2, show.getShowStartTime());
 			prepareStatement.setTime(3, show.getShowEndTime());
-			//prepareStatement.setString(4, show.getSeats());
+			//prepareStatement.setString(4, show.getSeats());//This is commented cause in DTO it's type is Seat[] but in database it is varchar
 			prepareStatement.setString(5, show.getShowName());
 			prepareStatement.setString(6, show.getMovieName());
 			prepareStatement.setInt(7,show.getScreenId());
