@@ -6,17 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.cg.omts.dto.Movie;
+import com.cg.omts.dto.Seat;
 import com.cg.omts.dto.Show;
 import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.utility.DBConnection;
 
-public class AdminDaoImpl  implements IAdminDao {
+public class AdminDaoImpl implements IAdminDao {
 	
 	static Connection connection = null;
 	static Statement statement = null;
@@ -174,8 +176,31 @@ public class AdminDaoImpl  implements IAdminDao {
 
 	@Override
 	public int addShow(Show show) throws OMTSException {
-		// TODO Auto-generated method stub
-		return 0;
+		int isInserted = 0;
+		System.out.println(show);
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IAdminQueryConstants.ADD_SHOW);    
+			prepareStatement.setInt(1,show.getShowId()); 
+			prepareStatement.setTime(2, show.getShowStartTime());
+			prepareStatement.setTime(3, show.getShowEndTime());
+			//prepareStatement.setString(4, show.getSeats());
+			prepareStatement.setString(5, show.getShowName());
+			prepareStatement.setString(6, show.getMovieName());
+			prepareStatement.setInt(7,show.getScreenId());
+			prepareStatement.setInt(8, show.getTheatreId());
+			prepareStatement.setInt(9, show.getMovieId());
+			isInserted = prepareStatement.executeUpdate();  
+			}catch(SQLException e){ 
+				throw new OMTSException("problem inserting Show Details into Database");
+			}finally {
+				try {
+					connection.close();
+				}catch(SQLException e) {
+					throw new OMTSException("problem while closing Database");
+				}
+			}
+		return isInserted;
 	}
 
 	@Override

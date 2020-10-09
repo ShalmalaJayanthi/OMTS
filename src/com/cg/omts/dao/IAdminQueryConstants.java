@@ -14,4 +14,6 @@ public interface IAdminQueryConstants {
 	
 	String GET_SHOW_DETAILS = "SELECT * FROM SHOWDETAILS";
 	
+	String ADD_SHOW = "INSERT INTO SHOWDETAILS VALUES(?,?,?,?,?,?,?,?,?)";
+	
 }
