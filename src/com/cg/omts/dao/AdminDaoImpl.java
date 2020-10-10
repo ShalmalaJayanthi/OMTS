@@ -12,13 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cg.omts.dto.Movie;
+import com.cg.omts.dto.Screen;
 import com.cg.omts.dto.Seat;
 import com.cg.omts.dto.Show;
 import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.utility.DBConnection;
 
-public class AdminDaoImpl implements IAdminDao {
+public class AdminDaoImpl implements IAdminDao, IQueryConstants {
 	
 	static Connection connection = null;
 	static Statement statement = null;
@@ -133,11 +134,6 @@ public class AdminDaoImpl implements IAdminDao {
 		return theatreList;
 	}
 	
-	@Override
-	public Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<Show> getShowDetails() throws OMTSException {
@@ -214,4 +210,48 @@ public class AdminDaoImpl implements IAdminDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Movie> getMovieDetailsToDelete() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int deleteMovie(Integer movieId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ArrayList<Theatre> getTheatreDetails(String theatreCity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean addScreen(Screen screen, Integer theatreId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean deleteScreen(Integer screenId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Screen> getScreenDetailsToDelete() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 }
