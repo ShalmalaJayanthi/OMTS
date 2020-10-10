@@ -173,19 +173,17 @@ public class AdminDaoImpl implements IAdminDao, IQueryConstants {
 	@Override
 	public int addShow(Show show) throws OMTSException {
 		int isInserted = 0;
-		System.out.println(show);
 		try {
 			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IAdminQueryConstants.ADD_SHOW);    
 			prepareStatement.setInt(1,show.getShowId()); 
 			prepareStatement.setTime(2, show.getShowStartTime());
 			prepareStatement.setTime(3, show.getShowEndTime());
-			//prepareStatement.setString(4, show.getSeats());//This is commented cause in DTO it's type is Seat[] but in database it is varchar
-			prepareStatement.setString(5, show.getShowName());
-			prepareStatement.setString(6, show.getMovieName());
-			prepareStatement.setInt(7,show.getScreenId());
-			prepareStatement.setInt(8, show.getTheatreId());
-			prepareStatement.setInt(9, show.getMovieId());
+			prepareStatement.setString(4, show.getShowName());
+			prepareStatement.setString(5, show.getMovieName());
+			prepareStatement.setInt(6,show.getScreenId());
+			prepareStatement.setInt(7, show.getTheatreId());
+			prepareStatement.setInt(8, show.getMovieId());
 			isInserted = prepareStatement.executeUpdate();  
 			}catch(SQLException e){ 
 				throw new OMTSException("problem inserting Show Details into Database");
@@ -202,13 +200,57 @@ public class AdminDaoImpl implements IAdminDao, IQueryConstants {
 	@Override
 	public int deleteShow(int showId) throws OMTSException {
 		// TODO Auto-generated method stub
-		return 0;
+		int isDeleted = 0;
+		try {
+		connection = DBConnection.getConnection();
+		prepareStatement=connection.prepareStatement(IAdminQueryConstants.DELETE_SHOW);    
+		prepareStatement.setInt(1,showId);  
+		isDeleted = prepareStatement.executeUpdate();  
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while deleting Show Details from Database");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+	return isDeleted;
 	}
 
 	@Override
-	public List<Show> getShowByName() throws OMTSException {
+	public List<Show> getShowByName(String showName) throws OMTSException {
 		// TODO Auto-generated method stub
-		return null;
+		List<Show> showList = new ArrayList<Show>();
+		try {
+			connection  = DBConnection.getConnection();
+			prepareStatement =connection.prepareStatement(IAdminQueryConstants.GET_SHOW_BY_NAME); 
+			prepareStatement.setString(1, showName);
+			resultSet = prepareStatement.executeQuery();  
+				while(resultSet.next())   {
+					Show show = new Show();
+					show.setShowId(resultSet.getInt(1));
+					show.setShowStartTime(resultSet.getTime(2));
+					show.setShowEndTime(resultSet.getTime(3));
+					show.setShowName(resultSet.getString(4));
+					show.setMovieName(resultSet.getString(5));
+					show.setScreenId(resultSet.getInt(6));
+					show.setTheatreId(resultSet.getInt(7));
+					show.setMovieId(resultSet.getInt(8));
+					showList.add(show); 
+				}
+			}catch(SQLException e){ 
+				throw new OMTSException("problem while displaying Show Data from Database");
+			}finally {
+				try {
+					connection.close();
+				}catch(SQLException e) {
+					throw new OMTSException("problem while closing Database");
+				}
+			}
+				
+		return showList;
+
 	}
 
 	

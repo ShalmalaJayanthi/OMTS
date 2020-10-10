@@ -26,7 +26,7 @@ public interface IAdminDao {
 	
 	public int deleteShow(int showId) throws OMTSException;
 	
-	public List<Show> getShowByName() throws OMTSException;
+	public List<Show> getShowByName(String showName) throws OMTSException;
 	
 	public Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException;
 	

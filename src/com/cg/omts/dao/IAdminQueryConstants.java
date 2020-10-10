@@ -12,6 +12,12 @@ public interface IAdminQueryConstants {
 	
 	String GET_SHOW_DETAILS = "SELECT * FROM SHOWDETAILS";
 	
-	String ADD_SHOW = "INSERT INTO SHOWDETAILS VALUES(?,?,?,?,?,?,?,?,?)";
+	String ADD_SHOW = "INSERT INTO SHOWDETAILS VALUES(?,?,?,?,?,?,?,?)";
+	
+	String DELETE_SHOW = "DELETE FROM SHOWDETAILS WHERE SHOWID=?";
+	
+	String GET_SHOW_BY_NAME="SELECT * FROM SHOWDETAILS WHERE SHOWNAME=?";
+
+
 	
 }
