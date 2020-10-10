@@ -3,6 +3,10 @@ package com.cg.omts.dto;
 import java.sql.Date;
 
 public class Movie {
+	
+	//private Blob movieImg;
+	
+	
 		private int movieId;
 		private String movieName;
 		private String movieGenre;
@@ -10,6 +14,9 @@ public class Movie {
 		private int movieLength;
 		private String language;
 		private Date movieReleaseDate;
+		private int theatreId;
+		private String theatreCity;
+		private String theatreName;
 		
 		public Movie() {
 			super();
@@ -26,6 +33,31 @@ public class Movie {
 			this.movieLength = movieLength;
 			this.language = language;
 			this.movieReleaseDate = movieReleaseDate;
+		}
+
+		
+		public int getTheatreId() {
+			return theatreId;
+		}
+
+		public void setTheatreId(int theatreId) {
+			this.theatreId = theatreId;
+		}
+
+		public String getTheatreCity() {
+			return theatreCity;
+		}
+
+		public void setTheatreCity(String theatreCity) {
+			this.theatreCity = theatreCity;
+		}
+
+		public String getTheatreName() {
+			return theatreName;
+		}
+
+		public void setTheatreName(String theatreName) {
+			this.theatreName = theatreName;
 		}
 
 		public int getMovieId() {

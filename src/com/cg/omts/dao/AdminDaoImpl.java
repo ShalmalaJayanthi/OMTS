@@ -5,14 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cg.omts.dto.Movie;
+import com.cg.omts.dto.Screen;
+import com.cg.omts.dto.Seat;
+import com.cg.omts.dto.Show;
 import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.utility.DBConnection;
 
-public class AdminDaoImpl  implements IAdminDao {
+public class AdminDaoImpl implements IAdminDao, IQueryConstants {
 	
 	static Connection connection = null;
 	static Statement statement = null;
@@ -126,4 +133,305 @@ public class AdminDaoImpl  implements IAdminDao {
 				
 		return theatreList;
 	}
+	
+
+	@Override
+	public List<Show> getShowDetails() throws OMTSException {
+		// TODO Auto-generated method stub
+		List<Show> showList = new ArrayList<Show>();
+		try {
+			connection  = DBConnection.getConnection();
+			statement = connection.createStatement();  
+			resultSet = statement.executeQuery(IAdminQueryConstants.GET_SHOW_DETAILS);  
+			
+			while(resultSet.next())   {
+					Show show = new Show();
+					show.setShowId(resultSet.getInt(1));
+					show.setShowStartTime(resultSet.getTime(2));
+					show.setShowEndTime(resultSet.getTime(3));
+					show.setShowName(resultSet.getString(4));
+					show.setMovieName(resultSet.getString(5));
+					show.setScreenId(resultSet.getInt(6));
+					show.setTheatreId(resultSet.getInt(7));
+					show.setMovieId(resultSet.getInt(8));
+					showList.add(show); 
+			}
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while displaying Show Data from Database");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+			
+		return showList;
+		
+	}
+
+	@Override
+	public int addShow(Show show) throws OMTSException {
+		int isInserted = 0;
+		System.out.println(show);
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IAdminQueryConstants.ADD_SHOW);    
+			prepareStatement.setInt(1,show.getShowId()); 
+			prepareStatement.setTime(2, show.getShowStartTime());
+			prepareStatement.setTime(3, show.getShowEndTime());
+			//prepareStatement.setString(4, show.getSeats());//This is commented cause in DTO it's type is Seat[] but in database it is varchar
+			prepareStatement.setString(5, show.getShowName());
+			prepareStatement.setString(6, show.getMovieName());
+			prepareStatement.setInt(7,show.getScreenId());
+			prepareStatement.setInt(8, show.getTheatreId());
+			prepareStatement.setInt(9, show.getMovieId());
+			isInserted = prepareStatement.executeUpdate();  
+			}catch(SQLException e){ 
+				throw new OMTSException("problem inserting Show Details into Database");
+			}finally {
+				try {
+					connection.close();
+				}catch(SQLException e) {
+					throw new OMTSException("problem while closing Database");
+				}
+			}
+		return isInserted;
+	}
+
+	@Override
+	public int deleteShow(int showId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Show> getShowByName() throws OMTSException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
+	@Override
+	public Boolean addMovie(Movie movie, Integer theatreId) {
+		connection = DBConnection.getConnection();
+		int rows = 0;
+		try {
+			prepareStatement = connection.prepareStatement(ADD_MOVIE);
+			prepareStatement.setInt(1, movie.getMovieId());
+			prepareStatement.setString(2, movie.getMovieName());
+			prepareStatement.setString(3, movie.getMovieGenre());
+			prepareStatement.setString(4, movie.getMovieDirector());
+			prepareStatement.setInt(5, movie.getMovieLength());
+			prepareStatement.setString(6, movie.getLanguage());
+			prepareStatement.setDate(7, movie.getMovieReleaseDate());
+			//statement.setBlob(8, inputStream);
+			prepareStatement.setInt(8, theatreId); 
+			
+			rows = prepareStatement.executeUpdate();
+			if(rows > 0) 
+				return true;
+			
+			
+		} catch(SQLException e){
+			System.out.println("Failed to add movie details!! "+e);
+			
+		}
+		finally{
+			try {
+				connection.close();
+				statement.close();
+			} catch (SQLException e) {
+				
+				System.out.println("Failed to close the database connection" +e);
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public int deleteMovie(Integer movieId) {
+		connection = DBConnection.getConnection();
+		int rows = 0;
+		try {
+			prepareStatement = connection.prepareStatement(DELETE_MOVIE);
+			prepareStatement.setInt(1, movieId);
+			rows = prepareStatement.executeUpdate();
+			return rows;
+		} catch (SQLException e) {
+			System.out.println("Failed to delete the movie with Id: "+movieId);
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the database connection" +e);
+			}
+		}
+		return rows;
+	}
+	
+	@Override
+	public ArrayList<Movie> getMovieDetailsToDelete() {
+		connection = DBConnection.getConnection();
+		Movie movie = null;
+		ArrayList<Movie> movieList = null;
+		try {
+			prepareStatement = connection.prepareStatement(DISPLAY_ALL_MOVIES_DELETE);
+			prepareStatement.executeQuery();
+			resultSet = prepareStatement.getResultSet();
+			movieList = new ArrayList<Movie>();
+			
+			while(resultSet.next()) {
+				movie = new Movie();
+				movie.setMovieId(resultSet.getInt(1));
+				movie.setMovieName(resultSet.getString(2));
+				movie.setTheatreId(resultSet.getInt(3));
+				movie.setTheatreName(resultSet.getString(4));
+				movie.setTheatreCity(resultSet.getString(5));
+				movieList.add(movie);
+			}
+			
+			return movieList;
+		} catch (SQLException e) {
+			System.out.println("Failed to get the movie details"+ e);
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the database connection" +e);
+			}
+		}
+		return movieList;
+		
+	}
+	
+	@Override
+	public ArrayList<Theatre> getTheatreDetails(String theatreCity) {
+		connection = DBConnection.getConnection();
+		
+		ArrayList<Theatre> theatreDetails = null;
+		Theatre theatre = null;
+		try {
+			prepareStatement = connection.prepareStatement(GET_THEATRE_DETAILS);
+			prepareStatement.setString(1, theatreCity);
+			prepareStatement.executeQuery();
+			resultSet = prepareStatement.getResultSet();
+			
+			theatreDetails = new ArrayList<Theatre>();
+			
+			while(resultSet.next()){
+				theatre = new Theatre();
+				theatre.setTheatreId(resultSet.getInt(1));
+				theatre.setTheatreName(resultSet.getString(2));
+				theatreDetails.add(theatre);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Failed to get the theatre details");
+		} finally {
+			try {
+				connection.close();
+				prepareStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the database connection" +e);
+			}			
+			
+		}
+				
+		return theatreDetails;
+	}
+
+	
+
+	@Override
+	public Boolean addScreen(Screen screen, Integer theatreId) {
+		connection = DBConnection.getConnection();
+		int rows = 0;
+		try {
+			prepareStatement = connection.prepareStatement(ADD_SCREEN);
+			prepareStatement.setInt(1, screen.getScreenId());
+			prepareStatement.setInt(2, theatreId);
+			prepareStatement.setString(3, screen.getScreenName());
+			prepareStatement.setInt(4, screen.getRows());
+			prepareStatement.setInt(5, screen.getColumns());
+			prepareStatement.setDate(6, screen.getMovieEndDate());
+			rows = prepareStatement.executeUpdate();
+			if(rows > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.print("Failed to add the screen\n"+e);
+		} finally {
+			try {
+				connection.close();
+				prepareStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the database connection"+ e);
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean deleteScreen(Integer screenId) {
+		connection = DBConnection.getConnection();
+		int rows = 0;
+		try {
+			prepareStatement = connection.prepareStatement(DELETE_SCREEN);
+			prepareStatement.setInt(1, screenId);
+			rows = prepareStatement.executeUpdate();
+			if(rows > 0)
+				return true;
+		} catch (SQLException e) {
+			System.out.println("Failed to delete the screen with Id: "+screenId);
+		} finally {
+			try {
+				connection.close();
+				prepareStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the database connection" +e);
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public ArrayList<Screen> getScreenDetailsToDelete() {
+		connection = DBConnection.getConnection();
+		Screen screen = null;
+		ArrayList<Screen> screenList = null;
+		try {
+			prepareStatement = connection.prepareStatement(DISPLAY_ALL_SCREEN_DELETE);
+			prepareStatement.executeQuery();
+			resultSet = prepareStatement.getResultSet();
+			screenList = new ArrayList<Screen>();
+			
+			while(resultSet.next()) {
+				screen = new Screen();
+				screen.setScreenId(resultSet.getInt(1));
+				screen.setScreenName(resultSet.getString(2));
+				screen.setTheatreId(resultSet.getInt(3));
+				screen.setTheatreName(resultSet.getString(4));
+				screen.setTheatreCity(resultSet.getString(5));
+				screenList.add(screen);
+			}
+			
+			return screenList;
+		} catch (SQLException e) {
+			System.out.println("Failed to get the screen details"+ e);
+		} finally {
+			try {
+				connection.close();
+				prepareStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the database connection" +e);
+			}
+		}
+		return screenList;
+	}
+	
+	
 }

@@ -1,12 +1,17 @@
 package com.cg.omts.dao;
 
 public interface IAdminQueryConstants {
-
-	String GET_THEATRE_DETAILS = "select * from theatre";
 	
-	String ADD_THEATRE = "insert into theatre valules(?,?,?,?,?)";
+	String GET_THEATRE_DETAILS = "SELECT * FROM THEATRE";
+	
+	String ADD_THEATRE = "INSERT INTO THEATRE VALUES(?,?,?,?,?)";
 	
 	String DELETE_THEATRE = "DELETE FROM THEATRE WHERE THEATREID=?";
 	
-	String GET_THEATRE_BY_NAME = "SELECT * FROM THEATRE WHERE THEATRENAME=?";
+	String GET_THEATRE_BY_NAME="SELECT * FROM THEATRE WHERE THEATRENAME=?";
+	
+	String GET_SHOW_DETAILS = "SELECT * FROM SHOWDETAILS";
+	
+	String ADD_SHOW = "INSERT INTO SHOWDETAILS VALUES(?,?,?,?,?,?,?,?,?)";
+	
 }
