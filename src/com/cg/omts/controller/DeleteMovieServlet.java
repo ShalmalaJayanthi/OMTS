@@ -29,13 +29,12 @@ public class DeleteMovieServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer movieId = Integer.parseInt(request.getParameter("movieId"));
-		System.out.println("movie id = " + movieId);
+		
+		int movieId = Integer.parseInt(request.getParameter("movieId"));
+		
 		IAdminService adminService = new AdminServiceImpl();
 		adminService.deleteMovie(movieId);
-		
-		//request.getRequestDispatcher("deleteMovies.jsp").forward(request, response);
-			
+				
 	}
 
 }

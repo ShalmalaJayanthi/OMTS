@@ -20,27 +20,20 @@ public class AddScreenServlet extends HttpServlet {
 			}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer screenId = Integer.parseInt(request.getParameter("screenId"));
-		//Integer theatreId = Integer.parseInt(request.getParameter("theatreId"));
+		
+		int screenId = Integer.parseInt(request.getParameter("screenId"));
 		String screenName = request.getParameter("screenName");
 		String date = request.getParameter("movieEndDate");
 		Date movieEndDate = Date.valueOf(date);
-		Integer screenRows = Integer.parseInt(request.getParameter("screenRows"));
-		Integer screenColumns = Integer.parseInt(request.getParameter("screenColumns"));
+		int screenRows = Integer.parseInt(request.getParameter("screenRows"));
+		int screenColumns = Integer.parseInt(request.getParameter("screenColumns"));
 		
 		Screen screen = new Screen(screenId, screenName, movieEndDate, screenRows, screenColumns);
 		
 		ServletContext context = getServletContext();
 		context.setAttribute("screen", screen);
 		request.getRequestDispatcher("getTheatreDetails.jsp").forward(request, response);
-		/*IAdminDAO adminDao = new AdminDao();
-		Boolean isAdded = adminDao.addScreen(screen);
-		if(isAdded) {
-			System.out.println("Screen is successfully added");
-			request.getRequestDispatcher("addScreen.jsp").forward(request, response);
-		} else {
-			request.getRequestDispatcher("adminHomePage.html").forward(request, response);
-		}*/
+		
 	}
 
 }

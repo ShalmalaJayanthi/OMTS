@@ -31,9 +31,14 @@ public interface IAdminDao {
 	public Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException;
 	
 	public  ArrayList<Movie> getMovieDetailsToDelete();
+	
 	public  int deleteMovie(Integer movieId);
+	
 	public  ArrayList<Theatre> getTheatreDetails(String theatreCity);
+	
 	public  Boolean addScreen(Screen screen, Integer theatreId);
+	
 	public  Boolean deleteScreen(Integer screenId);
+	
 	public  ArrayList<Screen> getScreenDetailsToDelete();
 }

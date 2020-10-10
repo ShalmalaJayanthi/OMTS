@@ -23,8 +23,8 @@ public class GetTheatreDetails extends HttpServlet {
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String theatreCity = request.getParameter("theatreCity");
-		System.out.println("City; "+theatreCity);
 		IAdminService adminService = new AdminServiceImpl();
 		ArrayList<Theatre> getTheatres = adminService.getTheatreDetails(theatreCity);
 		

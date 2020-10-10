@@ -23,11 +23,11 @@ public class MovieServlet extends HttpServlet {
        
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer movieId = Integer.parseInt(request.getParameter("movieId"));
+		int movieId = Integer.parseInt(request.getParameter("movieId"));
 		String movieName = request.getParameter("movieName");
 		String movieGenre = request.getParameter("movieGenre");
 		String movieDirector = request.getParameter("movieDirector");
-		Integer movieLength = Integer.parseInt(request.getParameter("movieLength"));
+		int movieLength = Integer.parseInt(request.getParameter("movieLength"));
 		String movieLanguage = request.getParameter("movieLanguage");
 		String releaseDate = request.getParameter("movieReleaseDate");
 	 

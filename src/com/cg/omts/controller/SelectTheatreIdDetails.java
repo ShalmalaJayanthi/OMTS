@@ -22,7 +22,7 @@ public class SelectTheatreIdDetails extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IAdminService adminService = new AdminServiceImpl();
-		Integer theatreId = Integer.parseInt(request.getParameter("theatreId"));
+		int theatreId = Integer.parseInt(request.getParameter("theatreId"));
 		Boolean isAdded;
 		
 		ServletContext context=getServletContext();  

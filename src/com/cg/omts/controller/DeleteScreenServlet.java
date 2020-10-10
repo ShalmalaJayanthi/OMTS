@@ -32,8 +32,8 @@ public class DeleteScreenServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer screenId = Integer.parseInt(request.getParameter("screenId"));
-		System.out.println("screen id = " + screenId);
+		
+		int screenId = Integer.parseInt(request.getParameter("screenId"));
 		IAdminService adminService = new AdminServiceImpl();
 		adminService.deleteScreen(screenId);
 	}
