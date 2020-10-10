@@ -8,11 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cg.omts.dto.Movie;
-import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.utility.DBConnection;
-
-import sun.security.pkcs11.Secmod.DbMode;
 
 public class UserDaoImpl implements IUserDao{
 
@@ -147,14 +144,13 @@ public class UserDaoImpl implements IUserDao{
 	@Override
 	public List<Integer> getTheatresByCity(String city) throws OMTSException {
 		List<Integer> theatreIdList = new ArrayList<>();
-		Theatre theatre = null;
+
 		try {
 			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_THEATREID);
 			prepareStatement.setString(1, city);
 			resultSet = prepareStatement.executeQuery();
 			while(resultSet.next()) {
-				theatre = new Theatre();
 				theatreIdList.add(resultSet.getInt(1));
 			}
 		}catch(SQLException e) {
