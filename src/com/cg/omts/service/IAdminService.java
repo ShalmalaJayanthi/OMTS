@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Screen;
+import com.cg.omts.dto.Show;
 import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 
@@ -29,6 +30,16 @@ public interface IAdminService {
 	public  Boolean addScreen(Screen screen, Integer theatreId);
 	
 	public  Boolean deleteScreen(Integer screenId);
+	
 	public abstract ArrayList<Screen> getScreenDetailsToDelete();
+	
+	public List<Show> getShowDetails() throws OMTSException;
+	
+	public int addShow(Show show) throws OMTSException;
+	
+	public int deleteShow(int showId) throws OMTSException;
+	
+	public List<Show> getShowByName(String showName) throws OMTSException;
+	
 
 }

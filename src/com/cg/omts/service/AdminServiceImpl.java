@@ -6,6 +6,7 @@ import com.cg.omts.dao.AdminDaoImpl;
 import com.cg.omts.dao.IAdminDao;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Screen;
+import com.cg.omts.dto.Show;
 import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 
@@ -86,6 +87,34 @@ public class AdminServiceImpl implements IAdminService{
 		adminDao = new AdminDaoImpl();
 		ArrayList<Screen> screenList = adminDao.getScreenDetailsToDelete();
 		return screenList;
+	}
+
+	@Override
+	public List<Show> getShowDetails() throws OMTSException {
+		// TODO Auto-generated method stub
+		adminDao = (IAdminDao) new AdminDaoImpl();
+		return adminDao.getShowDetails();
+	}
+
+	@Override
+	public int addShow(Show show) throws OMTSException {
+		// TODO Auto-generated method stub
+		adminDao = (IAdminDao) new AdminDaoImpl();
+		return adminDao.addShow(show);
+	}
+
+	@Override
+	public int deleteShow(int showId) throws OMTSException {
+		// TODO Auto-generated method stub
+		adminDao = (IAdminDao) new AdminDaoImpl();
+		return adminDao.deleteShow(showId);
+	}
+
+	@Override
+	public List<Show> getShowByName(String showName) throws OMTSException {
+		// TODO Auto-generated method stub
+		adminDao = (IAdminDao) new AdminDaoImpl();
+		return adminDao.getShowByName(showName);
 	}
 
 }
