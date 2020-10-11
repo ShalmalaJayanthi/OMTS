@@ -35,11 +35,11 @@ public interface IUserDao {
 	
 	public int setSeatStatus(int seatId, String status) throws OMTSException;
 	
-	public int deleteBookingDetails(int bookingId) throws OMTSException;
+	public int deleteBookingDetails(int ticketId) throws OMTSException;
 	
 	public List<Integer> getSeatsByTicket(int ticketId) throws OMTSException;
 	
-	public int deleteSeatDetailsInTicketSeat(int ticketId) throws OMTSException;
+	public int deleteAllocatedSeats(int ticketId) throws OMTSException;
 	
 	public int deleteSeatDetails(List<Integer> seatList) throws OMTSException;
 	
@@ -49,6 +49,8 @@ public interface IUserDao {
 	
 	public int cancelTicket(int ticketId) throws OMTSException;
 	
-	public int refundAfterCancellation(Transaction transaction) throws OMTSException;
+	public int getCurrentBalance(Transaction transaction) throws OMTSException;
+	
+	public int refundAfterCancellation(Transaction transaction, int currentBalance) throws OMTSException;
 
 }

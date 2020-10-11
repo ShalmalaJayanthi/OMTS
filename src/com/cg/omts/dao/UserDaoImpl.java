@@ -70,7 +70,7 @@ public class UserDaoImpl implements IUserDao{
 				theatreIdList.add(resultSet.getInt(1));
 			}
 		} catch (SQLException e) {
-			throw new OMTSException("problem while creating PS object"+e.getMessage());
+			throw new OMTSException("problem while creating PS object");
 		} finally {
 			try {
 				connection.close();
@@ -99,7 +99,7 @@ public class UserDaoImpl implements IUserDao{
 					}
 			}
 		} catch (SQLException e) {
-			throw new OMTSException("problem while creating PS object"+e.getMessage());
+			throw new OMTSException("problem while creating PS object");
 		} finally {
 			try {
 				connection.close();
@@ -118,6 +118,7 @@ public class UserDaoImpl implements IUserDao{
 			connection =  DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_ALL_MOVIES);
 			resultSet = prepareStatement.executeQuery();	
+			
 			while(resultSet.next()) {
 				movie = new Movie();
 				movie.setMovieId(resultSet.getInt(1));
@@ -131,7 +132,7 @@ public class UserDaoImpl implements IUserDao{
 				
 			}	
 		}catch(SQLException e) {
-			throw new OMTSException("problem occured while creating PS object"+e.getMessage());
+			throw new OMTSException("problem occured while creating PS object");
 		}
 		finally {
 			try {
@@ -145,7 +146,7 @@ public class UserDaoImpl implements IUserDao{
 	
 	@Override
 	public List<Integer> getTheatresByCity(String city) throws OMTSException {
-		List<Integer> theatreIdList = new ArrayList<>();
+		List<Integer> theatreIdList = new ArrayList<Integer>();
 
 		try {
 			connection = DBConnection.getConnection();
@@ -171,7 +172,7 @@ public class UserDaoImpl implements IUserDao{
 	@Override
 	public int generateTicket(int userId, Ticket ticket) throws OMTSException {
 		// TODO Auto-generated method stub
-		int isInserted = 0;
+		int isGenerated = 0;
 		try {
 			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GENERATE_TICKET);   
@@ -182,9 +183,9 @@ public class UserDaoImpl implements IUserDao{
 			prepareStatement.setInt(5, ticket.getTheatreId());
 			prepareStatement.setInt(6, ticket.getShowId());
 			prepareStatement.setInt(7, ticket.getMovieId());
-			isInserted = prepareStatement.executeUpdate();  
+			isGenerated = prepareStatement.executeUpdate();  
 		}catch(SQLException e){ 
-			throw new OMTSException("problem inserting Theatre Details into Database");
+			throw new OMTSException("problem while creating PS object");
 		}finally {
 			try {
 				connection.close();
@@ -192,13 +193,13 @@ public class UserDaoImpl implements IUserDao{
 				throw new OMTSException("problem while closing Database");
 			}
 		}
-		return isInserted;
+		return isGenerated;
 	}
 
 	@Override
 	public int allocateSeat(List<Integer> selectedSeatsList, int screenId) throws OMTSException {
 		// TODO Auto-generated method stub
-		int isInserted = 0;
+		int isAllocated = 0;
 		try {
 			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.ALLOCATE_SEATS);   
@@ -206,10 +207,10 @@ public class UserDaoImpl implements IUserDao{
 				prepareStatement.setInt(1, selectedSeat);
 				prepareStatement.setString(2, "BLOCKED");
 				prepareStatement.setInt(3, screenId);
-				isInserted = prepareStatement.executeUpdate();  
+				isAllocated = prepareStatement.executeUpdate();  
 			}
 		}catch(SQLException e){ 
-			throw new OMTSException("problem inserting Theatre Details into Database");
+			throw new OMTSException("problem while creating PS object");
 		}finally {
 			try {
 				connection.close();
@@ -217,21 +218,21 @@ public class UserDaoImpl implements IUserDao{
 				throw new OMTSException("problem while closing Database");
 			}
 		}
-		return isInserted;
+		return isAllocated;
 	}
 
 	@Override
 	public int setTicketStatus(int ticketId, String status) throws OMTSException {
 		// TODO Auto-generated method stub
-		int isInserted = 0;
+		int isUpdated = 0;
 		try {
 			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.SET_TICKET_STATUS);   
 			prepareStatement.setString(1, status);
 			prepareStatement.setInt(2, ticketId);
-			isInserted = prepareStatement.executeUpdate();  	
+			isUpdated = prepareStatement.executeUpdate();  	
 		}catch(SQLException e){ 
-			throw new OMTSException("problem inserting Theatre Details into Database");
+			throw new OMTSException("problem while creating PS object");
 		}finally {
 			try {
 				connection.close();
@@ -239,23 +240,23 @@ public class UserDaoImpl implements IUserDao{
 				throw new OMTSException("problem while closing Database");
 			}
 		}
-		return isInserted;
+		return isUpdated;
 	}
 
 	@Override
 	public int assignSeatsToTickets(int ticketId, List<Integer> seatsList) throws OMTSException {
 		// TODO Auto-generated method stub
-		int isInserted = 0;
+		int isAssigned = 0;
 		try {
 			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.ASSIGN_SEATS_TO_TICKET);   
 			for(Integer seat : seatsList) {
 				prepareStatement.setInt(1, ticketId);
 				prepareStatement.setInt(2, seat);
-				isInserted = prepareStatement.executeUpdate();  
+				isAssigned = prepareStatement.executeUpdate();  
 			}
 		}catch(SQLException e){ 
-			throw new OMTSException("problem inserting Theatre Details into Database");
+			throw new OMTSException("problem while creating PS object");
 		}finally {
 			try {
 				connection.close();
@@ -263,7 +264,7 @@ public class UserDaoImpl implements IUserDao{
 				throw new OMTSException("problem while closing Database");
 			}
 		}
-		return isInserted;
+		return isAssigned;
 	}
 
 	@Override
@@ -280,7 +281,7 @@ public class UserDaoImpl implements IUserDao{
 			prepareStatement.setInt(5, ticketId);
 			isInserted = prepareStatement.executeUpdate();  
 		}catch(SQLException e){ 
-			throw new OMTSException("problem in PS statement"+e.getMessage());
+			throw new OMTSException("problem in PS statement");
 		}finally {
 			try {
 				connection.close();
@@ -304,7 +305,7 @@ public class UserDaoImpl implements IUserDao{
 			prepareStatement.setInt(4, transactionId);
 			isInserted = prepareStatement.executeUpdate();  
 		}catch(SQLException e){ 
-			throw new OMTSException("problem inserting Theatre Details into Database");
+			throw new OMTSException("problem while creating PS object");
 		}finally {
 			try {
 				connection.close();
@@ -318,15 +319,15 @@ public class UserDaoImpl implements IUserDao{
 	@Override
 	public int setSeatStatus(int seatId, String status) throws OMTSException {
 		// TODO Auto-generated method stub
-		int isInserted = 0;
+		int isUpdated = 0;
 		try {
 			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.SET_SEAT_STATUS);   
 			prepareStatement.setString(1, status);
 			prepareStatement.setInt(2, seatId);
-			isInserted = prepareStatement.executeUpdate();  	
+			isUpdated = prepareStatement.executeUpdate();  	
 		}catch(SQLException e){ 
-			throw new OMTSException("problem inserting Theatre Details into Database");
+			throw new OMTSException("problem while creating PS object");
 		}finally {
 			try {
 				connection.close();
@@ -334,16 +335,227 @@ public class UserDaoImpl implements IUserDao{
 				throw new OMTSException("problem while closing Database");
 			}
 		}
-		return isInserted;
+		return isUpdated;
+	}
+		
+	@Override
+	public int deleteBookingDetails(int ticketId) throws OMTSException {
+		// TODO Auto-generated method stub
+		int isDeleted = 0;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_BOOKING_DETAILS);   
+			prepareStatement.setInt(1, ticketId);
+			isDeleted = prepareStatement.executeUpdate();  	
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while creating PS object");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return isDeleted;
+	}
+
+	@Override
+	public  List<Integer> getSeatsByTicket(int ticketId) throws OMTSException {
+		// TODO Auto-generated method stub
+		List<Integer> seatList = new ArrayList<>();
+
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SEATS);
+			prepareStatement.setInt(1, ticketId);
+			resultSet = prepareStatement.executeQuery();
+			while(resultSet.next()) {
+				seatList.add(resultSet.getInt(1));
+			}
+		}catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object");
+		}
+		finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing connection");
+			}
+		}
+		return seatList;	
+	}
+
+	@Override
+	public int deleteAllocatedSeats(int ticketId) throws OMTSException {
+		// TODO Auto-generated method stub
+		int isDeleted = 0;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_ALLOCATED_SEATS);   
+			prepareStatement.setInt(1, ticketId);
+			isDeleted = prepareStatement.executeUpdate();  	
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while creating PS object");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return isDeleted;
+	}
+
+	@Override
+	public int deleteSeatDetails(List<Integer> seatList) throws OMTSException {
+		// TODO Auto-generated method stub
+		int isDeleted = 0;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_SEATS);   
+			for(Integer seat : seatList) {
+				prepareStatement.setInt(1, seat);
+				isDeleted = prepareStatement.executeUpdate();  
+			}
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while creating PS object");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return isDeleted;
+	}
+
+	@Override
+	public Transaction getTransactionDetails(int ticketId) throws OMTSException {
+		// TODO Auto-generated method stub
+		Transaction transaction = null;
+		Boolean isFound = false;
+		try {
+			
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TRANSACTION_DETAILS);
+			prepareStatement.setInt(1, ticketId);
+			resultSet = prepareStatement.executeQuery();
+			
+			isFound = resultSet.next();
+			if(isFound == true) {
+				transaction = new Transaction();
+				transaction.setTransactionId(resultSet.getInt(1));
+				transaction.setAccountNumber(resultSet.getInt(2));
+				transaction.setTotalAmount(resultSet.getInt(3));
+			}
+		} catch (SQLException e) {
+			throw new OMTSException("problem while creating PS object" + e.getMessage());
+		} 
+		finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new OMTSException("problem while closing");
+			}
+
+		}
+		return transaction;
+	}
+
+	@Override
+	public int deletetransaction(int ticketId) throws OMTSException {
+		// TODO Auto-generated method stub
+		int isDeleted = 0;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_TRANSACTION);   
+			prepareStatement.setInt(1, ticketId);
+			isDeleted = prepareStatement.executeUpdate();  	
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while creating PS object");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return isDeleted;
+	}
+
+	@Override
+	public int cancelTicket(int ticketId) throws OMTSException {
+		int isDeleted = 0;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_TICKET);   
+			prepareStatement.setInt(1, ticketId);
+			isDeleted = prepareStatement.executeUpdate();  	
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while creating PS object");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return isDeleted;
 	}
 	
 	@Override
-	public int cancelTicket(int ticketId) throws OMTSException {
-		
-		return 0;
+	public int getCurrentBalance(Transaction transaction) throws OMTSException {
+		// TODO Auto-generated method stub
+		int currentBalance = 0;
+		Boolean isFound = false;
+		try {
+			
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_CURRENT_BALANCE);
+			prepareStatement.setInt(1, transaction.getAccountNumber());
+			resultSet = prepareStatement.executeQuery();
+			
+			isFound = resultSet.next();
+			if(isFound == true) {
+				currentBalance = resultSet.getInt(1);
+			}
+		} catch (SQLException e) {
+			throw new OMTSException("problem while creating PS object");
+		} 
+		finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new OMTSException("problem while closing");
+			}
+
+		}
+		return currentBalance;
 	}
 	
+	@Override
+	public int refundAfterCancellation(Transaction transaction, int currentBalance) throws OMTSException {
+		// TODO Auto-generated method stub
+		int isUpdated = 0;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.REFUND_AMOUNT);   
+			prepareStatement.setInt(1, transaction.getTotalAmount()+currentBalance);
+			prepareStatement.setInt(2, transaction.getAccountNumber());
+			isUpdated = prepareStatement.executeUpdate();  	
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while creating PS object");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return isUpdated;
+	}
 	
+
 	public static void main(String[] args) throws OMTSException { 
 		/*
 		 * Ticket ticket = new Ticket(); ticket.setTicketId(1); ticket.setNoOfSeats(1);
@@ -373,49 +585,23 @@ public class UserDaoImpl implements IUserDao{
 		 * booking.setBookingDate(date); System.out.println(addBooking(booking, 1, 1));
 		 * System.out.println(setTicketStatus(1, "BOOKED"));
 		 */
+		
+//		System.out.println("Deleting booking details in booking table : "+ deleteBookingDetails(1));
+//		List<Integer> seatList = getSeatsByTicket(1);
+//		System.out.println("Deleting allocated seats in ticketseats table : "+deleteAllocatedSeats(1));
+//		System.out.println("Deleting seats in seat table : "+deleteSeatDetails(seatList));
+		
+//		Transaction transaction = getTransactionDetails(1);
+//		System.out.println("Deleting transaction in transaction table : "+deletetransaction(1));
+//		
+//		Transaction transaction = new Transaction();
+//		transaction.setAccountNumber(123456);
+//		transaction.setTotalAmount(12300);
+//		int currentBal = getCurrentBalance(transaction);
+//		System.out.println("Current Balance in account : " + currentBal);
+//		System.out.println("Cancelling ticket : " + cancelTicket(1));
+//		System.out.println("Refunding amount : "+ refundAfterCancellation(transaction, currentBal));
+//		
 	}
-
-	@Override
-	public int deleteBookingDetails(int bookingId) throws OMTSException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<Integer> getSeatsByTicket(int ticketId) throws OMTSException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int deleteSeatDetailsInTicketSeat(int ticketId) throws OMTSException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteSeatDetails(List<Integer> seatList) throws OMTSException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Transaction getTransactionDetails(int ticketId) throws OMTSException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int deletetransaction(int ticketId) throws OMTSException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int refundAfterCancellation(Transaction transaction) throws OMTSException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
 	
 }

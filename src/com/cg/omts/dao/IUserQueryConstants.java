@@ -27,6 +27,22 @@ public interface IUserQueryConstants {
 	String SET_SEAT_STATUS = "update seat set seatStatus = ? where seatId = ?";
 	
 	String DELETE_BOOKING_DETAILS = "delete from booking where bookingId = ?";
+	
+	String GET_SEATS = "select seatId from ticketseat where ticketId = ?";
+	
+	String DELETE_ALLOCATED_SEATS = "delete from ticketseat where ticketId = ?";
+	
+	String DELETE_SEATS = "delete from seat where seatId = ?";
+	
+	String GET_TRANSACTION_DETAILS = "select transactionId, accountNo, totalAmt from transaction where ticketId = ?";
+	
+	String DELETE_TRANSACTION = "delete from transaction where ticketId = ?";
+	
+	String DELETE_TICKET = "delete from ticket where ticketId = ?";
+	
+	String REFUND_AMOUNT = "update bankaccount set accountBal = ? where accountNo = ?";
+	
+	String GET_CURRENT_BALANCE = "select accountBal from bankaccount where accountNo = ?";
 }
 
 
