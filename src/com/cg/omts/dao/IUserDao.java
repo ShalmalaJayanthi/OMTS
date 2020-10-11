@@ -2,14 +2,14 @@ package com.cg.omts.dao;
 
 import java.util.List;
 
+import com.cg.omts.dto.Booking;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Theatre;
 import com.cg.omts.dto.Ticket;
+import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;
 
 public interface IUserDao {
-
-	
 	
 	public Movie getMovieDetails(int movieId) throws OMTSException;
 	
@@ -25,10 +25,30 @@ public interface IUserDao {
 	
 	public int setTicketStatus(int ticketId, String status) throws OMTSException;	
 	
-
+	public int addTransaction(Transaction transaction, int ticketId, int userId) throws OMTSException;
+	
+	public int addBooking(Booking booking, int ticketId, int transactionId) throws OMTSException;
 	
 	public List<Integer> getTheatresByCity(String city) throws OMTSException;
 	
 	public List<Movie> getAllMovies() throws OMTSException;
+	
+	public int setSeatStatus(int seatId, String status) throws OMTSException;
+	
+	public int deleteBookingDetails(int bookingId) throws OMTSException;
+	
+	public List<Integer> getSeatsByTicket(int ticketId) throws OMTSException;
+	
+	public int deleteSeatDetailsInTicketSeat(int ticketId) throws OMTSException;
+	
+	public int deleteSeatDetails(List<Integer> seatList) throws OMTSException;
+	
+	public Transaction getTransactionDetails(int ticketId) throws OMTSException;
+	
+	public int deletetransaction(int ticketId) throws OMTSException;
+	
+	public int cancelTicket(int ticketId) throws OMTSException;
+	
+	public int refundAfterCancellation(Transaction transaction) throws OMTSException;
 
 }

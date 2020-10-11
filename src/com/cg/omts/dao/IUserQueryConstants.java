@@ -19,4 +19,14 @@ public interface IUserQueryConstants {
 	String SET_TICKET_STATUS = "update ticket set ticketStatus = ? where ticketId = ?";
 	
 	String ASSIGN_SEATS_TO_TICKET = "insert into ticketseat values(?,?)";
+	
+	String ADD_TRANSACTION = "insert into transaction values(?,?,?,?,?)";
+	
+	String ADD_BOOKING = "insert into booking values(?,?,?,?)";
+	
+	String SET_SEAT_STATUS = "update seat set seatStatus = ? where seatId = ?";
+	
+	String DELETE_BOOKING_DETAILS = "delete from booking where bookingId = ?";
 }
+
+
