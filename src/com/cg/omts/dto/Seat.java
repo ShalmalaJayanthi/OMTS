@@ -1,46 +1,52 @@
 package com.cg.omts.dto;
-enum BookingState {
-	Available, Blocked, Booked; 
+enum SeatStatus {
+	AVAILABLE, BLOCKED, BOOKED; 
 }
 public class Seat {
 		private int seatId;
 		private double seatPrice;
-		private BookingState bookingState;
+		private SeatStatus seatBookingState;
 		
 		public Seat() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
-		//constructor
-		public Seat(int seatId, double seatPrice, BookingState bookingState) {
+
+		public Seat(int seatId, double seatPrice, SeatStatus seatBookingState) {
 			super();
 			this.seatId = seatId;
 			this.seatPrice = seatPrice;
-			this.bookingState = bookingState;
+			this.seatBookingState = seatBookingState;
 		}
-		//getters and setters
+
 		public int getSeatId() {
 			return seatId;
 		}
+
 		public void setSeatId(int seatId) {
 			this.seatId = seatId;
 		}
+
 		public double getSeatPrice() {
 			return seatPrice;
 		}
+
 		public void setSeatPrice(double seatPrice) {
 			this.seatPrice = seatPrice;
 		}
-		public BookingState getBookingState() {
-			return bookingState;
+
+		public SeatStatus getBookingState() {
+			return seatBookingState;
 		}
-		public void setBookingState(BookingState bookingState) {
-			this.bookingState = bookingState;
+
+		public void setBookingState(SeatStatus seatBookingState) {
+			this.seatBookingState = seatBookingState;
 		}
-		//tostring
+
 		@Override
 		public String toString() {
-			return "Seat [seatId=" + seatId + ", seatPrice=" + seatPrice + ", bookingState=" + bookingState + "]";
+			return "Seat [seatId=" + seatId + ", seatPrice=" + seatPrice + ", bookingState=" + seatBookingState + "]";
 		}
+		
 		
 }

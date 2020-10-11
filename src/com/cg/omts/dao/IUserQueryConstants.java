@@ -11,5 +11,12 @@ public interface IUserQueryConstants {
 	String GET_ALL_MOVIES = "selct * from movie";
 	
 	String GET_THEATREID = "select theatreId from theatre WHERE theatreCity=?";
+	
+	String GENERATE_TICKET = "insert into ticket(userId, ticketId, noOfSeats, screenId, theatreId, showId, movieId) values(?,?,?,?,?,?,?)";
 
+	String ALLOCATE_SEATS = "insert into seat values(?,?,?)";
+	
+	String SET_TICKET_STATUS = "update ticket set ticketStatus = ? where ticketId = ?";
+	
+	String ASSIGN_SEATS_TO_TICKET = "insert into ticketseat values(?,?)";
 }

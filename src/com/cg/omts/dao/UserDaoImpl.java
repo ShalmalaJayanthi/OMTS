@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cg.omts.dto.Movie;
+import com.cg.omts.dto.Ticket;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.utility.DBConnection;
 
@@ -165,10 +166,122 @@ public class UserDaoImpl implements IUserDao{
 		}
 		return theatreIdList;			
 	}	
-	/*
-	 * public static void main(String[] args) throws OMTSException { List<String>
-	 * theatreNamesList =
-	 * UserDaoImpl.getTheatreNames(UserDaoImpl.getTheatresByMovie(2)); for(String s
-	 * : theatreNamesList) System.out.println(s); }
-	 */
+	
+	@Override
+	public int generateTicket(int userId, Ticket ticket) throws OMTSException {
+		// TODO Auto-generated method stub
+		int isInserted = 0;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GENERATE_TICKET);   
+			prepareStatement.setInt(1, userId);  
+			prepareStatement.setInt(2,ticket.getTicketId()); 
+			prepareStatement.setInt(3, ticket.getNoOfSeats());
+			prepareStatement.setInt(4, ticket.getScreenId());
+			prepareStatement.setInt(5, ticket.getTheatreId());
+			prepareStatement.setInt(6, ticket.getShowId());
+			prepareStatement.setInt(7, ticket.getMovieId());
+			isInserted = prepareStatement.executeUpdate();  
+		}catch(SQLException e){ 
+			throw new OMTSException("problem inserting Theatre Details into Database");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return isInserted;
+	}
+
+	@Override
+	public int allocateSeat(List<Integer> selectedSeatsList, int screenId) throws OMTSException {
+		// TODO Auto-generated method stub
+		int isInserted = 0;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.ALLOCATE_SEATS);   
+			for(Integer selectedSeat : selectedSeatsList) {
+				prepareStatement.setInt(1, selectedSeat);
+				prepareStatement.setString(2, "BLOCKED");
+				prepareStatement.setInt(3, screenId);
+				isInserted = prepareStatement.executeUpdate();  
+			}
+		}catch(SQLException e){ 
+			throw new OMTSException("problem inserting Theatre Details into Database");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return isInserted;
+	}
+
+	@Override
+	public int setTicketStatus(int ticketId, String status) throws OMTSException {
+		// TODO Auto-generated method stub
+		int isInserted = 0;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.SET_TICKET_STATUS);   
+			prepareStatement.setString(1, status);
+			prepareStatement.setInt(2, ticketId);
+			isInserted = prepareStatement.executeUpdate();  	
+		}catch(SQLException e){ 
+			throw new OMTSException("problem inserting Theatre Details into Database");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return isInserted;
+	}
+
+	@Override
+	public int assignSeatsToTickets(int ticketId, List<Integer> seatsList) throws OMTSException {
+		// TODO Auto-generated method stub
+		int isInserted = 0;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.ASSIGN_SEATS_TO_TICKET);   
+			for(Integer seat : seatsList) {
+				prepareStatement.setInt(1, ticketId);
+				prepareStatement.setInt(2, seat);
+				isInserted = prepareStatement.executeUpdate();  
+			}
+		}catch(SQLException e){ 
+			throw new OMTSException("problem inserting Theatre Details into Database");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return isInserted;
+	}
+	
+	
+//	public static void main(String[] args) throws OMTSException { 
+//		/*
+//		 * Ticket ticket = new Ticket(); ticket.setTicketId(1); ticket.setNoOfSeats(1);
+//		 * ticket.setScreenId(1); ticket.setMovieId(1); ticket.setShowId(1);
+//		 * ticket.setTheatreId(1);
+//		 */
+//		List<Integer> selectedSeatsList = new ArrayList<Integer>();
+//		selectedSeatsList.add(1);
+//		selectedSeatsList.add(2);
+//		selectedSeatsList.add(3);
+//		selectedSeatsList.add(4);
+//		
+//		System.out.println(setTicketStatus(1, "PROCESSING"));
+//		System.out.println(assignSeatsToTickets(1, selectedSeatsList));
+//	
+//	}
+	 
+
 }
