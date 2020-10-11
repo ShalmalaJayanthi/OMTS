@@ -463,7 +463,7 @@ public class UserDaoImpl implements IUserDao{
 	}
 
 	@Override
-	public int deletetransaction(int ticketId) throws OMTSException {
+	public int deleteTransaction(int ticketId) throws OMTSException {
 		// TODO Auto-generated method stub
 		int isDeleted = 0;
 		try {

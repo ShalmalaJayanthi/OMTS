@@ -45,7 +45,7 @@ public interface IUserDao {
 	
 	public Transaction getTransactionDetails(int ticketId) throws OMTSException;
 	
-	public int deletetransaction(int ticketId) throws OMTSException;
+	public int deleteTransaction(int ticketId) throws OMTSException;
 	
 	public int cancelTicket(int ticketId) throws OMTSException;
 	
