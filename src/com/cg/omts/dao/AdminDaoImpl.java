@@ -19,7 +19,7 @@ import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.utility.DBConnection;
 
-public class AdminDaoImpl implements IAdminDao, IQueryConstants {
+public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 	
 	static Connection connection = null;
 	static Statement statement = null;
@@ -56,7 +56,7 @@ public class AdminDaoImpl implements IAdminDao, IQueryConstants {
 			
 		return theatreList;
 		}
-
+		
 	@Override
 	public int addTheatre(Theatre theatre) throws OMTSException {
 		// TODO Auto-generated method stub
@@ -474,6 +474,5 @@ public class AdminDaoImpl implements IAdminDao, IQueryConstants {
 		}
 		return screenList;
 	}
-	
 	
 }
