@@ -21,7 +21,7 @@ Enter Theater city: <input type="text" name = "theatreCity">
 Enter Manager name: <input type="text" name="managerName">
 <br>
 <br>
-Enter Manager contact: <input type="text" name="managerContact" pattern="[1-9]{1}[0-9]{9}" title="Enter 10 numbers">
+Enter Manager contact: <input type="text" name="managerContact" pattern="[1-9]{1}[0-9]{9}" title="Enter 10 digit phone number">
 <br>
 <br>
 <input type="submit" value = "Insert Data">
