@@ -556,7 +556,7 @@ public class UserDaoImpl implements IUserDao{
 		}
 		return isUpdated;
 	}
-	
+	@Override
 	public Seat getSeatPrice(int seatId) throws OMTSException{
 		Seat seat = null;
 		try {
@@ -584,7 +584,7 @@ public class UserDaoImpl implements IUserDao{
 		return seat;
 		
 	}
-	
+	@Override
 	public List<Screen> getScreenByTheatreId(int theatreId) throws OMTSException {
 		List<Screen> screenList = new ArrayList<>();
 		Screen screen = null;
@@ -616,6 +616,10 @@ public class UserDaoImpl implements IUserDao{
 	}
 	
 
+	
+	
+	
+	
 	public static void main(String[] args) throws OMTSException { 
 		/*
 		 * Ticket ticket = new Ticket(); ticket.setTicketId(1); ticket.setNoOfSeats(1);

@@ -6,7 +6,6 @@ import com.cg.omts.dto.Booking;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Screen;
 import com.cg.omts.dto.Seat;
-import com.cg.omts.dto.Theatre;
 import com.cg.omts.dto.Ticket;
 import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;

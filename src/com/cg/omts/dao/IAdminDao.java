@@ -9,7 +9,6 @@ import com.cg.omts.dto.Show;
 import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 
-
 public interface IAdminDao {
 	
 	public List<Theatre> getTheatreDetails() throws OMTSException;
