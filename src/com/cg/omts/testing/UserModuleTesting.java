@@ -50,6 +50,8 @@ public class UserModuleTesting {
 		catch(OMTSException e) {
 			throw new OMTSException("Exception in testing");
 		}
-		
 	}
+	
+	@Test
+	
 }
