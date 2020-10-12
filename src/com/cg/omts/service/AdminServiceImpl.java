@@ -32,6 +32,7 @@ public class AdminServiceImpl implements IAdminService{
 	@author : supraja
 	@param1  : Theatre object
 	@return : Number of theatres added
+	@Exception : duplicate theatreId
 	*******/
 	@Override
 	public int addTheatre(Theatre theatre) throws OMTSException {
