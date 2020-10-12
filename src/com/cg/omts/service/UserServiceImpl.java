@@ -6,6 +6,8 @@ import com.cg.omts.dao.IUserDao;
 import com.cg.omts.dao.UserDaoImpl;
 import com.cg.omts.dto.Booking;
 import com.cg.omts.dto.Movie;
+import com.cg.omts.dto.Screen;
+import com.cg.omts.dto.Seat;
 import com.cg.omts.dto.Ticket;
 import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;
@@ -118,6 +120,16 @@ public class UserServiceImpl implements IUserService{
 	public int refundAfterCancellation(Transaction transaction, int currentBalance) throws OMTSException {
 		// TODO Auto-generated method stub
 		return userDao.refundAfterCancellation(transaction, currentBalance);
+	}
+	@Override
+	public Seat getSeatPrice(int seatId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getSeatPrice(seatId);
+	}
+	@Override
+	public List<Screen> getScreenByTheatreId(int theatreId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getScreenByTheatreId(theatreId);
 	}
 
 }

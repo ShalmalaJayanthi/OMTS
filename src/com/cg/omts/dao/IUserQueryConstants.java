@@ -43,6 +43,10 @@ public interface IUserQueryConstants {
 	String REFUND_AMOUNT = "update bankaccount set accountBal = ? where accountNo = ?";
 	
 	String GET_CURRENT_BALANCE = "select accountBal from bankaccount where accountNo = ?";
+	
+	String GET_SEATPRICE_BY_SEATID = "select seatPrice from seat where seatId=?";
+	
+	String GET_SCREEN_BY_THEATRE_ID = "select * from screen where tehatreId=?";
 }
 
 

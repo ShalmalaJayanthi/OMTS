@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import com.cg.omts.dto.Booking;
 import com.cg.omts.dto.Movie;
+import com.cg.omts.dto.Screen;
+import com.cg.omts.dto.Seat;
 import com.cg.omts.dto.Ticket;
 import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;
@@ -553,6 +555,64 @@ public class UserDaoImpl implements IUserDao{
 			}
 		}
 		return isUpdated;
+	}
+	
+	public Seat getSeatPrice(int seatId) throws OMTSException{
+		Seat seat = null;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SEATPRICE_BY_SEATID);
+			prepareStatement.setInt(1, seatId);
+			resultSet = prepareStatement.executeQuery();
+			while(resultSet.next()) {
+				seat = new Seat();
+				seat.setSeatPrice(resultSet.getDouble(1));
+			}
+			
+		}catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object");
+		}
+		finally {
+			try {
+				
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing connection");
+			}
+		}
+		
+		return seat;
+		
+	}
+	
+	public List<Screen> getScreenByTheatreId(int theatreId) throws OMTSException {
+		List<Screen> screenList = new ArrayList<>();
+		Screen screen = null;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SCREEN_BY_THEATRE_ID);
+			prepareStatement.setInt(1, theatreId);
+			resultSet = prepareStatement.executeQuery();
+			while(resultSet.next()) {
+				screen = new Screen();
+				screen.setScreenId(resultSet.getInt(1));
+				screen.setTheatreId(resultSet.getInt(2));
+				screen.setScreenName(resultSet.getString(3));
+				screen.setRows(resultSet.getInt(4));
+				screen.setColumns(resultSet.getInt(5));
+				screenList.add(screen);
+			}
+		}catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object");
+		}
+		finally{
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing the connection");
+			}
+		}
+		return screenList;	
 	}
 	
 

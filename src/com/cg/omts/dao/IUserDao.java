@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.cg.omts.dto.Booking;
 import com.cg.omts.dto.Movie;
+import com.cg.omts.dto.Screen;
+import com.cg.omts.dto.Seat;
 import com.cg.omts.dto.Theatre;
 import com.cg.omts.dto.Ticket;
 import com.cg.omts.dto.Transaction;
@@ -52,5 +54,9 @@ public interface IUserDao {
 	public int getCurrentBalance(Transaction transaction) throws OMTSException;
 	
 	public int refundAfterCancellation(Transaction transaction, int currentBalance) throws OMTSException;
+	
+	public Seat getSeatPrice(int seatId) throws OMTSException;
+	
+	public List<Screen> getScreenByTheatreId(int theatreId) throws OMTSException;
 
 }
