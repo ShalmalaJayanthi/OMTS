@@ -2,10 +2,12 @@ package com.cg.omts.dto;
 
 import java.util.Arrays;
 
-enum TicketStatus {
-	INPROCESS, BOOKED, CANCELLED;
-}
+
 public class Ticket {
+	
+		public enum TicketStatus {
+			INPROCESS, BOOKED, CANCELLED;
+		}
 		private int ticketId;
 		private int noOfSeats;
 		private TicketStatus ticketStatus;

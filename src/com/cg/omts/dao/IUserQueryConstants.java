@@ -8,10 +8,6 @@ public interface IUserQueryConstants {
 	
 	String GET_THEATRE_NAME_BY_ID = "select theatreName from theatre where theatreId = ?";
 	
-	String GET_ALL_MOVIES = "selct * from movie";
-	
-	String GET_THEATREID = "select theatreId from theatre WHERE theatreCity=?";
-	
 	String GENERATE_TICKET = "insert into ticket(userId, ticketId, noOfSeats, screenId, theatreId, showId, movieId) values(?,?,?,?,?,?,?)";
 
 	String ALLOCATE_SEATS = "insert into seat values(?,?,?)";
@@ -47,6 +43,11 @@ public interface IUserQueryConstants {
 	String GET_SEATPRICE_BY_SEATID = "select seatPrice from seat where seatId=?";
 	
 	String GET_SCREEN_BY_THEATRE_ID = "select * from screen where tehatreId=?";
+	
+	String GET_ALL_MOVIES = "selct * from movie";
+	
+	String GET_THEATREID = "select theatreId from theatre WHERE theatreCity=?";
+	
 }
 
 

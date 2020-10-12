@@ -18,10 +18,6 @@ public interface IUserService {
 	
 	public List<String> getTheatreNames(List<Integer> theatreIdList) throws OMTSException;
 	
-	public List<Integer> getTheatresByCity(String city) throws OMTSException;
-	
-	public List<Movie> getAllMovies() throws OMTSException;
-	
 	public int generateTicket(int ticketId, Ticket ticket) throws OMTSException;
 	
 	public int allocateSeat(List<Integer> selectedSeatsList, int screenId) throws OMTSException;
@@ -57,4 +53,8 @@ public interface IUserService {
 	public Seat getSeatPrice(int seatId) throws OMTSException;
 	
 	public List<Screen> getScreenByTheatreId(int theatreId) throws OMTSException;
+	
+	public List<Integer> getTheatresByCity(String city) throws OMTSException;
+	
+	public List<Movie> getAllMovies() throws OMTSException;
 }
