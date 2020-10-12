@@ -14,9 +14,9 @@ public interface IUserService {
 
 	public Movie getMovieDetails(int movieId) throws OMTSException;
 	
-	public List<Integer> getTheatresByMovie(int movieId) throws OMTSException;
+	public List<Integer> getTheatresByMovie(int movieId) throws OMTSException;//s
 	
-	public List<String> getTheatreNames(List<Integer> theatreIdList) throws OMTSException;
+	public List<String> getTheatreNames(List<Integer> theatreIdList) throws OMTSException;//s
 	
 	public int generateTicket(int ticketId, Ticket ticket) throws OMTSException;
 	
@@ -24,13 +24,13 @@ public interface IUserService {
 	
 	public int assignSeatsToTickets(int ticketId, List<Integer> seatsList) throws OMTSException;
 	
-	public int setTicketStatus(int ticketId, String status) throws OMTSException;	
+	public int setTicketStatus(int ticketId, String status) throws OMTSException;	//s
 	
-	public int addTransaction(Transaction transaction, int ticketId, int userId) throws OMTSException;
+	public int addTransaction(Transaction transaction, int ticketId, int userId) throws OMTSException;//s
 	
-	public int addBooking(Booking booking, int ticketId, int transactionId) throws OMTSException;
+	public int addBooking(Booking booking, int ticketId, int transactionId) throws OMTSException;//s
 	
-	public int setSeatStatus(int seatId, String status) throws OMTSException;
+	public int setSeatStatus(int seatId, String status) throws OMTSException;//s
 	
 	public int deleteBookingDetails(int ticketId) throws OMTSException;
 	

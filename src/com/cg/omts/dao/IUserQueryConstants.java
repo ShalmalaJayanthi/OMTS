@@ -2,7 +2,7 @@ package com.cg.omts.dao;
 
 public interface IUserQueryConstants {
 	
-	String GET_MOVIE_DETAILS = "select * from movie where movieid = ?";
+	String GET_MOVIE_DETAILS = "select * from movie where movieId = ?";
 	
 	String GET_THEATRES_BY_MOVIE = "select theatreId from theatremovie where movieId = ?";
 	
