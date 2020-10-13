@@ -1,6 +1,6 @@
 package com.cg.omts.dao;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +10,7 @@ import com.cg.omts.dto.Booking;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Screen;
 import com.cg.omts.dto.Seat;
+import com.cg.omts.dto.Show;
 import com.cg.omts.dto.Ticket;
 import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;
@@ -557,12 +558,12 @@ public class UserDaoImpl implements IUserDao{
 		return isUpdated;
 	}
 	@Override
-	public Seat getSeatPrice(int seatId) throws OMTSException{
+	public Seat getSeatPrice(int screenId) throws OMTSException{
 		Seat seat = null;
 		try {
 			connection = DBConnection.getConnection();
-			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SEATPRICE_BY_SEATID);
-			prepareStatement.setInt(1, seatId);
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SCREENSEATPRICE_BY_SCREENID);
+			prepareStatement.setInt(1, screenId);
 			resultSet = prepareStatement.executeQuery();
 			while(resultSet.next()) {
 				seat = new Seat();
@@ -614,6 +615,64 @@ public class UserDaoImpl implements IUserDao{
 		}
 		return screenList;	
 	}
+	@Override
+	public List<Show> getShowsByMovieAndTheatre(int screenId, int theatreId, int movieId) throws OMTSException {
+	List<Show> showList = new ArrayList<>();
+	Show show = null;
+	try {
+		connection = DBConnection.getConnection();
+		prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SHOWS_BY_MOVIE_THEATRE);
+		prepareStatement.setInt(1, screenId);
+		prepareStatement.setInt(2, theatreId);
+		prepareStatement.setInt(3, movieId);
+		resultSet = prepareStatement.executeQuery();
+		while(resultSet.next()) {
+			show = new Show();
+			show.setShowId(resultSet.getInt(1));
+			show.setShowStartTime(resultSet.getTime(2));
+			show.setShowEndTime(resultSet.getTime(3));
+			show.setShowName(resultSet.getString(4));
+			show.setMovieName(resultSet.getString(5));
+			showList.add(show);
+		}
+	} catch(SQLException e) {
+		throw new OMTSException("problem occured while creating PS object");
+	}
+	finally{
+		try {
+			connection.close();
+		}catch(SQLException e) {
+			throw new OMTSException("problem occured while closing the connection");
+		}
+	}
+	return showList;	
+	}
+	@Override
+	public Booking getBookingDetails(int ticketId) throws OMTSException {
+		Booking booking = null;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_BOOKING_DETAILS);
+			prepareStatement.setInt(1, ticketId);
+			resultSet = prepareStatement.executeQuery();
+			while(resultSet.next()) {
+				booking = new Booking();
+				booking.setBookingId(resultSet.getInt(1));
+				booking.setBookingDate(resultSet.getDate(2));
+			}
+		} catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object");
+		}
+		finally{
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing the connection");
+			}
+		}
+		return booking;	
+	}
+	
 	
 	
 	

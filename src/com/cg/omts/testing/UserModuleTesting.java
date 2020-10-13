@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+
+import com.cg.omts.dto.Booking;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Ticket;
 import com.cg.omts.dto.Transaction;
@@ -219,13 +221,89 @@ public class UserModuleTesting {
 	}
 	
 	@Test
-	public void getTheatresByMovieTest() {
+	public void getTheatresByMovieTest() throws OMTSException {
+		int movieId=1;
+		try {
+		List<Integer> expectedTheatreList = new ArrayList<Integer>();
+		expectedTheatreList.add(1);
+		List<Integer> actualTheatreList = userService.getTheatresByMovie(movieId);
+		assertEquals(expectedTheatreList,actualTheatreList);
+		}
+		catch(OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}
+	}
+	
+	@Test
+	public void getTheatreNamesTest() throws OMTSException {
+		try {
+		List<Integer> theatreIdList = new ArrayList<Integer>();
+		theatreIdList.add(1);
+		List<String> expectedTheatreIdList = new ArrayList<String>();
+		expectedTheatreIdList.add("vimal");
+		List<String> actualTheatreIdList = userService.getTheatreNames(theatreIdList);
+		assertEquals(expectedTheatreIdList,actualTheatreIdList);
+		}
+		catch(OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}
 		
 	}
 	
 	@Test
-	public void getTheatreNamesTest() {
-		
+	public void setTicketStatusTest() throws OMTSException{
+		try {
+			int ticketId=1;
+			String status="BOOKED";
+			int expected = 1;
+			int actual = userService.setTicketStatus(ticketId, status);
+			assertEquals(expected, actual);
+			
+			
+		}catch(OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}
+	}
+	
+	@Test
+	public void addTransactionTest() throws OMTSException {
+		try {
+			Transaction transaction = new Transaction(3,934784,1890);
+			int ticketId = 3;
+			int userId=3;
+			int actual = userService.addTransaction(transaction, ticketId, userId);
+			assertTrue(actual > 0);
+		}catch(OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}
+	}
+	
+	@Test
+	public void addBookingTest() throws OMTSException {
+		try {
+			int ticketId=3;
+			int transactionId=3;
+			LocalDate localDate = LocalDate.of(2004, 10, 12);
+			Date date = Date.valueOf(localDate);
+			Booking booking = new Booking(3,date);
+			int addBooking = userService.addBooking(booking, ticketId, transactionId);
+			assertTrue(addBooking>0);
+			
+		}catch(OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}
+	}
+	
+	@Test
+	public void setSeatStatusTest() throws OMTSException {
+		try {
+		int seatId=1;
+		String status="BOOKED";
+		int actual = userService.setSeatStatus(seatId, status);
+		assertTrue(actual > 0);
+		} catch(OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}
 	}
 	
 	
