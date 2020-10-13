@@ -10,8 +10,10 @@ import com.cg.omts.dto.Booking;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Screen;
 import com.cg.omts.dto.Seat;
+import com.cg.omts.dto.Seat.SeatStatus;
 import com.cg.omts.dto.Show;
 import com.cg.omts.dto.Ticket;
+import com.cg.omts.dto.Ticket.TicketStatus;
 import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.utility.DBConnection;
@@ -672,8 +674,115 @@ public class UserDaoImpl implements IUserDao{
 		}
 		return booking;	
 	}
+	@Override
 	
+	public boolean validatePayment(int accountNo,int cvv,String password) throws OMTSException {
+		// TODO Auto-generated method stub
+		boolean flag=false;
+		try {
+		connection = DBConnection.getConnection();
+		prepareStatement = connection.prepareStatement(IUserQueryConstants.VALIDATE_PAYMENT);
+		prepareStatement.setInt(1, accountNo);
+		resultSet = prepareStatement.executeQuery();
+		while(resultSet.next()) {
+		
+			int CVV=resultSet.getInt(1);
+			String PASS=resultSet.getString(2);
+			if(cvv==CVV && password.equals(PASS))
+				flag=true;
+			else
+				flag=false;
+			
+		}
+		}
+		catch(SQLException e)
+		{
+			throw new OMTSException(e.getMessage());
+		}
+		return flag;
+	}
+
 	
+	@Override
+	public Seat seatAvailability(int seatId) throws OMTSException {
+		
+		Seat seat = null;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.SEAT_AVAILABILITY);
+			prepareStatement.setInt(1, seatId);
+			resultSet = prepareStatement.executeQuery();
+			String seatStatus;
+			if(resultSet.next()) {
+				seat = new Seat();
+				seat.setSeatId(seatId);
+				//seat.setSeatPrice(resultSet.getDouble(1));
+				seatStatus = resultSet.getString(1);
+				seat.setBookingState(SeatStatus.valueOf(seatStatus));
+				
+			}
+			
+		}catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object");
+		}
+		finally {
+			try {
+				
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing connection");
+			}
+		}
+		
+		return seat;
+		
+	}
+
+	@Override
+	public Ticket getTicket(int ticketId) throws OMTSException {
+		Ticket ticket = null;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TICKET);
+			prepareStatement.setInt(1, ticketId);
+			resultSet = prepareStatement.executeQuery();
+			String status="";
+			TicketStatus ticketStatus;
+			while(resultSet.next()) {
+				ticket = new Ticket();
+				int noOfSeats=resultSet.getInt(1);
+				status = resultSet.getString(2);
+				ticketStatus= TicketStatus.valueOf(status); 
+				int screenId =resultSet.getInt(3);
+				int theatreId = resultSet.getInt(4);
+				int showId = resultSet.getInt(5);
+				int movieId = resultSet.getInt(6);
+				ticket.setTicketId(ticketId);
+				ticket.setNoOfSeats(noOfSeats);
+				ticket.setTicketStatus(ticketStatus);
+				ticket.setScreenId(screenId);
+				ticket.setTheatreId(theatreId);
+				ticket.setShowId(showId);
+				ticket.setMovieId(movieId);
+				
+				
+			}
+			
+		}catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object");
+		}
+		finally {
+			try {
+				
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing connection");
+			}
+		}
+		
+		return ticket;
+		
+	}
 	
 	
 	

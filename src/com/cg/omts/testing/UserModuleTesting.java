@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import com.cg.omts.dto.Booking;
 import com.cg.omts.dto.Movie;
+import com.cg.omts.dto.Seat;
 import com.cg.omts.dto.Ticket;
 import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;
@@ -306,5 +307,42 @@ public class UserModuleTesting {
 		}
 	}
 	
+	
+	@Test
+	public void validatePaymentTest() throws OMTSException{
+		boolean validate=true;
+		try {
+			boolean result =userService.validatePayment(123456, 662, "Ashu");
+			assertEquals(validate,result);
+		}
+		catch(OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}
+	}
+
+	@Test
+	public void seatAvailabiltyTest() throws OMTSException {
+		try {
+			int seatId = 1;
+
+			Seat actual = userService.seatAvailability(seatId);
+
+			assertNotNull(actual);
+
+		} catch (OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}
+	}
+	@Test
+	public void getTicketTest() throws OMTSException{
+		try {
+			int ticketId=1;
+			Ticket actual = userService.getTicket(ticketId);
+			assertNotNull(actual);
+		}catch (OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}
+	}
+
 	
 }

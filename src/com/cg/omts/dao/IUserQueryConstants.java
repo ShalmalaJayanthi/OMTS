@@ -54,6 +54,15 @@ public interface IUserQueryConstants {
 
 	String GET_SCREENSEATPRICE_BY_SCREENID = "select seatPrice from screenSeatPrice where screenId=?";
 	
+	String VALIDATE_PAYMENT = "select cvv,password from bankaccount where accountNo=?";
+	
+	String SEAT_AVAILABILITY ="select seatStatus from Seat where seatId=?";
+	
+	String GET_SEAT = "select seatStatus from seat where seatId=?";
+	
+	String GET_TICKET="select noOfSeats,ticketStatus,screenId,theatreId,showId,movieId from ticket where ticketId=?";
+
+	
 }
 
 

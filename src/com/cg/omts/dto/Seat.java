@@ -1,8 +1,9 @@
 package com.cg.omts.dto;
-enum SeatStatus {
-	AVAILABLE, BLOCKED, BOOKED; 
-}
+
 public class Seat {
+	public enum SeatStatus {
+		AVAILABLE, BLOCKED, BOOKED; 
+	}
 		private int seatId;
 		private double seatPrice;
 		private SeatStatus seatBookingState;

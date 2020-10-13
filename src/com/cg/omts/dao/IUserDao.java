@@ -63,4 +63,10 @@ public interface IUserDao {
 
 	Booking getBookingDetails(int ticketId) throws OMTSException;
 
+	Ticket getTicket(int ticketId) throws OMTSException;
+
+	boolean validatePayment(int accountNo, int cvv, String password) throws OMTSException;
+
+	Seat seatAvailability(int seatId) throws OMTSException;
+
 }

@@ -142,5 +142,20 @@ public class UserServiceImpl implements IUserService{
 		// TODO Auto-generated method stub
 		return userDao.getShowsByMovieAndTheatre(screenId, theatreId, movieId);
 	}
+	@Override
+	public boolean validatePayment(int accountNo, int cvv, String password) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.validatePayment(accountNo, cvv, password);
+	}
+	@Override
+	public Seat seatAvailability(int seatId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.seatAvailability(seatId);
+	}
+	@Override
+	public Ticket getTicket(int ticketId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getTicket(ticketId);
+	}
 
 }
