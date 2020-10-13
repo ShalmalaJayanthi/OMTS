@@ -1,15 +1,11 @@
 package com.cg.omts.testing;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.Test;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Ticket;
@@ -17,10 +13,8 @@ import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.service.IUserService;
 import com.cg.omts.service.UserServiceImpl;
-
-import junit.framework.Assert;
-
 import static com.cg.omts.dto.Ticket.TicketStatus;
+
 public class UserModuleTesting {
 
 	IUserService userService = new UserServiceImpl();

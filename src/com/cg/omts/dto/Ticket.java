@@ -1,8 +1,5 @@
 package com.cg.omts.dto;
 
-import java.util.Arrays;
-
-
 public class Ticket {
 	
 		public enum TicketStatus {

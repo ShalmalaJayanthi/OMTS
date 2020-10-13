@@ -11,45 +11,226 @@ import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;
 
 public interface IUserService {
+	
+	/*******************************
+	 * @description Method to get movie details 
+	 * @author Laxmi Prasanna Pujari
+	 *  
+	 * @param movieId
+	 * @return Movie
+	 * @throws OMTSException
+	 */
 
 	public Movie getMovieDetails(int movieId) throws OMTSException;
 	
+	/*******************************
+	 * @description Method to get theatre Id's
+	 * @author Laxmi Prasanna Pujari
+	 *  
+	 * @param movieId
+	 * @return List<Integer>
+	 * @throws OMTSException
+	 */
+	
 	public List<Integer> getTheatresByMovie(int movieId) throws OMTSException;//s
+	
+	/*******************************
+	 * @description Method to get Theatre Names
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param theatreIdList
+	 * @return List<String>
+	 * @throws OMTSException
+	 */
 	
 	public List<String> getTheatreNames(List<Integer> theatreIdList) throws OMTSException;//s
 	
+	/*******************************
+	 * @description Method to generate ticket
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param ticketId
+	 * @param ticket
+	 * @return int
+	 * @throws OMTSException
+	 */
 	public int generateTicket(int ticketId, Ticket ticket) throws OMTSException;
+	
+	/*******************************
+	 * @description Method to allocate seat
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param selectedSeatsList
+	 * @param screenId
+	 * @return int
+	 * @throws OMTSException
+	 */
 	
 	public int allocateSeat(List<Integer> selectedSeatsList, int screenId) throws OMTSException;
 	
+	/*******************************
+	 * @description Method to assign seats to tickets
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param ticketId
+	 * @param seatsList
+	 * @return int
+	 * @throws OMTSException
+	 */
+	
 	public int assignSeatsToTickets(int ticketId, List<Integer> seatsList) throws OMTSException;
+	
+	/*******************************
+	 * @description Method to set ticket status
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param ticketId
+	 * @param status
+	 * @return int
+	 * @throws OMTSException
+	 */
 	
 	public int setTicketStatus(int ticketId, String status) throws OMTSException;	//s
 	
+	/*******************************
+	 * @description Method to add transaction
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param transaction
+	 * @param ticketId
+	 * @param userId
+	 * @return int
+	 * @throws OMTSException
+	 */
+	
 	public int addTransaction(Transaction transaction, int ticketId, int userId) throws OMTSException;//s
+	
+	/*******************************
+	 * @description Method to add booking
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param booking
+	 * @param ticketId
+	 * @param transactionId
+	 * @return int
+	 * @throws OMTSException
+	 */
 	
 	public int addBooking(Booking booking, int ticketId, int transactionId) throws OMTSException;//s
 	
+	/*******************************
+	 * @description Method to set seat status
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param seatId
+	 * @param status
+	 * @return int
+	 * @throws OMTSException
+	 */
+	
 	public int setSeatStatus(int seatId, String status) throws OMTSException;//s
+	
+	/********************************
+	 * @description Methods to delete booking details
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param ticketId
+	 * @return int
+	 * @throws OMTSException
+	 */
 	
 	public int deleteBookingDetails(int ticketId) throws OMTSException;
 	
+	/********************************
+	 * @description Methods to get seats my ticket
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param ticketId
+	 * @return List<Integer>
+	 * @throws OMTSException
+	 */
+	
 	public List<Integer> getSeatsByTicket(int ticketId) throws OMTSException;
+	
+	/********************************
+	 * @description Method to delete allocated seats
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param ticketId
+	 * @return int
+	 * @throws OMTSException
+	 */
 	
 	public int deleteAllocatedSeats(int ticketId) throws OMTSException;
 	
+	/********************************
+	 * @description Method to delete seat details
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param seatList
+	 * @return int
+	 * @throws OMTSException
+	 */
+	
 	public int deleteSeatDetails(List<Integer> seatList) throws OMTSException;
 	
+	/********************************
+	 * @description Method to get transaction details
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param ticketId
+	 * @return Transaction
+	 * @throws OMTSException
+	 */
 	public Transaction getTransactionDetails(int ticketId) throws OMTSException;
+	
+	/********************************
+	 * @description Method to delete transaction 
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param ticketId
+	 * @return int
+	 * @throws OMTSException
+	 */
 	
 	public int deleteTransaction(int ticketId) throws OMTSException;
 	
+	/********************************
+	 * @description Method to cancel ticket
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param ticketId
+	 * @return int
+	 * @throws OMTSException
+	 */
+	
 	public int cancelTicket(int ticketId) throws OMTSException;
+	
+	/********************************
+	 * @description Method to get current balance
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param transaction
+	 * @return int
+	 * @throws OMTSException
+	 */
 	
 	public int getCurrentBalance(Transaction transaction) throws OMTSException;
 	
+	/********************************
+	 * @description Method to refund after cancellation
+	 * @author Laxmi Prasanna Pujari
+	 * 
+	 * @param transaction
+	 * @param currentBalance
+	 * @return int
+	 * @throws OMTSException
+	 */
+	
 	public int refundAfterCancellation(Transaction transaction, int currentBalance) throws OMTSException;
 
+	
+	
 	public Seat getSeatPrice(int seatId) throws OMTSException;
 	
 	public List<Screen> getScreenByTheatreId(int theatreId) throws OMTSException;
