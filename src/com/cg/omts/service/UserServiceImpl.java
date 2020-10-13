@@ -8,6 +8,7 @@ import com.cg.omts.dto.Booking;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Screen;
 import com.cg.omts.dto.Seat;
+import com.cg.omts.dto.Show;
 import com.cg.omts.dto.Ticket;
 import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;
@@ -130,6 +131,31 @@ public class UserServiceImpl implements IUserService{
 	public List<Screen> getScreenByTheatreId(int theatreId) throws OMTSException {
 		// TODO Auto-generated method stub
 		return userDao.getScreenByTheatreId(theatreId);
+	}
+	@Override
+	public Booking getBookingDetails(int ticketId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getBookingDetails(ticketId);
+	}
+	@Override
+	public List<Show> getShowsByMovieAndTheatre(int screenId, int theatreId, int movieId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getShowsByMovieAndTheatre(screenId, theatreId, movieId);
+	}
+	@Override
+	public boolean validatePayment(int accountNo, int cvv, String password) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.validatePayment(accountNo, cvv, password);
+	}
+	@Override
+	public Seat seatAvailability(int seatId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.seatAvailability(seatId);
+	}
+	@Override
+	public Ticket getTicket(int ticketId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getTicket(ticketId);
 	}
 
 }

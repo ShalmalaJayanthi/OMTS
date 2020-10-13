@@ -42,11 +42,26 @@ public interface IUserQueryConstants {
 	
 	String GET_SEATPRICE_BY_SEATID = "select seatPrice from seat where seatId=?";
 	
-	String GET_SCREEN_BY_THEATRE_ID = "select * from screen where tehatreId=?";
+	String GET_SCREEN_BY_THEATRE_ID = "select * from screen where theatreId=?";
 	
 	String GET_ALL_MOVIES = "selct * from movie";
 	
 	String GET_THEATREID = "select theatreId from theatre WHERE theatreCity=?";
+
+	String GET_SHOWS_BY_MOVIE_THEATRE = "select * from showDetails where screenId=?, theatreId=?, movieId=?";
+
+	String GET_BOOKING_DETAILS = "select * from booking where ticketId=?";
+
+	String GET_SCREENSEATPRICE_BY_SCREENID = "select seatPrice from screenSeatPrice where screenId=?";
+	
+	String VALIDATE_PAYMENT = "select cvv,password from bankaccount where accountNo=?";
+	
+	String SEAT_AVAILABILITY ="select seatStatus from Seat where seatId=?";
+	
+	String GET_SEAT = "select seatStatus from seat where seatId=?";
+	
+	String GET_TICKET="select noOfSeats,ticketStatus,screenId,theatreId,showId,movieId from ticket where ticketId=?";
+
 	
 }
 

@@ -6,6 +6,7 @@ import com.cg.omts.dto.Booking;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Screen;
 import com.cg.omts.dto.Seat;
+import com.cg.omts.dto.Show;
 import com.cg.omts.dto.Ticket;
 import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;
@@ -238,4 +239,18 @@ public interface IUserService {
 	public List<Integer> getTheatresByCity(String city) throws OMTSException;
 	
 	public List<Movie> getAllMovies() throws OMTSException;
+	
+	public Booking getBookingDetails(int ticketId) throws OMTSException;
+	
+	public List<Show> getShowsByMovieAndTheatre(int screenId, int theatreId, int movieId) throws OMTSException;
+	
+	public boolean validatePayment(int accountNo,int cvv,String password) throws OMTSException;
+	
+	public Seat seatAvailability(int seatId) throws OMTSException;
+	
+	public Ticket getTicket(int ticketId) throws OMTSException;
+
+
+	
+	
 }
