@@ -15,11 +15,6 @@ public class AdminServiceImpl implements IAdminService{
 	IAdminDao adminDao = null;
 	
 	
-	/***********
-	 @Description : This methods returns all Theatres available
-	 @author :  supraja
-	 @return : List of Theatre type
-	***********/
 	@Override
 	public List<Theatre> getTheatreDetails() throws OMTSException {
 		// TODO Auto-generated method stub
@@ -27,13 +22,6 @@ public class AdminServiceImpl implements IAdminService{
 		return adminDao.getTheatreDetails();
 	}
 
-	/**********
-	@Description: To add the newly registered Theatre
-	@author : supraja
-	@param1  : Theatre object
-	@return : Number of theatres added
-	@Exception : duplicate theatreId
-	*******/
 	@Override
 	public int addTheatre(Theatre theatre) throws OMTSException {
 		// TODO Auto-generated method stub
@@ -41,12 +29,7 @@ public class AdminServiceImpl implements IAdminService{
 		return adminDao.addTheatre(theatre);
 	}
 	
-	/*******
-	 @Description: To delete specified Theatre
-	 @author : supraja
-	 @param : Theatre Id
-	 @return : No of theatres deleted
-	********/
+	
 	@Override
 	public int deleteTheatre(int theatreId) throws OMTSException {
 		// TODO Auto-generated method stub
@@ -54,12 +37,6 @@ public class AdminServiceImpl implements IAdminService{
 		return adminDao.deleteTheatre(theatreId);
 	}
 	
-	/*********
-	 @Description : To get the list of theatres by specified theatre name 
-	 @author : supraja
-	 @param : theatre name
-	 @return : List of theatre of specified name 
-	*********/
 	@Override
 	public List<Theatre> getTheatreByName(String theatreName) throws OMTSException {
 		// TODO Auto-generated method stub
@@ -116,11 +93,6 @@ public class AdminServiceImpl implements IAdminService{
 		return screenList;
 	}
 
-	/*********
-	 @Description : To get details of all the shows
-	 @author : supraja
-	 @return : List of shows
-	**********/
 	@Override
 	public List<Show> getShowDetails() throws OMTSException {
 		// TODO Auto-generated method stub
@@ -128,12 +100,7 @@ public class AdminServiceImpl implements IAdminService{
 		return adminDao.getShowDetails();
 	}
 
-	/*********
-	 @Description : To add the registered show
-	 @author : supraja
-	 @param  : show object
-	 @return : Number of shows inserted 
-	********/
+	
 	@Override
 	public int addShow(Show show) throws OMTSException {
 		// TODO Auto-generated method stub
@@ -141,12 +108,6 @@ public class AdminServiceImpl implements IAdminService{
 		return adminDao.addShow(show);
 	}
 	
-	/******
-	 @Description : To deleted requested show
-	 @author : supraja
-	 @param : show Id
-	 @return : number of shows deleted 
-	********/
 	@Override
 	public int deleteShow(int showId) throws OMTSException {
 		// TODO Auto-generated method stub
@@ -154,12 +115,6 @@ public class AdminServiceImpl implements IAdminService{
 		return adminDao.deleteShow(showId);
 	}
 
-	/*******
-	 @Description : To get the list of shows of specific show name
-	 @author  : supraja
-	 @param : show name
-	 @return : List of shows of specified name
-	********/
 	@Override
 	public List<Show> getShowByName(String showName) throws OMTSException {
 		// TODO Auto-generated method stub
