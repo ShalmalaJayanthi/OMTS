@@ -16,11 +16,6 @@
 				Movie Length <c:out value="${movie.movieLength}" /><br>
 				Language <c:out value="${movie.language}" /><br>
 				Movie Release Date <c:out value="${movie.movieReleaseDate}" /><br>
-				<form action="BookingController" method="post">
-					<input type = "hidden" name= "action"  value = "UpdateServlet">
-					<input type="text" name="movieId" value="${movie.movieId}">
-					<input type = "hidden" value = "${movie.movieId } name = "movieId">
-					<input type = "submit" value = "BOOK">
-				</form>
+				<a href="booking.jsp?movieId="${movie.movieId}"">View Movie Details</a>
 </body>
 </html>
