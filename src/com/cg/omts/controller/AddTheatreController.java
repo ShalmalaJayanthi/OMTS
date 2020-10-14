@@ -17,11 +17,11 @@ import com.cg.omts.service.IAdminService;
 /**
  * Servlet implementation class AddTheatreServlet
  */
-@WebServlet("/AddTheatreServlet")
-public class AddTheatreServlet extends HttpServlet {
+@WebServlet("/AddTheatreController")
+public class AddTheatreController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-    public AddTheatreServlet() {
+    public AddTheatreController() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,11 +48,13 @@ public class AddTheatreServlet extends HttpServlet {
 		}
 		if(rowsInserted!=0) {
 			request.setAttribute("message", "Successfully registsred Theatre with theatreId :"+theatreId);
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("displayTheatres.jsp");
+			requestDispatcher.forward(request, response);
 		}else {
 			request.setAttribute("message", "Could not insert the Threatre, the theatreId :"+theatreId+" is already existing");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("addTheatre.jsp");
+			requestDispatcher.forward(request, response);
 		}
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("displayTheatres.jsp");
-		requestDispatcher.forward(request, response);
 	}
 
 }

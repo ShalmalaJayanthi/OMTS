@@ -13,9 +13,12 @@
 </head>
 <body>
 <h1>
+<% if(request.getAttribute("message")!=null) { %>
 <%= request.getAttribute("message") %>
+<%} %>
 </h1>
-<h1>List of Theatres Registered</h1>
+<h1>List of Theatres </h1>
+<br>
 <table  border=1>
 
 <%IAdminService adminService = new AdminServiceImpl();
