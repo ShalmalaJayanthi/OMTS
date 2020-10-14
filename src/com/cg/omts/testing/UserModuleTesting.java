@@ -164,7 +164,6 @@ public class UserModuleTesting {
 	@Test
 	public void deleteSeatDetailsTest() throws OMTSException {
 		try {
-			int ticketId = 1;
 			List<Integer> seatsList = new ArrayList<Integer>();
 			seatsList.add(1);
 			seatsList.add(2);

@@ -2,11 +2,13 @@ package com.cg.omts.dao;
 
 import java.util.List;
 
+
 import com.cg.omts.dto.Booking;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Screen;
 import com.cg.omts.dto.Seat;
 import com.cg.omts.dto.Show;
+import com.cg.omts.dto.Theatre;
 import com.cg.omts.dto.Ticket;
 import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;
@@ -18,6 +20,8 @@ public interface IUserDao {
 	public List<Integer> getTheatresByMovie(int movieId) throws OMTSException;
 	
 	public List<String> getTheatreNames(List<Integer> theatreIdList) throws OMTSException;
+	
+	public List<Theatre> getTheatres(List<Integer> theatreIdList) throws OMTSException;
 	
 	public int generateTicket(int ticketId, Ticket ticket) throws OMTSException;
 	

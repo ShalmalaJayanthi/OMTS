@@ -12,6 +12,7 @@ import com.cg.omts.dto.Screen;
 import com.cg.omts.dto.Seat;
 import com.cg.omts.dto.Seat.SeatStatus;
 import com.cg.omts.dto.Show;
+import com.cg.omts.dto.Theatre;
 import com.cg.omts.dto.Ticket;
 import com.cg.omts.dto.Ticket.TicketStatus;
 import com.cg.omts.dto.Transaction;
@@ -74,7 +75,7 @@ public class UserDaoImpl implements IUserDao{
 				theatreIdList.add(resultSet.getInt(1));
 			}
 		} catch (SQLException e) {
-			throw new OMTSException("problem while creating PS object");
+			throw new OMTSException("problem while creating PS object"+e.getMessage());
 		} finally {
 			try {
 				connection.close();
@@ -832,6 +833,41 @@ public class UserDaoImpl implements IUserDao{
 //		System.out.println("Cancelling ticket : " + cancelTicket(1));
 //		System.out.println("Refunding amount : "+ refundAfterCancellation(transaction, currentBal));
 //		
+	}
+
+	@Override
+	public List<Theatre> getTheatres(List<Integer> theatreIdList) throws OMTSException {
+		// TODO Auto-generated method stub
+		List<Theatre> theatresList = new ArrayList<Theatre>();
+		Theatre theatre = null;
+		try {
+			
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_THEATRE_BY_ID);
+			
+			for(Integer theatreId : theatreIdList) {
+				prepareStatement.setInt(1, theatreId);
+				resultSet = prepareStatement.executeQuery();
+					while(resultSet.next()) {
+						theatre = new Theatre();
+						theatre.setTheatreId(resultSet.getInt(1));
+						theatre.setTheatreName(resultSet.getString(2));
+						theatre.setTheatreCity(resultSet.getString(3));
+						theatre.setManagerName(resultSet.getString(4));
+						theatre.setManagerContact(resultSet.getString(5));
+						theatresList.add(theatre);
+					}
+			}
+		} catch (SQLException e) {
+			throw new OMTSException("problem while creating PS object"+e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new OMTSException("problem while closing");
+			}
+		}
+		return theatresList;
 	}
 	
 }

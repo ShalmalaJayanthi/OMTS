@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	<a href="MovieDetailsServlet?movieId=1">View Movie Details</a>
+	<a href="MovieDetailsController?movieId=1">View Movie Details</a>
 </body>
 </html>

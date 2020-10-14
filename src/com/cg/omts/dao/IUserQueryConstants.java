@@ -4,9 +4,11 @@ public interface IUserQueryConstants {
 	
 	String GET_MOVIE_DETAILS = "select * from movie where movieId = ?";
 	
-	String GET_THEATRES_BY_MOVIE = "select theatreId from theatremovie where movieId = ?";
+	String GET_THEATRES_BY_MOVIE = "select theatreId from movie where movieId = ?";
 	
 	String GET_THEATRE_NAME_BY_ID = "select theatreName from theatre where theatreId = ?";
+	
+	String GET_THEATRE_BY_ID = "select * from theatre where theatreId = ?";
 	
 	String GENERATE_TICKET = "insert into ticket(userId, ticketId, noOfSeats, screenId, theatreId, showId, movieId) values(?,?,?,?,?,?,?)";
 
