@@ -1,21 +1,35 @@
 package com.cg.omts.dto;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
 public class Customer {
-		private String customerId;
+		private int customerId;
 		private String customerName;
 		private String customerPassword;
-		private LocalDate dateOfBirth;
+		private Date dateOfBirth;
 		private List<Ticket> myTickets;
-		private String customerContact;
+		private int customerContact;
+		private String roleCode;
 		public Customer() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
-		public Customer(String customerId, String customerName, String customerPassword, LocalDate dateOfBirth,
-				List<Ticket> myTickets, String customerContact) {
+		
+		public Customer(int customerId, String customerName, String customerPassword, Date dateOfBirth,
+				int customerContact, String roleCode) {
+			super();
+			this.customerId = customerId;
+			this.customerName = customerName;
+			this.customerPassword = customerPassword;
+			this.dateOfBirth = dateOfBirth;
+			this.customerContact = customerContact;
+			this.roleCode = roleCode;
+		}
+
+		public Customer(int customerId, String customerName, String customerPassword, Date dateOfBirth,
+				List<Ticket> myTickets, int customerContact, String roleCode) {
 			super();
 			this.customerId = customerId;
 			this.customerName = customerName;
@@ -23,12 +37,19 @@ public class Customer {
 			this.dateOfBirth = dateOfBirth;
 			this.myTickets = myTickets;
 			this.customerContact = customerContact;
+			this.roleCode = roleCode;
+		}
+
+		public Customer(int customerId, String customerPassword) {
+			super();
+			this.customerId = customerId;
+			this.customerPassword = customerPassword;
 		}
 		
-		public String getCustomerId() {
+		public int getCustomerId() {
 			return customerId;
 		}
-		public void setCustomerId(String customerId) {
+		public void setCustomerId(int customerId) {
 			this.customerId = customerId;
 		}
 		public String getCustomerName() {
@@ -43,10 +64,10 @@ public class Customer {
 		public void setCustomerPassword(String customerPassword) {
 			this.customerPassword = customerPassword;
 		}
-		public LocalDate getDateOfBirth() {
+		public Date getDateOfBirth() {
 			return dateOfBirth;
 		}
-		public void setDateOfBirth(LocalDate dateOfBirth) {
+		public void setDateOfBirth(Date dateOfBirth) {
 			this.dateOfBirth = dateOfBirth;
 		}
 		public List<Ticket> getMyTickets() {
@@ -55,17 +76,24 @@ public class Customer {
 		public void setMyTickets(List<Ticket> myTickets) {
 			this.myTickets = myTickets;
 		}
-		public String getCustomerContact() {
+		public int getCustomerContact() {
 			return customerContact;
 		}
-		public void setCustomerContact(String customerContact) {
+		public void setCustomerContact(int customerContact) {
 			this.customerContact = customerContact;
 		}
-		
+		public String getRoleCode() {
+			return roleCode;
+		}
+		public void setRoleCode(String roleCode) {
+			this.roleCode = roleCode;
+		}
 		@Override
 		public String toString() {
 			return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerPassword="
 					+ customerPassword + ", dateOfBirth=" + dateOfBirth + ", myTickets=" + myTickets
-					+ ", customerContact=" + customerContact + "]";
+					+ ", customerContact=" + customerContact + ", roleCode=" + roleCode + "]";
 		}
+		
+		
 }

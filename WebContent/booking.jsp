@@ -24,7 +24,7 @@
 			<%
 				if(request.getAttribute("screenList") != null) {
 					IUserService userService = new UserServiceImpl();
-					List<Screen> screenList = (ArrayList<Screen>) request.getAttribute("screenList");
+					List<Screen> screenList = (ArrayList<Screen>)request.getAttribute("screenList");
 				}
 			
 			%>

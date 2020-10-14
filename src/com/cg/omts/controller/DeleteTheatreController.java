@@ -1,37 +1,44 @@
 package com.cg.omts.controller;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.service.AdminServiceImpl;
 import com.cg.omts.service.IAdminService;
 
-/**
- * Servlet implementation class DeleteTheatreServlet
- */
 @WebServlet("/DeleteTheatreServlet")
-public class DeleteTheatreServlet extends HttpServlet {
+public class DeleteTheatreController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteTheatreServlet() {
+    public DeleteTheatreController() {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		String theatreName = request.getParameter("theatreName");
+		
+		IAdminService adminService = new AdminServiceImpl();
+		try {
+			List<Theatre> searchTheatreList = adminService.getTheatreByName(theatreName);
+			if(searchTheatreList.size()==0) {
+				request.setAttribute("errorMessage","The Theatre Name does not exist");
+			}
+			request.setAttribute("searchTheatreList", searchTheatreList);
+			RequestDispatcher rd = request.getRequestDispatcher("./deleteTheatre.jsp");
+			rd.forward(request, response);
+			
+		} catch (OMTSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
