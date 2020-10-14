@@ -63,7 +63,6 @@ public class UserDaoImpl implements IUserDao{
 	
 	@Override
 	public List<Integer> getTheatresByMovie(int movieId) throws OMTSException {
-		// TODO Auto-generated method stub
 		List<Integer> theatreIdList = new ArrayList<Integer>();
 		try {
 			
@@ -89,7 +88,6 @@ public class UserDaoImpl implements IUserDao{
 
 	@Override
 	public List<String> getTheatreNames(List<Integer> theatreIdList) throws OMTSException {
-		// TODO Auto-generated method stub
 		List<String> theatreNamesList = new ArrayList<String>();
 		try {
 			
