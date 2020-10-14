@@ -535,5 +535,32 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 		return rows;
 	}
 
+	@Override
+	public int getMovieLength(int movieId) throws OMTSException {
+		// TODO Auto-generated method stub
+				connection = DBConnection.getConnection();
+				int movieLength = 0;
+				try {
+					prepareStatement = connection.prepareStatement(IAdminQueryConstants.GET_MOVIELENGTH);
+					prepareStatement.setInt(1, movieId);
+					ResultSet resultSet = prepareStatement.executeQuery();
+					while(resultSet.next())   {
+						movieLength = resultSet.getInt(1);
+					//System.out.println(rs.getInt(1)+"  "+rs.getTime(2)+"  "+rs.getTime(3)+" "+rs.getString(4));  
+					}
+				} catch (SQLException e) {
+					System.out.println("Failed to retrieve movie length from movie "+movieId);
+				} finally {
+					try {
+						connection.close();
+						prepareStatement.close();
+					} catch (SQLException e) {
+						System.out.println("Failed to close the database connection" +e);
+					}
+				}
+				return movieLength;
+
+	}
+
 	
 }

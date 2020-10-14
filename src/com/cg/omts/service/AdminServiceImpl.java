@@ -137,4 +137,11 @@ public class AdminServiceImpl implements IAdminService{
 		return adminDao.register(customer);
 	}
 
+	@Override
+	public int getMovieLength(int movieId) throws OMTSException {
+		// TODO Auto-generated method stub
+		adminDao = adminDao = (IAdminDao) new AdminDaoImpl();
+		return adminDao.getMovieLength(movieId);
+	}
+
 }

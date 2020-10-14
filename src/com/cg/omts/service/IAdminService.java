@@ -118,6 +118,12 @@ public interface IAdminService {
 	 @Exception : throws OMTSException
 	********/
 	public int register(Customer customer) throws OMTSException;
-
-
+	
+	/**@Description : To get the movie length of requested movie
+	 * @author  : supraja
+	 * @param movieId
+	 * @return
+	 * @throws OMTSException
+	 */
+	public int getMovieLength(int movieId) throws OMTSException;
 }

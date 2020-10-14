@@ -45,4 +45,6 @@ public interface IAdminDao {
 	public String validateLogin(Customer customer) throws OMTSException;
 
 	public int register(Customer customer) throws OMTSException;
+	
+	public int getMovieLength(int movieId) throws OMTSException;
 }
