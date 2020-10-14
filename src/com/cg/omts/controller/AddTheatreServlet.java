@@ -20,29 +20,14 @@ import com.cg.omts.service.IAdminService;
 @WebServlet("/AddTheatreServlet")
 public class AddTheatreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
     public AddTheatreServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
 		int rowsInserted = 0;
 		String theatreName = request.getParameter("theatreName");
 		int theatreId = Integer.parseInt(request.getParameter("theatreId"));
@@ -59,13 +44,12 @@ public class AddTheatreServlet extends HttpServlet {
 		try {
 			rowsInserted = adminService.addTheatre(theatre);
 		} catch (OMTSException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(rowsInserted!=0) {
-			request.setAttribute("message", "Successfully inserted Theatre with theatreId :"+theatreId);
+			request.setAttribute("message", "Successfully registsred Theatre with theatreId :"+theatreId);
 		}else {
-			request.setAttribute("message", "Could not insert the Threatre, please check if you have entered same theatreId :"+theatreId+" again");
+			request.setAttribute("message", "Could not insert the Threatre, the theatreId :"+theatreId+" is already existing");
 		}
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("displayTheatres.jsp");
 		requestDispatcher.forward(request, response);
