@@ -3,6 +3,7 @@ package com.cg.omts.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cg.omts.dto.Customer;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Screen;
 import com.cg.omts.dto.Show;
@@ -40,4 +41,8 @@ public interface IAdminDao {
 	public  Boolean deleteScreen(Integer screenId);
 	
 	public  ArrayList<Screen> getScreenDetailsToDelete();
+
+	public String validateLogin(Customer customer) throws OMTSException;
+
+	public int register(Customer customer) throws OMTSException;
 }

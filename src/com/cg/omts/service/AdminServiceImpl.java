@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.cg.omts.dao.AdminDaoImpl;
 import com.cg.omts.dao.IAdminDao;
+import com.cg.omts.dto.Customer;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Screen;
 import com.cg.omts.dto.Show;
@@ -120,6 +121,20 @@ public class AdminServiceImpl implements IAdminService{
 		// TODO Auto-generated method stub
 		adminDao = (IAdminDao) new AdminDaoImpl();
 		return adminDao.getShowByName(showName);
+	}
+
+	@Override
+	public String validateLogin(Customer customer) throws OMTSException {
+		// TODO Auto-generated method stub
+		adminDao = (IAdminDao) new AdminDaoImpl();
+		return adminDao.validateLogin(customer);
+	}
+
+	@Override
+	public int register(Customer customer) throws OMTSException {
+		// TODO Auto-generated method stub
+		adminDao = (IAdminDao) new AdminDaoImpl();
+		return adminDao.register(customer);
 	}
 
 }

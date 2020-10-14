@@ -290,11 +290,31 @@ public interface IUserService {
 	 */
 	public List<String> getTheatreNames(List<Integer> theatreIdList) throws OMTSException;//s
 	
-
+	/*******
+	 @Description : To validate payment
+	 @author  : Ashutosh
+	 @param : accountNo, cvv, password
+	 @return : Boolean(true or false)
+	 @Exception : throws OMTSException
+	********/
 	public boolean validatePayment(int accountNo,int cvv,String password) throws OMTSException;
 	
+	/*******
+	 @Description : To get Seat Availabilty
+	 @author  : Ashutosh
+	 @param : seatId
+	 @return : Seat object
+	 @Exception : throws OMTSException
+	********/
 	public Seat seatAvailability(int seatId) throws OMTSException;
 	
+	/*******
+	 @Description : To get Ticket
+	 @author  : Ashutosh
+	 @param : ticketId
+	 @return : Ticket object
+	 @Exception : throws OMTSException
+	********/
 	public Ticket getTicket(int ticketId) throws OMTSException;
 
 

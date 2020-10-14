@@ -1,6 +1,7 @@
 package com.cg.omts.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cg.omts.dto.Customer;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Screen;
 import com.cg.omts.dto.Seat;
@@ -474,5 +476,64 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 		}
 		return screenList;
 	}
+	@Override
+	public String validateLogin(Customer customer) throws OMTSException {
+		// TODO Auto-generated method stub
+		boolean status=false;
+		String roleCode="";
+		try {
+			connection=DBConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement(IQueryConstants.VALIDATE);
+			ps.setInt(1, customer.getCustomerId());
+			ps.setString(2, customer.getCustomerPassword());
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				roleCode=rs.getString(1);
+			}
+		}catch (SQLException e) {
+			System.out.println("Failed to get the login"+ e);
+		} finally {
+			try {
+				connection.close();
+				prepareStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the database connection" +e);
+			}
+		}
+		
+		return roleCode;
+	}
+
+	@Override
+	public int register(Customer customer) throws OMTSException {
+		// TODO Auto-generated method stub
+		int rows=0;
+		int error=-1;
+		try {
+			connection=DBConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement(IQueryConstants.REGISTER);
+			ps.setInt(1,customer.getCustomerId());
+			ps.setString(2,customer.getCustomerName());
+			Date date=customer.getDateOfBirth();
+		    ps.setDate(4, customer.getDateOfBirth());
+		    ps.setString(3,customer.getCustomerPassword());
+			ps.setInt(5,customer.getCustomerContact());
+			ps.setString(6,customer.getRoleCode());
+			rows=ps.executeUpdate();
+		}catch (SQLException e) {
+			System.out.println("Failed to get the login"+ e);
+		} finally {
+			try {
+				connection.close();
+				prepareStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the database connection" +e);
+			}
+		}
+		
+		return rows;
+	}
+
 	
 }
