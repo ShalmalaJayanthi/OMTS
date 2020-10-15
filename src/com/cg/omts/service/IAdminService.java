@@ -49,19 +49,82 @@ public interface IAdminService {
 	
 	public List<Theatre> getTheatreByName(String theatreName) throws OMTSException;
 	
+	/****
+	 * @description Method to add the movie details to the given theatreID
+	 * @author Jayanthi Shalmala
+	 * 
+	 * @param movie 
+	 * @param theatreId
+	 * @return boolean value
+	 * @throws OMTSException
+	 */
+	
 	public  Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException;
 	
-	public  ArrayList<Movie> getMovieDetailsToDelete();
+	/*****
+	 * @description Method to get the movie details
+	 * @author Jayanthi Shalmala
+	 * 
+	 * @return list of movie objects
+	 * @throws OMTSException
+	 */
 	
-	public  int deleteMovie(Integer movieId);
+	public  ArrayList<Movie> getMovieDetailsToDelete() throws OMTSException;
 	
-	public  ArrayList<Theatre> getTheatreDetails(String theatreCity);
 	
-	public  Boolean addScreen(Screen screen, Integer theatreId);
+	/*****
+	 * @description Method to delete the movie with the given movieId
+	 * @author Jayanthi Shalmala
+	 * 
+	 * @param movieId
+	 * @return int
+	 * @throws OMTSException
+	 */
+	public  int deleteMovie(Integer movieId) throws OMTSException;
 	
-	public  Boolean deleteScreen(Integer screenId);
 	
-	public abstract ArrayList<Screen> getScreenDetailsToDelete();
+	/*****
+	 * @description Method to get the theatre details that belong to the given city
+	 * @author Jayanthi Shalmala
+	 * 
+	 * @param theatreCity
+	 * @return list of theatre objects
+	 * @throws OMTSException
+	 */
+	public  ArrayList<Theatre> getTheatreDetails(String theatreCity) throws OMTSException;
+	
+	
+	/*****
+	 * @description Method to add the screen to the given theatreId
+	 * @author Jayanthi Shalmala
+	 * 
+	 * @param screen
+	 * @param theatreId
+	 * @return boolean value
+	 * @throws OMTSException
+	 */
+	public  Boolean addScreen(Screen screen, Integer theatreId) throws OMTSException;
+	
+	
+	/*****
+	 * @description Method to delete the screen with given screenId
+	 * @author Jayanthi Shalmala
+	 *  
+	 * @param screenId
+	 * @return boolean value
+	 * @throws OMTSException
+	 */
+	public  Boolean deleteScreen(Integer screenId) throws OMTSException;
+	
+	
+	/*****
+	 * @description Method to get the screen details
+	 * @author Jayanthi Shalmala
+	 * 
+	 * @return ArrayList<Screen> 
+	 * @throws OMTSException
+	 */
+	public abstract ArrayList<Screen> getScreenDetailsToDelete() throws OMTSException;
 	
 	
 	/*********

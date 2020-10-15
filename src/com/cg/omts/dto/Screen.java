@@ -33,6 +33,13 @@ public class Screen {
 			this.rows = rows;
 			this.columns = columns;
 		}
+		public Screen(int screenId, String screenName, int screenRows, int screenColumns) {
+			this.screenId = screenId;
+			this.screenName = screenName;
+			this.rows = screenRows;
+			this.columns = screenColumns;
+			
+		}
 		
 		public Screen(int screenId, String screenName, Date movieEndDate, int screenRows,
 				int screenColumns) {

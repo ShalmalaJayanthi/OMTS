@@ -11,21 +11,28 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.cg.omts.dto.Movie;
+import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.service.AdminServiceImpl;
 import com.cg.omts.service.IAdminService;
 
 @WebServlet("/DeleteMovieServlet")
-public class DeleteMovieServlet extends HttpServlet {
+public class DeleteMovieController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IAdminService adminService = new AdminServiceImpl();
 		
-		ArrayList<Movie> displayDetails = adminService.getMovieDetailsToDelete();
-		HttpSession session = request.getSession();
-		session.setAttribute("displayDetails", displayDetails);
-		System.out.println("In do get method of delete movie servlet "+ displayDetails);
-		request.getRequestDispatcher("deleteMovies.jsp").forward(request, response);
+		ArrayList<Movie> displayDetails;
+		try {
+			displayDetails = adminService.getMovieDetailsToDelete();
+			HttpSession session = request.getSession();
+			session.setAttribute("displayDetails", displayDetails);
+			System.out.println("In do get method of delete movie servlet "+ displayDetails);
+			request.getRequestDispatcher("deleteMovies.jsp").forward(request, response);
+		} catch (OMTSException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,7 +40,12 @@ public class DeleteMovieServlet extends HttpServlet {
 		int movieId = Integer.parseInt(request.getParameter("movieId"));
 		
 		IAdminService adminService = new AdminServiceImpl();
-		adminService.deleteMovie(movieId);
+		try {
+			adminService.deleteMovie(movieId);
+		} catch (OMTSException e) {
+			
+			e.printStackTrace();
+		}
 				
 	}
 
