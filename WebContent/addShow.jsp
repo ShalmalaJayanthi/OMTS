@@ -14,23 +14,27 @@
 <br>
 <form method="post" action="./AddShowServlet">
 Enter Show Id : 
-<input type="text" name="showId" pattern="[1-9]{1}[0-9]{7,}" title="Screen Id should be minimum 8 digit" required>
+<input type="text" name="showId" pattern="[1-9]{1}[0-9]{3,}" title="Screen Id should be minimum 4 digit" required>
 <br>
 <br>
-Enter Show Name:<select id="showType" name="showName" >
-<option value="Morning">Morning</option>
-<option value="Matinee">Matinee</option>
-<option value="Evening">Evening</option>
-<option value="Night"> Night</option>
+Enter Show Name:<select id="showType" name="showName" onchange="myFunction()">
+ <option value="" selected disabled hidden>Choose here</option>
+<option value="morning">Morning</option>
+<option value="matinee">Matinee</option>
+<option value="firstshow">Evening</option>
+<option value="secondshow"> Night</option>
 </select>
 <br>
+<p>When you select a new car, a function is triggered which outputs the value of the selected car.</p>
+
+<p id="demo"></p>
 <br>
 Enter Show Start Time:
-<input type="time" name="stime" required>
+<input type="time" id="stime" required>
 <br>
 <br>
 Enter Show End Time :
-<input type="time" name="etime" required>
+<input type="time" id="etime" required>
 <br>
 <br>
 Enter Theatre Id:
@@ -47,5 +51,36 @@ Enter Screen Id :
 <br>
 <input type="submit" value="Enter Show">
 </form>
+<script type="text/javascript">
+function myFunction() {
+  var x = document.getElementById("showType").value;
+  document.getElementById("demo").innerHTML = "You selected: " + x;
+  console.log(x);
+  if(x==='morning') {
+	  document.getElementById("stime").min="06:00"
+	  document.getElementById("stime").max="08:00"
+	  document.getElementById("etime").min="07:00"
+	  document.getElementById("etime").max="11:00"
+  } else if(x==='matinee') {
+	  document.getElementById("stime").min="10:00"
+	  document.getElementById("stime").max="12:00"
+	  document.getElementById("etime").min="11:00"
+	  document.getElementById("etime").max="15:00"
+  } else if(x==='firstshow') {
+	  document.getElementById("stime").min="17:00"
+	  document.getElementById("stime").max="20:00"
+	  document.getElementById("etime").min="18:00"
+	  document.getElementById("etime").max="23:00"
+  } else {
+	  document.getElementById("stime").min="21:00"
+	  document.getElementById("stime").max="23:00"
+	  document.getElementById("etime").min="22:00"
+	  document.getElementById("etime").max="02:00"
+  }
+  //document.getElementById("num").min=89;
+  //document.getElementById("starttime").min="07:00"
+}
+</script>
+
 </body>
 </html>
