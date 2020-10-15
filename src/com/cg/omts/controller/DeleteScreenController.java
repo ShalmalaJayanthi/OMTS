@@ -1,6 +1,7 @@
 package com.cg.omts.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -45,6 +46,8 @@ public class DeleteScreenController extends HttpServlet {
 		IAdminService adminService = new AdminServiceImpl();
 		try {
 			adminService.deleteScreen(screenId);
+			PrintWriter out = response.getWriter();
+			out.println("Successfully deleted the screen with ID: "+ screenId);
 		} catch (OMTSException e) {
 			
 			e.printStackTrace();

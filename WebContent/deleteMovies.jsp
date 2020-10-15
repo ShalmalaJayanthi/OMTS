@@ -12,7 +12,7 @@
 <body>
 	
 	<form method = "post" action = "DeleteMovieServlet">
-	<input type = "number" name = "movieId" value = "Enter Movie ID"></br>
+	<input type = "number" name = "movieId" placeholder = "Enter Movie ID"></br>
 			<input type = "submit" value = "Submit">
 	<c:if test="${displayDetails != null}">
 		<table border="1">

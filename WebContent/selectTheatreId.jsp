@@ -11,7 +11,7 @@
 </head>
 <body>
 	
-		<form method = "post" action = "SelectTheatreIdDetails">
+		<form method = "post" action = "./SelectTheatreIdDetails">
 		<input type = "number" name = "theatreId" placeholder = "Enter Theatre ID"></br>
 			<input type = "submit" value = "Submit">
 			

@@ -17,6 +17,7 @@ Enter Theatre Name:
 <input type="text" name="theatreName" required>
 <input type="submit" value="search theatre" >
 </form>
+<a href="deleteTheatre.jsp">View All </a>
 <br>
 <% if (request.getAttribute("errorMessage")!=null) {%>
 <h2><%=request.getAttribute("errorMessage") %></h2>

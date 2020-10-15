@@ -94,7 +94,8 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 		prepareStatement.setInt(1,theatreId);  
 		isDeleted = prepareStatement.executeUpdate();  
 		}catch(SQLException e){ 
-			throw new OMTSException("problem while deleting Theatre Details from Database");
+			System.out.println(e);
+			//throw new OMTSException("problem while deleting Theatre Details from Database");
 		}finally {
 			try {
 				connection.close();

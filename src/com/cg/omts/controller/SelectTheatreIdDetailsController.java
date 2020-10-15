@@ -1,6 +1,7 @@
 package com.cg.omts.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -21,6 +22,8 @@ public class SelectTheatreIdDetailsController extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+				
 		IAdminService adminService = new AdminServiceImpl();
 		int theatreId = Integer.parseInt(request.getParameter("theatreId"));
 		Boolean isAdded;
@@ -31,14 +34,18 @@ public class SelectTheatreIdDetailsController extends HttpServlet {
 		try {
 			if(screen == null) {
 				isAdded = adminService.addMovie(movie,theatreId);
-				if(isAdded)
+				if(isAdded) {
 					System.out.println("Successfully Added movie details");
+					out.println("<h2>Successfully Added movie details with movie Id: "+movie.getMovieId());
+			}
 			} else {
 				String screenId = ""+ screen.getScreenId() + theatreId; 
 				screen.setScreenId(Integer.parseInt(screenId));
 				isAdded = adminService.addScreen(screen, theatreId);
-				if(isAdded)
+				if(isAdded) {
 					System.out.println("Successfully Added Screen details");
+					out.println("<h2>Successfully added Screen details with screen Id: "+screen.getScreenId());
+				}
 			}
 		} catch (OMTSException e) {
 			System.out.println("Couldn't add the details\n" + e);

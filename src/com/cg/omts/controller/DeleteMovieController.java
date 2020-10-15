@@ -1,6 +1,7 @@
 package com.cg.omts.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -42,6 +43,8 @@ public class DeleteMovieController extends HttpServlet {
 		IAdminService adminService = new AdminServiceImpl();
 		try {
 			adminService.deleteMovie(movieId);
+			PrintWriter out = response.getWriter();
+			out.println("Successfully deleted movie with ID: "+ movieId);
 		} catch (OMTSException e) {
 			
 			e.printStackTrace();
