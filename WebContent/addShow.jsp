@@ -24,7 +24,6 @@ Enter Show Name:<select id="showType" name="showName" >
 <option value="Night"> Night</option>
 </select>
 <br>
-<p id='print'></p>
 <br>
 Enter Show Start Time:
 <input type="time" name="stime" required>
