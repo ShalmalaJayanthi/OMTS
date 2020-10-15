@@ -496,10 +496,10 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 		String roleCode="";
 		try {
 			connection=DBConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(IQueryConstants.VALIDATE);
-			ps.setInt(1, customer.getCustomerId());
-			ps.setString(2, customer.getCustomerPassword());
-			ResultSet rs = ps.executeQuery();
+			prepareStatement = connection.prepareStatement(IQueryConstants.VALIDATE);
+			prepareStatement.setInt(1, customer.getCustomerId());
+			prepareStatement.setString(2, customer.getCustomerPassword());
+			ResultSet rs = prepareStatement.executeQuery();
 			if(rs.next())
 			{
 				roleCode=rs.getString(1);

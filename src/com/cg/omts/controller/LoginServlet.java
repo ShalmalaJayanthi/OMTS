@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("username", customer.getCustomerId());
 				session.setAttribute("rolecode", "adm");
-				dispatcher= request.getRequestDispatcher("adminHomePage.jsp");
+				dispatcher= request.getRequestDispatcher("adminHomePage.html");
 				dispatcher.forward(request, response);
 				System.out.println("Admin");
 			}
