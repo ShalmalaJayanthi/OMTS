@@ -575,6 +575,58 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 				return movieLength;
 
 	}
+	@Override
+	public List<Integer> getScreenFromMovieAndTheatre(int theatreId, int movieId) throws OMTSException {
+		// TODO Auto-generated method stub
+		List<Integer> screenList = new ArrayList<Integer>();
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IAdminQueryConstants.GET_SCREEN_FROM_MOVIE_AND_THEATRE);
+			prepareStatement.setInt(1, movieId);
+			prepareStatement.setInt(2, theatreId);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			int screenId = 0;
+			while(resultSet.next())   {
+				screenId = resultSet.getInt(1); 
+				screenList.add(screenId);
+			}
+		}catch (SQLException e) {
+			System.out.println("Failed to retrieve screen Id  from movie and theatre");
+		} finally {
+			try {
+				connection.close();
+				prepareStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the database connection" +e);
+			}
+		}
+		return screenList;
+	}
 
+	@Override
+	public String getMovieNameById(int movieId) throws OMTSException{
+		// TODO Auto-generated method stub
+		String movieName="";
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IAdminQueryConstants.GET_MOVIENAME_BY_FROM_MOVIE);
+			prepareStatement.setInt(1, movieId);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			while(resultSet.next())   {
+				movieName = resultSet.getString(1);
+			}
+		}catch (SQLException e) {
+			System.out.println("Failed to retrieve screen Id  from movie and theatre");
+		} finally {
+			try {
+				connection.close();
+				prepareStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the database connection" +e);
+			}
+		}
 	
+		return movieName;
+	}
+
 }

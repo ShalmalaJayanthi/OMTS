@@ -189,4 +189,22 @@ public interface IAdminService {
 	 * @throws OMTSException
 	 */
 	public int getMovieLength(int movieId) throws OMTSException;
+	/***
+	 * @Description : To get the screen Id from movie and theatre
+	 * @author  : supraja
+	 * @param theatreId
+	 * @param movieId
+	 * @return
+	 * @throws OMTSException
+	 */
+	public List<Integer> getScreenFromMovieAndTheatre(int theatreId, int movieId) throws OMTSException;
+	
+	/***
+	 *  @Description : To get movie name from movie 
+	 * @author  : supraja
+	 * @param movieId
+	 * @return
+	 * @throws OMTSException
+	 */
+	public String getMovieNameById(int movieId) throws OMTSException;
 }

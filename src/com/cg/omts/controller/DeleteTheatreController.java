@@ -52,7 +52,7 @@ public class DeleteTheatreController extends HttpServlet {
 		IAdminService adminService = new AdminServiceImpl();
 		try {
 			rowsDeleted = adminService.deleteTheatre(theatreId);
-			response.sendRedirect("./deleteTheatre.jsp");
+			response.sendRedirect("./deleteTheatre.jsp?message=Successfully Deleted");
 		} catch (OMTSException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

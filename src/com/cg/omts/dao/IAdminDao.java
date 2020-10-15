@@ -47,4 +47,8 @@ public Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException;
 	public int register(Customer customer) throws OMTSException;
 	
 	public int getMovieLength(int movieId) throws OMTSException;
+	
+	public List<Integer> getScreenFromMovieAndTheatre(int theatreId, int movieId) throws OMTSException;
+	
+	public String getMovieNameById(int movieId) throws OMTSException;
 }

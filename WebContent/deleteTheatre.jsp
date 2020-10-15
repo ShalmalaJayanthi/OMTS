@@ -19,6 +19,11 @@ Enter Theatre Name:
 </form>
 <a href="deleteTheatre.jsp">View All </a>
 <br>
+<h3>
+<% if (request.getParameter("message")!=null) {%>
+<%=request.getParameter("message") %>
+<%} %>
+</h3>
 <% if (request.getAttribute("errorMessage")!=null) {%>
 <h2><%=request.getAttribute("errorMessage") %></h2>
 <%} %>

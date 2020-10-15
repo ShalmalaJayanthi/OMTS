@@ -1,12 +1,17 @@
 package com.cg.omts.controller;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cg.omts.dto.Show;
+import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.service.AdminServiceImpl;
 import com.cg.omts.service.IAdminService;
@@ -32,7 +37,22 @@ public class DeleteShowController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		String showName = request.getParameter("showNameSearch");
+		
+		IAdminService adminService = new AdminServiceImpl();
+		try {
+			List<Show> searchShowList = adminService.getShowByName(showName);
+			if(searchShowList.size()==0) {
+				request.setAttribute("errorMessage","The Show Name does not exist");
+			}
+			request.setAttribute("searchShowList", searchShowList);
+			RequestDispatcher rd = request.getRequestDispatcher("./deleteShow.jsp");
+			rd.forward(request, response);
+			
+		} catch (OMTSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -49,7 +69,7 @@ public class DeleteShowController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		response.sendRedirect("./deleteShow.jsp");
+		response.sendRedirect("./deleteShow.jsp?message=Successfully Deleted");
 	}
 
 }

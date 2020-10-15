@@ -140,8 +140,22 @@ public class AdminServiceImpl implements IAdminService{
 	@Override
 	public int getMovieLength(int movieId) throws OMTSException {
 		// TODO Auto-generated method stub
-		adminDao = adminDao = (IAdminDao) new AdminDaoImpl();
+		adminDao = (IAdminDao) new AdminDaoImpl();
 		return adminDao.getMovieLength(movieId);
+	}
+
+	@Override
+	public List<Integer> getScreenFromMovieAndTheatre(int theatreId, int movieId) throws OMTSException {
+		// TODO Auto-generated method stub
+		adminDao = (IAdminDao) new AdminDaoImpl();
+		return adminDao.getScreenFromMovieAndTheatre(theatreId, movieId);
+	}
+
+	@Override
+	public String getMovieNameById(int movieId) throws OMTSException {
+		// TODO Auto-generated method stub
+		adminDao = (IAdminDao) new AdminDaoImpl();
+		return adminDao.getMovieNameById(movieId);
 	}
 
 }
