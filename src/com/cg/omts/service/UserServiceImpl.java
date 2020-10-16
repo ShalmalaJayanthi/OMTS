@@ -1,5 +1,6 @@
 package com.cg.omts.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.cg.omts.dao.IUserDao;
@@ -124,9 +125,9 @@ public class UserServiceImpl implements IUserService{
 		return userDao.refundAfterCancellation(transaction, currentBalance);
 	}
 	@Override
-	public Seat getSeatPrice(int seatId) throws OMTSException {
+	public Seat getSeatPrice(int screenId) throws OMTSException {
 		// TODO Auto-generated method stub
-		return userDao.getSeatPrice(seatId);
+		return userDao.getSeatPrice(screenId);
 	}
 	@Override
 	public List<Screen> getScreenByTheatreId(int theatreId) throws OMTSException {
@@ -163,5 +164,16 @@ public class UserServiceImpl implements IUserService{
 		// TODO Auto-generated method stub
 		return userDao.getTheatres(theatreIdList);
 	}
+	@Override
+	public String getScreenName(int screenId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getScreenName(screenId);
+	}
+	@Override
+	public String getShowName(int showId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getShowName(showId);
+	}
+	
 
 }

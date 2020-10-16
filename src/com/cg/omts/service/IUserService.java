@@ -1,5 +1,6 @@
 package com.cg.omts.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.cg.omts.dto.Booking;
@@ -218,7 +219,7 @@ public interface IUserService {
 	 * @return Seat
 	 * @throws OMTSException
 	 */
-	public Seat getSeatPrice(int seatId) throws OMTSException;
+	public Seat getSeatPrice(int screenId) throws OMTSException;
 	
 	/*****
 	 * @description Method to return screen details
@@ -315,13 +316,14 @@ public interface IUserService {
 	/*******
 	 @Description : To get Ticket
 	 @author  : Ashutosh
+	 
 	 @param : ticketId
 	 @return : Ticket object
 	 @Exception : throws OMTSException
 	********/
 	public Ticket getTicket(int ticketId) throws OMTSException;
 
-
+	public String getScreenName(int screenId) throws OMTSException;
 	
-	
+	public String getShowName(int showId) throws OMTSException;
 }

@@ -16,6 +16,6 @@
 				Movie Length <c:out value="${movie.movieLength}" /><br>
 				Language <c:out value="${movie.language}" /><br>
 				Movie Release Date <c:out value="${movie.movieReleaseDate}" /><br>
-				<a href="booking.jsp?movieId="${movie.movieId}"">View Movie Details</a>
+				<a href="booking.jsp?movieId=${movie.movieId}">BOOK</a>
 </body>
 </html>

@@ -4,7 +4,7 @@ public interface IUserQueryConstants {
 	
 	String GET_MOVIE_DETAILS = "select * from movie where movieId = ?";
 	
-	String GET_THEATRES_BY_MOVIE = "select theatreId from movie where movieId = ?";
+	String GET_THEATRES_BY_MOVIE = "select theatreId from movietheatre where movieId = ?";
 	
 	String GET_THEATRE_NAME_BY_ID = "select theatreName from theatre where theatreId = ?";
 	
@@ -50,11 +50,11 @@ public interface IUserQueryConstants {
 	
 	String GET_THEATREID = "select theatreId from theatre WHERE theatreCity=?";
 
-	String GET_SHOWS_BY_MOVIE_THEATRE = "select * from showDetails where screenId=?, theatreId=?, movieId=?";
+	String GET_SHOWS_BY_MOVIE_THEATRE = "select * from showdetails where screenId=? and theatreId=? and movieId=?";
 
 	String GET_BOOKING_DETAILS = "select * from booking where ticketId=?";
 
-	String GET_SCREENSEATPRICE_BY_SCREENID = "select seatPrice from screenSeatPrice where screenId=?";
+	String GET_SCREENSEATPRICE_BY_SCREENID = "select seatPrice from screenseatprice where screenId=?";
 	
 	String VALIDATE_PAYMENT = "select cvv,password from bankaccount where accountNo=?";
 	
@@ -64,7 +64,17 @@ public interface IUserQueryConstants {
 	
 	String GET_TICKET="select noOfSeats,ticketStatus,screenId,theatreId,showId,movieId from ticket where ticketId=?";
 
+	String GET_SCREEN_NAME = "select screenName from screen where screenId = ?";
 	
+	String GET_SHOW_NAME = "select showName from showdetails where showId = ?";
+
+	String CHECK_TICKET = "select * from ticket";
+	
+	String CHECK_SEAT = "select * from seat";
+	
+	String MAX_TICKET_ID = "select max(ticketId) from ticket";
+	
+	String MAX_SEAT_ID = "select max(seatId) from seat";
 }
 
 

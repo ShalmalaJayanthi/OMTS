@@ -1,5 +1,6 @@
 package com.cg.omts.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -59,9 +60,13 @@ public interface IUserDao {
 	
 	public int refundAfterCancellation(Transaction transaction, int currentBalance) throws OMTSException;
 	
-	public Seat getSeatPrice(int seatId) throws OMTSException;
+	public Seat getSeatPrice(int screenId) throws OMTSException;
 	
 	public List<Screen> getScreenByTheatreId(int theatreId) throws OMTSException;
+	
+	public String getScreenName(int screenId) throws OMTSException;
+	
+	public String getShowName(int showId) throws OMTSException;
 
 	List<Show> getShowsByMovieAndTheatre(int screenId, int theatreId, int movieId) throws OMTSException;
 
@@ -72,5 +77,6 @@ public interface IUserDao {
 	boolean validatePayment(int accountNo, int cvv, String password) throws OMTSException;
 
 	Seat seatAvailability(int seatId) throws OMTSException;
-
+	
+	
 }
