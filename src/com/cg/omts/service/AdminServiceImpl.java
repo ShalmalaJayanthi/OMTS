@@ -53,42 +53,42 @@ public class AdminServiceImpl implements IAdminService{
 	}
 
 	@Override
-	public ArrayList<Movie> getMovieDetailsToDelete() {
+	public ArrayList<Movie> getMovieDetailsToDelete() throws OMTSException{
 		adminDao = new AdminDaoImpl();
 		ArrayList<Movie> movieList = adminDao.getMovieDetailsToDelete();
 		return movieList;
 	}
 	
 	@Override
-	public ArrayList<Theatre> getTheatreDetails(String theatreCity) {
+	public ArrayList<Theatre> getTheatreDetails(String theatreCity) throws OMTSException {
 		adminDao = new AdminDaoImpl();
 		ArrayList<Theatre> getTheatreDetails = adminDao.getTheatreDetails(theatreCity);
 		return getTheatreDetails;
 	}
 
 	@Override
-	public int deleteMovie(Integer movieId) {
+	public int deleteMovie(Integer movieId) throws OMTSException {
 		adminDao = new AdminDaoImpl();
 		int rowsAffected = adminDao.deleteMovie(movieId);
 		return rowsAffected;
 	}
 
 	@Override
-	public Boolean addScreen(Screen screen, Integer theatreId) {
+	public Boolean addScreen(Screen screen, Integer theatreId) throws OMTSException {
 		adminDao = new AdminDaoImpl();
 		Boolean isAdded = adminDao.addScreen(screen, theatreId);
 		return isAdded;
 	}
 
 	@Override
-	public Boolean deleteScreen(Integer screenId) {
+	public Boolean deleteScreen(Integer screenId) throws OMTSException{
 		adminDao = new AdminDaoImpl();
 		Boolean isAdded = adminDao.deleteScreen(screenId);
 		return isAdded;
 	}
 
 	@Override
-	public ArrayList<Screen> getScreenDetailsToDelete() {
+	public ArrayList<Screen> getScreenDetailsToDelete() throws OMTSException{
 		adminDao = new AdminDaoImpl();
 		ArrayList<Screen> screenList = adminDao.getScreenDetailsToDelete();
 		return screenList;
@@ -140,8 +140,22 @@ public class AdminServiceImpl implements IAdminService{
 	@Override
 	public int getMovieLength(int movieId) throws OMTSException {
 		// TODO Auto-generated method stub
-		adminDao = adminDao = (IAdminDao) new AdminDaoImpl();
+		adminDao = (IAdminDao) new AdminDaoImpl();
 		return adminDao.getMovieLength(movieId);
+	}
+
+	@Override
+	public List<Integer> getScreenFromMovieAndTheatre(int theatreId, int movieId) throws OMTSException {
+		// TODO Auto-generated method stub
+		adminDao = (IAdminDao) new AdminDaoImpl();
+		return adminDao.getScreenFromMovieAndTheatre(theatreId, movieId);
+	}
+
+	@Override
+	public String getMovieNameById(int movieId) throws OMTSException {
+		// TODO Auto-generated method stub
+		adminDao = (IAdminDao) new AdminDaoImpl();
+		return adminDao.getMovieNameById(movieId);
 	}
 
 }

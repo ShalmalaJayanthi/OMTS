@@ -1,15 +1,21 @@
 package com.cg.omts.testing;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.cg.omts.dto.Movie;
+import com.cg.omts.dto.Screen;
 import com.cg.omts.dto.Show;
 import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
@@ -221,4 +227,85 @@ public class AdminModuleTesting {
 		boolean expectedShowList = true;
 		assertEquals(expectedShowList, actualShowList);
 	}
+	
+	@Test
+	public void addMovieTest() throws OMTSException {
+		try {
+			int theatreId = 1;
+			Date movieReleaseDate = Date.valueOf("2020-03-01");
+			Movie movie = new Movie(2, "SeventhSense", "action", "mani", 180, "Telugu", movieReleaseDate);
+			boolean isAdded = adminService.addMovie(movie, theatreId);
+			assertTrue(isAdded);
+		} catch(OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}
+	}
+	
+	@Test
+	public void getMovieDetailsToDeleteTest() throws OMTSException {
+		try {
+			ArrayList<Movie> movieDetails = adminService.getMovieDetailsToDelete();
+			assertNotNull(movieDetails);
+		} catch(OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}
+	}
+	
+	@Test
+	public void deleteMovieTest() throws OMTSException {
+		try {
+			int movieId = 2;
+			int rowDeleted = adminService.deleteMovie(movieId);
+			assertTrue(rowDeleted > 0);
+		} catch(OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}
+	}
+	
+	@Test
+	public void getTheatreDetailsMovieTest() throws OMTSException {
+		try {
+			String theatreCity = "Hyderabad";
+			ArrayList<Theatre> theatreDetails = adminService.getTheatreDetails(theatreCity);
+			assertNotNull(theatreDetails);
+		} catch(OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}
+	}
+	
+	@Test
+	public void addScreenTest() throws OMTSException {
+		try {
+			int theatreId = 1;
+			Screen screen = new Screen(1, "Screen1",  50, 10);
+			boolean isAdded = adminService.addScreen(screen, theatreId);
+			assertTrue(isAdded);
+		} catch(OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}	
+			
+	}
+	
+	@Test
+	public void deleteScreenTest() throws OMTSException {
+		try {
+			int screenId = 1;
+			boolean isDeleted = adminService.deleteScreen(screenId);
+			assertTrue(isDeleted);
+		} catch(OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}
+	}
+	
+	@Test
+	public void getScreenDetailsToDeleteTest() throws OMTSException {
+		try {
+			ArrayList<Screen> screenList = adminService.getScreenDetailsToDelete();
+			assertNotNull(screenList);
+		} catch(OMTSException e) {
+			throw new OMTSException("Exception in testing");
+		}
+	}
+	
+	
 }

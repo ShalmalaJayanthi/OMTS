@@ -94,7 +94,8 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 		prepareStatement.setInt(1,theatreId);  
 		isDeleted = prepareStatement.executeUpdate();  
 		}catch(SQLException e){ 
-			throw new OMTSException("problem while deleting Theatre Details from Database");
+			System.out.println(e);
+			//throw new OMTSException("problem while deleting Theatre Details from Database");
 		}finally {
 			try {
 				connection.close();
@@ -257,8 +258,9 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 
 	
 	
+	
 	@Override
-	public Boolean addMovie(Movie movie, Integer theatreId) {
+	public Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException {
 		connection = DBConnection.getConnection();
 		int rows = 0;
 		try {
@@ -277,25 +279,23 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 			if(rows > 0) 
 				return true;
 			
-			
 		} catch(SQLException e){
-			System.out.println("Failed to add movie details!! "+e);
+			throw new OMTSException("Failed to add movie details!! "+e);
 			
 		}
 		finally{
 			try {
 				connection.close();
-				statement.close();
+				prepareStatement.close();
 			} catch (SQLException e) {
-				
-				System.out.println("Failed to close the database connection" +e);
+				throw new OMTSException("Failed to close the database connection" +e);
 			}
 		}
 		return false;
 	}
 
 	@Override
-	public int deleteMovie(Integer movieId) {
+	public int deleteMovie(Integer movieId) throws OMTSException {
 		connection = DBConnection.getConnection();
 		int rows = 0;
 		try {
@@ -304,20 +304,21 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 			rows = prepareStatement.executeUpdate();
 			return rows;
 		} catch (SQLException e) {
-			System.out.println("Failed to delete the movie with Id: "+movieId);
+
+			throw new OMTSException("Failed to delete the movie with Id: "+movieId);
+			
 		} finally {
 			try {
 				connection.close();
-				statement.close();
+				prepareStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Failed to close the database connection" +e);
+					throw new OMTSException("Failed to close the database connection" +e);
 			}
 		}
-		return rows;
 	}
 	
 	@Override
-	public ArrayList<Movie> getMovieDetailsToDelete() {
+	public ArrayList<Movie> getMovieDetailsToDelete() throws OMTSException{
 		connection = DBConnection.getConnection();
 		Movie movie = null;
 		ArrayList<Movie> movieList = null;
@@ -339,21 +340,24 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 			
 			return movieList;
 		} catch (SQLException e) {
-			System.out.println("Failed to get the movie details"+ e);
+			
+			throw new OMTSException("Failed to get the movie details"+ e);
+			
 		} finally {
 			try {
 				connection.close();
-				statement.close();
+				prepareStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Failed to close the database connection" +e);
+				
+				throw new OMTSException("Failed to close the database connection" +e);
+				
 			}
 		}
-		return movieList;
 		
 	}
 	
 	@Override
-	public ArrayList<Theatre> getTheatreDetails(String theatreCity) {
+	public ArrayList<Theatre> getTheatreDetails(String theatreCity) throws OMTSException{
 		connection = DBConnection.getConnection();
 		
 		ArrayList<Theatre> theatreDetails = null;
@@ -373,25 +377,30 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 				theatreDetails.add(theatre);
 			}
 			
+			return theatreDetails;
+			
 		} catch (SQLException e) {
-			System.out.println("Failed to get the theatre details");
+			
+			throw new OMTSException("Failed to get the theatre details");
+			
 		} finally {
 			try {
 				connection.close();
 				prepareStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Failed to close the database connection" +e);
+				
+				throw new OMTSException("Failed to close the database connection" +e);
 			}			
 			
 		}
 				
-		return theatreDetails;
+		
 	}
 
 	
 
 	@Override
-	public Boolean addScreen(Screen screen, Integer theatreId) {
+	public Boolean addScreen(Screen screen, Integer theatreId) throws OMTSException {
 		connection = DBConnection.getConnection();
 		int rows = 0;
 		try {
@@ -401,26 +410,28 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 			prepareStatement.setString(3, screen.getScreenName());
 			prepareStatement.setInt(4, screen.getRows());
 			prepareStatement.setInt(5, screen.getColumns());
-			prepareStatement.setDate(6, screen.getMovieEndDate());
 			rows = prepareStatement.executeUpdate();
 			if(rows > 0) {
 				return true;
 			}
+			
 		} catch (SQLException e) {
-			System.out.print("Failed to add the screen\n"+e);
+			
+			throw new OMTSException("Failed to add the screen\n"+e);
 		} finally {
 			try {
 				connection.close();
 				prepareStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Failed to close the database connection"+ e);
+				
+				throw new OMTSException("Failed to close the database connection"+ e);
 			}
 		}
 		return false;
 	}
 
 	@Override
-	public Boolean deleteScreen(Integer screenId) {
+	public Boolean deleteScreen(Integer screenId) throws OMTSException {
 		connection = DBConnection.getConnection();
 		int rows = 0;
 		try {
@@ -430,20 +441,22 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 			if(rows > 0)
 				return true;
 		} catch (SQLException e) {
-			System.out.println("Failed to delete the screen with Id: "+screenId);
+			
+			throw new OMTSException("Failed to delete the screen with Id: "+screenId);
 		} finally {
 			try {
 				connection.close();
 				prepareStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Failed to close the database connection" +e);
+				
+				throw new OMTSException("Failed to get the screen details"+ e);
 			}
 		}
 		return false;
 	}
 
 	@Override
-	public ArrayList<Screen> getScreenDetailsToDelete() {
+	public ArrayList<Screen> getScreenDetailsToDelete() throws OMTSException{
 		connection = DBConnection.getConnection();
 		Screen screen = null;
 		ArrayList<Screen> screenList = null;
@@ -465,16 +478,17 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 			
 			return screenList;
 		} catch (SQLException e) {
-			System.out.println("Failed to get the screen details"+ e);
+			
+			throw new OMTSException("Failed to get the screen details"+ e);
 		} finally {
 			try {
 				connection.close();
 				prepareStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Failed to close the database connection" +e);
+				
+				throw new OMTSException("Failed to close the database connection" +e);
 			}
 		}
-		return screenList;
 	}
 	@Override
 	public String validateLogin(Customer customer) throws OMTSException {
@@ -483,10 +497,10 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 		String roleCode="";
 		try {
 			connection=DBConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(IQueryConstants.VALIDATE);
-			ps.setInt(1, customer.getCustomerId());
-			ps.setString(2, customer.getCustomerPassword());
-			ResultSet rs = ps.executeQuery();
+			prepareStatement = connection.prepareStatement(IQueryConstants.VALIDATE);
+			prepareStatement.setInt(1, customer.getCustomerId());
+			prepareStatement.setString(2, customer.getCustomerPassword());
+			ResultSet rs = prepareStatement.executeQuery();
 			if(rs.next())
 			{
 				roleCode=rs.getString(1);
@@ -561,6 +575,78 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 				return movieLength;
 
 	}
+	@Override
+	public List<Integer> getScreenFromMovieAndTheatre(int theatreId, int movieId) throws OMTSException {
+		// TODO Auto-generated method stub
+		List<Integer> screenList = new ArrayList<Integer>();
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IAdminQueryConstants.GET_SCREEN_FROM_MOVIE_AND_THEATRE);
+			prepareStatement.setInt(1, movieId);
+			prepareStatement.setInt(2, theatreId);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			int screenId = 0;
+			while(resultSet.next())   {
+				screenId = resultSet.getInt(1); 
+				screenList.add(screenId);
+			}
+		}catch (SQLException e) {
+			System.out.println("Failed to retrieve screen Id  from movie and theatre");
+		} finally {
+			try {
+				connection.close();
+				prepareStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the database connection" +e);
+			}
+		}
+		return screenList;
+	}
 
+	@Override
+	public String getMovieNameById(int movieId) throws OMTSException{
+		// TODO Auto-generated method stub
+		String movieName="";
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IAdminQueryConstants.GET_MOVIENAME_BY_FROM_MOVIE);
+			prepareStatement.setInt(1, movieId);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			while(resultSet.next())   {
+				movieName = resultSet.getString(1);
+			}
+		}catch (SQLException e) {
+			System.out.println("Failed to retrieve screen Id  from movie and theatre");
+		} finally {
+			try {
+				connection.close();
+				prepareStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the database connection" +e);
+			}
+		}
 	
+		return movieName;
+	}
+	
+
+	public static boolean checkTransaction() throws SQLException, OMTSException {
+		connection = DBConnection.getConnection();
+		prepareStatement = connection.prepareStatement(IQueryConstants.CHECK_TRANSACTION);
+		resultSet = prepareStatement.executeQuery();
+		if(resultSet.next())
+			return true;
+		return false;
+	}
+	
+	public static int getMaxTransactionId() throws SQLException, OMTSException {
+		connection = DBConnection.getConnection();
+		prepareStatement = connection.prepareStatement(IQueryConstants.MAX_TRANSACTION_ID);
+		resultSet = prepareStatement.executeQuery();
+		int maxId=0;
+		if(resultSet.next())
+		 maxId = resultSet.getInt(1);
+		return maxId;
+	}
+
 }

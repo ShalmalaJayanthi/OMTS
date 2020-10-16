@@ -10,29 +10,43 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cg.omts.dto.Show;
 import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.service.AdminServiceImpl;
 import com.cg.omts.service.IAdminService;
 
-@WebServlet("/DeleteTheatreServlet")
-public class DeleteTheatreController extends HttpServlet {
+
+/**
+ * Servlet implementation class DeleteShowController
+ */
+@WebServlet("/DeleteShowServlet")
+public class DeleteShowController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public DeleteTheatreController() {
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DeleteShowController() {
         super();
         // TODO Auto-generated constructor stub
     }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String theatreName = request.getParameter("theatreName");
+		// TODO Auto-generated method stub
+		String showName = request.getParameter("showNameSearch");
 		
 		IAdminService adminService = new AdminServiceImpl();
 		try {
-			List<Theatre> searchTheatreList = adminService.getTheatreByName(theatreName);
-			if(searchTheatreList.size()==0) {
-				request.setAttribute("errorMessage","The Theatre Name does not exist");
+			List<Show> searchShowList = adminService.getShowByName(showName);
+			if(searchShowList.size()==0) {
+				request.setAttribute("errorMessage","The Show Name does not exist");
 			}
-			request.setAttribute("searchTheatreList", searchTheatreList);
-			RequestDispatcher rd = request.getRequestDispatcher("./deleteTheatre.jsp");
+			request.setAttribute("searchShowList", searchShowList);
+			RequestDispatcher rd = request.getRequestDispatcher("./deleteShow.jsp");
 			rd.forward(request, response);
 			
 		} catch (OMTSException e) {
@@ -47,18 +61,15 @@ public class DeleteTheatreController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		int rowsDeleted=0;
-		int theatreId = Integer.parseInt(request.getParameter("theatreId"));
-		IAdminService adminService = new AdminServiceImpl();
+		int showId = Integer.parseInt(request.getParameter("showId"));
+		IAdminService adminDao = new AdminServiceImpl();
 		try {
-			rowsDeleted = adminService.deleteTheatre(theatreId);
-			response.sendRedirect("./deleteTheatre.jsp?message=Successfully Deleted");
+			adminDao.deleteShow(showId);
 		} catch (OMTSException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+		response.sendRedirect("./deleteShow.jsp?message=Successfully Deleted");
 	}
 
 }

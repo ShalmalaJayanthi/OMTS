@@ -15,10 +15,10 @@ public class LoginTest {
 	IAdminService adminService = new AdminServiceImpl();
 	
 	@Test
-	public void loginTest() throws OMTSException
+	public void loginTestUser() throws OMTSException
 	{
 		String validate ="usr";
-		Customer user = new Customer(1, "jaya");
+		Customer user = new Customer(54321, "usr");
 		String result= adminService.validateLogin(user);
 		assertEquals(validate,result);
 	}
@@ -29,5 +29,14 @@ public class LoginTest {
 		int rows=1;
 		Date d=Date.valueOf("2001-12-12");
 		Customer user = new Customer(2, "Ashutosh", "hi@123", d, 123456, "usr");
+	}
+	
+	@Test
+	public void loginTestAdmin() throws OMTSException
+	{
+		String validate ="adm";
+		Customer user = new Customer(12345, "adm");
+		String result= adminService.validateLogin(user);
+		assertEquals(validate,result);
 	}
 }

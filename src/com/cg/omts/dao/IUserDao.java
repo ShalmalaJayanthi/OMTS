@@ -77,6 +77,8 @@ public interface IUserDao {
 	boolean validatePayment(int accountNo, int cvv, String password) throws OMTSException;
 
 	Seat seatAvailability(int seatId) throws OMTSException;
-	
-	
+
+
+	List<Movie> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException;
+
 }

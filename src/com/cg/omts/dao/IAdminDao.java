@@ -28,23 +28,27 @@ public interface IAdminDao {
 	
 	public List<Show> getShowByName(String showName) throws OMTSException;
 	
-	public Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException;
+public Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException;
 	
-	public  ArrayList<Movie> getMovieDetailsToDelete();
+	public  ArrayList<Movie> getMovieDetailsToDelete() throws OMTSException;
 	
-	public  int deleteMovie(Integer movieId);
+	public  int deleteMovie(Integer movieId) throws OMTSException;
 	
-	public  ArrayList<Theatre> getTheatreDetails(String theatreCity);
+	public  ArrayList<Theatre> getTheatreDetails(String theatreCity) throws OMTSException;
 	
-	public  Boolean addScreen(Screen screen, Integer theatreId);
+	public  Boolean addScreen(Screen screen, Integer theatreId) throws OMTSException;
 	
-	public  Boolean deleteScreen(Integer screenId);
+	public  Boolean deleteScreen(Integer screenId) throws OMTSException;
 	
-	public  ArrayList<Screen> getScreenDetailsToDelete();
+	public  ArrayList<Screen> getScreenDetailsToDelete() throws OMTSException;
 
 	public String validateLogin(Customer customer) throws OMTSException;
 
 	public int register(Customer customer) throws OMTSException;
 	
 	public int getMovieLength(int movieId) throws OMTSException;
+	
+	public List<Integer> getScreenFromMovieAndTheatre(int theatreId, int movieId) throws OMTSException;
+	
+	public String getMovieNameById(int movieId) throws OMTSException;
 }

@@ -47,7 +47,7 @@ public class AddTheatreController extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(rowsInserted!=0) {
-			request.setAttribute("message", "Successfully registsred Theatre with theatreId :"+theatreId);
+			request.setAttribute("message", "Successfully registered Theatre with theatreId :"+theatreId);
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("displayTheatres.jsp");
 			requestDispatcher.forward(request, response);
 		}else {

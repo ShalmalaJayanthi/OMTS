@@ -174,6 +174,10 @@ public class UserServiceImpl implements IUserService{
 		// TODO Auto-generated method stub
 		return userDao.getShowName(showId);
 	}
-	
+
+	public List<Movie> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getMoviesByTheatre(theatreIdList);
+	}
 
 }

@@ -10,7 +10,7 @@
 </head>
 <body>
 	<form method = "post" action = "DeleteScreenServlet">
-	<input type = "number" name = "screenId" value = "Enter Screen ID"></br>
+	<input type = "number" name = "screenId" placeholder = "Enter Screen ID"></br>
 			<input type = "submit" value = "Submit">
 	<c:if test="${displayDetails != null}">
 		<table border="1">
