@@ -46,7 +46,7 @@ public interface IUserQueryConstants {
 	
 	String GET_SCREEN_BY_THEATRE_ID = "select * from screen where theatreId=?";
 	
-	String GET_ALL_MOVIES = "selct * from movie";
+	String GET_ALL_MOVIES = "select * from movie";
 	
 	String GET_THEATREID = "select theatreId from theatre WHERE theatreCity=?";
 

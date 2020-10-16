@@ -48,8 +48,10 @@ public class ProceedToPayController extends HttpServlet {
 			userService.setTicketStatus(ticketId, "INPROCESS");
 			request.setAttribute("ticketId", ticketId);
 			request.setAttribute("movieId", movieId);
+			request.setAttribute("theatreId", theatreId);
 			request.setAttribute("screenId", screenId);
 			request.setAttribute("showId", showId);
+			request.setAttribute("totalPrice", price*noOfSeats);
 			dispatcher = request.getRequestDispatcher("payment.jsp");
 			dispatcher.forward(request, response);
 		} catch (OMTSException e) {

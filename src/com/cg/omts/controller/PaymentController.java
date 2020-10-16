@@ -20,7 +20,7 @@ import com.cg.omts.service.IUserService;
 import com.cg.omts.service.UserServiceImpl;
 
 @WebServlet("/paymentController")
-public class PaymentProcessController extends HttpServlet{
+public class PaymentController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub.
@@ -28,16 +28,21 @@ public class PaymentProcessController extends HttpServlet{
 		int accountNo=Integer.parseInt(req.getParameter("acc"));
 		int cvv =Integer.parseInt(req.getParameter("cvv"));
 		String password=req.getParameter("pass");
-		
+		int ticketId = Integer.parseInt(req.getParameter("ticketId"));
+		int theatreId = Integer.parseInt(req.getParameter("theatreId"));
+		int screenId = Integer.parseInt(req.getParameter("screenId"));
+		int showId = Integer.parseInt(req.getParameter("showId"));
+		int movieId = Integer.parseInt(req.getParameter("movieId"));
+		int totalCost = Integer.parseInt(req.getParameter("totalPrice"));
 		IUserService user = new UserServiceImpl();
-		
+		 
 		try {
 			
 			Boolean flag= user.validatePayment(accountNo, cvv, password);
 			if(flag==true) {
-				int ticketId = 1;
-				int userId = 1;
-				int totalCost = 1000; 
+				//int ticketId = 1;
+				int userId = 3;
+				//int totalCost = 1000; 
 				int transactionId = GenerateTransactionID.getTransactionId();
 				System.out.println("Transaction Id generated id: "+transactionId);
 				Transaction transaction = new Transaction(transactionId, accountNo, totalCost);
@@ -47,7 +52,7 @@ public class PaymentProcessController extends HttpServlet{
 				System.out.println("is Transaction done: "+ isTransact);
 				//add transaction (get tran id) -- completed
 				//Booking id=customerid+theatreid+movieid+showid;
-				int theatreId =1, movieId = 1, showId = 1; 
+				//int theatreId =1, movieId = 1, showId = 1; 
 				
 				/*
 				 * DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss"); Date dateobj = new
@@ -90,10 +95,6 @@ public class PaymentProcessController extends HttpServlet{
 		} catch (OMTSException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		
-		
+		}		
 	}
-
 }

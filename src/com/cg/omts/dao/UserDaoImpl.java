@@ -137,7 +137,7 @@ public class UserDaoImpl implements IUserDao{
 				
 			}	
 		}catch(SQLException e) {
-			throw new OMTSException("problem occured while creating PS object");
+			throw new OMTSException("problem occured while creating PS object"+e.getMessage());
 		}
 		finally {
 			try {
@@ -322,7 +322,7 @@ public class UserDaoImpl implements IUserDao{
 			prepareStatement.setInt(5, ticketId);
 			isInserted = prepareStatement.executeUpdate();  
 		}catch(SQLException e){ 
-			throw new OMTSException("problem in PS statement");
+			throw new OMTSException("problem in PS statement"+e.getMessage());
 		}finally {
 			try {
 				connection.close();
