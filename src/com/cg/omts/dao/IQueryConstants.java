@@ -14,4 +14,6 @@ public interface IQueryConstants {
 	String VALIDATE = "select roleCode from user where userId=? and password=?";
 	String REGISTER="insert into user values(?,?,?,?,?,?)";
 
+	String CHECK_TRANSACTION = "select * from transaction";
+	String MAX_TRANSACTION_ID = "select max(transactionid) from transaction";
 }

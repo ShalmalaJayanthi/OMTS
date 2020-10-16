@@ -628,5 +628,25 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 	
 		return movieName;
 	}
+	
+
+	public static boolean checkTransaction() throws SQLException, OMTSException {
+		connection = DBConnection.getConnection();
+		prepareStatement = connection.prepareStatement(IQueryConstants.CHECK_TRANSACTION);
+		resultSet = prepareStatement.executeQuery();
+		if(resultSet.next())
+			return true;
+		return false;
+	}
+	
+	public static int getMaxTransactionId() throws SQLException, OMTSException {
+		connection = DBConnection.getConnection();
+		prepareStatement = connection.prepareStatement(IQueryConstants.MAX_TRANSACTION_ID);
+		resultSet = prepareStatement.executeQuery();
+		int maxId=0;
+		if(resultSet.next())
+		 maxId = resultSet.getInt(1);
+		return maxId;
+	}
 
 }
