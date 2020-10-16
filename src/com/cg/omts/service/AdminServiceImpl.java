@@ -158,4 +158,11 @@ public class AdminServiceImpl implements IAdminService{
 		return adminDao.getMovieNameById(movieId);
 	}
 
+	@Override
+	public String checkShowNameandScreenId(String showName, int screenId) throws OMTSException {
+		// TODO Auto-generated method stub
+		adminDao = (IAdminDao) new AdminDaoImpl();
+		return adminDao.checkShowNameandScreenId(showName, screenId);
+	}
+
 }

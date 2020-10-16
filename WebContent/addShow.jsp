@@ -14,27 +14,25 @@
 <br>
 <form method="post" action="./AddShowServlet">
 Enter Show Id : 
-<input type="text" name="showId" pattern="[1-9]{1}[0-9]{3,}" title="Screen Id should be minimum 4 digit" required>
+<input type="text" name="showId" pattern="[5]{1}[0-9]{3}" title="Show Id should be minimum 4 digit" required>
 <br>
 <br>
 Enter Show Name:<select id="showType" name="showName" onchange="myFunction()">
  <option value="" selected disabled hidden>Choose here</option>
 <option value="morning">Morning</option>
 <option value="matinee">Matinee</option>
-<option value="firstshow">Evening</option>
-<option value="secondshow"> Night</option>
+<option value="firstshow">First show</option>
+<option value="secondshow">Second Show</option>
 </select>
 <br>
-<p>When you select a new car, a function is triggered which outputs the value of the selected car.</p>
 
-<p id="demo"></p>
 <br>
 Enter Show Start Time:
-<input type="time" id="stime" required>
+<input type="time" id="stime" name="stime" required>
 <br>
 <br>
 Enter Show End Time :
-<input type="time" id="etime" required>
+<input type="time" id="etime" name="etime" required>
 <br>
 <br>
 Enter Theatre Id:
@@ -54,7 +52,6 @@ Enter Screen Id :
 <script type="text/javascript">
 function myFunction() {
   var x = document.getElementById("showType").value;
-  document.getElementById("demo").innerHTML = "You selected: " + x;
   console.log(x);
   if(x==='morning') {
 	  document.getElementById("stime").min="06:00"

@@ -15,7 +15,7 @@
 <h1> Enter Theatre Details to Register </h1>
 <br>
 <form method="post" action="./AddTheatreController">
-Enter Theater id : <input type="text" name = "theatreId" pattern="[2]{1}[0-9]{3,}" title="Theatre Id should start with number 2 and minimum of 4 digits" required>
+Enter Theater id : <input type="text" name = "theatreId" pattern="[2]{1}[0-9]{3}" title="Theatre Id should start with number 2 and minimum of 4 digits" required>
 <br>
 <br>
 Enter Theater name :  <input type="text" name="theatreName" pattern= "[a-zA-Z]{1,}" title="Enter only alphabets" required>

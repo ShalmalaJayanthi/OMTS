@@ -200,11 +200,21 @@ public interface IAdminService {
 	public List<Integer> getScreenFromMovieAndTheatre(int theatreId, int movieId) throws OMTSException;
 	
 	/***
-	 *  @Description : To get movie name from movie 
+	 * @Description : To get movie name from movie 
 	 * @author  : supraja
 	 * @param movieId
 	 * @return
 	 * @throws OMTSException
 	 */
 	public String getMovieNameById(int movieId) throws OMTSException;
+	
+	/*******
+	 * @Description : To check if there exists a  showname in screenId
+	 * @author  : supraja
+	 * @param showName
+	 * @param screenId
+	 * @return
+	 * @throws OMTSException
+	 */
+	public String checkShowNameandScreenId(String showName, int screenId) throws OMTSException;
 }
