@@ -5,22 +5,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Displaying Movie Details</title>
 </head>
 <body>
-			
-				Movie Id <c:out value="${movie.movieId}" /><br>
-				Movie Name <c:out value="${movie.movieName}" /><br>
-				Movie Genre <c:out value="${movie.movieGenre}" /><br>
-				Movie Director <c:out value="${movie.movieDirector}" /><br>
-				Movie Length <c:out value="${movie.movieLength}" /><br>
-				Language <c:out value="${movie.language}" /><br>
-				Movie Release Date <c:out value="${movie.movieReleaseDate}" /><br>
-				<form action="BookingController" method="post">
-					<input type = "hidden" name= "action"  value = "UpdateServlet">
-					<input type="text" name="movieId" value="${movie.movieId}">
-					<input type = "hidden" value = "${movie.movieId } name = "movieId">
-					<input type = "submit" value = "BOOK">
-				</form>
+	<div class="display">
+	<table align="center" border=1>
+	<tr><td>Movie Id</td><td><c:out value="${movie.movieId}" /></td></tr>
+	<tr><td>Movie Name</td><td><c:out value="${movie.movieName}"/></td></tr>
+	<tr><td>Movie Genre</td><td><c:out value="${movie.movieGenre}" /></td></tr>
+	<tr><td>Movie Director</td><td><c:out value="${movie.movieDirector}" /></td></tr>
+	<tr><td>Movie Length</td><td><c:out value="${movie.movieLength}" /></td></tr>
+	<tr><td>Language</td><td><c:out value="${movie.movieLength}" /></td></tr>
+	<tr><td>Movie Release Date</td><td><c:out value="${movie.movieReleaseDate}" /></td></tr>
+	</table>
+	</div>
+	<div>
+	<button name="book ticket">
+		<a href=""></a>
+	</button>
+	</div>
 </body>
 </html>
