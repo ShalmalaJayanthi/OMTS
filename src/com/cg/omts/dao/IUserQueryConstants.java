@@ -64,6 +64,8 @@ public interface IUserQueryConstants {
 	
 	String GET_TICKET="select noOfSeats,ticketStatus,screenId,theatreId,showId,movieId from ticket where ticketId=?";
 
+	String GET_MOVIES_BY_THEATRE_ID = "select * from movie where theatreId=?";
+
 	
 }
 

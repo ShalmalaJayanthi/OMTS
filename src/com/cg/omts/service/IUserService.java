@@ -289,8 +289,17 @@ public interface IUserService {
 	 * @return List<String>
 	 * @throws OMTSException
 	 */
-	public List<String> getTheatreNames(List<Integer> theatreIdList) throws OMTSException;//s
+	public List<String> getTheatreNames(List<Integer> theatreIdList) throws OMTSException;
 	
+	/*******************************
+	 * @description Method to get Movie Names
+	 * @author Supriya M
+	 * 
+	 * @param theatreIdList
+	 * @return List<Movie>
+	 * @throws OMTSException
+	 */
+	public List<Movie> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException;
 
 	public List<Theatre> getTheatres(List<Integer> theatreIdList) throws OMTSException;
 

@@ -73,4 +73,6 @@ public interface IUserDao {
 
 	Seat seatAvailability(int seatId) throws OMTSException;
 
+	List<Movie> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException;
+
 }

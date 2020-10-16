@@ -18,6 +18,7 @@ import com.cg.omts.dto.Ticket.TicketStatus;
 import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.utility.DBConnection;
+import com.cg.omts.utility.JdbcUtility;
 
 public class UserDaoImpl implements IUserDao{
 
@@ -171,7 +172,43 @@ public class UserDaoImpl implements IUserDao{
 			}
 		}
 		return theatreIdList;			
-	}	
+	}
+	
+	@Override
+	public List<Movie> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException {
+		List<Movie> movieListBasedonCity = new ArrayList<>();
+		Movie movie = null;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_MOVIES_BY_THEATRE_ID);
+			for(Integer theatreId : theatreIdList) {
+				prepareStatement.setInt(1, theatreId);
+				resultSet = prepareStatement.executeQuery();
+					while(resultSet.next()) {
+						movie = new Movie();
+						movie.setMovieId(resultSet.getInt(1));
+						movie.setMovieName(resultSet.getString(2));
+						movie.setMovieGenre(resultSet.getString(3));
+						movie.setMovieDirector(resultSet.getString(4));
+						movie.setMovieLength(resultSet.getInt(5));
+						movie.setLanguage(resultSet.getString(6));
+						movie.setMovieReleaseDate(resultSet.getDate(7));
+						movieListBasedonCity.add(movie);
+					}
+			}
+		} catch(SQLException e) {
+			throw new OMTSException("Problem occured while creating PS objetc");
+		}
+		finally {
+			try {
+				connection.close();
+			} catch(SQLException e) {
+				throw new OMTSException("Problem occured while closing connection");
+			}
+		}
+		
+		return movieListBasedonCity;
+	}
 	
 	@Override
 	public int generateTicket(int userId, Ticket ticket) throws OMTSException {
