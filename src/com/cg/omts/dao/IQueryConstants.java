@@ -11,7 +11,7 @@ public interface IQueryConstants {
 	String ADD_SCREEN = "insert into screen values(?, ?, ?, ?, ?)";
 	String DELETE_SCREEN = "delete from screen where screenId = ?";
 	String DISPLAY_ALL_SCREEN_DELETE= "select s.screenId, s.screenName, s.theatreId, t.theatreName, t.theatreCity from screen s, theatre t where s.theatreId = t.theatreId;";
-	String VALIDATE = "select roleCode from user where userId=? and password=?";
+	String VALIDATE = "select roleCode from userdetails where userId=? and password=?";
 	String REGISTER="insert into user values(?,?,?,?,?,?)";
 
 	String CHECK_TRANSACTION = "select * from transaction";

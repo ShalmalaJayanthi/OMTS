@@ -33,12 +33,13 @@ public class UserDaoImpl implements IUserDao{
 		Movie movie = null;
 		Boolean isFound = false;
 		try {
+
 			
 			connection = DBConnection.getConnection();
+
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_MOVIE_DETAILS);
 			prepareStatement.setInt(1, movieId);
-			resultSet = prepareStatement.executeQuery();
-			
+			resultSet = prepareStatement.executeQuery();	
 			isFound = resultSet.next();
 			if(isFound == true) {
 				movie = new Movie();

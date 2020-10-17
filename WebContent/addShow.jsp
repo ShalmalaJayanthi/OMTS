@@ -7,6 +7,26 @@
 <title>Add Show</title>
 </head>
 <body>
+<%
+  response.setHeader("Cache-Control","no-cache");
+  response.setHeader("Cache-Control","no-store");
+  response.setHeader("Pragma","no-cache");
+  response.setDateHeader ("Expires", 0);
+
+  if(session.getAttribute("username")==null)
+      response.sendRedirect("index.jsp");
+
+  %> 
+
+<% if (session != null) {
+         if (session.getAttribute("username") != null) {
+            int id = (Integer)session.getAttribute("username");
+         }
+      } 
+%>
+<form action="./LogoutServlet" method="post">
+      <input type="submit" value="Logout">
+</form>
 <h1>Enter Details to Register Show</h1>
 <%if(request.getAttribute("message")!= null)  { %>
 <h1><%= request.getAttribute("message")%></h1>
@@ -14,15 +34,15 @@
 <br>
 <form method="post" action="./AddShowServlet">
 Enter Show Id : 
-<input type="text" name="showId" pattern="[5]{1}[0-9]{3}" title="Show Id should be minimum 4 digit" required>
+<input type="text" name="showId" pattern="[5]{1}[0-9]{3}" title="Show Id should be of only 4 digit" required>
 <br>
 <br>
 Enter Show Name:<select id="showType" name="showName" onchange="myFunction()">
  <option value="" selected disabled hidden>Choose here</option>
-<option value="morning">Morning</option>
-<option value="matinee">Matinee</option>
-<option value="firstshow">First show</option>
-<option value="secondshow">Second Show</option>
+<option value="morning show">Morning</option>
+<option value="matinee show">Matinee</option>
+<option value="first show">First show</option>
+<option value="second show">Second Show</option>
 </select>
 <br>
 

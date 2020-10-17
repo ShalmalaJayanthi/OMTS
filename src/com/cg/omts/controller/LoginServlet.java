@@ -1,6 +1,7 @@
 package com.cg.omts.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,7 +22,7 @@ public class LoginServlet extends HttpServlet {
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		PrintWriter out = response.getWriter();
 		int userId=Integer.parseInt(request.getParameter("user"));
 		String password=request.getParameter("pass");
 		IAdminService admin = new AdminServiceImpl();
@@ -30,21 +31,25 @@ public class LoginServlet extends HttpServlet {
 		try {
 			if(admin.validateLogin(customer).equals("adm"))
 			{
-				HttpSession session = request.getSession();
+				HttpSession session = request.getSession(true);
 				session.setAttribute("username", customer.getCustomerId());
 				session.setAttribute("rolecode", "adm");
-				dispatcher= request.getRequestDispatcher("adminHomePage.html");
-				dispatcher.forward(request, response);
 				System.out.println("Admin");
+				response.sendRedirect("adminHomePage.jsp");
+			
 			}
 			else if(admin.validateLogin(customer).equals("usr"))
 			{
-				HttpSession session = request.getSession();
+				HttpSession session = request.getSession(true);
 				session.setAttribute("username", customer.getCustomerId());
 				session.setAttribute("rolecode", "usr");
 				dispatcher= request.getRequestDispatcher("userhome.jsp");
 				dispatcher.forward(request, response);
 				System.out.println("User");
+			} else  {
+				request.setAttribute("errormessage", "Either user name or password is wrong.");
+				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+		        rd.forward(request, response);
 			}
 		} catch (OMTSException e) {
 			// TODO Auto-generated catch block
