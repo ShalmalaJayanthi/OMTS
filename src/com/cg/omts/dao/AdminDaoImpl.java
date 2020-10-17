@@ -1,6 +1,7 @@
 package com.cg.omts.dao;
 
 import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -649,5 +650,4 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 		 maxId = resultSet.getInt(1);
 		return maxId;
 	}
-
 }

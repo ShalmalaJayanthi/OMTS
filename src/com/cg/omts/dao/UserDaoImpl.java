@@ -1,6 +1,7 @@
 package com.cg.omts.dao;
 
 import java.sql.Connection; 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,8 +20,6 @@ import com.cg.omts.dto.Ticket.TicketStatus;
 import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.utility.DBConnection;
-import com.cg.omts.utility.DbConnection;
-import com.cg.omts.utility.DbConnection;
 
 public class UserDaoImpl implements IUserDao{
 
@@ -35,7 +34,7 @@ public class UserDaoImpl implements IUserDao{
 		Boolean isFound = false;
 		try {
 			
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_MOVIE_DETAILS);
 			prepareStatement.setInt(1, movieId);
 			resultSet = prepareStatement.executeQuery();
@@ -70,7 +69,7 @@ public class UserDaoImpl implements IUserDao{
 		List<Integer> theatreIdList = new ArrayList<Integer>();
 		try {
 			
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_THEATRES_BY_MOVIE);
 			prepareStatement.setInt(1, movieId);
 			resultSet = prepareStatement.executeQuery();
@@ -95,7 +94,7 @@ public class UserDaoImpl implements IUserDao{
 		List<String> theatreNamesList = new ArrayList<String>();
 		try {
 			
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_THEATRE_NAME_BY_ID);
 			
 			for(Integer theatreId : theatreIdList) {
@@ -122,7 +121,7 @@ public class UserDaoImpl implements IUserDao{
 		List<Movie> movieList = new ArrayList<Movie>();
 		Movie movie = null;
 		try {
-			connection =  DbConnection.getConnection();
+			connection =  DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_ALL_MOVIES);
 			resultSet = prepareStatement.executeQuery();	
 			
@@ -156,7 +155,7 @@ public class UserDaoImpl implements IUserDao{
 		List<Integer> theatreIdList = new ArrayList<Integer>();
 
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_THEATREID);
 			prepareStatement.setString(1, city);
 			resultSet = prepareStatement.executeQuery();
@@ -181,7 +180,7 @@ public class UserDaoImpl implements IUserDao{
 		List<Movie> movieListBasedonCity = new ArrayList<>();
 		Movie movie = null;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_MOVIES_BY_THEATRE_ID);
 			for(Integer theatreId : theatreIdList) {
 				prepareStatement.setInt(1, theatreId);
@@ -217,7 +216,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isGenerated = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GENERATE_TICKET);    
 			prepareStatement.setInt(1, ticket.getTicketId()); 
 			prepareStatement.setInt(2, ticket.getNoOfSeats());
@@ -243,7 +242,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isAllocated = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.ALLOCATE_SEATS);   
 			for(Integer selectedSeat : selectedSeatsList) {
 				prepareStatement.setInt(1, selectedSeat);
@@ -268,7 +267,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isUpdated = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.SET_TICKET_STATUS);   
 			prepareStatement.setString(1, status);
 			prepareStatement.setInt(2, ticketId);
@@ -290,7 +289,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isAssigned = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.ASSIGN_SEATS_TO_TICKET);   
 			for(Integer seat : seatsList) {
 				prepareStatement.setInt(1, ticketId);
@@ -314,7 +313,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isInserted = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.ADD_TRANSACTION);   
 			prepareStatement.setInt(1, transaction.getTransactionId());   
 			prepareStatement.setInt(2, transaction.getAccountNumber());
@@ -338,7 +337,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isInserted = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.ADD_BOOKING);   
 			
 			prepareStatement.setInt(1, booking.getBookingId());  
@@ -363,7 +362,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isUpdated = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.SET_SEAT_STATUS);   
 			prepareStatement.setString(1, status);
 			prepareStatement.setInt(2, seatId);
@@ -385,7 +384,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isDeleted = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_BOOKING_DETAILS);   
 			prepareStatement.setInt(1, ticketId);
 			isDeleted = prepareStatement.executeUpdate();  	
@@ -407,7 +406,7 @@ public class UserDaoImpl implements IUserDao{
 		List<Integer> seatList = new ArrayList<>();
 
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SEATS);
 			prepareStatement.setInt(1, ticketId);
 			resultSet = prepareStatement.executeQuery();
@@ -432,7 +431,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isDeleted = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_ALLOCATED_SEATS);   
 			prepareStatement.setInt(1, ticketId);
 			isDeleted = prepareStatement.executeUpdate();  	
@@ -453,7 +452,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isDeleted = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_SEATS);   
 			for(Integer seat : seatList) {
 				prepareStatement.setInt(1, seat);
@@ -478,7 +477,7 @@ public class UserDaoImpl implements IUserDao{
 		Boolean isFound = false;
 		try {
 			
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TRANSACTION_DETAILS);
 			prepareStatement.setInt(1, ticketId);
 			resultSet = prepareStatement.executeQuery();
@@ -509,7 +508,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isDeleted = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_TRANSACTION);   
 			prepareStatement.setInt(1, ticketId);
 			isDeleted = prepareStatement.executeUpdate();  	
@@ -529,7 +528,7 @@ public class UserDaoImpl implements IUserDao{
 	public int cancelTicket(int ticketId) throws OMTSException {
 		int isDeleted = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_TICKET);   
 			prepareStatement.setInt(1, ticketId);
 			isDeleted = prepareStatement.executeUpdate();  	
@@ -552,7 +551,7 @@ public class UserDaoImpl implements IUserDao{
 		Boolean isFound = false;
 		try {
 			
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_CURRENT_BALANCE);
 			prepareStatement.setInt(1, transaction.getAccountNumber());
 			resultSet = prepareStatement.executeQuery();
@@ -580,7 +579,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isUpdated = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.REFUND_AMOUNT);   
 			prepareStatement.setInt(1, transaction.getTotalAmount()+currentBalance);
 			prepareStatement.setInt(2, transaction.getAccountNumber());
@@ -600,7 +599,7 @@ public class UserDaoImpl implements IUserDao{
 	public Seat getSeatPrice(int screenId) throws OMTSException{
 		Seat seat = null;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SCREENSEATPRICE_BY_SCREENID);
 			prepareStatement.setInt(1, screenId);
 			resultSet = prepareStatement.executeQuery();
@@ -629,7 +628,7 @@ public class UserDaoImpl implements IUserDao{
 		List<Screen> screenList = new ArrayList<>();
 		Screen screen = null;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SCREEN_BY_THEATRE_ID);
 			prepareStatement.setInt(1, theatreId);
 			resultSet = prepareStatement.executeQuery();
@@ -659,7 +658,7 @@ public class UserDaoImpl implements IUserDao{
 	List<Show> showList = new ArrayList<Show>();
 	Show show = null;
 	try {
-		connection = DbConnection.getConnection();
+		connection = DBConnection.getConnection();
 		prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SHOWS_BY_MOVIE_THEATRE);
 		prepareStatement.setInt(1, screenId);
 		prepareStatement.setInt(2, theatreId);
@@ -690,7 +689,7 @@ public class UserDaoImpl implements IUserDao{
 	public Booking getBookingDetails(int ticketId) throws OMTSException {
 		Booking booking = null;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_BOOKING_DETAILS);
 			prepareStatement.setInt(1, ticketId);
 			resultSet = prepareStatement.executeQuery();
@@ -717,7 +716,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		boolean flag=false;
 		try {
-		connection = DbConnection.getConnection();
+		connection = DBConnection.getConnection();
 		prepareStatement = connection.prepareStatement(IUserQueryConstants.VALIDATE_PAYMENT);
 		prepareStatement.setInt(1, accountNo);
 		resultSet = prepareStatement.executeQuery();
@@ -745,7 +744,7 @@ public class UserDaoImpl implements IUserDao{
 		
 		Seat seat = null;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.SEAT_AVAILABILITY);
 			prepareStatement.setInt(1, seatId);
 			resultSet = prepareStatement.executeQuery();
@@ -779,7 +778,7 @@ public class UserDaoImpl implements IUserDao{
 	public Ticket getTicket(int ticketId) throws OMTSException {
 		Ticket ticket = null;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TICKET);
 			prepareStatement.setInt(1, ticketId);
 			resultSet = prepareStatement.executeQuery();
@@ -880,7 +879,7 @@ public class UserDaoImpl implements IUserDao{
 		Theatre theatre = null;
 		try {
 			
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_THEATRE_BY_ID);
 			
 			for(Integer theatreId : theatreIdList) {
@@ -913,7 +912,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		String screenName = null;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SCREEN_NAME);
 			prepareStatement.setInt(1, screenId);
 			resultSet = prepareStatement.executeQuery();
@@ -941,7 +940,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		String showName = null;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SHOW_NAME);
 			prepareStatement.setInt(1, showId);
 			resultSet = prepareStatement.executeQuery();
@@ -968,7 +967,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		boolean isFound = false;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.CHECK_TICKET);
 		
 			resultSet = prepareStatement.executeQuery();
@@ -995,7 +994,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int maxTicId = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.MAX_TICKET_ID);
 			resultSet = prepareStatement.executeQuery();
 			if(resultSet.next()) {
@@ -1020,7 +1019,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		boolean isFound = false;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.CHECK_SEAT);
 		
 			resultSet = prepareStatement.executeQuery();
@@ -1045,7 +1044,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		boolean isFound = false;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.CHECK_BOOKING);
 		
 			resultSet = prepareStatement.executeQuery();
@@ -1070,7 +1069,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int maxSeatId = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.MAX_SEAT_ID);
 			resultSet = prepareStatement.executeQuery();
 			if(resultSet.next()) {
@@ -1094,7 +1093,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int maxBookingId = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.MAX_BOOKING_ID);
 			resultSet = prepareStatement.executeQuery();
 			if(resultSet.next()) {
@@ -1121,7 +1120,7 @@ public class UserDaoImpl implements IUserDao{
 		
 		Booking booking = null;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_BOOKING_BY_ID);
 			prepareStatement.setInt(1, bookingId);
 			resultSet = prepareStatement.executeQuery();
@@ -1149,7 +1148,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int transactionId = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TRANSACTION_ID);
 			resultSet = prepareStatement.executeQuery();
 			if(resultSet.next()) {
@@ -1175,7 +1174,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int ticketId = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TICKET_ID);
 			resultSet = prepareStatement.executeQuery();
 			if(resultSet.next()) {
@@ -1203,7 +1202,7 @@ public class UserDaoImpl implements IUserDao{
 		
 		Ticket ticket = null;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TICKET_BY_ID);
 						
 				for(Integer ticketId : ticketIdList) {
@@ -1248,7 +1247,7 @@ public class UserDaoImpl implements IUserDao{
 		
 		Transaction transaction = null;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TRANSACTION_BY_TICKET);
 			for(Integer ticketId : ticketIdList) {
 				prepareStatement.setInt(1, ticketId);
@@ -1283,7 +1282,7 @@ public class UserDaoImpl implements IUserDao{
 		List<Booking> bookingList = new ArrayList<Booking>();
 		Booking booking = null;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_BOOKING_BY_TRANSACTION);   
 			for(Transaction transaction : transactionIdList) {
 				prepareStatement.setInt(1, transaction.getTransactionId());
@@ -1314,7 +1313,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isInserted = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.ADD_TICKET_TO_USER);   
 			
 			prepareStatement.setInt(1, userId);  
@@ -1339,7 +1338,7 @@ public class UserDaoImpl implements IUserDao{
 		List<Integer> ticketIdList = new ArrayList<Integer>();
 		try {
 			
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TICKET_IDS);
 			prepareStatement.setInt(1, userId);
 			resultSet = prepareStatement.executeQuery();
@@ -1364,7 +1363,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isDeleted = 0;
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_FROM_USER);   
 			prepareStatement.setInt(1, ticketId);
 			isDeleted = prepareStatement.executeUpdate();  	
@@ -1385,7 +1384,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		List<String> showNameList = new ArrayList<String>();
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SHOWNAME_BY_THEATREID);
 			
 			
@@ -1413,7 +1412,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		List<String> screenNameList = new ArrayList<String>();
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SCREENNAME_BY_THEATREID);
 			
 			
@@ -1442,7 +1441,7 @@ public class UserDaoImpl implements IUserDao{
 		int noOfSeats = 0;
 		
 		try {
-			connection = DbConnection.getConnection();
+			connection = DBConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_AVAILABLE_SEATS);
 			
 			prepareStatement.setInt(1, screenId);  
