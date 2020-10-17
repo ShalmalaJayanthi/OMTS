@@ -20,6 +20,7 @@ import com.cg.omts.dto.Show;
 import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.utility.DBConnection;
+import com.cg.omts.utility.DBConnection;
 
 public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 	
@@ -647,36 +648,6 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 		if(resultSet.next())
 		 maxId = resultSet.getInt(1);
 		return maxId;
-	}
-
-	@Override
-	public String checkShowNameandScreenId(String showName, int screenId) throws OMTSException {
-		// TODO Auto-generated method stub
-		String existShowName="";
-		int existScreenId = 0;
-		String exist = "";
-		try {
-			connection = DBConnection.getConnection();
-			prepareStatement = connection.prepareStatement(IAdminQueryConstants.CHECK_SHOWNAME_AND_SCREENID);
-			prepareStatement.setString(1, showName);
-			prepareStatement.setInt(2, screenId);
-			ResultSet resultSet = prepareStatement.executeQuery();
-			while(resultSet.next())   {
-				existShowName = resultSet.getString(1);
-				existScreenId = resultSet.getInt(2);
-				exist = existShowName +"" + existScreenId;
-			}
-		}catch (SQLException e) {
-			System.out.println("Failed to retrieve screenId and showname  from showdetails");
-		} finally {
-			try {
-				connection.close();
-				prepareStatement.close();
-			} catch (SQLException e) {
-				System.out.println("Failed to close the database connection" +e);
-			}
-		}
-			return exist;
 	}
 
 }

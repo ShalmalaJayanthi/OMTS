@@ -42,7 +42,8 @@ public class ProceedToPayController extends HttpServlet {
 		int userId = 1;
 		try {
 			Ticket ticket = new Ticket(ticketId, noOfSeats, TicketStatus.INPROCESS, screenId, theatreId, showId, movieId);	
-			int isGenerated = userService.generateTicket(userId, ticket);
+			int isGenerated = userService.generateTicket(ticket);
+			userService.assignTicketToUser(ticketId,userId);
 			userService.allocateSeat(selectedSeatsList, screenId);
 			userService.assignSeatsToTickets(ticketId, selectedSeatsList);
 			userService.setTicketStatus(ticketId, "INPROCESS");

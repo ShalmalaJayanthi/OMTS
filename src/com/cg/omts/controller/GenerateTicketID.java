@@ -9,6 +9,7 @@ import com.cg.omts.exceptions.OMTSException;
 public class GenerateTicketID {
 	public static int startTicketID = 1000;
 	public static int startSeatId = 1;
+	public static int startBookingId = 1000;
 	static public int getTicketId() {
 		try {
 			boolean isTicketNull = UserDaoImpl.checkTicket();
@@ -41,5 +42,19 @@ public class GenerateTicketID {
 		System.out.println("In GENERATE SEAT ID"+startSeatId);
 		return startSeatId;
 	}
-	
+	static public int getBookingId() {
+		try {
+			boolean isBookingNull = UserDaoImpl.checkBooking();
+			if(isBookingNull == false) {
+				startBookingId = 1000;
+			} else {
+				startBookingId = UserDaoImpl.getMaxBookingId()+1;
+			}
+			System.out.println("isFound"+isBookingNull);
+			
+		}catch(SQLException | OMTSException e) {
+			e.printStackTrace();
+		}
+		return startBookingId;
+	}
 }

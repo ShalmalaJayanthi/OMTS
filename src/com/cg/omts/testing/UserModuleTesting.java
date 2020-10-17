@@ -40,7 +40,7 @@ public class UserModuleTesting {
 	public void generateTicketTest() throws OMTSException {
 		try {
 			Ticket ticket = new Ticket(1, 2, TicketStatus.BOOKED, 1, 1, 1, 1);
-			int isGenerated = userService.generateTicket(1, ticket); 
+			int isGenerated = userService.generateTicket(ticket); 
 			assertTrue(isGenerated > 0);
 		}
 		catch(OMTSException e) {
@@ -268,7 +268,7 @@ public class UserModuleTesting {
 			Transaction transaction = new Transaction(3,934784,1890);
 			int ticketId = 3;
 			int userId=3;
-			int actual = userService.addTransaction(transaction, ticketId, userId);
+			int actual = userService.addTransaction(transaction, ticketId);
 			assertTrue(actual > 0);
 		}catch(OMTSException e) {
 			throw new OMTSException("Exception in testing");

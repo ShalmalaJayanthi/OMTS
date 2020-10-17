@@ -3,6 +3,8 @@ package com.cg.omts.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.catalina.util.CustomObjectInputStream;
+
 import com.cg.omts.dto.Booking;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Screen;
@@ -35,7 +37,7 @@ public interface IUserService {
 	 * @return int
 	 * @throws OMTSException
 	 */
-	public int generateTicket(int ticketId, Ticket ticket) throws OMTSException;
+	public int generateTicket(Ticket ticket) throws OMTSException;
 	
 	/*******************************
 	 * @description Method to allocate seat
@@ -84,7 +86,7 @@ public interface IUserService {
 	 * @throws OMTSException
 	 */
 	
-	public int addTransaction(Transaction transaction, int ticketId, int userId) throws OMTSException;//s
+	public int addTransaction(Transaction transaction, int ticketId) throws OMTSException;//s
 	
 	/*******************************
 	 * @description Method to add booking
@@ -335,4 +337,29 @@ public interface IUserService {
 	public String getScreenName(int screenId) throws OMTSException;
 	
 	public String getShowName(int showId) throws OMTSException;
+	
+	int getTransactionIdByBookingId(int bookingId) throws OMTSException;
+	
+	int getTicketIdByBookingId(int bookingId) throws OMTSException;
+
+	public List<Ticket> getTicketByIDS(List<Integer> ticketIdList) throws OMTSException;
+
+	public List<Transaction> getTransactionByTicket(List<Integer> ticketIdList) throws OMTSException;
+	
+	public List<Booking> getBookingByUser(List<Transaction> transactionId) throws OMTSException;
+	
+	public int assignTicketToUser(int ticketId, int userId) throws OMTSException;
+
+	public List<Integer> getTicketIdsByUser(int userId) throws OMTSException;
+
+	public int deleteTicketFromUser(int ticketId) throws OMTSException;
+
+	public List<String> getShowNamesByTheatre(List<Integer> theatreIdList) throws OMTSException;
+
+	public List<String> getScreenNameByTheatre(List<Integer> theatreIdList) throws OMTSException;
+
+	public int getSeatsAvailable(int screenId) throws OMTSException;
+
+	public Screen getScreen(int screenId) throws OMTSException;
+	
 }

@@ -10,7 +10,7 @@ public interface IUserQueryConstants {
 	
 	String GET_THEATRE_BY_ID = "select * from theatre where theatreId = ?";
 	
-	String GENERATE_TICKET = "insert into ticket(userId, ticketId, noOfSeats, screenId, theatreId, showId, movieId) values(?,?,?,?,?,?,?)";
+	String GENERATE_TICKET = "insert into ticket(ticketId, noOfSeats, screenId, theatreId, showId, movieId) values(?,?,?,?,?,?)";
 
 	String ALLOCATE_SEATS = "insert into seat values(?,?,?)";
 	
@@ -18,13 +18,17 @@ public interface IUserQueryConstants {
 	
 	String ASSIGN_SEATS_TO_TICKET = "insert into ticketseat values(?,?)";
 	
-	String ADD_TRANSACTION = "insert into transaction values(?,?,?,?,?)";
+	String ADD_TRANSACTION = "insert into transaction values(?,?,?,?)";
 	
 	String ADD_BOOKING = "insert into booking values(?,?,?,?)";
 	
+	String ADD_TICKET_TO_USER = "insert into userticket values(?,?)";
+	
+	String GET_TICKET_IDS = "select ticketId from userticket where userId = ?";
+	
 	String SET_SEAT_STATUS = "update seat set seatStatus = ? where seatId = ?";
 	
-	String DELETE_BOOKING_DETAILS = "delete from booking where bookingId = ?";
+	String DELETE_BOOKING_DETAILS = "delete from booking where ticketId = ?";
 	
 	String GET_SEATS = "select seatId from ticketseat where ticketId = ?";
 	
@@ -54,6 +58,8 @@ public interface IUserQueryConstants {
 
 	String GET_BOOKING_DETAILS = "select * from booking where ticketId=?";
 
+	String GET_BOOKING_BY_ID = "select * from booking where bookingId=?";
+	
 	String GET_SCREENSEATPRICE_BY_SCREENID = "select seatPrice from screenseatprice where screenId=?";
 	
 	String VALIDATE_PAYMENT = "select cvv,password from bankaccount where accountNo=?";
@@ -76,9 +82,34 @@ public interface IUserQueryConstants {
 	
 	String CHECK_SEAT = "select * from seat";
 	
+	String CHECK_BOOKING = "select * from booking";
+	
 	String MAX_TICKET_ID = "select max(ticketId) from ticket";
 	
 	String MAX_SEAT_ID = "select max(seatId) from seat";
+	
+	String MAX_BOOKING_ID = "select max(bookingId) from booking";
+	
+	String GET_TRANSACTION_ID = "select transactionId from booking where bookingId = ?";
+	
+	String GET_TICKET_BY_ID = "select * from ticket where ticketId = ?";
+	
+	String GET_TICKET_ID = "select ticketId from booking where bookingId = ?";
+	
+	String GET_TRANSACTION_BY_TICKET = "select * from transaction where ticketId = ?";
+
+	String GET_BOOKING_BY_TRANSACTION = "select bookingId, bookingDate from booking where transactionId = ?";
+	
+	String DELETE_FROM_USER= "delete from userticket where ticketId=?";
+	
+	String GET_SHOWNAME_BY_THEATREID= "select showName from showDetails where theatreId=?";
+	
+	String GET_SCREENNAME_BY_THEATREID= "select screenName from screen where theatreId=?";
+	
+	String GET_AVAILABLE_SEATS = "select count(*) from seat where screenId = ?";
+	
+	String GET_SCREEN_BY_ID = "select screenRows, columns from screen where screenId = ?";
+	
 }
 
 

@@ -1,12 +1,17 @@
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="com.cg.omts.dto.Booking"%>
+<%@page import="com.cg.omts.dto.Transaction"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.cg.omts.dto.Ticket"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
-<title>Payment</title>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
 </head>
-<body>
 <style>
 ul {
 	list-style-type: none;
@@ -127,6 +132,7 @@ li a:hover {
 
 </style>
 
+<body>
 <div class="header">
 
 		<ul>
@@ -143,23 +149,54 @@ li a:hover {
 
 
 	</div>
-<form action ="paymentController" method ="post">
-
-<input type = "hidden" value=<%=request.getAttribute("ticketId")%> name = "ticketId">
-<input type = "hidden" value=<%=request.getAttribute("theatreId") %> name = "theatreId">
-<input type = "hidden" value=<%=request.getAttribute("movieId") %> name = "movieId">
-<input type = "hidden" value=<%=request.getAttribute("showId") %> name = "showId">
-<input type = "hidden" value=<%=request.getAttribute("screenId") %> name = "screenId">
-
-<table>
-
-<tr><td>Account Number<td><input type="number" name="acc" required>
-<tr><td>Cvv<td><input type="number" name="cvv" required>
-<tr><td>Password<td><input type="password" name="pass" required>
-<tr><td>Total Amount<td><input type = "text" name = "totalPrice" value = <%=request.getAttribute("totalPrice") %> readonly>
-<tr><td><td><input type ="submit" value="PAY">
-</table>
-</form>
+	<%
+		List<Ticket> ticketList = new ArrayList<Ticket>();
+	
+		List<Transaction> transactionList = new ArrayList<Transaction>();
+		List<Booking> bookingList = new ArrayList<Booking>();
+		ticketList = (List<Ticket>)request.getAttribute("ticketList");
+		transactionList = (List<Transaction>) request.getAttribute("transactionList");
+		bookingList = (List<Booking>) request.getAttribute("bookingList");
+		List<String> theatreNameList = new ArrayList<String>();
+		List<String> movieNameList = new ArrayList<String>();
+		List<String> showNameList = new ArrayList<String>();
+		List<String> screenNameList = new ArrayList<String>();
+		theatreNameList = (List<String>)request.getAttribute("theatreNameList");
+		showNameList = (List<String>)request.getAttribute("showNameList");
+		screenNameList = (List<String>)request.getAttribute("screenNameList");
+		movieNameList = (List<String>)request.getAttribute("movieNameList");
+	%>
+	
+	<table border="1" align ="center">
+		<tr>
+			
+			<th>TICKETID</th>
+			<th>NUMBER OF SEATS</th>
+			<th>THEATRE NAME</th>
+			<th>MOVIE NAME</th>
+			<th>SHOW NAME</th>
+			<th>SCREEN NAME</th>
+			<th>TOTAL AMOUNT</th>
+			<th>BOOKING DATE</th>
+			<th>SEAT NUMBERS</th>
+			
+		</tr>
+		<%	for(int i = 0; i < ticketList.size(); i++){
+		%> 		<tr>
+					<td><%=ticketList.get(i).getTicketId() %>
+					<td><%=ticketList.get(i).getNoOfSeats() %>
+					<td><%=theatreNameList.get(i) %> 
+					<td><%=movieNameList.get(i) %>
+					<td><%=showNameList.get(i) %>
+					<td><%=screenNameList.get(i)%>
+					<td><%=transactionList.get(i).getTotalAmount() %>
+					<td><%=bookingList.get(i).getBookingDate() %>
+					<td><a href="CancelBookingController?ticketId=<%=ticketList.get(i).getTicketId()%>">cancel</a>
+				</tr>	
+			<%
+			}%>
+			
+	</table>
 <div class="footer" style="font-size: 20px">
 		<span style="font-size: 15px">&#9400;</span> Copyrights Capgemini
 		India Ltd.

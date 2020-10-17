@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +26,7 @@ public class PaymentController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub.
 		PrintWriter out = resp.getWriter();
+		RequestDispatcher dispatcher = null;
 		int accountNo=Integer.parseInt(req.getParameter("acc"));
 		int cvv =Integer.parseInt(req.getParameter("cvv"));
 		String password=req.getParameter("pass");
@@ -41,14 +43,15 @@ public class PaymentController extends HttpServlet{
 			Boolean flag= user.validatePayment(accountNo, cvv, password);
 			if(flag==true) {
 				//int ticketId = 1;
-				int userId = 3;
+				int userId = 1;
 				//int totalCost = 1000; 
 				int transactionId = GenerateTransactionID.getTransactionId();
+				int bookingId = GenerateTicketID.getBookingId();
 				System.out.println("Transaction Id generated id: "+transactionId);
 				Transaction transaction = new Transaction(transactionId, accountNo, totalCost);
 				System.out.println("Transaction obj in paymentprocess: " + transaction);
 				
-				int isTransact= user.addTransaction(transaction, ticketId, userId);
+				int isTransact= user.addTransaction(transaction, ticketId);
 				System.out.println("is Transaction done: "+ isTransact);
 				//add transaction (get tran id) -- completed
 				//Booking id=customerid+theatreid+movieid+showid;
@@ -58,8 +61,7 @@ public class PaymentController extends HttpServlet{
 				 * DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss"); Date dateobj = new
 				 * Date(); System.out.println(df.format(dateobj));
 				 */
-				String bookingId1 = "" + userId + theatreId + movieId + showId;
-				int bookingId = Integer.parseInt(bookingId1);
+				
 				
 				
 				Date todayDate = new Date(System.currentTimeMillis());
@@ -83,12 +85,17 @@ public class PaymentController extends HttpServlet{
 						user.setSeatStatus(seatId, "BOOKED");
 		
 					}
+					req.setAttribute("ticketId", ticketId);
+					req.setAttribute("booking", booking);
+					req.setAttribute("transaction", transaction);
+					dispatcher = req.getRequestDispatcher("bookingConfirmation.jsp");
 					
-					HttpSession session = req.getSession();
-					session.setAttribute("booking", booking);
-					session.setAttribute("transaction", transaction);
-					resp.sendRedirect("bookingConfirmation.jsp");
-					}
+					dispatcher.forward(req, resp);
+//					HttpSession session = req.getSession();
+//					session.setAttribute("booking", booking);
+//					session.setAttribute("transaction", transaction);
+//					resp.sendRedirect("bookingConfirmation.jsp");
+				}
 			}else
 				out.println("Invalid Credentials");
 			

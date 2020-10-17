@@ -24,7 +24,7 @@ public interface IUserDao {
 	
 	public List<Theatre> getTheatres(List<Integer> theatreIdList) throws OMTSException;
 	
-	public int generateTicket(int ticketId, Ticket ticket) throws OMTSException;
+	public int generateTicket(Ticket ticket) throws OMTSException;
 	
 	public int allocateSeat(List<Integer> selectedSeatsList, int screenId) throws OMTSException;
 	
@@ -32,7 +32,7 @@ public interface IUserDao {
 	
 	public int setTicketStatus(int ticketId, String status) throws OMTSException;	
 	
-	public int addTransaction(Transaction transaction, int ticketId, int userId) throws OMTSException;
+	public int addTransaction(Transaction transaction, int ticketId) throws OMTSException;
 	
 	public int addBooking(Booking booking, int ticketId, int transactionId) throws OMTSException;
 	
@@ -71,6 +71,12 @@ public interface IUserDao {
 	List<Show> getShowsByMovieAndTheatre(int screenId, int theatreId, int movieId) throws OMTSException;
 
 	Booking getBookingDetails(int ticketId) throws OMTSException;
+	
+	Booking getBookingById(int bookingId) throws OMTSException;
+	
+	int getTransactionIdByBookingId(int bookingId) throws OMTSException;
+	
+	int getTicketIdByBookingId(int bookingId) throws OMTSException;
 
 	Ticket getTicket(int ticketId) throws OMTSException;
 
@@ -80,4 +86,23 @@ public interface IUserDao {
 
 	List<Movie> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException;
 
+	public List<Ticket> getTicketByIDS(List<Integer> ticketIdList) throws OMTSException;
+	
+	public List<Transaction> getTransactionByTicket(List<Integer> ticketIdList) throws OMTSException;
+	
+	public List<Booking> getBookingByUser(List<Transaction> transactionId) throws OMTSException;
+	
+	public int assignTicketToUser(int ticketId, int userId) throws OMTSException;
+
+	public List<Integer> getTicketIdsByUser(int userId) throws OMTSException;
+
+	public int deleteTicketFromUser(int ticketId) throws OMTSException;
+
+	public List<String> getShowNamesByTheatre(List<Integer> theatreIdList) throws OMTSException;
+
+	public List<String> getScreenNamesByTheatre(List<Integer> theatreIdList) throws OMTSException;
+
+	public int getSeatsAvailable(int screenId) throws OMTSException;
+	
+	public Screen getScreen(int screenId) throws OMTSException;
 }

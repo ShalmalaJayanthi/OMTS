@@ -45,9 +45,9 @@ public class UserServiceImpl implements IUserService{
 
 	}
 	@Override
-	public int generateTicket(int ticketId, Ticket ticket) throws OMTSException {
+	public int generateTicket(Ticket ticket) throws OMTSException {
 		// TODO Auto-generated method stub
-		return userDao.generateTicket(ticketId, ticket);
+		return userDao.generateTicket(ticket);
 	}
 	@Override
 	public int allocateSeat(List<Integer> selectedSeatsList, int screenId) throws OMTSException {
@@ -65,9 +65,9 @@ public class UserServiceImpl implements IUserService{
 		return userDao.setTicketStatus(ticketId, status);
 	}
 	@Override
-	public int addTransaction(Transaction transaction, int ticketId, int userId) throws OMTSException {
+	public int addTransaction(Transaction transaction, int ticketId) throws OMTSException {
 		// TODO Auto-generated method stub
-		return userDao.addTransaction(transaction, ticketId, userId);
+		return userDao.addTransaction(transaction, ticketId);
 	}
 	@Override
 	public int addBooking(Booking booking, int ticketId, int transactionId) throws OMTSException {
@@ -178,6 +178,66 @@ public class UserServiceImpl implements IUserService{
 	public List<Movie> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException {
 		// TODO Auto-generated method stub
 		return userDao.getMoviesByTheatre(theatreIdList);
+	}
+	@Override
+	public int getTransactionIdByBookingId(int bookingId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getTicketIdByBookingId(bookingId);
+	}
+	@Override
+	public int getTicketIdByBookingId(int bookingId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getTicketIdByBookingId(bookingId);
+	}
+	@Override
+	public List<Ticket> getTicketByIDS(List<Integer> ticketIdList) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getTicketByIDS(ticketIdList);
+	}
+	@Override
+	public List<Transaction> getTransactionByTicket(List<Integer> ticketIdList) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getTransactionByTicket(ticketIdList);
+	}
+	@Override
+	public List<Booking> getBookingByUser(List<Transaction> transactionId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getBookingByUser(transactionId);
+	}
+	@Override
+	public int assignTicketToUser(int ticketId, int userId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.assignTicketToUser(ticketId, userId);
+	}
+	@Override
+	public List<Integer> getTicketIdsByUser(int userId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getTicketIdsByUser(userId);
+	}
+	@Override
+	public int deleteTicketFromUser(int ticketId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.deleteTicketFromUser( ticketId);
+	}
+	@Override
+	public List<String> getShowNamesByTheatre(List<Integer> theatreIdList) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getShowNamesByTheatre(theatreIdList);
+	}
+	@Override
+	public List<String> getScreenNameByTheatre(List<Integer> theatreIdList) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getScreenNamesByTheatre(theatreIdList);
+	}
+	@Override
+	public int getSeatsAvailable(int screenId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getSeatsAvailable(screenId);
+	}
+	@Override
+	public Screen getScreen(int screenId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getScreen(screenId);
 	}
 
 }

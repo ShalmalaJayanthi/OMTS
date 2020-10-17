@@ -40,8 +40,12 @@ public class BookingShowController extends HttpServlet{
 			}
 			double totalPrice = noOfSeats * seat.getSeatPrice();
 			String screenName = userService.getScreenName(screenId);
+			int seatsAvailable = userService.getSeatsAvailable(screenId);
+			Screen screen = userService.getScreen(screenId);
+			int totalSeatsAvailable = (screen.getRows()*screen.getColumns())-seatsAvailable;
+			System.out.println("Seats available =======" + totalSeatsAvailable);
 			request.setAttribute("theatreId", theatreId);
-			request.setAttribute("screenId", screenId);
+;			request.setAttribute("screenId", screenId);
 			request.setAttribute("movieId", movieId);
 			request.setAttribute("showId", showId);
 			request.setAttribute("screenName", screenName);
@@ -49,6 +53,7 @@ public class BookingShowController extends HttpServlet{
 			request.setAttribute("noOfSeats", noOfSeats);
 			request.setAttribute("totalPrice", totalPrice);
 			request.setAttribute("showName", showName);
+			request.setAttribute("totalSeatsAvailable", totalSeatsAvailable);
 			dispatcher = request.getRequestDispatcher("booking.jsp");
 			dispatcher.forward(request, response);
 		}catch(OMTSException e) {

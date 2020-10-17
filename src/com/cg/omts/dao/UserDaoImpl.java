@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.List;
 import com.cg.omts.dto.Booking;
@@ -18,7 +19,8 @@ import com.cg.omts.dto.Ticket.TicketStatus;
 import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.utility.DBConnection;
-import com.cg.omts.utility.JdbcUtility;
+import com.cg.omts.utility.DbConnection;
+import com.cg.omts.utility.DbConnection;
 
 public class UserDaoImpl implements IUserDao{
 
@@ -33,7 +35,7 @@ public class UserDaoImpl implements IUserDao{
 		Boolean isFound = false;
 		try {
 			
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_MOVIE_DETAILS);
 			prepareStatement.setInt(1, movieId);
 			resultSet = prepareStatement.executeQuery();
@@ -68,7 +70,7 @@ public class UserDaoImpl implements IUserDao{
 		List<Integer> theatreIdList = new ArrayList<Integer>();
 		try {
 			
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_THEATRES_BY_MOVIE);
 			prepareStatement.setInt(1, movieId);
 			resultSet = prepareStatement.executeQuery();
@@ -93,7 +95,7 @@ public class UserDaoImpl implements IUserDao{
 		List<String> theatreNamesList = new ArrayList<String>();
 		try {
 			
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_THEATRE_NAME_BY_ID);
 			
 			for(Integer theatreId : theatreIdList) {
@@ -120,7 +122,7 @@ public class UserDaoImpl implements IUserDao{
 		List<Movie> movieList = new ArrayList<Movie>();
 		Movie movie = null;
 		try {
-			connection =  DBConnection.getConnection();
+			connection =  DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_ALL_MOVIES);
 			resultSet = prepareStatement.executeQuery();	
 			
@@ -154,7 +156,7 @@ public class UserDaoImpl implements IUserDao{
 		List<Integer> theatreIdList = new ArrayList<Integer>();
 
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_THEATREID);
 			prepareStatement.setString(1, city);
 			resultSet = prepareStatement.executeQuery();
@@ -179,7 +181,7 @@ public class UserDaoImpl implements IUserDao{
 		List<Movie> movieListBasedonCity = new ArrayList<>();
 		Movie movie = null;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_MOVIES_BY_THEATRE_ID);
 			for(Integer theatreId : theatreIdList) {
 				prepareStatement.setInt(1, theatreId);
@@ -211,19 +213,18 @@ public class UserDaoImpl implements IUserDao{
 	}
 	
 	@Override
-	public int generateTicket(int userId, Ticket ticket) throws OMTSException {
+	public int generateTicket(Ticket ticket) throws OMTSException {
 		// TODO Auto-generated method stub
 		int isGenerated = 0;
 		try {
-			connection = DBConnection.getConnection();
-			prepareStatement = connection.prepareStatement(IUserQueryConstants.GENERATE_TICKET);   
-			prepareStatement.setInt(1, userId);  
-			prepareStatement.setInt(2, ticket.getTicketId()); 
-			prepareStatement.setInt(3, ticket.getNoOfSeats());
-			prepareStatement.setInt(4, ticket.getScreenId());
-			prepareStatement.setInt(5, ticket.getTheatreId());
-			prepareStatement.setInt(6, ticket.getShowId());
-			prepareStatement.setInt(7, ticket.getMovieId());
+			connection = DbConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GENERATE_TICKET);    
+			prepareStatement.setInt(1, ticket.getTicketId()); 
+			prepareStatement.setInt(2, ticket.getNoOfSeats());
+			prepareStatement.setInt(3, ticket.getScreenId());
+			prepareStatement.setInt(4, ticket.getTheatreId());
+			prepareStatement.setInt(5, ticket.getShowId());
+			prepareStatement.setInt(6, ticket.getMovieId());
 			isGenerated = prepareStatement.executeUpdate();  
 		}catch(SQLException e){ 
 			throw new OMTSException("problem while creating PS object"+e.getMessage());
@@ -242,7 +243,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isAllocated = 0;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.ALLOCATE_SEATS);   
 			for(Integer selectedSeat : selectedSeatsList) {
 				prepareStatement.setInt(1, selectedSeat);
@@ -267,7 +268,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isUpdated = 0;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.SET_TICKET_STATUS);   
 			prepareStatement.setString(1, status);
 			prepareStatement.setInt(2, ticketId);
@@ -289,7 +290,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isAssigned = 0;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.ASSIGN_SEATS_TO_TICKET);   
 			for(Integer seat : seatsList) {
 				prepareStatement.setInt(1, ticketId);
@@ -309,17 +310,16 @@ public class UserDaoImpl implements IUserDao{
 	}
 
 	@Override
-	public int addTransaction(Transaction transaction, int ticketId, int userId) throws OMTSException {
+	public int addTransaction(Transaction transaction, int ticketId) throws OMTSException {
 		// TODO Auto-generated method stub
 		int isInserted = 0;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.ADD_TRANSACTION);   
-			prepareStatement.setInt(1, transaction.getTransactionId());  
-			prepareStatement.setInt(2, userId); 
-			prepareStatement.setInt(3, transaction.getAccountNumber());
-			prepareStatement.setInt(4, transaction.getTotalAmount());
-			prepareStatement.setInt(5, ticketId);
+			prepareStatement.setInt(1, transaction.getTransactionId());   
+			prepareStatement.setInt(2, transaction.getAccountNumber());
+			prepareStatement.setInt(3, transaction.getTotalAmount());
+			prepareStatement.setInt(4, ticketId);
 			isInserted = prepareStatement.executeUpdate();  
 		}catch(SQLException e){ 
 			throw new OMTSException("problem in PS statement"+e.getMessage());
@@ -338,15 +338,16 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isInserted = 0;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.ADD_BOOKING);   
+			
 			prepareStatement.setInt(1, booking.getBookingId());  
 			prepareStatement.setDate(2, booking.getBookingDate()); 
 			prepareStatement.setInt(3, ticketId);
 			prepareStatement.setInt(4, transactionId);
 			isInserted = prepareStatement.executeUpdate();  
 		}catch(SQLException e){ 
-			throw new OMTSException("problem while creating PS object");
+			throw new OMTSException("problem while creating PS object"+e.getMessage());
 		}finally {
 			try {
 				connection.close();
@@ -362,7 +363,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isUpdated = 0;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.SET_SEAT_STATUS);   
 			prepareStatement.setString(1, status);
 			prepareStatement.setInt(2, seatId);
@@ -384,7 +385,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isDeleted = 0;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_BOOKING_DETAILS);   
 			prepareStatement.setInt(1, ticketId);
 			isDeleted = prepareStatement.executeUpdate();  	
@@ -406,7 +407,7 @@ public class UserDaoImpl implements IUserDao{
 		List<Integer> seatList = new ArrayList<>();
 
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SEATS);
 			prepareStatement.setInt(1, ticketId);
 			resultSet = prepareStatement.executeQuery();
@@ -431,7 +432,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isDeleted = 0;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_ALLOCATED_SEATS);   
 			prepareStatement.setInt(1, ticketId);
 			isDeleted = prepareStatement.executeUpdate();  	
@@ -452,7 +453,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isDeleted = 0;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_SEATS);   
 			for(Integer seat : seatList) {
 				prepareStatement.setInt(1, seat);
@@ -477,7 +478,7 @@ public class UserDaoImpl implements IUserDao{
 		Boolean isFound = false;
 		try {
 			
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TRANSACTION_DETAILS);
 			prepareStatement.setInt(1, ticketId);
 			resultSet = prepareStatement.executeQuery();
@@ -508,12 +509,12 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isDeleted = 0;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_TRANSACTION);   
 			prepareStatement.setInt(1, ticketId);
 			isDeleted = prepareStatement.executeUpdate();  	
 		}catch(SQLException e){ 
-			throw new OMTSException("problem while creating PS object");
+			throw new OMTSException("problem while creating PS object"+e.getMessage());
 		}finally {
 			try {
 				connection.close();
@@ -528,12 +529,12 @@ public class UserDaoImpl implements IUserDao{
 	public int cancelTicket(int ticketId) throws OMTSException {
 		int isDeleted = 0;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_TICKET);   
 			prepareStatement.setInt(1, ticketId);
 			isDeleted = prepareStatement.executeUpdate();  	
 		}catch(SQLException e){ 
-			throw new OMTSException("problem while creating PS object");
+			throw new OMTSException("problem while creating PS object"+e.getMessage());
 		}finally {
 			try {
 				connection.close();
@@ -551,7 +552,7 @@ public class UserDaoImpl implements IUserDao{
 		Boolean isFound = false;
 		try {
 			
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_CURRENT_BALANCE);
 			prepareStatement.setInt(1, transaction.getAccountNumber());
 			resultSet = prepareStatement.executeQuery();
@@ -579,7 +580,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int isUpdated = 0;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.REFUND_AMOUNT);   
 			prepareStatement.setInt(1, transaction.getTotalAmount()+currentBalance);
 			prepareStatement.setInt(2, transaction.getAccountNumber());
@@ -599,7 +600,7 @@ public class UserDaoImpl implements IUserDao{
 	public Seat getSeatPrice(int screenId) throws OMTSException{
 		Seat seat = null;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SCREENSEATPRICE_BY_SCREENID);
 			prepareStatement.setInt(1, screenId);
 			resultSet = prepareStatement.executeQuery();
@@ -628,7 +629,7 @@ public class UserDaoImpl implements IUserDao{
 		List<Screen> screenList = new ArrayList<>();
 		Screen screen = null;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SCREEN_BY_THEATRE_ID);
 			prepareStatement.setInt(1, theatreId);
 			resultSet = prepareStatement.executeQuery();
@@ -658,7 +659,7 @@ public class UserDaoImpl implements IUserDao{
 	List<Show> showList = new ArrayList<Show>();
 	Show show = null;
 	try {
-		connection = DBConnection.getConnection();
+		connection = DbConnection.getConnection();
 		prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SHOWS_BY_MOVIE_THEATRE);
 		prepareStatement.setInt(1, screenId);
 		prepareStatement.setInt(2, theatreId);
@@ -689,7 +690,7 @@ public class UserDaoImpl implements IUserDao{
 	public Booking getBookingDetails(int ticketId) throws OMTSException {
 		Booking booking = null;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_BOOKING_DETAILS);
 			prepareStatement.setInt(1, ticketId);
 			resultSet = prepareStatement.executeQuery();
@@ -716,7 +717,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		boolean flag=false;
 		try {
-		connection = DBConnection.getConnection();
+		connection = DbConnection.getConnection();
 		prepareStatement = connection.prepareStatement(IUserQueryConstants.VALIDATE_PAYMENT);
 		prepareStatement.setInt(1, accountNo);
 		resultSet = prepareStatement.executeQuery();
@@ -744,7 +745,7 @@ public class UserDaoImpl implements IUserDao{
 		
 		Seat seat = null;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.SEAT_AVAILABILITY);
 			prepareStatement.setInt(1, seatId);
 			resultSet = prepareStatement.executeQuery();
@@ -778,7 +779,7 @@ public class UserDaoImpl implements IUserDao{
 	public Ticket getTicket(int ticketId) throws OMTSException {
 		Ticket ticket = null;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TICKET);
 			prepareStatement.setInt(1, ticketId);
 			resultSet = prepareStatement.executeQuery();
@@ -879,7 +880,7 @@ public class UserDaoImpl implements IUserDao{
 		Theatre theatre = null;
 		try {
 			
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_THEATRE_BY_ID);
 			
 			for(Integer theatreId : theatreIdList) {
@@ -912,7 +913,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		String screenName = null;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SCREEN_NAME);
 			prepareStatement.setInt(1, screenId);
 			resultSet = prepareStatement.executeQuery();
@@ -940,7 +941,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		String showName = null;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SHOW_NAME);
 			prepareStatement.setInt(1, showId);
 			resultSet = prepareStatement.executeQuery();
@@ -967,7 +968,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		boolean isFound = false;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.CHECK_TICKET);
 		
 			resultSet = prepareStatement.executeQuery();
@@ -994,7 +995,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		int maxTicId = 0;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.MAX_TICKET_ID);
 			resultSet = prepareStatement.executeQuery();
 			if(resultSet.next()) {
@@ -1019,7 +1020,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		boolean isFound = false;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.CHECK_SEAT);
 		
 			resultSet = prepareStatement.executeQuery();
@@ -1040,12 +1041,36 @@ public class UserDaoImpl implements IUserDao{
 		}
 		return isFound;
 	}
-
+	public static boolean checkBooking() throws SQLException, OMTSException {
+		// TODO Auto-generated method stub
+		boolean isFound = false;
+		try {
+			connection = DbConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.CHECK_BOOKING);
+		
+			resultSet = prepareStatement.executeQuery();
+			if(resultSet.next()) {
+				isFound = true;
+			}
+			
+		}catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object");
+		}
+		finally {
+			try {
+				
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing connection");
+			}
+		}
+		return isFound;
+	}
 	public static int getMaxSeatId() throws OMTSException {
 		// TODO Auto-generated method stub
 		int maxSeatId = 0;
 		try {
-			connection = DBConnection.getConnection();
+			connection = DbConnection.getConnection();
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.MAX_SEAT_ID);
 			resultSet = prepareStatement.executeQuery();
 			if(resultSet.next()) {
@@ -1065,5 +1090,422 @@ public class UserDaoImpl implements IUserDao{
 		}
 		return maxSeatId;
 	}
-	
+	public static int getMaxBookingId() throws OMTSException {
+		// TODO Auto-generated method stub
+		int maxBookingId = 0;
+		try {
+			connection = DbConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.MAX_BOOKING_ID);
+			resultSet = prepareStatement.executeQuery();
+			if(resultSet.next()) {
+				maxBookingId = resultSet.getInt(1);
+			}
+			
+		}catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object");
+		}
+		finally {
+			try {
+				
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing connection");
+			}
+		}
+		return maxBookingId;
+	}
+
+	@Override
+	public Booking getBookingById(int bookingId) throws OMTSException {
+		// TODO Auto-generated method stub
+		
+		Booking booking = null;
+		try {
+			connection = DbConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_BOOKING_BY_ID);
+			prepareStatement.setInt(1, bookingId);
+			resultSet = prepareStatement.executeQuery();
+			while(resultSet.next()) {
+				booking = new Booking();
+				booking.setBookingId(resultSet.getInt(1));
+				booking.setBookingDate(resultSet.getDate(2));
+				
+			}
+		} catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object");
+		}
+		finally{
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing the connection");
+			}
+		}
+		return booking;	
+	}
+
+	@Override
+	public int getTransactionIdByBookingId(int bookingId) throws OMTSException {
+		// TODO Auto-generated method stub
+		int transactionId = 0;
+		try {
+			connection = DbConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TRANSACTION_ID);
+			resultSet = prepareStatement.executeQuery();
+			if(resultSet.next()) {
+				transactionId = resultSet.getInt(1);
+			}
+			
+		}catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object");
+		}
+		finally {
+			try {
+				
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing connection");
+			}
+		}
+		return transactionId;
+	}
+
+	@Override
+	public int getTicketIdByBookingId(int bookingId) throws OMTSException {
+		// TODO Auto-generated method stub
+		int ticketId = 0;
+		try {
+			connection = DbConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TICKET_ID);
+			resultSet = prepareStatement.executeQuery();
+			if(resultSet.next()) {
+				ticketId = resultSet.getInt(1);
+			}
+			
+		}catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object");
+		}
+		finally {
+			try {
+				
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing connection");
+			}
+		}
+		return ticketId;
+	}
+
+	@Override
+	public List<Ticket> getTicketByIDS(List<Integer> ticketIdList) throws OMTSException {
+		// TODO Auto-generated method stub
+		List<Ticket> ticketList = new ArrayList<Ticket>();
+		
+		Ticket ticket = null;
+		try {
+			connection = DbConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TICKET_BY_ID);
+						
+				for(Integer ticketId : ticketIdList) {
+					prepareStatement.setInt(1, ticketId);
+					resultSet = prepareStatement.executeQuery();
+					String status="";
+					TicketStatus ticketStatus;
+						while(resultSet.next()) {
+							ticket = new Ticket();
+							ticket.setTicketId(resultSet.getInt(1));
+							ticket.setNoOfSeats(resultSet.getInt(2));
+							status = resultSet.getString(3);
+							ticketStatus= TicketStatus.valueOf(status); 
+							int screenId =resultSet.getInt(4);
+							ticket.setTicketStatus(ticketStatus);
+							ticket.setScreenId(screenId);
+							ticket.setTheatreId(resultSet.getInt(5));
+							ticket.setShowId(resultSet.getInt(6));
+							ticket.setMovieId(resultSet.getInt(7));
+							ticketList.add(ticket);
+						}
+				}
+		} catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object"+e.getMessage());
+		}
+		finally{
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing the connection");
+			}
+		}
+		
+		return ticketList;
+		
+	}
+
+	@Override
+	public List<Transaction> getTransactionByTicket(List<Integer> ticketIdList) throws OMTSException {
+		// TODO Auto-generated method stub
+		List<Transaction> transactionList = new ArrayList<Transaction>();
+		
+		Transaction transaction = null;
+		try {
+			connection = DbConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TRANSACTION_BY_TICKET);
+			for(Integer ticketId : ticketIdList) {
+				prepareStatement.setInt(1, ticketId);
+				resultSet = prepareStatement.executeQuery();
+			
+		
+				while(resultSet.next()) {
+					transaction = new Transaction();
+					transaction.setTransactionId(resultSet.getInt(1));
+					transaction.setAccountNumber(resultSet.getInt(2));
+					transaction.setTotalAmount(resultSet.getInt(3));
+				
+					transactionList.add(transaction);
+				}
+			}
+		} catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object"+e.getMessage());
+		}
+		finally{
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing the connection");
+			}
+		}
+		return transactionList;
+	}
+
+	@Override
+	public List<Booking> getBookingByUser(List<Transaction> transactionIdList) throws OMTSException {
+		// TODO Auto-generated method stub
+		List<Booking> bookingList = new ArrayList<Booking>();
+		Booking booking = null;
+		try {
+			connection = DbConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_BOOKING_BY_TRANSACTION);   
+			for(Transaction transaction : transactionIdList) {
+				prepareStatement.setInt(1, transaction.getTransactionId());
+				resultSet = prepareStatement.executeQuery();
+				while(resultSet.next()) {
+					booking = new Booking();
+					booking.setBookingId(resultSet.getInt(1));
+					booking.setBookingDate(resultSet.getDate(2));
+					bookingList.add(booking);
+					
+				}
+			}
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while creating PS object");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return bookingList;
+
+	}
+
+	@Override
+	public int assignTicketToUser(int ticketId, int userId) throws OMTSException {
+		// TODO Auto-generated method stub
+		int isInserted = 0;
+		try {
+			connection = DbConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.ADD_TICKET_TO_USER);   
+			
+			prepareStatement.setInt(1, userId);  
+			prepareStatement.setInt(2, ticketId); 
+			
+			isInserted = prepareStatement.executeUpdate();  
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while creating PS object"+e.getMessage());
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return isInserted;
+	}
+
+	@Override
+	public List<Integer> getTicketIdsByUser(int userId) throws OMTSException {
+		// TODO Auto-generated method stub
+		List<Integer> ticketIdList = new ArrayList<Integer>();
+		try {
+			
+			connection = DbConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_TICKET_IDS);
+			prepareStatement.setInt(1, userId);
+			resultSet = prepareStatement.executeQuery();
+			while(resultSet.next()) {
+				ticketIdList.add(resultSet.getInt(1));
+			}
+		} catch (SQLException e) {
+			throw new OMTSException("problem while creating PS object"+e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new OMTSException("problem while closing");
+			}
+		}
+		
+		return ticketIdList;
+	}
+
+	@Override
+	public int deleteTicketFromUser(int ticketId) throws OMTSException {
+		// TODO Auto-generated method stub
+		int isDeleted = 0;
+		try {
+			connection = DbConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.DELETE_FROM_USER);   
+			prepareStatement.setInt(1, ticketId);
+			isDeleted = prepareStatement.executeUpdate();  	
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while creating PS object");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return isDeleted;
+	}
+
+	@Override
+	public List<String> getShowNamesByTheatre(List<Integer> theatreIdList) throws OMTSException {
+		// TODO Auto-generated method stub
+		List<String> showNameList = new ArrayList<String>();
+		try {
+			connection = DbConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SHOWNAME_BY_THEATREID);
+			
+			
+			for(Integer theatreId : theatreIdList) {
+				prepareStatement.setInt(1, theatreId);
+				resultSet = prepareStatement.executeQuery();
+				while(resultSet.next()) {
+					showNameList.add(resultSet.getString(1));
+				}
+			}
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while creating PS object" + e.getMessage());
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return showNameList;
+	}
+
+	@Override
+	public List<String> getScreenNamesByTheatre(List<Integer> theatreIdList) throws OMTSException {
+		// TODO Auto-generated method stub
+		List<String> screenNameList = new ArrayList<String>();
+		try {
+			connection = DbConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SCREENNAME_BY_THEATREID);
+			
+			
+			for(Integer theatreId : theatreIdList) {
+				prepareStatement.setInt(1, theatreId);
+				resultSet = prepareStatement.executeQuery();
+				while(resultSet.next()) {
+					screenNameList.add(resultSet.getString(1));
+				}
+			}
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while creating PS object");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return screenNameList;
+	}
+
+	@Override
+	public int getSeatsAvailable(int screenId) throws OMTSException {
+		// TODO Auto-generated method stub
+		int noOfSeats = 0;
+		
+		try {
+			connection = DbConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_AVAILABLE_SEATS);
+			
+			prepareStatement.setInt(1, screenId);  
+			resultSet =  prepareStatement.executeQuery();  
+			if(resultSet.next()) {
+				noOfSeats = resultSet.getInt(1);
+			}
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while creating PS object"+e.getMessage());
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return noOfSeats;
+
+	}
+
+	@Override
+	public Screen getScreen(int screenId) throws OMTSException {
+		// TODO Auto-generated method stub
+		Screen screen = null;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_SCREEN_BY_ID);
+			prepareStatement.setInt(1, screenId);
+			resultSet = prepareStatement.executeQuery();
+			if(resultSet.next()) {
+				screen = new Screen();
+				screen.setRows(resultSet.getInt(1));
+				screen.setColumns(resultSet.getInt(2));
+			
+			}
+		} catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object");
+		}
+		finally{
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing the connection");
+			}
+		}
+		return screen;	
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
