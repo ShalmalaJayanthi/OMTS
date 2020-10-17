@@ -36,6 +36,6 @@
 		<a href = "addScreen.jsp">Add Screen</a>
 		<a href = "DeleteScreenServlet">Delete Screen</a>
 		<a href="addShow.jsp">Add Show</a>
-		<a href="deleteShow.jsp">Delete Show</a>
+		<a href="deleteShows.jsp">Delete Show</a>
 </body>
 </html>
