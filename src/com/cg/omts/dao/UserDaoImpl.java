@@ -1215,6 +1215,7 @@ public class UserDaoImpl implements IUserDao{
 							ticket.setTicketId(resultSet.getInt(1));
 							ticket.setNoOfSeats(resultSet.getInt(2));
 							status = resultSet.getString(3);
+							System.out.println(status);
 							ticketStatus= TicketStatus.valueOf(status); 
 							int screenId =resultSet.getInt(4);
 							ticket.setTicketStatus(ticketStatus);
@@ -1488,6 +1489,56 @@ public class UserDaoImpl implements IUserDao{
 			}
 		}
 		return screen;	
+	}
+
+	@Override
+	public String getTheatreNames(int theatreId) throws OMTSException {
+		// TODO Auto-generated method stub
+		String theatreName = null;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_THEATRE_NAME);
+			prepareStatement.setInt(1, theatreId);
+			resultSet = prepareStatement.executeQuery();
+			if(resultSet.next()) {
+				theatreName = resultSet.getString(1);
+			}
+			
+		}catch(SQLException e) {
+			throw new OMTSException("problem occured while creating PS object");
+		}
+		finally {
+			try {
+				
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem occured while closing connection");
+			}
+		}
+		
+		return theatreName;
+	}
+
+	@Override
+	public int makePayment(int accountNo, int currentBalance, int totalCost) throws OMTSException {
+		// TODO Auto-generated method stub
+		int isUpdated = 0;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.DEDUCT_AMOUNT); 
+			prepareStatement.setInt(1, currentBalance-totalCost);
+			prepareStatement.setInt(2, accountNo);
+			isUpdated = prepareStatement.executeUpdate();  	
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while creating PS object"+e.getMessage());
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+		return isUpdated;
 	}
 }
 

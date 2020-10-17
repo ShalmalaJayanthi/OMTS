@@ -239,5 +239,16 @@ public class UserServiceImpl implements IUserService{
 		// TODO Auto-generated method stub
 		return userDao.getScreen(screenId);
 	}
+	@Override
+	public String getTheatreName(int theatreId) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.getTheatreNames(theatreId);
+	}
+	@Override
+	public int makePayment(int accountNo, int currentBalance, int totalCost) throws OMTSException {
+		// TODO Auto-generated method stub
+		return userDao.makePayment(accountNo,currentBalance, totalCost);
+	}
+	
 
 }

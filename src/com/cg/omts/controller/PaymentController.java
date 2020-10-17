@@ -37,7 +37,8 @@ public class PaymentController extends HttpServlet{
 		int movieId = Integer.parseInt(req.getParameter("movieId"));
 		int totalCost = Integer.parseInt(req.getParameter("totalPrice"));
 		IUserService user = new UserServiceImpl();
-		 
+		int currentBalance = 0;
+		String movieName = "", theatreName = "", screenName = "", showName = "";
 		try {
 			
 			Boolean flag= user.validatePayment(accountNo, cvv, password);
@@ -50,8 +51,10 @@ public class PaymentController extends HttpServlet{
 				System.out.println("Transaction Id generated id: "+transactionId);
 				Transaction transaction = new Transaction(transactionId, accountNo, totalCost);
 				System.out.println("Transaction obj in paymentprocess: " + transaction);
-				
+				currentBalance = user.getCurrentBalance(transaction);
 				int isTransact= user.addTransaction(transaction, ticketId);
+				int isdeducted = user.makePayment(accountNo, currentBalance, totalCost);
+				
 				System.out.println("is Transaction done: "+ isTransact);
 				//add transaction (get tran id) -- completed
 				//Booking id=customerid+theatreid+movieid+showid;
@@ -85,9 +88,17 @@ public class PaymentController extends HttpServlet{
 						user.setSeatStatus(seatId, "BOOKED");
 		
 					}
+					movieName = user.getMovieDetails(movieId).getMovieName();
+					theatreName = user.getTheatreName(theatreId);
+					screenName = user.getScreenName(screenId);
+					showName = user.getShowName(showId);
 					req.setAttribute("ticketId", ticketId);
 					req.setAttribute("booking", booking);
 					req.setAttribute("transaction", transaction);
+					req.setAttribute("movieName", movieName);
+					req.setAttribute("theatreName", theatreName);
+					req.setAttribute("screenName", screenName);
+					req.setAttribute("showName", showName);
 					dispatcher = req.getRequestDispatcher("bookingConfirmation.jsp");
 					
 					dispatcher.forward(req, resp);

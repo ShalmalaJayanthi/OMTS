@@ -105,4 +105,8 @@ public interface IUserDao {
 	public int getSeatsAvailable(int screenId) throws OMTSException;
 	
 	public Screen getScreen(int screenId) throws OMTSException;
+
+	public String getTheatreNames(int theatreId) throws OMTSException;
+
+	public int makePayment(int accountNo, int currentBalance, int totalCost) throws OMTSException;
 }

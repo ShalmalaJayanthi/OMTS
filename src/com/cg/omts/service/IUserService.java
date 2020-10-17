@@ -361,5 +361,9 @@ public interface IUserService {
 	public int getSeatsAvailable(int screenId) throws OMTSException;
 
 	public Screen getScreen(int screenId) throws OMTSException;
+
+	public String getTheatreName(int theatreId) throws OMTSException;
+
+	public int makePayment(int accountNo, int currentBalance, int totalCost) throws OMTSException;
 	
 }

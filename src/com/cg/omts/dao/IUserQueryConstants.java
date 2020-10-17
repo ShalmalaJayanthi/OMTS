@@ -102,13 +102,17 @@ public interface IUserQueryConstants {
 	
 	String DELETE_FROM_USER= "delete from userticket where ticketId=?";
 	
-	String GET_SHOWNAME_BY_THEATREID= "select showName from showDetails where theatreId=?";
+	String GET_SHOWNAME_BY_THEATREID= "select showName from showdetails where theatreId=?";
 	
 	String GET_SCREENNAME_BY_THEATREID= "select screenName from screen where theatreId=?";
 	
 	String GET_AVAILABLE_SEATS = "select count(*) from seat where screenId = ?";
 	
 	String GET_SCREEN_BY_ID = "select screenRows, columns from screen where screenId = ?";
+	
+	String GET_THEATRE_NAME = "select theatreName from theatre where theatreId = ?";
+	
+	String DEDUCT_AMOUNT = "update bankaccount set accountBal = ? where accountNo = ?";
 	
 }
 

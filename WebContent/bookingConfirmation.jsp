@@ -221,15 +221,14 @@ Ticket ticket = user.getTicket(ticketId);
 %>
 <center>
 <table>
-<tr><td>Ticket ID: <td><%=ticket.getTicketId() %>
-<tr><td>No Of Seats: <td><%=ticket.getNoOfSeats() %>
-<tr><td>Ticket Status:<td> <%=ticket.getTicketStatus() %>
-<tr><td>Screen Id:<td> <%=ticket.getScreenId() %>
-<tr><td>Theatre Id:<td> <%=ticket.getTheatreId() %>
-<tr><td>Show Id:<td><%=ticket.getShowId() %>
-<tr><td>Movie Id:<td><%=ticket.getMovieId() %>
-</table>
-</center>
+<tr><td>Ticket ID<td>: <td><%=ticket.getTicketId() %>
+<tr><td>No Of Seats<td>: <td><%=ticket.getNoOfSeats() %>
+<tr><td>Ticket Status<td>:<td> <%=ticket.getTicketStatus() %>
+<tr><td>Movie Id<td>:<td><%=request.getAttribute("movieName") %>
+<tr><td>Theatre Id<td>:<td> <%=request.getAttribute("theatreName")  %>
+<tr><td>Show Id<td>:<td><%=request.getAttribute("showName")  %>
+<tr><td>Screen Id<td>:<td> <%=request.getAttribute("screenName") %>
+
 <% Booking booking = (Booking)request.getAttribute("booking");
 System.out.println("In booking config transactioin obj is: "+booking);
 request.setAttribute("booking", booking.getBookingId());
@@ -242,20 +241,18 @@ Booking booking = user.getBookingDetails(ticketId);
 
 %>
 --%>
-<center>
-<table>
-<tr><td>Booking Id:<td><%=booking.getBookingId() %>
-<tr><td>Booking Date:<td><%=booking.getBookingDate() %>
 
-</table>
-</center>
+<tr><td>Booking Id<td>:<td><%=booking.getBookingId() %>
+<tr><td>Booking Date<td>:<td><%=booking.getBookingDate() %>
+
+
  
 <% Transaction transaction = (Transaction)request.getAttribute("transaction");
 System.out.println("In booking config transactioin obj is: "+transaction);%>
-<center>
-<tr><td>Transaction Id:<td><%=transaction.getTransactionId() %>
-<tr><td>Account Number:<td><%=transaction.getAccountNumber() %>
-<tr><td>Total Amount:<td><%=transaction.getTotalAmount() %>
+
+<tr><td>Transaction Id<td>:<td><%=transaction.getTransactionId() %><br>
+<tr><td>Account Number<td>:<td><%=transaction.getAccountNumber() %><br>
+<tr><td>Total Amount<td>:<td><%=transaction.getTotalAmount() %>
 </center> 
 
 </body>
