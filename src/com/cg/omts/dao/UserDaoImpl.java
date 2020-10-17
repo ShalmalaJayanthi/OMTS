@@ -1541,21 +1541,3 @@ public class UserDaoImpl implements IUserDao{
 		return isUpdated;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
