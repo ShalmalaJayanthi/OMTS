@@ -7,6 +7,7 @@
 <title>Registration</title>
 </head>
 <body>
+<h1>Registration Form</h1>
 <form method="post" action="RegisterServlet">
 	<table >
 		<tr>

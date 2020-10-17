@@ -214,10 +214,10 @@ b {
 		document.getElementById("log").style.display = "none";
 	}
 
-	window.history.forward();
-	function noBack() {
-		window.history.foward();
-	}
+	//window.history.forward();
+	//function noBack() {
+		//window.history.foward();
+	//}
 </script>
 
 </head>
