@@ -12,6 +12,26 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+  response.setHeader("Cache-Control","no-cache");
+  response.setHeader("Cache-Control","no-store");
+  response.setHeader("Pragma","no-cache");
+  response.setDateHeader ("Expires", 0);
+
+  if(session.getAttribute("username")==null)
+      response.sendRedirect("index.jsp");
+
+  %> 
+
+<% if (session != null) {
+         if (session.getAttribute("username") != null) {
+            int id = (Integer)session.getAttribute("username");
+         }
+      } 
+%>
+<form action="./LogoutServlet" method="post">
+      <input type="submit" value="Logout">
+</form>
 <h1>
 <% if(request.getAttribute("message")!=null) { %>
 <%= request.getAttribute("message") %>

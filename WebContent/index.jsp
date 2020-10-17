@@ -238,8 +238,15 @@ b {
 		</ul>
 
 
-
 	</div>
+	
+<% if(request.getAttribute("logout")!=null) {%>
+<h1 style="color:yellow;"><%=request.getAttribute("logout") %></h1>
+<%} %>
+<% if(request.getAttribute("errormessage")!=null) {%>
+<h1 style="color:yellow;"><%=request.getAttribute("errormessage") %></h1>
+<%} %>
+
 	<div class="loginform" id="log">
 		<img src="cross.png" class="img" onclick="cross()">
 
@@ -248,7 +255,7 @@ b {
 				<img src="caption1.png" class="caption-image">
 			</caption>
 			<br>
-			<form action="LoginServlet" method="post">
+			<form action="./LoginServlet" method="post">
 				<tr>
 					<td><b>UserName:</b></td>
 					<td><input type="number" name="user" class="input"></td>
