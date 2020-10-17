@@ -45,54 +45,7 @@ public class AdminServiceImpl implements IAdminService{
 		return adminDao.getTheatreByName(theatreName);
 	}
 
-	@Override
-	public Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException {
-		adminDao = new AdminDaoImpl();
-		Boolean isAdded = adminDao.addMovie(movie, theatreId);
-		return isAdded;
-	}
-
-	@Override
-	public ArrayList<Movie> getMovieDetailsToDelete() throws OMTSException{
-		adminDao = new AdminDaoImpl();
-		ArrayList<Movie> movieList = adminDao.getMovieDetailsToDelete();
-		return movieList;
-	}
 	
-	@Override
-	public ArrayList<Theatre> getTheatreDetails(String theatreCity) throws OMTSException {
-		adminDao = new AdminDaoImpl();
-		ArrayList<Theatre> getTheatreDetails = adminDao.getTheatreDetails(theatreCity);
-		return getTheatreDetails;
-	}
-
-	@Override
-	public int deleteMovie(Integer movieId) throws OMTSException {
-		adminDao = new AdminDaoImpl();
-		int rowsAffected = adminDao.deleteMovie(movieId);
-		return rowsAffected;
-	}
-
-	@Override
-	public Boolean addScreen(Screen screen, Integer theatreId) throws OMTSException {
-		adminDao = new AdminDaoImpl();
-		Boolean isAdded = adminDao.addScreen(screen, theatreId);
-		return isAdded;
-	}
-
-	@Override
-	public Boolean deleteScreen(Integer screenId) throws OMTSException{
-		adminDao = new AdminDaoImpl();
-		Boolean isAdded = adminDao.deleteScreen(screenId);
-		return isAdded;
-	}
-
-	@Override
-	public ArrayList<Screen> getScreenDetailsToDelete() throws OMTSException{
-		adminDao = new AdminDaoImpl();
-		ArrayList<Screen> screenList = adminDao.getScreenDetailsToDelete();
-		return screenList;
-	}
 
 	@Override
 	public List<Show> getShowDetails() throws OMTSException {
@@ -163,6 +116,104 @@ public class AdminServiceImpl implements IAdminService{
 		// TODO Auto-generated method stub
 		adminDao = (IAdminDao) new AdminDaoImpl();
 		return adminDao.checkShowNameandScreenId(showName, screenId);
+	}
+	
+	@Override
+	public boolean addMovie(Movie movie) throws OMTSException {
+		adminDao = new AdminDaoImpl();
+		Boolean isAdded = adminDao.addMovie(movie);
+		return isAdded;
+	}
+
+	@Override
+	public ArrayList<Movie> getMovieDetailsToDelete() throws OMTSException {
+		adminDao = new AdminDaoImpl();
+		ArrayList<Movie> movieList = adminDao.getMovieDetailsToDelete();
+		return movieList;
+	}
+	
+	@Override
+	public ArrayList<Theatre> getTheatreDetails(String theatreCity) throws OMTSException {
+		adminDao = new AdminDaoImpl();
+		ArrayList<Theatre> getTheatreDetails = adminDao.getTheatreDetails(theatreCity);
+		return getTheatreDetails;
+	}
+
+	@Override
+	public int deleteMovie(Integer movieId) throws OMTSException {
+		adminDao = new AdminDaoImpl();
+		int rowsAffected = adminDao.deleteMovie(movieId);
+		return rowsAffected;
+	}
+
+	@Override
+	public Boolean addScreen(Screen screen, Integer theatreId) throws OMTSException {
+		adminDao = new AdminDaoImpl();
+		Boolean isAdded = adminDao.addScreen(screen, theatreId);
+		return isAdded;
+	}
+
+	@Override
+	public Boolean deleteScreen(Integer screenId) throws OMTSException {
+		adminDao = new AdminDaoImpl();
+		Boolean isAdded = adminDao.deleteScreen(screenId);
+		return isAdded;
+	}
+
+	@Override
+	public ArrayList<Screen> getScreenDetailsToDelete() throws OMTSException {
+		adminDao = new AdminDaoImpl();
+		ArrayList<Screen> screenList = adminDao.getScreenDetailsToDelete();
+		return screenList;
+	}
+
+	@Override
+	public boolean addMovieToTheatre(int movieId, int theatreId) throws OMTSException {
+		adminDao = new AdminDaoImpl();
+		boolean isAdded = adminDao.addMovieToTheatre(movieId, theatreId);
+		return isAdded;
+	}
+
+	@Override
+	public ArrayList<Movie> getMovieIdName() throws OMTSException {
+		adminDao = new AdminDaoImpl();
+		ArrayList<Movie> movieList = adminDao.getMovieIdName();
+		return movieList;
+	}
+
+	@Override
+	public boolean isMovieIdExists(int movieId) throws OMTSException {
+		adminDao = new AdminDaoImpl();
+		boolean isExists = adminDao.isMovieIdExists(movieId);
+		return isExists;
+	}
+
+	@Override
+	public boolean isScreenIdExists(int screenId) throws OMTSException {
+		adminDao = new AdminDaoImpl();
+		boolean isExists = adminDao.isScreenIdExists(screenId);
+		return isExists;
+	}
+
+	@Override
+	public boolean isTheatreIdExists(int theatreId) throws OMTSException {
+		adminDao = new AdminDaoImpl();
+		boolean isExists = adminDao.isTheatreIdExists(theatreId);
+		return isExists;
+	}
+
+	@Override
+	public boolean checkTheatreIdInCity(int theatreId, String theatreCity) throws OMTSException {
+		adminDao = new AdminDaoImpl();
+		boolean isCorrect = adminDao.checkTheatreIdInCity(theatreId, theatreCity);
+		return isCorrect;
+	}
+
+	@Override
+	public boolean checkIdTheatreMovieAlreadyExists(int theatreId, int movieId) throws OMTSException {
+		adminDao = new AdminDaoImpl();
+		boolean isExists = adminDao.checkIdTheatreMovieAlreadyExists(theatreId, movieId);
+		return isExists;
 	}
 
 }

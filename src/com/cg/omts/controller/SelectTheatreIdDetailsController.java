@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.cg.omts.dao.AdminDaoImpl;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Screen;
 import com.cg.omts.exceptions.OMTSException;
@@ -22,30 +24,33 @@ public class SelectTheatreIdDetailsController extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-				
 		IAdminService adminService = new AdminServiceImpl();
+		String theatreCity = request.getParameter("theatreCity");
 		int theatreId = Integer.parseInt(request.getParameter("theatreId"));
-		Boolean isAdded;
+		System.out.println("Theatre ID in SelectTheatreIdDetails Controller" + theatreId);
+		Boolean isAdded = false;
 		
 		ServletContext context=getServletContext();  
-		Movie movie = (Movie) context.getAttribute("movieDto");
 		Screen screen = (Screen) context.getAttribute("screen");
+		
+		PrintWriter out = response.getWriter();
+		String message;
 		try {
-			if(screen == null) {
-				isAdded = adminService.addMovie(movie,theatreId);
-				if(isAdded) {
-					System.out.println("Successfully Added movie details");
-					out.println("<h2>Successfully Added movie details with movie Id: "+movie.getMovieId());
-			}
-			} else {
-				String screenId = ""+ screen.getScreenId() + theatreId; 
-				screen.setScreenId(Integer.parseInt(screenId));
+			if(adminService.isTheatreIdExists(theatreId) && adminService.checkTheatreIdInCity(theatreId, theatreCity)) {
 				isAdded = adminService.addScreen(screen, theatreId);
 				if(isAdded) {
-					System.out.println("Successfully Added Screen details");
-					out.println("<h2>Successfully added Screen details with screen Id: "+screen.getScreenId());
+					message = "Successfully added screen details with ID: "+ screen.getScreenId();
+					request.setAttribute("message", message);
+					request.getRequestDispatcher("addScreen.jsp").forward(request, response);
+				} else {
+					message = "Failed to add Screen details with ID: "+screen.getScreenId();
+					request.setAttribute("message", message);
+					request.getRequestDispatcher("addScreen.jsp").forward(request, response);
 				}
+			} else {
+				message = "Enter valid theatre ID";
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("addScreen.jsp").forward(request, response);
 			}
 		} catch (OMTSException e) {
 			System.out.println("Couldn't add the details\n" + e);

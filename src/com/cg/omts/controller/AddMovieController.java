@@ -1,6 +1,7 @@
 package com.cg.omts.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 //import java.io.InputStream;
 import java.sql.Date;
 
@@ -14,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 //import javax.servlet.http.Part;
 
 import com.cg.omts.dto.Movie;
+import com.cg.omts.exceptions.OMTSException;
+import com.cg.omts.service.AdminServiceImpl;
+import com.cg.omts.service.IAdminService;
 
 
 @WebServlet("/AddMovieServlet")
@@ -32,12 +36,40 @@ public class AddMovieController extends HttpServlet {
 		String releaseDate = request.getParameter("movieReleaseDate");
 	 
 		Date movieReleaseDate = Date.valueOf(releaseDate);
+		IAdminService adminService = new AdminServiceImpl();
+		PrintWriter out = response.getWriter();
+		String message = " ";
+		try {
+			if(adminService.isMovieIdExists(movieId)){
+				message = "Movie with ID: "+movieId+" already exists!!";
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("addMovie.jsp").forward(request, response);
+			} else {
+				Movie movie = new Movie(movieId, movieName, movieGenre, movieDirector, movieLength, movieLanguage, movieReleaseDate);
+				
+				boolean isMovieAdded = false;
+				try {
+					isMovieAdded = adminService.addMovie(movie);
+					if(isMovieAdded) {
+						message = "Movie details with ID : "+ movie.getMovieId()+ " is successfully added";
+						request.setAttribute("message", message);
+						request.getRequestDispatcher("addMovie.jsp").forward(request, response);
+					}
+					else {
+						message = "Failed to add movie details with ID : "+ movie.getMovieId();
+						request.setAttribute("message", message);
+						request.getRequestDispatcher("addMovie.jsp").forward(request, response);
+					}
+				} catch (OMTSException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} catch (OMTSException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
-		Movie movie = new Movie(movieId, movieName, movieGenre, movieDirector, movieLength, movieLanguage, movieReleaseDate);
-		
-		ServletContext context=getServletContext();  
-		context.setAttribute("movieDto",movie);  
-		request.getRequestDispatcher("getTheatreDetails.jsp").include(request, response);
 		
 		
 		

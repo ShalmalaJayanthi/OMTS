@@ -26,15 +26,26 @@ public class GetTheatreDetailsController extends HttpServlet {
 		
 		String theatreCity = request.getParameter("theatreCity");
 		IAdminService adminService = new AdminServiceImpl();
-		ArrayList<Theatre> getTheatres;
+		
+		ArrayList<Theatre> getTheatres = null;
+		ArrayList<Movie> getMovieDetails = null;
 		try {
-			getTheatres = adminService.getTheatreDetails(theatreCity);
-			ServletContext context=getServletContext();  
-			Movie movie = (Movie) context.getAttribute("movieDto");  
+			request.setAttribute("theatreCity", theatreCity);
+			ServletContext context=getServletContext();    
 			Screen screen = (Screen) context.getAttribute("screen");
-			context.setAttribute("movie", movie);
 			context.setAttribute("screen",screen);
-			displayTheatreDetails(request, response, getTheatres);
+			
+			getTheatres = adminService.getTheatreDetails(theatreCity);
+			request.setAttribute("theatreDetails", getTheatres);
+			
+			if(screen == null) {
+				getMovieDetails = adminService.getMovieIdName();
+				 
+				request.setAttribute("movieDetails", getMovieDetails);
+				request.getRequestDispatcher("addMovieToTheatre.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("selectTheatreId.jsp").forward(request, response);
+			}
 		} catch (OMTSException e) {
 			
 			e.printStackTrace();
@@ -42,12 +53,6 @@ public class GetTheatreDetailsController extends HttpServlet {
 		
 		
 	
-	}
-	
-	protected void displayTheatreDetails(HttpServletRequest request, HttpServletResponse response, ArrayList<Theatre> getTheatres) throws ServletException, IOException {
-	
-		request.setAttribute("theatreDetails", getTheatres); 
-		request.getRequestDispatcher("selectTheatreId.jsp").forward(request, response);
 	}
 
 }

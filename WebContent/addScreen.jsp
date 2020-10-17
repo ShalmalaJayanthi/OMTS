@@ -7,11 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method = "post" action = "AddScreenServlet">
-		<table>
+	<%
+		String message = (String)request.getAttribute("message");
+		if(message != null)
+			out.print(message);
+	%>
+	<form method = "post" action = "AddScreenServlet" align = "center">
+		<table align = "center">
+			<h3><caption>Enter the Screen Details</caption></h3>
 			<tr><td>Screen Id<td><input type="number" name = "screenId" required>
 			<tr><td>Screen Name<td><input type = "text" name = "screenName" required>
-			<tr><td>Movie End Date<td><input type = "date" name = "movieEndDate" required>
 			<tr><td>Screen Rows<td><input type = "number" name = "screenRows" required>
 			<tr><td>Screen Columns<td><input type = "number" name = "screenColumns" required>
 			<tr colspan="2" align = "centre"><td><input type = "submit" value = "Submit">

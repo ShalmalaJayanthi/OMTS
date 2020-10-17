@@ -28,7 +28,6 @@ public class DeleteMovieController extends HttpServlet {
 			displayDetails = adminService.getMovieDetailsToDelete();
 			HttpSession session = request.getSession();
 			session.setAttribute("displayDetails", displayDetails);
-			System.out.println("In do get method of delete movie servlet "+ displayDetails);
 			request.getRequestDispatcher("deleteMovies.jsp").forward(request, response);
 		} catch (OMTSException e) {
 			e.printStackTrace();
@@ -37,17 +36,31 @@ public class DeleteMovieController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		PrintWriter out = response.getWriter();
 		int movieId = Integer.parseInt(request.getParameter("movieId"));
-		
 		IAdminService adminService = new AdminServiceImpl();
+		String message;
 		try {
-			adminService.deleteMovie(movieId);
-			PrintWriter out = response.getWriter();
-			out.println("Successfully deleted movie with ID: "+ movieId);
-		} catch (OMTSException e) {
-			
-			e.printStackTrace();
+			boolean isMIdExists = adminService.isMovieIdExists(movieId);
+			if(isMIdExists) {
+				int rowsDeleted = adminService.deleteMovie(movieId);
+				if(rowsDeleted > 0) {
+					message = "Successfully deleted record with movie ID: "+movieId;
+					request.setAttribute("message", message);
+					request.getRequestDispatcher("adminHomePage.jsp").forward(request, response);
+				} else { 
+					message = "Failed to delete the record with movie ID: "+movieId;
+					request.setAttribute("message", message);
+					request.getRequestDispatcher("adminHomePage.jsp").forward(request, response);
+				}
+			} else {
+				message = "Enter a valid movie ID";
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("adminHomePage.jsp").forward(request, response);
+			}
+		} catch (OMTSException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 				
 	}

@@ -9,15 +9,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method = "post" action = "DeleteScreenServlet">
-	<input type = "number" name = "screenId" placeholder = "Enter Screen ID"></br>
-			<input type = "submit" value = "Submit">
+	<form method = "post" action = "DeleteScreenServlet" align = "center">
+	<input type = "number" name = "screenId" placeholder = "Enter Screen ID" required></br>
+			<input type = "submit" value = "Submit"></br></br>
 	<c:if test="${displayDetails != null}">
-		<table border="1">
+		<table border="1" align = "center">
+			<caption>Screen Details</caption>
 			<tr><th>Screen ID<th>Screen Name<th>Theatre ID<th>Theatre Name<th>Theatre City</tr>
-			
-			
-			</br></br>
+		
 			<c:forEach items="${displayDetails}" var="details">
 							<tr>
 					<td><c:out value = "${details.screenId}"></c:out>

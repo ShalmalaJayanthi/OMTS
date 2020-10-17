@@ -25,6 +25,11 @@
          }
       } 
 %>
+	<%
+		String message = (String)request.getAttribute("message");
+		if(message != null)
+			out.print(message);
+	%>
 <form action="./LogoutServlet" method="post">
       <input type="submit" value="Logout">
 </form>
@@ -32,6 +37,7 @@
 <a href="addTheatre.jsp">Add Theatre</a>
 		<a href="deleteTheatre.jsp">Delete Theatre</a>
 		<a href= "addMovie.jsp">Add Movie</a>
+		<a href= "getTheatreDetails.jsp">Add Movie to Theatre</a>
 		<a href = "DeleteMovieServlet">Delete Movie</a>
 		<a href = "addScreen.jsp">Add Screen</a>
 		<a href = "DeleteScreenServlet">Delete Screen</a>

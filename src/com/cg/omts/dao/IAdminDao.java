@@ -27,20 +27,6 @@ public interface IAdminDao {
 	public int deleteShow(int showId) throws OMTSException;
 	
 	public List<Show> getShowByName(String showName) throws OMTSException;
-	
-public Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException;
-	
-	public  ArrayList<Movie> getMovieDetailsToDelete() throws OMTSException;
-	
-	public  int deleteMovie(Integer movieId) throws OMTSException;
-	
-	public  ArrayList<Theatre> getTheatreDetails(String theatreCity) throws OMTSException;
-	
-	public  Boolean addScreen(Screen screen, Integer theatreId) throws OMTSException;
-	
-	public  Boolean deleteScreen(Integer screenId) throws OMTSException;
-	
-	public  ArrayList<Screen> getScreenDetailsToDelete() throws OMTSException;
 
 	public String validateLogin(Customer customer) throws OMTSException;
 
@@ -53,4 +39,32 @@ public Boolean addMovie(Movie movie, Integer theatreId) throws OMTSException;
 	public String getMovieNameById(int movieId) throws OMTSException;
 	
 	public String checkShowNameandScreenId(String showName, int screenId) throws OMTSException;
+	
+public boolean addMovie(Movie movie) throws OMTSException;
+	
+	public boolean addMovieToTheatre(int movieId, int theatreId) throws OMTSException;
+	
+	public ArrayList<Movie> getMovieIdName() throws OMTSException;
+	
+	public  ArrayList<Movie> getMovieDetailsToDelete() throws OMTSException;
+	
+	public  int deleteMovie(Integer movieId) throws OMTSException;
+	
+	public  ArrayList<Theatre> getTheatreDetails(String theatreCity) throws OMTSException;
+	
+	public boolean isMovieIdExists(int movieId) throws OMTSException;
+	
+	public boolean isScreenIdExists(int screenId) throws OMTSException;
+	
+	public boolean isTheatreIdExists(int theatreId) throws OMTSException;
+	
+	public boolean checkTheatreIdInCity(int theatreId, String theatreCity) throws OMTSException;
+	
+	public boolean checkIdTheatreMovieAlreadyExists(int theatreId, int movieId) throws OMTSException;
+	
+	public  Boolean addScreen(Screen screen, Integer theatreId) throws OMTSException;
+	
+	public  Boolean deleteScreen(Integer screenId) throws OMTSException;
+	
+	public  ArrayList<Screen> getScreenDetailsToDelete() throws OMTSException;
 }

@@ -1,4 +1,3 @@
-<%@ page import = "java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -11,13 +10,14 @@
 </head>
 <body>
 	
-		<form method = "post" action = "SelectTheatreIdDetails" align = "center">
+	<form method = "post" action = "AddMovieToTheatre" align = "center">
 		<input type = "hidden" name = "theatreCity" value = <%=request.getAttribute("theatreCity") %>>
 		<input type = "number" name = "theatreId" placeholder = "Enter Theatre ID" required></br>
-			<input type = "submit" value = "Submit">
+		<input type = "number" name = "movieId" placeholder = "Enter Movie ID" required></br></br>
+		<input type = "submit" value = "Submit"></br></br>
 			
 	<c:if test="${theatreDetails != null}">
-		<table border="1" align = "center">
+		<table border="1"  align = "left">
 			<caption>Theatre Details</caption>
 			<tr><th>Theatre ID<th>Theatre Name</tr>
 			
@@ -31,6 +31,22 @@
 		</table>
 	</c:if>
 	
+	<c:if test="${movieDetails != null}">
+		<table border="1" align = "right">
+			<caption>Movie Details</caption>
+			<tr><th>Movie ID<th>Movie Name</tr>
+			
+					<c:forEach items="${movieDetails}" var="details"> 
+							<tr>
+					<td><c:out value = "${details.movieId}"></c:out>
+					<td><c:out value = "${details.movieName}"></c:out>
+										
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if>
+	
 	</form>
+
 </body>
 </html>

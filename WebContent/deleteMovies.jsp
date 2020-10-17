@@ -10,13 +10,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%
+		String message = (String)request.getAttribute("message");
+		if(message != null)
+			out.print(message);
+	%>
 	
-	<form method = "post" action = "DeleteMovieServlet">
-	<input type = "number" name = "movieId" placeholder = "Enter Movie ID"></br>
-			<input type = "submit" value = "Submit">
+	<form method = "post" action = "DeleteMovieServlet" align = "center">
+		<input type = "number" name = "movieId" placeholder = "Enter Movie ID" required></br>
+		<input type = "submit" value = "Submit"></br></br>
 	<c:if test="${displayDetails != null}">
-		<table border="1">
-			<tr><th>Movie ID<th>Movie Name<th>Theatre ID<th>Theatre Name<th>Theatre City</tr>
+		<table border="1" align = "center">
+			<caption>Movie Details</caption>
+			<tr><th>ID<th>Name<th>Genre<th>Director<th>Language</tr>
 			
 			
 			</br></br>
@@ -24,9 +30,9 @@
 							<tr>
 					<td><c:out value = "${details.movieId}"></c:out>
 					<td><c:out value = "${details.movieName}"></c:out>
-					<td><c:out value = "${details.theatreId}"></c:out>
-					<td><c:out value = "${details.theatreName}"></c:out>
-					<td><c:out value = "${details.theatreCity}"></c:out>
+					<td><c:out value = "${details.movieGenre}"></c:out>
+					<td><c:out value = "${details.movieDirector}"></c:out>
+					<td><c:out value = "${details.language}"></c:out>
 					
 				</tr>
 			</c:forEach>
@@ -34,4 +40,5 @@
 	</c:if>
 	</form>
 </body>
+
 </html>

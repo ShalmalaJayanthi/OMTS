@@ -8,13 +8,17 @@
 </head>
 	<body>
 	
-	
-	<form method = "post" action = "GetTheatreDetails">
+	<%
+		String message = (String)request.getAttribute("message");
+		if(message != null)
+			out.print(message);
+	%>
+	<form method = "post" action = "GetTheatreDetails" align = "center">
 	
 	Select Theatre City : 
 		<select name = "theatreCity">
 			<option value = "Hyderabad">Hyderabad</option>
-			<option value = "warangal">Warangal</option>
+			<option value = "Warangal">Warangal</option>
 			<option value = "Adilabad">Adilabad</option>
 			<option value = "Nizamabad">Nizamabad</option>
 			<option value = "Khammam">Khammam</option>

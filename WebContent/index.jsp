@@ -258,7 +258,7 @@ b {
 			<form action="./LoginServlet" method="post">
 				<tr>
 					<td><b>UserName:</b></td>
-					<td><input type="number" name="user" class="input"></td>
+					<td><input type="number" name="user" class="input" maxlength="4" pattern = [0-9]{4}></td>
 				</tr>
 
 				<tr>

@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -7,9 +8,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action = "AddMovieServlet" method = "post" enctype="multipart/form-data">
-		<table>
-			<tr><td>Movie Id</td><td><input type="number" name = "movieId" required></td></tr>
+	<%
+		String message = (String)request.getAttribute("message");
+		if(message != null)
+			out.print(message);
+	%>
+	<form action = "AddMovieServlet" method = "post" align = "center">
+		<table align = "center">
+			<caption>Enter Movie Details</caption>
+			<tr><td>Movie Id</td><td><input type="number" name = "movieId" required title = "Movie ID must contain only digits"></td></tr>
 			<tr><td>Movie Name</td><td><input type="text" name = "movieName" required></td></tr>
 			<tr><td>Movie Genre</td><td><input type="text" name = "movieGenre" required></td></tr>
 			<tr><td>Movie Director</td><td><input type= "text" name = "movieDirector" required></td></tr>

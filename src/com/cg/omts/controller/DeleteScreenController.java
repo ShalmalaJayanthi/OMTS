@@ -30,7 +30,7 @@ public class DeleteScreenController extends HttpServlet {
 			displayDetails = adminService.getScreenDetailsToDelete();
 			HttpSession session = request.getSession();
 			session.setAttribute("displayDetails", displayDetails);
-			System.out.println("In do get method of delete screen servlet "+ displayDetails);
+			
 			request.getRequestDispatcher("deleteScreen.jsp").forward(request, response);
 		} catch (OMTSException e) {
 			// TODO Auto-generated catch block
@@ -42,12 +42,27 @@ public class DeleteScreenController extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		PrintWriter out = response.getWriter();
 		int screenId = Integer.parseInt(request.getParameter("screenId"));
 		IAdminService adminService = new AdminServiceImpl();
+		String message;
 		try {
-			adminService.deleteScreen(screenId);
-			PrintWriter out = response.getWriter();
-			out.println("Successfully deleted the screen with ID: "+ screenId);
+			if(adminService.isScreenIdExists(screenId)) {
+			boolean isDeleted = adminService.deleteScreen(screenId);
+			if(isDeleted) {
+				message = "Successfully deleted screen with ID: "+screenId;
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("adminHomePage.jsp").forward(request, response);
+			} else {
+				message = "Failed to delete screen with ID: "+screenId;
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("adminHomePage.jsp").forward(request, response);
+			}
+			} else {
+				message = "Enter valid Screen ID";
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("adminHomePage.jsp").forward(request, response);
+			}
 		} catch (OMTSException e) {
 			
 			e.printStackTrace();

@@ -231,10 +231,10 @@ public class AdminModuleTesting {
 	@Test
 	public void addMovieTest() throws OMTSException {
 		try {
-			int theatreId = 1;
+			
 			Date movieReleaseDate = Date.valueOf("2020-03-01");
 			Movie movie = new Movie(2, "SeventhSense", "action", "mani", 180, "Telugu", movieReleaseDate);
-			boolean isAdded = adminService.addMovie(movie, theatreId);
+			boolean isAdded = adminService.addMovie(movie);
 			assertTrue(isAdded);
 		} catch(OMTSException e) {
 			throw new OMTSException("Exception in testing");
