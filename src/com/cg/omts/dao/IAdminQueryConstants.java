@@ -2,30 +2,30 @@ package com.cg.omts.dao;
 
 public interface IAdminQueryConstants {
 	
-	String GET_THEATRE_DETAILS = "SELECT * FROM THEATRE";
+	String GET_THEATRE_DETAILS = "select * from theatre";
 	
-	String ADD_THEATRE = "INSERT INTO THEATRE VALUES(?,?,?,?,?)";
+	String ADD_THEATRE = "insert into theatre values(?,?,?,?,?)";
 	
-	String DELETE_THEATRE = "DELETE FROM THEATRE WHERE THEATREID=?";
+	String DELETE_THEATRE = "delete from theatre where theatreId = ?";
 	
-	String GET_THEATRE_BY_NAME="SELECT * FROM THEATRE WHERE THEATRENAME=?";
+	String GET_THEATRE_BY_NAME = "select * from theatre where theatreName = ?";
 	
-	String GET_SHOW_DETAILS = "SELECT * FROM SHOWDETAILS";
+	String GET_SHOW_DETAILS = "select * from showdetails";
 	
-	String ADD_SHOW = "INSERT INTO SHOWDETAILS VALUES(?,?,?,?,?,?,?,?)";
+	String ADD_SHOW = "insert into showdetails values(?,?,?,?,?,?,?,?)";
 	
-	String DELETE_SHOW = "DELETE FROM SHOWDETAILS WHERE SHOWID=?";
+	String DELETE_SHOW = "delete from showdetails where showId = ?";
 	
-	String GET_SHOW_BY_NAME="SELECT * FROM SHOWDETAILS WHERE SHOWNAME=?";
+	String GET_SHOW_BY_NAME = "select * from showdetails where showName = ?";
 	
-	String GET_MOVIELENGTH = "SELECT MOVIELENGTH FROM MOVIE WHERE MOVIEID=?";
+	String GET_MOVIELENGTH = "select movieLength from movie where movieId = ?";
 	
-	String GET_MOVIENAME_FROM_MOVIE = "SELECT MOVIENAME FROM MOVIE WHERE MOVIEID=?";
+	String GET_MOVIENAME_FROM_MOVIE = "select movieName from movie where movieId = ?";
 	
-	String GET_SCREEN_FROM_MOVIE_AND_THEATRE="SELECT SCREENID,THEATREID FROM SCREEN WHERE THEATREID =(SELECT THEATREID FROM MOVIETHEATRE WHERE MOVIEID=? AND THEATREID=?)";
+	String GET_SCREEN_FROM_MOVIE_AND_THEATRE = "select screenId, theatreId from screen where theatreId =(select theatreId from movietheatre where movieId = ? and theatreId = ?)";
 	
-	String GET_MOVIENAME_BY_FROM_MOVIE = "SELECT MOVIENAME FROM MOVIE WHERE MOVIEID = ?";
+	String GET_MOVIENAME_BY_FROM_MOVIE = "select movieName from movie wherer movieId = ?";
 	
-	String CHECK_SHOWNAME_AND_SCREENID = "SELECT SHOWNAME,SCREENID FROM SHOWDETAILS WHERE SHOWNAME=? AND SCREENID=?";
+	String CHECK_SHOWNAME_AND_SCREENID = "select showName,screenId from showdetails where showName=? and screenId=?";
 	
 }

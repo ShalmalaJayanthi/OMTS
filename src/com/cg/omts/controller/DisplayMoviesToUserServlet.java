@@ -39,22 +39,28 @@ public class DisplayMoviesToUserServlet extends HttpServlet{
 		System.out.println("Inside doGet");
 		try {
 			String city = request.getParameter("city");
-			List<Integer> movieIdList = new ArrayList<Integer>();
-			List<Integer> theatreIdList = userService.getTheatresByCity(city);
-			movieIdList = userService.getMoviesByTheatre(theatreIdList);
-			List<Movie> movieList = new ArrayList<Movie>();
-			Set<Movie> movieSet = new HashSet<Movie>();
+			request.setAttribute("city", city);
+			if(city.equals("All Cities")) {
+				dispatcher = request.getRequestDispatcher("userhome.jsp");
+				dispatcher.include(request, response);
+			} else {
+				List<Integer> movieIdList = new ArrayList<Integer>();
+				List<Integer> theatreIdList = userService.getTheatresByCity(city);
+				movieIdList = userService.getMoviesByTheatre(theatreIdList);
+				List<Movie> movieList = new ArrayList<Movie>();
+				Set<Movie> movieSet = new HashSet<Movie>();
 			
-			movieList = userService.getMoviesById(movieIdList);
-			for(Movie movie : movieList) {
-				movieSet.add(movie);
+				movieList = userService.getMoviesById(movieIdList);
+				for(Movie movie : movieList) {
+					movieSet.add(movie);
+				}
+				//HttpSession session = request.getSession();
+				//request.setAttribute("movie", movieList);
+				request.setAttribute("movie", movieSet);
+			
+				dispatcher = request.getRequestDispatcher("movieoncity.jsp");
+				dispatcher.include(request, response);
 			}
-			HttpSession session = request.getSession();
-			//request.setAttribute("movie", movieList);
-			request.setAttribute("movie", movieSet);
-			dispatcher = request.getRequestDispatcher("userhome.jsp");
-			dispatcher.include(request, response);
-			
 		} catch(OMTSException e) {
 			e.printStackTrace();
 		}

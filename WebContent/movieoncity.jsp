@@ -1,41 +1,23 @@
+<%@page import="java.util.Set"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@page import="com.cg.omts.service.UserServiceImpl"%>
-<%@page import="com.cg.omts.service.IUserService"%> 
+<%@page import="com.cg.omts.service.IUserService"%>
 <%@page import="com.cg.omts.dto.Movie"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html> 
 <head>
-<meta charset="UTF-8">
-<title>UserHome </title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Movie On City</title>
+</head>
 <style>
-.bgpic {
-	background-image: url("background.png");
-	height: 100%;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-.header {
-	overflow: hidden;
-	background-color: #291f04;
-	padding: 5px 5px;
-	opacity: 1;
-	height:5%;
-	margin-top:0%;
-}
-.header.logout {
-	background-color: #291f04;
-	color: white;
-	left:95%;
-}
-
 .footer {
 	position: fixed;
 	left: 0;
 	bottom: 0;
 	color: white;
-	background-color:#291f04;
+	background-color: #291f04;
 	margin-top: 100%;
 	width: 100%;
 	height: 6%;
@@ -43,18 +25,40 @@
 	text-align: center;
 	opacity: 1;
 }
+.header {
+	overflow: hidden;
+	background-color: #291f04;
+	padding: 5px 5px;
+	opacity: 1;
+	height:5%;
+}
+.header.logout {
+	background-color:#291f04;
+	color: white;
+	left:95%;
+}
+.bgpic {
+	background-image: url("background.png");
+	height: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
 table {
 	width: 50%;
 	margin-left: 20%;
-	margin-top: -1%;
-	border: 2px;
+	margin-top: 5%;
 }
 th {
-	font-size:30px;
+	font-size:20px;
 }
 td {
 	font-size:20px;
-	align:center
+}
+.btn {
+	width: 40px;
+	align: center;
+	color: green;
 }
 .selectclass {
 	width:250px;
@@ -70,32 +74,15 @@ td {
 		 window.location.href="./DisplayMoviesToUser?city="+city;
 	}
 </script>
-</head>
 <body class="bgpic">
-<%-- <%
-  response.setHeader("Cache-Control","no-cache");
-  response.setHeader("Cache-Control","no-store");
-  response.setHeader("Pragma","no-cache");
-  response.setDateHeader ("Expires", 0);
-
-  if(session.getAttribute("username")==null)
-      response.sendRedirect("index.jsp");
-
-  %> --%>
-
-<% if (session != null) {
-         if (session.getAttribute("username") != null) {
-            int id = (Integer)session.getAttribute("username");
-         }
-      }
-%>
-</form>
-	 <div class="header">
-		    <a href="index.jsp" class = "logout" align="right">
+	<div class="header">
+		    <a href="userhome.jsp" class = "back" align="right">
+		  	<img src="back.png" alt="back button" style="width:60px;height:55px;border:0;">
+		    </a>
+			<a href="index.jsp" class = "logout" align="right">
 		  	<img src="logout.png" alt="logout button" style="width:60px;height:55px;border:0;float:right">
 		    </a>
 	</div> 
-	
 	<div class="userhome" id="userhome">
 	<form action="/DisplayMoviesToUser" method="get" align="center">
 		<select name="city" id="city" onchange="selectCity()" class="selectclass">
@@ -105,24 +92,34 @@ td {
 		<option value = "Warangal" align="center">WARANGAL</option>
 		<option value = "Nizambad" align="center">NIZAMBAD</option>
 		</select>
-	<!-- <iframe height="400" width="700"> -->
 	<table align="center" border=1>
+	<h3 align="center">Selected City : <%= request.getAttribute("city")%></h3>
+	  <%
+	  	  	if(request.getAttribute("movie") != null && request.getAttribute("movie") != "All Cities") {
+	  		Set<Movie> moviecityList = (Set<Movie>)request.getAttribute("movie");
+	  		for(Movie movie : moviecityList) {
+				String movieName = movie.getMovieName();
+				int movId = movie.getMovieId();
+				%>
+				<tr><th><%= movieName%></th><td></td><td><a href="MovieDetailsServlet?movieId=<%= movId%>">View Movie Details</a></td></tr>
 	  		<% 
+	  		}
+	  	}else if(request.getAttribute("movie") == "All Cities"){
 	  		IUserService userService = new UserServiceImpl();
 			List<Movie> moviesList = userService.getAllMovies();
 		for(Movie movie : moviesList) {
 			String movieName = movie.getMovieName();
 			int movId = movie.getMovieId();
-			%>
+	%>
+	
 	<tr><th><%= movieName%></th><td></td><td><a href="MovieDetailsServlet?movieId=<%= movId%>">View Movie Details</a></td></tr>
-	<% } %>
+	<% }} %>
 	</table>
-	<!-- </iframe> -->
 	</form>
 	</div>
 	<div class="footer" style="font-size: 20px">
 		<span style="font-size: 15px">&#9400;</span> Copyrights Capgemini
 		India Ltd.
-	</div>  
+	</div>
 </body>
 </html>

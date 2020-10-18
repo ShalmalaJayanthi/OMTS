@@ -22,7 +22,7 @@ public class MovieDetailsController extends HttpServlet{
 		PrintWriter out = response.getWriter();
 		RequestDispatcher dispatcher = null;
 		int movieId = Integer.parseInt(request.getParameter("movieId"));
-		String back = request.getParameter("back");
+		
 		IUserService userService = new UserServiceImpl();
 		try {
 			Movie movie = userService.getMovieDetails(movieId);
