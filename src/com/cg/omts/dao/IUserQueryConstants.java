@@ -72,9 +72,10 @@ public interface IUserQueryConstants {
 
 
 	String GET_SCREEN_NAME = "select screenName from screen where screenId = ?";
-
-	String GET_MOVIES_BY_THEATRE_ID = "select * from movie where theatreId=?";
-
+	//changed
+	String GET_MOVIES_BY_THEATRE_ID = "select movieId from movietheatre where theatreId=?";
+	//changed
+	String GET_MOVIES_BY_ID = "select * from movie where movieId = ?";
 
 	String GET_SHOW_NAME = "select showName from showdetails where showId = ?";
 

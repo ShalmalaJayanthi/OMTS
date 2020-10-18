@@ -38,9 +38,8 @@ public class ViewBookingController extends HttpServlet{
 		List<String> movieNameList = new ArrayList<String>();
 		List<String> showNameList = new ArrayList<String>();
 		List<String> screenNameList = new ArrayList<String>();
-		
+		List<Integer> movieIdList = new ArrayList<Integer>();
 		try {
-			
 			
 			ticketIdList = userService.getTicketIdsByUser(userId);
 			ticketList = userService.getTicketByIDS(ticketIdList);
@@ -51,7 +50,8 @@ public class ViewBookingController extends HttpServlet{
 			transactionList = userService.getTransactionByTicket(ticketIdList);
 			bookingList = userService.getBookingByUser(transactionList);
 			theatreNameList = userService.getTheatreNames(theatreIdList);
-			moviesList = userService.getMoviesByTheatre(theatreIdList);
+			movieIdList = userService.getMoviesByTheatre(theatreIdList);
+			moviesList = userService.getMoviesById(movieIdList);
 			for(Movie movie : moviesList) {
 				movieNameList.add(movie.getMovieName());
 			}

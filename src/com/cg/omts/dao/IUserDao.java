@@ -84,7 +84,9 @@ public interface IUserDao {
 
 	Seat seatAvailability(int seatId) throws OMTSException;
 
-	List<Movie> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException;
+	List<Movie> getMoviesById(List<Integer> movieIdList) throws OMTSException;
+	
+	List<Integer> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException;
 
 	public List<Ticket> getTicketByIDS(List<Integer> ticketIdList) throws OMTSException;
 	

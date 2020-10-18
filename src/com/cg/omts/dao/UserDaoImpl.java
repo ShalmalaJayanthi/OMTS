@@ -177,14 +177,14 @@ public class UserDaoImpl implements IUserDao{
 	}
 	
 	@Override
-	public List<Movie> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException {
-		List<Movie> movieListBasedonCity = new ArrayList<>();
+	public List<Movie> getMoviesById(List<Integer> movieIdList) throws OMTSException {
+		List<Movie> movieList = new ArrayList<>();
 		Movie movie = null;
 		try {
 			connection = DBConnection.getConnection();
-			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_MOVIES_BY_THEATRE_ID);
-			for(Integer theatreId : theatreIdList) {
-				prepareStatement.setInt(1, theatreId);
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_MOVIES_BY_ID);
+			for(Integer movieId : movieIdList) {
+				prepareStatement.setInt(1, movieId);
 				resultSet = prepareStatement.executeQuery();
 					while(resultSet.next()) {
 						movie = new Movie();
@@ -195,7 +195,7 @@ public class UserDaoImpl implements IUserDao{
 						movie.setMovieLength(resultSet.getInt(5));
 						movie.setLanguage(resultSet.getString(6));
 						movie.setMovieReleaseDate(resultSet.getDate(7));
-						movieListBasedonCity.add(movie);
+						movieList.add(movie);
 					}
 			}
 		} catch(SQLException e) {
@@ -209,7 +209,34 @@ public class UserDaoImpl implements IUserDao{
 			}
 		}
 		
-		return movieListBasedonCity;
+		return movieList;
+	}
+	
+	@Override
+	public List<Integer> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException {
+		List<Integer> movieIdList = new ArrayList<>();
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_MOVIES_BY_THEATRE_ID);
+			for(Integer theatreId : theatreIdList) {
+				prepareStatement.setInt(1, theatreId);
+				resultSet = prepareStatement.executeQuery();
+					while(resultSet.next()) {
+						movieIdList.add(resultSet.getInt(1));
+					}
+			}
+		} catch(SQLException e) {
+			throw new OMTSException("Problem occured while creating PS objetc");
+		}
+		finally {
+			try {
+				connection.close();
+			} catch(SQLException e) {
+				throw new OMTSException("Problem occured while closing connection");
+			}
+		}
+		
+		return movieIdList;
 	}
 	
 	@Override

@@ -302,8 +302,10 @@ public interface IUserService {
 	 * @return List<Movie>
 	 * @throws OMTSException
 	 */
-	public List<Movie> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException;
+	public List<Movie> getMoviesById(List<Integer> movieIdList) throws OMTSException;
 
+	public List<Integer> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException;
+	
 	public List<Theatre> getTheatres(List<Integer> theatreIdList) throws OMTSException;
 
 	/*******

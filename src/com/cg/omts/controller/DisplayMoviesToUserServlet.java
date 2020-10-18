@@ -2,7 +2,10 @@ package com.cg.omts.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,11 +39,19 @@ public class DisplayMoviesToUserServlet extends HttpServlet{
 		System.out.println("Inside doGet");
 		try {
 			String city = request.getParameter("city");
+			List<Integer> movieIdList = new ArrayList<Integer>();
 			List<Integer> theatreIdList = userService.getTheatresByCity(city);
-			List<Movie> movie = userService.getMoviesByTheatre(theatreIdList);
-
+			movieIdList = userService.getMoviesByTheatre(theatreIdList);
+			List<Movie> movieList = new ArrayList<Movie>();
+			Set<Movie> movieSet = new HashSet<Movie>();
+			
+			movieList = userService.getMoviesById(movieIdList);
+			for(Movie movie : movieList) {
+				movieSet.add(movie);
+			}
 			HttpSession session = request.getSession();
-			request.setAttribute("movie", movie);
+			//request.setAttribute("movie", movieList);
+			request.setAttribute("movie", movieSet);
 			dispatcher = request.getRequestDispatcher("userhome.jsp");
 			dispatcher.include(request, response);
 			
@@ -48,5 +59,4 @@ public class DisplayMoviesToUserServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 	}
-
 }

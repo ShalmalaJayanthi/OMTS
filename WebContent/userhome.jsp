@@ -1,3 +1,4 @@
+<%@page import="java.util.Set"%>
 <%@page import="com.cg.omts.service.UserServiceImpl"%>
 <%@page import="com.cg.omts.service.IUserService"%>
 <%@page import="com.cg.omts.dto.Movie"%>
@@ -29,7 +30,7 @@
 	<table align="center">
 	  <%
 	  	if(request.getAttribute("movie") != null) {
-	  		List<Movie> moviecityList = (List<Movie>)request.getAttribute("movie");
+	  		Set<Movie> moviecityList = (Set<Movie>)request.getAttribute("movie");
 	  		for(Movie movie : moviecityList) {
 				String movieName = movie.getMovieName();
 				int movId = movie.getMovieId();
