@@ -10,6 +10,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%
+		int screenId = Integer.parseInt((String)(request.getAttribute("screenId")));
+		String screenName = (String)request.getAttribute("screenName");
+		int screenRows = Integer.parseInt((String)request.getAttribute("screenRows"));
+		int screenColumns = Integer.parseInt((String)request.getAttribute("screenColumns"));
+		request.setAttribute("screenName", screenName);
+		request.setAttribute("screenRows", screenRows);
+		request.setAttribute("screenColumns", screenColumns);
+	
+	%>
 	
 		<form method = "post" action = "SelectTheatreIdDetails" align = "center">
 		<input type = "hidden" name = "theatreCity" value = <%=request.getAttribute("theatreCity") %>>

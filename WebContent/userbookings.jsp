@@ -112,7 +112,7 @@ a {
 
 </style>
 
-<body>
+<body class="bgpic">
  <div class="header">
 	 		
 	 		<a href="index.jsp" class = "logout" align="right"><img src="logout.png" alt="logout button" style="width:20px;height:20px;border:0;float:right"></a>

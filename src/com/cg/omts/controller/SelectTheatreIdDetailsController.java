@@ -30,9 +30,18 @@ public class SelectTheatreIdDetailsController extends HttpServlet {
 		System.out.println("Theatre ID in SelectTheatreIdDetails Controller" + theatreId);
 		Boolean isAdded = false;
 		
-		ServletContext context=getServletContext();  
-		Screen screen = (Screen) context.getAttribute("screen");
-		
+		/*
+		 * ServletContext context=getServletContext(); Screen screen = (Screen)
+		 * context.getAttribute("screen");
+		 */
+		int screenId = Integer.parseInt((String)(request.getAttribute("screenId")));
+		String screenName = (String)request.getAttribute("screenName");
+		int screenRows = Integer.parseInt((String)request.getAttribute("screenRows"));
+		int screenColumns = Integer.parseInt((String)request.getAttribute("screenColumns"));
+		request.setAttribute("screenName", screenName);
+		request.setAttribute("screenRows", screenRows);
+		request.setAttribute("screenColumns", screenColumns);
+		Screen screen = new Screen(screenId, screenName, screenRows, screenColumns);
 		PrintWriter out = response.getWriter();
 		String message;
 		try {

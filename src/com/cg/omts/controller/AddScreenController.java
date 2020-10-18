@@ -31,8 +31,11 @@ public class AddScreenController extends HttpServlet {
 			if(!adminService.isScreenIdExists(screenId)) {
 				Screen screen = new Screen(screenId, screenName, screenRows, screenColumns);
 				
-				ServletContext context = getServletContext();
-				context.setAttribute("screen", screen);
+				//ServletContext context = getServletContext();
+				request.setAttribute("screenId", screenId);
+				request.setAttribute("screenName", screenName);
+				request.setAttribute("screenRows", screenRows);
+				request.setAttribute("screenColumns", screenColumns);
 				request.getRequestDispatcher("getTheatreDetails.jsp").forward(request, response);
 			} else {
 				String message = "Screen with ID: "+screenId + " already exists!!";
