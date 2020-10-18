@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>MovieDetails</title>
 <style>
+body {
+	margin:0;
+}
 .footer {
 	position: fixed;
 	left: 0;
@@ -25,7 +28,7 @@
 	background-color: #291f04;
 	padding: 5px 5px;
 	opacity: 1;
-	height:5%;
+	height:9%;
 }
 .header.logout {
 	background-color: #291f04;
@@ -33,8 +36,8 @@
 	left:95%;
 }
 .bgpic {
-	background-image: url("background.png");
-	height: 100%;
+	background-image: url("background.jpg");
+	height: 100vh;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -43,14 +46,15 @@ table {
 	width: 50%;
 	margin-left: 20%;
 	margin-top: 5%;
+	background-color:#e3dddc;
 }
 th {
-	font-size:20px;
+	font-size:30px;
 	text-align:center
 }
 td {
 	text-align:center;
-	font-size:20px;
+	font-size:30px;
 }
 .btn {
   margin-bottom:10%;
