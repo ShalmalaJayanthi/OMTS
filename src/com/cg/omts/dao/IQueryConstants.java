@@ -4,7 +4,7 @@ public interface IQueryConstants {
 	
 	
 	
-	String VALIDATE = "select roleCode from user where userId=? and password=?";
+	String VALIDATE = "select roleCode from userDetails where userId=? and password=?";
 	String REGISTER="insert into user values(?,?,?,?,?,?)";
 
 	String CHECK_TRANSACTION = "select * from transaction";
