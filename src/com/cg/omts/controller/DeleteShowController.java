@@ -46,7 +46,7 @@ public class DeleteShowController extends HttpServlet {
 				request.setAttribute("errorMessage","The Show Name does not exist");
 			}
 			request.setAttribute("searchShowList", searchShowList);
-			RequestDispatcher rd = request.getRequestDispatcher("./deleteShow.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("./deleteShows.jsp");
 			rd.forward(request, response);
 			
 		} catch (OMTSException e) {
@@ -69,7 +69,7 @@ public class DeleteShowController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		response.sendRedirect("./deleteShow.jsp?message=Successfully Deleted");
+		response.sendRedirect("./deleteShows.jsp?message=Successfully Deleted");
 	}
 
 }

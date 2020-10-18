@@ -3,6 +3,7 @@ package com.cg.omts.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -58,30 +59,24 @@ public class AddShowController extends HttpServlet {
 		  String movieName="";
 		  try {
 			  movieName = adminService.getMovieNameById(movieId);
+			  System.out.println(movieName+" Movie name");
 		  }catch (OMTSException e) {
 			  
 		  }
 		show.setMovieName(movieName);
 		try {
 			startTime = new SimpleDateFormat("HH:mm").parse(request.getParameter("stime"));
-			endTime = new SimpleDateFormat("HH:mm").parse(request.getParameter("etime"));
+			//endTime = new SimpleDateFormat("HH:mm").parse(request.getParameter("etime"));
+			long t = startTime.getTime();
+			//long hours = TimeUnit.MILLISECONDS.toHours(t); 
+			int movieLength = adminService.getMovieLength(movieId);;
+			//System.out.println(movieLength);
+			long ONE_MINUTE_IN_MILLIS=60000;
+			Date afterAddingMovieLength=new Date(t + (movieLength * ONE_MINUTE_IN_MILLIS));
 			java.sql.Time showStartTime =  new java.sql.Time(startTime.getTime());
-			java.sql.Time showEndTime =  new java.sql.Time(endTime.getTime());
-			  
-			System.out.println(startTime+" "+endTime);
-			Long t = startTime.getTime() - endTime.getTime();
-			  long difference_In_Time = startTime.getTime() - endTime.getTime(); 
-			  long difference_In_Minutes = (difference_In_Time  / (1000 * 60)) % 60 ;
-			  long difference_In_Hours = (difference_In_Time  / (1000 * 60 * 60)) % 24;
-			  int hourinmin = 0;
-			  if(difference_In_Hours != 0 ) {
-				 hourinmin = (int) (difference_In_Hours * 60);
-			  }
-			 finaltime = (int)difference_In_Minutes+hourinmin;
-			  if(finaltime < 0 ) {
-				  finaltime = finaltime*-1;
-			  }
-			  System.out.println(finaltime);
+			java.sql.Time showEndTime =  new java.sql.Time(afterAddingMovieLength.getTime());
+			//System.out.println("showstart" + showStartTime);
+			//System.out.println("end time " + showEndTime);
 			  show.setShowId(showId);
 			  show.setShowName(showName);
 			  show.setShowStartTime(showStartTime);
@@ -92,15 +87,11 @@ public class AddShowController extends HttpServlet {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (OMTSException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		try {
-		int len = adminService.getMovieLength(movieId);
-		  System.out.println(len);
-		  if(len ==  finaltime) {
-			  System.out.println("Equal time");
-		  } else {
-			 message += "Show Duration is not same as movie length. ";
-		  }
 		  String existShow = adminService.checkShowNameandScreenId(showName, screenId);
 		  System.out.println("exist show" + existShow);
 		  if(existShow.length()==0) {
@@ -116,24 +107,15 @@ public class AddShowController extends HttpServlet {
 			 message += "TheatreId, ScreenId and MovieId do not match"; 
 		 }
 		 System.out.println(sList);
-		 if((sList.contains(screenId) && (len == finaltime) &&(existShow.length()==0))){
+		 if((sList.contains(screenId) &&(existShow.length()==0))){
 			 System.out.println("all conditions true");
 			 int rowsInserted = adminService.addShow(show);
 			 System.out.println(rowsInserted);
 			 if(rowsInserted > 0) {
-			  request.setAttribute("message", "Successful");
+			  request.setAttribute("message", "Successful inserted showId "+showId);
 			  RequestDispatcher rd = request.getRequestDispatcher("displayShows.jsp");
 			  rd.forward(request, response);
-			 } else  {
-				 //request.setAttribute("message", "Not Successful Id already exists"); 
-				 message+= "Show Id already exists";
-			 }
-			// RequestDispatcher rd = request.getRequestDispatcher("time.jsp");
-			 //rd.forward(request, response);
-		 }else {
-			 //message += "TheatreId, ScreenId and MovieId do not match.Try Again";
-			 System.out.println(message);
-			 //request.setAttribute("message", message);
+			 } 
 		 }
 		}catch(OMTSException e) {
 			message+= "Show Id already exists";
@@ -143,6 +125,7 @@ public class AddShowController extends HttpServlet {
 		 RequestDispatcher rd = request.getRequestDispatcher("addShow.jsp");
 		 rd.forward(request, response);
 
-	}
+
+		}
 
 }

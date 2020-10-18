@@ -24,7 +24,7 @@ public interface IAdminQueryConstants {
 	
 	String GET_SCREEN_FROM_MOVIE_AND_THEATRE = "select screenId, theatreId from screen where theatreId =(select theatreId from movietheatre where movieId = ? and theatreId = ?)";
 	
-	String GET_MOVIENAME_BY_FROM_MOVIE = "select movieName from movie wherer movieId = ?";
+	String GET_MOVIENAME_BY_FROM_MOVIE = "select movieName from movie where movieId = ?";
 	
 	String CHECK_SHOWNAME_AND_SCREENID = "select showName,screenId from showdetails where showName=? and screenId=?";
 	

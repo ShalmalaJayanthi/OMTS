@@ -30,7 +30,7 @@ public class JdbcUtility {
 			DriverManager.registerDriver(new OracleDriver());
 			
 			//Getting the connection object by specifying URL and database credentials
-			connection = DriverManager.getConnection(url, "system", "Capgemini123");
+			connection = DriverManager.getConnection(url, "system", "Oracle");
 			
 			
 /*			Pushing this statement to log file

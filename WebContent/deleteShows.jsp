@@ -31,7 +31,7 @@
 <form action="./LogoutServlet" method="post">
       <input type="submit" value="Logout">
 </form>
-<a href="adminHomePage.html">Go Back</a>
+<a href="adminHomePage.jsp">Go Back</a>
 <a href="deleteShow.jsp"> View ALL</a>
 <h1>Delete Show</h1>
 <form action="./DeleteShowServlet" method="get">

@@ -9,6 +9,30 @@
 <meta charset="UTF-8">
 <title>UserHome </title>
 <style>
+.header a {
+	float:right;
+	color: white;
+	padding: 12px;
+	text-decoration: none;
+	line-height: 25px;
+	border-radius: 4px;
+	display: block;
+	color: white;
+	text-align: right;
+	width:0%;
+	padding: 14px 20px;
+	width: 200px;
+	font-size: 180%;
+}
+a {
+	float: left;
+}
+
+.header a:hover {
+	background-color: #a89e8a;
+	font-size: 200%;
+}
+
 .bgpic {
 	background-image: url("background.png");
 	height: 100%;
@@ -19,17 +43,21 @@
 .header {
 	overflow: hidden;
 	background-color: #291f04;
-	padding: 5px 5px;
+	padding: 0px 0px;
 	opacity: 1;
-	height:5%;
+	height:4%;
 	margin-top:0%;
 }
-.header.logout {
+.header a.logout {
 	background-color: #291f04;
 	color: white;
-	left:95%;
-}
 
+}
+.header logo {
+	weight: 10;
+	color: white;
+	font-size: 40px;
+}
 .footer {
 	position: fixed;
 	left: 0;
@@ -91,9 +119,13 @@ td {
 %>
 </form>
 	 <div class="header">
-		    <a href="index.jsp" class = "logout" align="right">
-		  	<img src="logout.png" alt="logout button" style="width:60px;height:55px;border:0;float:right">
-		    </a>
+	 		
+	 		<a href="index.jsp" class = "logout" align="right"><img src="logout.png" alt="logout button" style="width:20px;height:20px;border:0;float:right"></a>
+		    
+			<a href="ViewBookingController" class="active" ><b>My Bookings</b></a>
+		    <a href="userhome.jsp" class="active" ><b>User Home </b></a>
+		  	<a class="logo" style="width:100px;height:20px;border:0;float:left">T-CKT</a>
+		    
 	</div> 
 	
 	<div class="userhome" id="userhome">
