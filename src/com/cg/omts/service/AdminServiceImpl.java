@@ -215,5 +215,12 @@ public class AdminServiceImpl implements IAdminService{
 		boolean isExists = adminDao.checkIdTheatreMovieAlreadyExists(theatreId, movieId);
 		return isExists;
 	}
+	
+	@Override
+	public boolean addScreenSeatPrice(int screenId, int seatPrice) throws OMTSException {
+		adminDao = new AdminDaoImpl();
+		boolean isAdded = adminDao.addScreenSeatPrice(screenId, seatPrice);
+		return isAdded;
+	}
 
 }

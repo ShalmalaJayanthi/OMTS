@@ -26,17 +26,18 @@ public class AddScreenController extends HttpServlet {
 		String screenName = request.getParameter("screenName");
 		int screenRows = Integer.parseInt(request.getParameter("screenRows"));
 		int screenColumns = Integer.parseInt(request.getParameter("screenColumns"));
+		int seatPrice = Integer.parseInt(request.getParameter("seatPrice"));
 		IAdminService adminService = new AdminServiceImpl();
+		System.out.println("In AddScreenController screenId: "+ screenId);
 		try {
 			if(!adminService.isScreenIdExists(screenId)) {
 				Screen screen = new Screen(screenId, screenName, screenRows, screenColumns);
+				System.out.println("In AddScreenController screen: "+ screen);
+				ServletContext context=getServletContext();
 				
-				//ServletContext context = getServletContext();
-				request.setAttribute("screenId", screenId);
-				request.setAttribute("screenName", screenName);
-				request.setAttribute("screenRows", screenRows);
-				request.setAttribute("screenColumns", screenColumns);
-				request.getRequestDispatcher("getTheatreDetails.jsp").forward(request, response);
+				request.setAttribute("seatPrice", seatPrice);
+				context.setAttribute("screen", screen);
+				request.getRequestDispatcher("getTheatreScreenDetails.jsp").forward(request, response);
 			} else {
 				String message = "Screen with ID: "+screenId + " already exists!!";
 				request.setAttribute("message", message);

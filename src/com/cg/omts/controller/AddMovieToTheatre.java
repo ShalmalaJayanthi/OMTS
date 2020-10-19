@@ -28,7 +28,6 @@ public class AddMovieToTheatre extends HttpServlet {
 		boolean movieIdExists = false, theatreIdExists = false, theatreInSameCity = false;
 		String message = "";
 		
-		
 		try {
 			movieIdExists = adminService.isMovieIdExists(movieId);
 			theatreIdExists = adminService.isTheatreIdExists(theatreId);

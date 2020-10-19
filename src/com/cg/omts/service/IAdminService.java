@@ -282,4 +282,14 @@ public interface IAdminService {
 	 * @throws OMTSException
 	 */
 	public boolean checkIdTheatreMovieAlreadyExists(int theatreId, int movieId) throws OMTSException;
+	
+	/*****
+	 * @description Method to add screen seat price
+	 * @author Jayanthi Shalmala
+	 * @param screenId
+	 * @param seatPrice
+	 * @return boolean value
+	 * @throws OMTSException
+	 */
+	public boolean addScreenSeatPrice(int screenId, int seatPrice) throws OMTSException;
 }

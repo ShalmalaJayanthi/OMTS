@@ -14,6 +14,9 @@
 </head>
 <style>
 
+body {
+	margin:0;
+}
 .header a {
 	float:right;
 	color: white;
@@ -39,8 +42,8 @@ a {
 }
 
 .bgpic {
-	background-image: url("background.png");
-	height: 100%;
+	background-image: url("background.jpg");
+	height: 100vh;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -50,7 +53,7 @@ a {
 	background-color: #291f04;
 	padding: 0px 0px;
 	opacity: 1;
-	height:4%;
+	height:8%;
 	margin-top:0%;
 }
 .header a.logout {
@@ -139,7 +142,7 @@ a {
 		screenNameList = (List<String>)request.getAttribute("screenNameList");
 		movieNameList = (List<String>)request.getAttribute("movieNameList");
 	%>
-	
+	<br><br><br>
 	<table border="1" align ="center">
 		<tr>
 			

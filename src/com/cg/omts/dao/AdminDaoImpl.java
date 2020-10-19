@@ -309,7 +309,7 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 		} finally {
 			try {
 				connection.close();
-				prepareStatement.close();
+				
 			} catch (SQLException e) {
 				System.out.println("Failed to close the database connection" +e);
 			}
@@ -838,6 +838,31 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 			}
 		} catch (SQLException e) {
 			throw new OMTSException("Failed to check whether given Theatre ID and movie ID exists "+e);
+		} finally{
+			try {
+				connection.close();
+				prepareStatement.close();
+			} catch (SQLException e) {
+				throw new OMTSException("Failed to close the database connection" +e);
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean addScreenSeatPrice(int screenId, int seatPrice) throws OMTSException {
+		connection = DBConnection.getConnection();
+		System.out.println("Screen id and seat Price in dao are: "+screenId + " "+seatPrice);
+		int rows = 0;
+		try {
+			prepareStatement = connection.prepareStatement(ADD_SCREEN_SEAT_PRICE);
+			prepareStatement.setInt(1, screenId);
+			prepareStatement.setInt(2, seatPrice);
+			rows = prepareStatement.executeUpdate();
+			if(rows > 0)
+				return true;
+		} catch (SQLException e) {
+			throw new OMTSException("Failed to add the screen seat price" + e);
 		} finally{
 			try {
 				connection.close();

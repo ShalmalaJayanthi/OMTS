@@ -67,4 +67,6 @@ public boolean addMovie(Movie movie) throws OMTSException;
 	public  Boolean deleteScreen(Integer screenId) throws OMTSException;
 	
 	public  ArrayList<Screen> getScreenDetailsToDelete() throws OMTSException;
+	
+	public boolean addScreenSeatPrice(int screenId, int seatPrice) throws OMTSException;
 }

@@ -10,7 +10,7 @@ public interface IQueryConstants {
 	String CHECK_TRANSACTION = "select * from transaction";
 	String MAX_TRANSACTION_ID = "select max(transactionid) from transaction";
 	
-String ADD_MOVIE = "insert into movie values(?, ?, ?, ?, ?, ?, ?)"; 
+	String ADD_MOVIE = "insert into movie values(?, ?, ?, ?, ?, ?, ?)"; 
 	
 	
 	String DELETE_MOVIE = "delete from movie where movieId = ?";
@@ -27,4 +27,5 @@ String ADD_MOVIE = "insert into movie values(?, ?, ?, ?, ?, ?, ?)";
 
 	String ADD_MOVIE_TO_THEATRE = "insert into movietheatre values(?, ?)";
 	String GET_MOVIE_NAME_ID = "select movieId, movieName from movie";
+	String ADD_SCREEN_SEAT_PRICE = "insert into screenseatprice values(?, ?)";
 }

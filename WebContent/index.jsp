@@ -14,7 +14,7 @@
 }
 
 .bgpic {
-	background-image: url("backk.jpg");
+	background-image: url("background.jpg");
 	height: 100vh;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -228,7 +228,7 @@ b {
 		<ul>
 			<li><a class="logo"><b>T-CKT</b></a></li>
 			<div class="header-right">
-				<li><a href="index.jsp" class="active"><b>Home </b></a></li>
+				<li><a href="getstarted.html" class="active"><b>Home </b></a></li>
 				<li><a href="register.jsp" class="active"><b>Register</b></a></li>
 				<li><a class="active" href="#login" onclick="login()"><b>Login
 					</b></a></li>
@@ -246,6 +246,9 @@ b {
 <% if(request.getAttribute("errormessage")!=null) {%>
 <h1 style="color:yellow;"><%=request.getAttribute("errormessage") %></h1>
 <%} %>
+<% if(request.getAttribute("message") != null){ %>
+<h1 ><%=request.getAttribute("message") %></h1>
+<%} %>
 
 	<div class="loginform" id="log">
 		<img src="cross.png" class="img" onclick="cross()">
@@ -258,7 +261,7 @@ b {
 			<form action="./LoginServlet" method="post">
 				<tr>
 					<td><b>UserName:</b></td>
-					<td><input type="number" name="user" class="input" maxlength="4" pattern = [0-9]{4}></td>
+					<td><input type="number" name="user" class="input" maxlength="4"></td>
 				</tr>
 
 				<tr>

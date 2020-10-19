@@ -27,27 +27,23 @@ public class SelectTheatreIdDetailsController extends HttpServlet {
 		IAdminService adminService = new AdminServiceImpl();
 		String theatreCity = request.getParameter("theatreCity");
 		int theatreId = Integer.parseInt(request.getParameter("theatreId"));
-		System.out.println("Theatre ID in SelectTheatreIdDetails Controller" + theatreId);
-		Boolean isAdded = false;
 		
-		/*
-		 * ServletContext context=getServletContext(); Screen screen = (Screen)
-		 * context.getAttribute("screen");
-		 */
-		int screenId = Integer.parseInt((String)(request.getAttribute("screenId")));
-		String screenName = (String)request.getAttribute("screenName");
-		int screenRows = Integer.parseInt((String)request.getAttribute("screenRows"));
-		int screenColumns = Integer.parseInt((String)request.getAttribute("screenColumns"));
-		request.setAttribute("screenName", screenName);
-		request.setAttribute("screenRows", screenRows);
-		request.setAttribute("screenColumns", screenColumns);
-		Screen screen = new Screen(screenId, screenName, screenRows, screenColumns);
+		System.out.println("Theatre ID in SelectTheatreScreenIdDetails Controller" + theatreId);
+		Boolean isAdded = false, isPriceAdded = false;
+		
+		ServletContext context=getServletContext();
+		Screen screen = (Screen)context.getAttribute("screen");
+		int seatPrice = Integer.parseInt(request.getParameter("seatPrice"));
+		
 		PrintWriter out = response.getWriter();
 		String message;
 		try {
 			if(adminService.isTheatreIdExists(theatreId) && adminService.checkTheatreIdInCity(theatreId, theatreCity)) {
 				isAdded = adminService.addScreen(screen, theatreId);
-				if(isAdded) {
+				int screenId = screen.getScreenId();
+				System.out.println("Screen Id : "+screenId+"\nSeat price = "+seatPrice);
+				isPriceAdded = adminService.addScreenSeatPrice(screenId, seatPrice);
+				if(isAdded && isPriceAdded) {
 					message = "Successfully added screen details with ID: "+ screen.getScreenId();
 					request.setAttribute("message", message);
 					request.getRequestDispatcher("addScreen.jsp").forward(request, response);

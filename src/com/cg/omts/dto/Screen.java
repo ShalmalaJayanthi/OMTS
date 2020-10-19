@@ -17,6 +17,7 @@ public class Screen {
 		private int columns;
 		private String theatreName;
 		private String theatreCity;
+		private int seatPrice;
 		
 		public Screen() {
 			super();
@@ -41,6 +42,21 @@ public class Screen {
 			
 		}
 		
+		
+		public int getSeatPrice() {
+			return seatPrice;
+		}
+		public void setSeatPrice(int seatPrice) {
+			this.seatPrice = seatPrice;
+		}
+		public Screen(int screenId, String screenName, int rows, int columns, int seatPrice) {
+			super();
+			this.screenId = screenId;
+			this.screenName = screenName;
+			this.rows = rows;
+			this.columns = columns;
+			this.seatPrice = seatPrice;
+		}
 		public Screen(int screenId, String screenName, Date movieEndDate, int screenRows,
 				int screenColumns) {
 			this.screenId = screenId;

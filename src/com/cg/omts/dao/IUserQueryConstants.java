@@ -93,7 +93,7 @@ public interface IUserQueryConstants {
 	
 	String GET_TRANSACTION_ID = "select transactionId from booking where bookingId = ?";
 	
-	String GET_TICKET_BY_ID = "select * from ticket where ticketId = ?";
+	String GET_TICKET_BY_ID = "select * from ticket where ticketId = ? and ticketStatus = ?";
 	
 	String GET_TICKET_ID = "select ticketId from booking where bookingId = ?";
 	

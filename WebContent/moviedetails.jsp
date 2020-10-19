@@ -7,6 +7,37 @@
 <meta charset="UTF-8">
 <title>MovieDetails</title>
 <style>
+body {
+	margin:0;
+}
+
+
+.header {
+	overflow: hidden;
+	background-color: #291f04;
+	padding: 5px 5px;
+	opacity: 1;
+	height:8%;
+	margin-top:0%;
+}
+
+.header a {
+	
+	color: white;
+	
+	font-size: 180%;
+}
+.header a.logout {
+	background-color: #291f04;
+	color: white;
+
+}
+
+.header a.logo {
+	weight: 10;
+	color: white;
+	font-size: 30px;
+}
 .footer {
 	position: fixed;
 	left: 0;
@@ -20,21 +51,21 @@
 	text-align: center;
 	opacity: 1;
 }
-.header {
+/*.header {
 	overflow: hidden;
 	background-color: #291f04;
 	padding: 5px 5px;
 	opacity: 1;
-	height:5%;
+	height:8%;
 }
 .header.logout {
 	background-color: #291f04;
 	color: white;
-	left:95%;
-}
+
+}*/
 .bgpic {
-	background-image: url("background.png");
-	height: 100%;
+	background-image: url("background.jpg");
+	height: 100vh;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -43,14 +74,15 @@ table {
 	width: 50%;
 	margin-left: 20%;
 	margin-top: 5%;
+	background-color:#e3dddc;
 }
 th {
-	font-size:20px;
+	font-size:30px;
 	text-align:center
 }
 td {
 	text-align:center;
-	font-size:20px;
+	font-size:30px;
 }
 .btn {
   margin-bottom:10%;
@@ -76,12 +108,15 @@ td {
 	
 	<div class="header">
 		    <a href="userhome.jsp" class = "back" align="right">
-		  	<img src="back.png" alt="back button" style="width:60px;height:55px;border:0;">
+		  	<img src="back.png" alt="back button" style="width:20px;height:25px;border:0;">
 		    </a>
+		    
+		  	
 			<a href="index.jsp" class = "logout" align="right">
-		  	<img src="logout.png" alt="logout button" style="width:60px;height:55px;border:0;float:right;">
+		  	<img src="logout.png" alt="logout button" style="width:20px;height:20px;border:0;float:right;">
 		    </a>
 	</div> 
+
 	<div class="display">
 	<table align="center" border=1>
 	<tr><th>Movie Id</th><td><c:out value="${movie.movieId}" /></td></tr>

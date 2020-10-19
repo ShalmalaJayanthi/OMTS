@@ -1235,6 +1235,7 @@ public class UserDaoImpl implements IUserDao{
 						
 				for(Integer ticketId : ticketIdList) {
 					prepareStatement.setInt(1, ticketId);
+					prepareStatement.setString(2, "BOOKED");
 					resultSet = prepareStatement.executeQuery();
 					String status="";
 					TicketStatus ticketStatus;

@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>UserHome </title>
 <style>
+
 .header a {
 	float:right;
 	color: white;
@@ -33,9 +34,12 @@ a {
 	font-size: 200%;
 }
 
+body {
+	margin:0;
+}
 .bgpic {
-	background-image: url("background.png");
-	height: 100%;
+	background-image: url("background.jpg");
+	height: 100vh;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -45,8 +49,8 @@ a {
 	background-color: #291f04;
 	padding: 0px 0px;
 	opacity: 1;
-	height:4%;
-	margin-top:0%;
+
+	height:8%;
 }
 .header a.logout {
 	background-color: #291f04;
@@ -73,9 +77,11 @@ a {
 }
 table {
 	width: 50%;
-	margin-left: 20%;
-	margin-top: -1%;
+	margin-left: 25%;
+	margin-top: 2%;
 	border: 2px;
+	background-color:#e3dddc;
+	style="overflow-y:auto;
 }
 th {
 	font-size:30px;
@@ -84,6 +90,7 @@ td {
 	font-size:20px;
 	align:center
 }
+tr:hover {background-color:#f5f5f5;}
 .selectclass {
 	width:250px;
 	height:35px;
@@ -100,7 +107,7 @@ td {
 </script>
 </head>
 <body class="bgpic">
-<%-- <%
+<%
   response.setHeader("Cache-Control","no-cache");
   response.setHeader("Cache-Control","no-store");
   response.setHeader("Pragma","no-cache");
@@ -109,7 +116,7 @@ td {
   if(session.getAttribute("username")==null)
       response.sendRedirect("index.jsp");
 
-  %> --%>
+  %> 
 
 <% if (session != null) {
          if (session.getAttribute("username") != null) {
@@ -137,7 +144,6 @@ td {
 		<option value = "Warangal" align="center">WARANGAL</option>
 		<option value = "Nizambad" align="center">NIZAMBAD</option>
 		</select>
-	<!-- <iframe height="400" width="700"> -->
 	<table align="center" border=1>
 	  		<% 
 	  		IUserService userService = new UserServiceImpl();
@@ -146,10 +152,10 @@ td {
 			String movieName = movie.getMovieName();
 			int movId = movie.getMovieId();
 			%>
-	<tr><th><%= movieName%></th><td></td><td><a href="MovieDetailsServlet?movieId=<%= movId%>">View Movie Details</a></td></tr>
+			
+	<tr><th><%= movieName%></th><td><a href="MovieDetailsServlet?movieId=<%= movId%>">View Movie Details</a></td></tr>
 	<% } %>
-	</table>
-	<!-- </iframe> -->
+	</table> 
 	</form>
 	</div>
 	<div class="footer" style="font-size: 20px">

@@ -6,90 +6,73 @@
 <head>
 <title>Payment</title>
 </head>
-<body>
+<body class = "bgpic">
 <style>
-ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-}
 
-li {
-	float: left;
+body {
+	margin:0;
 }
-
-li a {
-	display: block;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	width: 200px;
-	font-size: 60%;
-}
-
-/* Change the link color to #111 (black) on hover */
-li a:hover {
-	background-color: #a89e8a;
-	font-size: 200%;
-}
-
-.active {
-	background-color: #a89e8a;
-}
-
-.loginform {
-	margin-top: 10%;
-	background: #a89e8a;
-	width: 26%;
-	height: 50%;
-	border-radius: 7%;
-	opacity: 0.8;
-	color: white;
-	align: center;
-	margin-left: 35%;
-	display: none;
-	position: absolute;
-	box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
-		rgba(0, 0, 0, .19);
-	border: 3px solid #f1f1f1;
-}
-
-.header {
-	overflow: hidden;
-	background-color: #a89e8a;
-	padding: 20px 10px;
-	opacity: 0.8;
-}
-
 .header a {
-	float: left;
+	float:right;
 	color: white;
-	text-align: center;
 	padding: 12px;
 	text-decoration: none;
-	font-size: 28px;
 	line-height: 25px;
 	border-radius: 4px;
+	display: block;
+	color: white;
+	text-align: right;
+	width:0%;
+	padding: 14px 20px;
+	width: 200px;
+	font-size: 180%;
 }
-
-.header a.logo {
-	weight: 10;
-	font-size: 40px;
+a {
+	float: left;
 }
 
 .header a:hover {
 	background-color: #a89e8a;
+	font-size: 200%;
 }
 
-.header a.active {
-	background-color: #a89e8a;
+.bgpic {
+	background-image: url("background.jpg");
+	height: 100vh;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.header {
+	overflow: hidden;
+	background-color: #291f04;
+	padding: 0px 0px;
+	opacity: 1;
+	height:8%;
+	margin-top:0%;
+}
+.header a.logout {
+	background-color: #291f04;
 	color: white;
-}
 
-.header-right {
-	float: right;
+}
+.header logo {
+	weight: 10;
+	color: white;
+	font-size: 40px;
+}
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	color: white;
+	background-color:#291f04;
+	margin-top: 100%;
+	width: 100%;
+	height: 6%;
+	font-size: 200%;
+	text-align: center;
+	opacity: 1;
 }
 
 @media screen and (max-width: 500px) {
@@ -127,21 +110,14 @@ li a:hover {
 
 </style>
 
-<div class="header">
-
-		<ul>
-			<li><a class="logo"><b>T-CKT</b></a></li>
-			<div class="header-right">
-				<li><a href="userhome.jsp" class="active"><b>Home </b></a></li>
-				<li><a href="ViewBookingController" class="active"><b>My Bookings</b></a></li>
-				<li><a class="active" href="index.jsp" onclick="login()"><b>Signout
-					</b></a></li>
-				
-			</div>
-		</ul>
-
-
-
+ <div class="header">
+	 		
+	 		<a href="index.jsp" class = "logout" align="right"><img src="logout.png" alt="logout button" style="width:20px;height:20px;border:0;float:right"></a>
+		    
+			<a href="ViewBookingController" class="active" ><b>My Bookings</b></a>
+		    <a href="userhome.jsp" class="active" ><b>User Home </b></a>
+		  	<a class="logo" style="width:100px;height:20px;border:0;float:left">T-CKT</a>
+		    
 	</div>
 <form action ="paymentController" method ="post">
 
@@ -150,8 +126,8 @@ li a:hover {
 <input type = "hidden" value=<%=request.getAttribute("movieId") %> name = "movieId">
 <input type = "hidden" value=<%=request.getAttribute("showId") %> name = "showId">
 <input type = "hidden" value=<%=request.getAttribute("screenId") %> name = "screenId">
-
-<table>
+<br><br><br><br><br>
+<table align="center">
 
 <tr><td>Account Number<td><input type="number" name="acc" required>
 <tr><td>Cvv<td><input type="number" name="cvv" required>

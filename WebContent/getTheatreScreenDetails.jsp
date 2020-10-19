@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
-<%@ page import = "java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -70,7 +68,7 @@
 	</style>
 </head>
 <body>
-<%
+	<%
   response.setHeader("Cache-Control","no-cache");
   response.setHeader("Cache-Control","no-store");
   response.setHeader("Pragma","no-cache");
@@ -88,7 +86,7 @@
       }
 %>
 </form>
-<div class="header">
+	<div class="header">
 	<a href="adminHomePage.jsp" class = "back" align="right">
 		 <img src="back.png" alt="back button" style="width:20px;height:25px;border:0;">
    </a>
@@ -96,27 +94,25 @@
   <img src="logout.png" alt="logout button" style="width:60px;height:55px;border:0;float:right">
    </a>
 </div>
+	
+	<%
+		String message = (String)request.getAttribute("message");
+		if(message != null)
+			out.print(message);
+	%>
+	
 
-	<form method = "post" action = "DeleteScreenServlet" align = "center">
-	<input type = "number" name = "screenId" placeholder = "Enter Screen ID" required></br>
-			<input type = "submit" value = "Submit"></br></br>
-	<c:if test="${displayDetails != null}">
-		<table border="1" align = "center">
-			<caption>Screen Details</caption>
-			<tr><th>Screen ID<th>Screen Name<th>Theatre ID<th>Theatre Name<th>Theatre City</tr>
-		
-			<c:forEach items="${displayDetails}" var="details">
-							<tr>
-					<td><c:out value = "${details.screenId}"></c:out>
-					<td><c:out value = "${details.screenName}"></c:out>
-					<td><c:out value = "${details.theatreId}"></c:out>
-					<td><c:out value = "${details.theatreName}"></c:out>
-					<td><c:out value = "${details.theatreCity}"></c:out>
-					
-				</tr>
-			</c:forEach>
-		</table>
-	</c:if>
+	<form method = "post" action = "GetTheatreScreenDetailsController" align = "center">
+	<input type = "hidden" name = "seatPrice" value = <%= request.getAttribute("seatPrice") %>>
+	Select Theatre City : 
+		<select name = "theatreCity">
+			<option value = "Hyderabad">Hyderabad</option>
+			<option value = "Warangal">Warangal</option>
+			<option value = "Adilabad">Adilabad</option>
+			<option value = "Nizamabad">Nizamabad</option>
+			<option value = "Khammam">Khammam</option>
+		</select>
+		<input type = "submit" value = "Submit">
 	</form>
 	<div class="footer" style="font-size: 20px">
 <span style="font-size: 15px">&#9400;</span> Copyrights Capgemini

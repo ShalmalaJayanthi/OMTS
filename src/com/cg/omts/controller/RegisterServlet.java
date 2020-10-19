@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,15 +29,21 @@ public class RegisterServlet extends HttpServlet {
 		String dateOfBirth = req.getParameter("custdob");
 		int customerContact = Integer.parseInt(req.getParameter("contact"));
 		String roleCode="usr";
-		
+		RequestDispatcher rd;
 		Date date = java.sql.Date.valueOf(dateOfBirth);
 		Customer customer = new Customer(customerId, customerName, customerPassword, date, customerContact, roleCode);
 		IAdminService admin = new AdminServiceImpl();
 		int rows=0;
 		rows=admin.register(customer);
 		if(rows>0) {
-			out.println("<h2> Customer added succesfully</h2>");
-			
+			//out.println("<h2> Customer added succesfully</h2>");
+			req.setAttribute("message","User registered successfully");
+			rd = req.getRequestDispatcher("./index.jsp");
+			rd.forward(req, resp);
+		}else {
+			req.setAttribute("errorMessage", "Could not register try again");
+			rd = req.getRequestDispatcher("./register.jsp");
+			rd.forward(req, resp);
 		}
 			//rows=admin.register(customer);
 		} catch (OMTSException e) {

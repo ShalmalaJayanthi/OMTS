@@ -13,102 +13,73 @@
 <meta charset="ISO-8859-1">
 <title>Booking Confirmation</title>
 </head>
+
 <style>
-* {
-	padding: 0px;
-	margin: 0px;
+
+body {
+	margin:0;
+}
+.header a {
+	float:right;
+	color: white;
+	padding: 12px;
+	text-decoration: none;
+	line-height: 25px;
+	border-radius: 4px;
+	display: block;
+	color: white;
+	text-align: right;
+	width:0%;
+	padding: 14px 20px;
+	width: 200px;
+	font-size: 180%;
+}
+a {
+	float: left;
+}
+
+.header a:hover {
+	background-color: #a89e8a;
+	font-size: 200%;
 }
 
 .bgpic {
-	background-image: url("backk.jpg");
+	background-image: url("background.jpg");
 	height: 100vh;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
-
-ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-}
-
-li {
-	float: left;
-}
-
-li a {
-	display: block;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	width: 200px;
-	font-size: 60%;
-}
-
-/* Change the link color to #111 (black) on hover */
-li a:hover {
-	background-color: #a89e8a;
-	font-size: 200%;
-}
-
-.active {
-	background-color: #a89e8a;
-}
-
-.loginform {
-	margin-top: 10%;
-	background: #a89e8a;
-	width: 26%;
-	height: 50%;
-	border-radius: 7%;
-	opacity: 0.8;
-	color: white;
-	align: center;
-	margin-left: 35%;
-	display: none;
-	position: absolute;
-	box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
-		rgba(0, 0, 0, .19);
-	border: 3px solid #f1f1f1;
-}
-
 .header {
 	overflow: hidden;
-	background-color: #a89e8a;
-	padding: 20px 10px;
-	opacity: 0.8;
+	background-color: #291f04;
+	padding: 0px 0px;
+	opacity: 1;
+	height:8%;
+	margin-top:0%;
 }
-
-.header a {
-	float: left;
+.header a.logout {
+	background-color: #291f04;
 	color: white;
-	text-align: center;
-	padding: 12px;
-	text-decoration: none;
-	font-size: 28px;
-	line-height: 25px;
-	border-radius: 4px;
-}
 
-.header a.logo {
+}
+.header logo {
 	weight: 10;
+	color: white;
 	font-size: 40px;
 }
-
-.header a:hover {
-	background-color: #a89e8a;
-}
-
-.header a.active {
-	background-color: #a89e8a;
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
 	color: white;
-}
-
-.header-right {
-	float: right;
+	background-color:#291f04;
+	margin-top: 100%;
+	width: 100%;
+	height: 6%;
+	font-size: 200%;
+	text-align: center;
+	opacity: 1;
 }
 
 @media screen and (max-width: 500px) {
@@ -130,51 +101,6 @@ li a:hover {
 	font-size: 15px;
 }
 
-.button {
-	align-content: center;
-	align: center;
-	font-size: 12px;
-	width: 140px;
-	height: 40px;
-	margin-left: -50px;
-	margin-top: 40px;
-	cursor: pointer;
-	padding: 15px 20px;
-	border-radius: 25px;
-	color: black;
-	
-	text-align: center;
-}
-
-.img {
-	width: 5%;
-	height: 5%;
-	margin-left: 95%;
-	border-radius: 10%;
-	position: relative;
-	cursor: pointer;
-}
-
-.cross-button {
-	width: 50px;
-}
-
-.caption {
-	font-style: italic;
-	font-size: 30px;
-	margin-bottom: 20px;
-	margin-top: 10px;
-}
-
-.caption-image {
-	position: absolute;
-	width: 20%;
-	height: 20%;
-	border-radius: 20%;
-	left: 40%;
-	top: -11%;
-}
-
 .footer {
 	position: fixed;
 	left: 0;
@@ -188,24 +114,17 @@ li a:hover {
 	text-align: center;
 	opacity: 0.7;
 }
+
 </style>
-<body>
-<div class="header">
-
-		<ul>
-			<li><a class="logo"><b>T-CKT</b></a></li>
-			<div class="header-right">
-			<li><a></a>
-				
-				<li><a href="userhome.jsp" class="active"><b>Home </b></a></li>
-				<li><a href="ViewBookingController" class="active"><b>My BOOKINGS</b></a></li>
-				<li><a href="index.jsp" class="active"><b>Signout</b></a>
-
-			</div>
-		</ul>
-
-
-
+<body class="bgpic">
+ <div class="header">
+	 		
+	 		<a href="index.jsp" class = "logout" align="right"><img src="logout.png" alt="logout button" style="width:20px;height:20px;border:0;float:right"></a>
+		    
+			<a href="ViewBookingController" class="active" ><b>My Bookings</b></a>
+		    <a href="userhome.jsp" class="active" ><b>User Home </b></a>
+		  	<a class="logo" style="width:100px;height:20px;border:0;float:left">T-CKT</a>
+		    
 	</div>
 	<div class="footer" style="font-size: 20px">
 		<span style="font-size: 15px">&#9400;</span> Copyrights Capgemini
