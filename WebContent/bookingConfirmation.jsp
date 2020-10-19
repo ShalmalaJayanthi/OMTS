@@ -130,6 +130,9 @@ a {
 		<span style="font-size: 15px">&#9400;</span> Copyrights Capgemini
 		India Ltd.
 	</div>
+	<%if(request.getAttribute("message") != null){ %>
+		<%=request.getAttribute("message")	%>
+	<%} %>
 <center><h1>BOOKING CONFIRMATION</h1></center>
 <center><h2>TICKET DETAILS</h2></center>
 

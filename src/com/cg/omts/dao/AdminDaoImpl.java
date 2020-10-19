@@ -517,7 +517,7 @@ public class AdminDaoImpl  implements IAdminDao, IQueryConstants {
 		
 		} catch (SQLException e) {
 
-			throw new OMTSException("Failed to delete the movie with Id: "+movieId);
+			throw new OMTSException("Failed to delete the movie with Id: "+movieId+e.getMessage());
 			
 		} finally {
 			try {

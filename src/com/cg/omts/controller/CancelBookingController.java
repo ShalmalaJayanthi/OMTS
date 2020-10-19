@@ -44,7 +44,8 @@ public class CancelBookingController extends HttpServlet {
 			currentBalance = userService.getCurrentBalance(transaction);
 			isRefunded = userService.refundAfterCancellation(transaction, currentBalance);
 			
-			dispatcher = request.getRequestDispatcher("userhome.jsp");
+			request.setAttribute("message", "Successfully cancelled the ticket Id : "+ ticketId);
+			dispatcher = request.getRequestDispatcher("ViewBookingController");
 			dispatcher.forward(request, response);
 			
 		} catch (OMTSException e) {

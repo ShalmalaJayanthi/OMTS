@@ -31,6 +31,15 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		  HttpSession session = request.getSession(false);
+	      //session.setAttribute("some_token",)
+	     //session.setAttribute("name", null);
+	     session.removeAttribute("name");
+	     //session.removeAttribute("some_token");
+	     session.invalidate();
+	     request.setAttribute("logout", "Successfully logged out");
+	     RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+	     rd.forward(request, response);
 	}
 
 	/**

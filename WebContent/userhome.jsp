@@ -31,7 +31,7 @@ a {
 
 .header a:hover {
 	background-color: #a89e8a;
-	font-size: 200%;
+
 }
 
 body {
@@ -120,14 +120,14 @@ tr:hover {background-color:#f5f5f5;}
 
 <% if (session != null) {
          if (session.getAttribute("username") != null) {
-            int id = (Integer)session.getAttribute("username");
+            int userId = (Integer)session.getAttribute("username");
          }
       }
 %>
 </form>
 	 <div class="header">
 	 		
-	 		<a href="index.jsp" class = "logout" align="right"><img src="logout.png" alt="logout button" style="width:20px;height:20px;border:0;float:right"></a>
+	 		<a href="LogoutServlet" class = "logout" align="right"><img src="logout.png" alt="logout button" style="width:20px;height:20px;border:0;float:right"></a>
 		    
 			<a href="ViewBookingController" class="active" ><b>My Bookings</b></a>
 		    <a href="userhome.jsp" class="active" ><b>User Home </b></a>

@@ -26,6 +26,7 @@ public class ViewBookingController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		RequestDispatcher dispatcher = null;
+		String message = (String) req.getAttribute("message");
 		int userId = 1;//after implementing sessions, get this value from session
 		IUserService userService = new UserServiceImpl();
 		List<Integer> ticketIdList = new ArrayList<Integer>();
@@ -67,6 +68,8 @@ public class ViewBookingController extends HttpServlet{
 			req.setAttribute("theatreNameList", theatreNameList);
 			req.setAttribute("showNameList", showNameList);
 			req.setAttribute("screenNameList", screenNameList);
+			System.out.println("VIIIIIIIIEWWWWWWWWWWW BOKKKKKKKKKIIIIIIIIIINNNNNNNNNG"+message);
+			req.setAttribute("message", message);
 			dispatcher = req.getRequestDispatcher("userbookings.jsp");
 
 			dispatcher.forward(req, resp);

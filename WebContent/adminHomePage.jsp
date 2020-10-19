@@ -122,12 +122,41 @@ margin:0px;
 </style>
 </head>
 <body>
+<%
+  response.setHeader("Cache-Control","no-cache");
+  response.setHeader("Cache-Control","no-store");
+  response.setHeader("Pragma","no-cache");
+  response.setDateHeader ("Expires", 0);
+
+  if(session.getAttribute("username")==null)
+      response.sendRedirect("index.jsp");
+
+  %> 
+  
+ 
+
 <div class="topnav">
+<a class="active" href="index.jsp">Go back</a>
   <a class="active" href="#home">OMTS</a>
   <form  action="./LogoutServlet" method="post">
       <input class="button" type="submit" value="Logout">
 </form>
 </div>
+<% if (session != null) {
+         if (session.getAttribute("username") != null) {
+            int id = (Integer)session.getAttribute("username");
+            %><%= session.getAttribute("username")%> <%    
+         }
+      } 
+%>
+<%
+		String message = (String)request.getAttribute("message");
+		if(message != null) {
+			out.print("<html><body><h5 align = center;>");
+			out.print(message);
+			out.print("</h5></body></html>");
+		}
+	%>
 
 <center><h1>Welcome Admin</h1></center>
 <div class="container">

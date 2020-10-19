@@ -104,12 +104,12 @@
 	<form action = "AddMovieServlet" method = "post" align = "center">
 		<table align = "center">
 			<caption>Enter Movie Details</caption>
-			<tr><td>Movie Id</td><td><input type="number" name = "movieId" required title = "Movie ID must contain only digits"></td></tr>
-			<tr><td>Movie Name</td><td><input type="text" name = "movieName" required></td></tr>
-			<tr><td>Movie Genre</td><td><input type="text" name = "movieGenre" required></td></tr>
-			<tr><td>Movie Director</td><td><input type= "text" name = "movieDirector" required></td></tr>
-			<tr><td>Movie Length</td><td><input type= "number" name = "movieLength" required></td></tr>
-			<tr><td>Movie Language</td><td><input type= "text" name = "movieLanguage" required></td></tr>
+			<tr><td>Movie Id</td><td><input type="text" name = "movieId" pattern="^[3]{1}[0-9]{3}$" title="Movie Id should start with number 3 and of only 4 digits" required></td></tr>
+			<tr><td>Movie Name</td><td><input type="text" name = "movieName" pattern = "^[a-zA-Z0-9]+$"title = "Movie Name must contain letters and digits" required></td></tr>
+			<tr><td>Movie Genre</td><td><input type="text" name = "movieGenre" pattern = "^[a-zA-Z]+$"title = "Movie Genre must contain only letters" required></td></tr>
+			<tr><td>Movie Director</td><td><input type= "text" name = "movieDirector"  pattern = "^[a-zA-Z]+$" title = "Name must contain only letters" required></td></tr>
+			<tr><td>Movie Length</td><td><input type= "number" name = "movieLength"  required></td></tr>
+			<tr><td>Movie Language</td><td><input type= "text" name = "movieLanguage" pattern = "^[a-zA-Z]+$" title = "Language must contain only letters" required></td></tr>
 			<tr><td>Movie Release Date</td><td><input type="date" name = "movieReleaseDate" required></td></tr>
 			<!-- <tr><td>Upload Movie Image</td><td><input type = "file" name = "uploadImg" required></td></tr> -->
 			<tr ><td colspan="2" align = "center"><button type = "submit"> Submit </button>

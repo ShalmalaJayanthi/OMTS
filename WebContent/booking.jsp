@@ -275,7 +275,7 @@ li a:hover {
 			<tr>
 				<td><label>Enter Number of seats</label></td><td>:</td>
 				<td>
-					<input type ="number" name = "noOfSeats" min = "1" max = "10" onkeyup=imposeMinMax(this) value="1">
+					<input type ="number" name = "noOfSeats" min = "1" max = "10" onkeyup=imposeMinMax(this) value="1" required>
 				</td>
 			</tr>
 			<tr>
@@ -342,7 +342,12 @@ li a:hover {
 		
 		
 	</form>
-	<button onclick="proceedToPay()">Proceed to Pay</button>
+	<% if((request.getAttribute("theatreId") != null) && (request.getAttribute("screenId") != null) && (request.getAttribute("showId") != null)){ %>
+			<input type="button" id="myBtn" value="Proceed to Pay" onclick="proceedToPay()">
+	<%}else{ %>		
+			<input type="button" id="myBtn" value="Proceed to Pay" disabled>
+			<!-- <button onclick="proceedToPay()" diabled>Proceed to Pay</button> -->
+	<%} %>
 	</center>
 	<div class="footer" style="font-size: 20px">
 		<span style="font-size: 15px">&#9400;</span> Copyrights Capgemini

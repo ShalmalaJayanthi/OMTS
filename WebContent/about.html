@@ -1,12 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Home Page</title>
-</head>
-<body>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 <style>
 * {
 	padding: 0px;
@@ -201,46 +197,17 @@ b {
 	font-size: 150%;
 }
 </style>
-
-<meta charset="ISO-8859-1">
-<title>Home Page</title>
-
-<script type="text/javascript">
-	function login() {
-		document.getElementById("log").style.display = "block";
-	}
-
-	function cross() {
-		document.getElementById("log").style.display = "none";
-	}
-
-	//window.history.forward();
-	//function noBack() {
-		//window.history.foward();
-	//}
-</script>
-
 </head>
-<body class="bgpic">
-
-	<div class="header">
+<body class = "bgpic">
+<div class="header">
 
 		<ul>
 			<li><a class="logo"><b>T-CKT</b></a></li>
 			<div class="header-right">
 				<li><a href="index.jsp" class="active"><b>Home </b></a></li>
-				<% if (session.getAttribute("username") == null) {
-			            %> <a class="active" href="register.jsp" > <b>Register</b></a></li> <%
-					}  else {%>
-					 <% }%>
-				<% if (session.getAttribute("username") != null) {
-			            int id = (Integer)session.getAttribute("username");
-			            System.out.println("session id "+ id); 
-					%><li><a class="active" href="./LogoutServlet" id="logout"> <b>Logout</b></a></li><%
-					}  else {%>
-					<li><a class="active" href="#" onclick="login()" id="login"> <b>Login
-					 <% }%>
-					</b></a></li>
+				<!-- <li><a href="register.jsp" class="active"><b>Register</b></a></li>
+				<li><a class="active" href="#login" onclick="login()"><b>Login
+					</b></a></li> -->
 				<li><a href="about.html" class="active"><b>About US </b></a></li>
 
 			</div>
@@ -248,48 +215,9 @@ b {
 
 
 	</div>
-	
-<% if(request.getAttribute("logout")!=null) {%>
-<h1 style="color:Green;"><%=request.getAttribute("logout") %></h1>
-<%} %>
-<% if(request.getAttribute("errormessage")!=null) {%>
-<h1 style="color:Red;"><%=request.getAttribute("errormessage") %></h1>
-<%} %>
-<% if(request.getAttribute("message") != null){ %>
-<h1 style="color:Red;"><%=request.getAttribute("message") %></h1>
-<%} %>
+<center><h3>Under service</h3></center>
 
-	<div class="loginform" id="log">
-		<img src="cross.png" class="img" onclick="cross()">
-
-		<table style="margin-top: 30%;">
-			<caption>
-				<img src="caption1.png" class="caption-image">
-			</caption>
-			<br>
-			<form action="./LoginServlet" method="post">
-				<tr>
-					<td><b>UserId:</b></td>
-					<td><input type="text" name="user" class="input" pattern="^[1]{1}[0-9]{3}$" title = "User Id should start with 1, should contain numbers only with length 4" required></td>
-				</tr>
-
-				<tr>
-					<td><b>Password:</b></td>
-					<td><input type="Password" name="pass" class="input" required></td>
-				</tr>
-
-				<tr>
-					<td></td>
-					<td><button type="submit" class="button">
-							<b>Login</b>
-						</button></td>
-				</tr>
-			</form>
-		</table>
-
-	</div>
-
-	<div class="footer" style="font-size: 20px">
+<div class="footer" style="font-size: 20px">
 		<span style="font-size: 15px">&#9400;</span> Copyrights Capgemini
 		India Ltd.
 	</div>

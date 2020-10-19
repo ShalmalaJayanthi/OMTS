@@ -12,7 +12,6 @@ public interface IQueryConstants {
 	
 	String ADD_MOVIE = "insert into movie values(?, ?, ?, ?, ?, ?, ?)"; 
 	
-	
 	String DELETE_MOVIE = "delete from movie where movieId = ?";
 	String DISPLAY_ALL_MOVIES_DELETE = "select movieId, movieName, movieGenre, movieDirector, language from movie";
 	String GET_THEATRE_DETAILS = "select theatreId, theatreName from theatre where theatreCity = ?";

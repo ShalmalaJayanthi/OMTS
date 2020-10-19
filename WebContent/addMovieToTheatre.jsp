@@ -100,10 +100,10 @@
 	
 	<form method = "post" action = "AddMovieToTheatre" align = "center">
 		<input type = "hidden" name = "theatreCity" value = <%=request.getAttribute("theatreCity") %>>
-		<input type = "number" name = "theatreId" placeholder = "Enter Theatre ID" required></br>
-		<input type = "number" name = "movieId" placeholder = "Enter Movie ID" required></br></br>
+		<input type = "number" name = "theatreId" placeholder = "Enter Theatre ID" pattern="^[2]{1}[0-9]{3}+$" title="Theatre ID should start with number 2 and of only 4 digits"required></br>
+		<input type = "number" name = "movieId" placeholder = "Enter Movie ID" pattern="^[3]{1}[0-9]{3}+$" title="Movie ID should start with number 3 and of only 4 digits"required></br></br>
 		<input type = "submit" value = "Submit"></br></br>
-			
+	<br><br>
 	<c:if test="${theatreDetails != null}">
 		<table border="1"  align = "left">
 			<caption>Theatre Details</caption>

@@ -97,8 +97,12 @@
 	
 	<%
 		String message = (String)request.getAttribute("message");
-		if(message != null)
+		if(message != null) {
+			out.print("<html><body><h5 align = center;>");
 			out.print(message);
+			out.print("</h5></body></html>");
+		}
+			
 	%>
 	<form method = "post" action = "GetTheatreDetails" align = "center">
 	

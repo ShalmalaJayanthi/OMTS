@@ -27,23 +27,23 @@
 					<div class="register-form">
 					
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="UserName" name="name">
+							<input type="text" class="form-control" placeholder="UserName" pattern="^[a-zA-Z][0-9]{10}$" title = "User Name can be alphabet and numbers only with length 10" name="name" required>
 							
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="UserID" name="custid">
+							<input type="text" class="form-control" placeholder="UserID" pattern="^[1]{1}[0-9]{3}$" title = "User Id should start with 1, should contain numbers only with length 4" name="custid" required>
 							
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control" placeholder="password" name="pass">
+							<input type="password" class="form-control" placeholder="password" name="pass" pattern = "^[a-zA-Z][0-9]{10}$" title = "User Name can be alphabet and numbers only with length 10"required>
 							
 						</div>
 						<div class="form-group">
-							<input type="date" class="form-control" placeholder="Date" name="custdob">
+							<input type="date" class="form-control" placeholder="Date" name="custdob" required>
 							
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Contact Number" name="contact">
+							<input type="text" class="form-control" placeholder="Contact Number" name="contact" required>
 							
 						</div>
 						

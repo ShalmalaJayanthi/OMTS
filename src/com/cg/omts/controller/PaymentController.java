@@ -99,6 +99,7 @@ public class PaymentController extends HttpServlet{
 					req.setAttribute("theatreName", theatreName);
 					req.setAttribute("screenName", screenName);
 					req.setAttribute("showName", showName);
+					req.setAttribute("message", "payment successful");
 					dispatcher = req.getRequestDispatcher("bookingConfirmation.jsp");
 					
 					dispatcher.forward(req, resp);
@@ -108,7 +109,17 @@ public class PaymentController extends HttpServlet{
 //					resp.sendRedirect("bookingConfirmation.jsp");
 				}
 			}else
-				out.println("Invalid Credentials");
+				//out.println("Invalid Credentials");
+				req.setAttribute("message", "Invalid Credentials");
+				req.setAttribute("totalPrice", totalCost);
+				req.setAttribute("ticketId", ticketId);
+				
+				req.setAttribute("movieName", movieName);
+				req.setAttribute("theatreName", theatreName);
+				req.setAttribute("screenName", screenName);
+				req.setAttribute("showName", showName);
+				dispatcher = req.getRequestDispatcher("payment.jsp");
+				dispatcher.forward(req, resp);
 			
 		} catch (OMTSException e) {
 			// TODO Auto-generated catch block

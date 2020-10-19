@@ -126,11 +126,14 @@ a {
 <input type = "hidden" value=<%=request.getAttribute("movieId") %> name = "movieId">
 <input type = "hidden" value=<%=request.getAttribute("showId") %> name = "showId">
 <input type = "hidden" value=<%=request.getAttribute("screenId") %> name = "screenId">
+<%if(request.getAttribute("message") != null){%>
+	<%=request.getAttribute("message")	%>
+<%} %>
 <br><br><br><br><br>
 <table align="center">
 
-<tr><td>Account Number<td><input type="number" name="acc" required>
-<tr><td>Cvv<td><input type="number" name="cvv" required>
+<tr><td>Account Number<td><input type="number" name="acc"  pattern="^[0-9]{10}$" title="Account number should be of 10 digits"required>
+<tr><td>Cvv<td><input type="number" name="cvv"  pattern="^[0-9]{3}$" title="CVV should be of 3 digits"required>
 <tr><td>Password<td><input type="password" name="pass" required>
 <tr><td>Total Amount<td><input type = "text" name = "totalPrice" value = <%=request.getAttribute("totalPrice") %> readonly>
 <tr><td><td><input type ="submit" value="PAY">

@@ -48,8 +48,15 @@ public class DisplayMoviesToUserServlet extends HttpServlet{
 				List<Integer> theatreIdList = userService.getTheatresByCity(city);
 				movieIdList = userService.getMoviesByTheatre(theatreIdList);
 				List<Movie> movieList = new ArrayList<Movie>();
+				Set<Integer> movieIdSet = new HashSet<Integer>();
 				Set<Movie> movieSet = new HashSet<Movie>();
-			
+				for(Integer movieId : movieIdList) {
+					movieIdSet.add(movieId);
+				}
+				movieIdList = new ArrayList<Integer>();
+				for(Integer movieId: movieIdSet) {
+					movieIdList.add(movieId);
+				}
 				movieList = userService.getMoviesById(movieIdList);
 				for(Movie movie : movieList) {
 					movieSet.add(movie);

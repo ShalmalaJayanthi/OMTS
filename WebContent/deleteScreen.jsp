@@ -98,7 +98,7 @@
 </div>
 
 	<form method = "post" action = "DeleteScreenServlet" align = "center">
-	<input type = "number" name = "screenId" placeholder = "Enter Screen ID" required></br>
+	<input type = "number" name = "screenId" placeholder = "Enter Screen ID" pattern="^[4]{1}[0-9]{3}$" title="Screen ID should start with number 4 and of only 4 digits" required></br>
 			<input type = "submit" value = "Submit"></br></br>
 	<c:if test="${displayDetails != null}">
 		<table border="1" align = "center">

@@ -116,6 +116,17 @@ a {
 </style>
 
 <body class="bgpic">
+
+<%
+  response.setHeader("Cache-Control","no-cache");
+  response.setHeader("Cache-Control","no-store");
+  response.setHeader("Pragma","no-cache");
+  response.setDateHeader ("Expires", 0);
+
+  if(session.getAttribute("username")==null)
+      response.sendRedirect("index.jsp");
+
+  %> 
  <div class="header">
 	 		
 	 		<a href="index.jsp" class = "logout" align="right"><img src="logout.png" alt="logout button" style="width:20px;height:20px;border:0;float:right"></a>
@@ -125,6 +136,7 @@ a {
 		  	<a class="logo" style="width:100px;height:20px;border:0;float:left">T-CKT</a>
 		    
 	</div> 
+	
 	<%
 		List<Ticket> ticketList = new ArrayList<Ticket>();
 	
@@ -171,7 +183,9 @@ a {
 				</tr>	
 			<%
 			}%>
-			
+			<%if(request.getAttribute("message") != null){ %>
+		<%=request.getAttribute("message")%>
+	<%} %>
 	</table>
 <div class="footer" style="font-size: 20px">
 		<span style="font-size: 15px">&#9400;</span> Copyrights Capgemini
