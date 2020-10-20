@@ -286,11 +286,11 @@ body {
 		  	
 		    
 	</div> 
-	<br><br><br><br><br><br><br><br>
+	<br><br><br><br><br>
 <center>
 	<form action ="BookingController" method = "post" id = "theatreSelection" name = "bookingForm">
-		<table>
-		
+		<table align="center">
+		<caption><h1>Ticket Booking</h1></caption><br>
 			<tr>
 				<td><label>Select Theatre </label></td>
 				<td>:</td>

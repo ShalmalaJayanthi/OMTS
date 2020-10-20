@@ -27,6 +27,7 @@
 }
 a {
 	float: left;
+
 }
 
 .header a:hover {
@@ -76,25 +77,27 @@ body {
 	opacity: 1;
 }
 table {
-	width: 50%;
-	margin-left: 25%;
-	margin-top: 2%;
-	border: 2px;
-	background-color:#e3dddc;
-	style="overflow-y:auto;
+	background-color: #ffff1a;
+	border-collapse: collapse;
+	width: 70%;
+	height: 20%
 }
-th {
-	font-size:30px;
+
+th, td {
+	padding: 8px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
 }
-td {
-	font-size:20px;
-	align:center
+
+tr:hover {
+	background-color: grey;
 }
-tr:hover {background-color:#f5f5f5;}
+
 .selectclass {
 	width:250px;
 	height:35px;
-	margin-right:81%;
+	margin-top:2%;
+	margin-left:70%;
 	font-size:15px;
 	background-color:#e3dddc;
 }
@@ -140,14 +143,16 @@ tr:hover {background-color:#f5f5f5;}
 
 	<div class="userhome" id="userhome">
 	<form action="/DisplayMoviesToUser" method="get" align="center">
-		<select name="city" id="city" onchange="selectCity()" class="selectclass">
+		<select name="city" id="city" onchange="selectCity()" class="selectclass" align = "center">
 		<option value="-1" selected disabled align="center">Select city</option>
 		<option value="All Cities" align="center">ALL CITIES</option>
 		<option value="Hyderabad" align="center">HYDERABAD</option>
 		<option value = "Warangal" align="center">WARANGAL</option>
 		<option value = "Nizambad" align="center">NIZAMBAD</option>
 		</select>
+		</br></br>
 	<table align="center" border=1>
+	<tr><th style="text-align:center">Movie</th><th style="text-align:center">Movie Details</th></tr>
 	  		<% 
 	  		IUserService userService = new UserServiceImpl();
 			List<Movie> moviesList = userService.getAllMovies();
@@ -155,8 +160,8 @@ tr:hover {background-color:#f5f5f5;}
 			String movieName = movie.getMovieName();
 			int movId = movie.getMovieId();
 			%>
-			
-	<tr><th><%= movieName%></th><td><a href="MovieDetailsServlet?movieId=<%= movId%>">View Movie Details</a></td></tr>
+	
+	<tr><td style="text-align:center"><%= movieName%></th><td><center><a href="MovieDetailsServlet?movieId=<%= movId%>" >View Movie Details</a></center></td></tr>
 	<% } %>
 	</table> 
 	</form>

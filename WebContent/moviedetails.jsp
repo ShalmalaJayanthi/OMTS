@@ -84,18 +84,20 @@ body {
 	background-size: cover;
 }
 table {
-	width: 50%;
-	margin-left: 20%;
-	margin-top: 5%;
-	background-color:#e3dddc;
+	background-color: #ffff1a;
+	border-collapse: collapse;
+	width: 40%;
+	height: 30%
 }
-th {
-	font-size:30px;
-	text-align:center
+
+th, td {
+	padding: 8px;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
 }
-td {
-	text-align:center;
-	font-size:30px;
+
+tr:hover {
+	background-color: grey;
 }
 .btn {
   margin-bottom:10%;
@@ -129,9 +131,10 @@ td {
 		  	<img src="backbutton.png" alt="back button" style="width:20px;height:25px;border:0;">
 		    </a>
 	</div> 
-
+	<br><br><br><br>
 	<div class="display">
 	<table align="center" border=1>
+	<caption><h1>Movie Details</h1></caption>
 	<tr><th>Movie Id</th><td><c:out value="${movie.movieId}" /></td></tr>
 	<tr><th>Movie Name</th><td><c:out value="${movie.movieName}"/></td></tr>
 	<tr><th>Movie Genre</th><td><c:out value="${movie.movieGenre}" /></td></tr>

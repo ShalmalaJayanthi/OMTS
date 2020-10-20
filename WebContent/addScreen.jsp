@@ -9,25 +9,72 @@
 	body {
 	margin:0;
 	}
-	.bgpic {
+
+
+	.header a.logout {
+	float:right;
+	color: white;
+	padding: 12px;
+	text-decoration: none;
+	line-height: 25px;
+	border-radius: 4px;
+	display: block;
+	color: white;
+	text-align: right;
+	width:0%;
+	padding: 14px 20px;
+	width: 200px;
+	font-size: 180%;
+}
+
+
+.header a.logout:hover {
+	background-color: #a89e8a;
+
+}
+
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	color: white;
+	background-color:#291f04;
+	margin-top: 100%;
+	width: 100%;
+	height: 6%;
+	font-size: 200%;
+	text-align: center;
+	opacity: 1;
+}
+.bgpic {
 	background-image: url("background.jpg");
 	height: 100vh;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	}
-	.header {
+}
+.header {
 	overflow: hidden;
 	background-color: #291f04;
-	padding: 5px 5px;
+	padding: 0px 0px;
 	opacity: 1;
-	height:9%;
-	}
-	.header.logout {
+
+	height:8%;
+}
+.header a.logout {
 	background-color: #291f04;
 	color: white;
-	left:95%;
-	}
+
+}
+.header logo {
+	weight: 10;
+	color: white;
+	font-size: 40px;
+}
+.header a.back{
+	float : left;
+	padding: 15px 15px;
+}
 	
 	.footer {
 	position: fixed;
@@ -43,21 +90,20 @@
 	opacity: 1;
 	}
 	table {
-	width: 50%;
-	margin-left: 25%;
-	margin-top: 2%;
-	border: 2px;
-	background-color:#e3dddc;
-	style="overflow-y:auto;
-	}
-	th {
-	font-size:30px;
-	}
-	td {
-	font-size:20px;
-	align:center
-	}
-	tr:hover {background-color:#f5f5f5;}
+	background-color: #ffff1a;
+	border-collapse: collapse;
+	width: 40%;
+	height: 20%
+}
+
+th, td {
+	padding: 8px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+
+	
 	.selectclass {
 	width:250px;
 	height:35px;
@@ -65,9 +111,29 @@
 	font-size:15px;
 	background-color:#e3dddc;
 	}
+	
+	.btn {
+  margin-bottom:10%;
+  align: center;
+  background-color: #291f04;
+  border: none;
+  border-radius: 16px;
+  color: white;
+  
+  padding: 12px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 20px 550px;
+  cursor: pointer;
+}
+.btn:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
 	</style>
 </head>
-<body>
+<body class="bgpic">
 	<%
   response.setHeader("Cache-Control","no-cache");
   response.setHeader("Cache-Control","no-store");
@@ -87,28 +153,35 @@
 %>
 </form>
 	<div class="header">
-	<a href="adminHomePage.jsp" class = "back" align="right">
-		 <img src="back.png" alt="back button" style="width:20px;height:25px;border:0;">
-   </a>
-   <a href="index.jsp" class = "logout" align="right">
-  <img src="logout.png" alt="logout button" style="width:60px;height:55px;border:0;float:right">
-   </a>
-</div>
+		   
+		  	
+			<a href="LogoutServlet" class = "logout" align="right"><b>Logout</b></a>
+			<a href="adminHomePage.jsp" class = "back" align="left">
+		  	<img src="backbutton.png" alt="back button" style="width:20px;height:25px;border:0;">
+		    </a>
+	</div> 
+
 	<%
 		String message = (String)request.getAttribute("message");
 		if(message != null)
 			out.print(message);
 	%>
+	</br></br></br>
 	<form method = "post" action = "AddScreenServlet" align = "center">
 		<table align = "center">
-			<h3><caption>Enter the Screen Details</caption></h3>
-			<tr><td>Screen Id<td><input type="text" name = "screenId"  pattern="^[4]{1}[0-9]{3}$" title="Screen Id should start with number 4 and of only 4 digits" required>
-			<tr><td>Screen Name<td><input type = "text" name = "screenName" pattern = "^[a-zA-Z0-9]+$" title = "Screen Name must contain letters and digits only" required>
-			<tr><td>Screen Rows<td><input type = "text" name = "screenRows" pattern="^[1-9]{1}[0-9]{1}$" title="Screen rows should consist digits only and with max 99 rows" required>
-			<tr><td>Screen Columns<td><input type = "text" name = "screenColumns" pattern="^[1-9]{1}[0-9]{1}$" title="Screen columns should consist digits only and with max 99 coulumns"required>
-			<tr><td>Screen Seat Price<td><input type = "text" name = "seatPrice" pattern="^[1-9]{1}[0-9]{1,}$" title="Screen Price should a number" required>
-			<tr colspan="2" align = "centre"><td><input type = "submit" value = "Submit">	
+			<caption><h2>Enter the Screen Details</h2></caption>
+			<tr><td style = "text-align:center">Screen Id<td><center><input type="text" name = "screenId"  pattern="^[4]{1}[0-9]{3}$" title="Screen Id should start with number 4 and of only 4 digits" required></center>
+			<tr><td style = "text-align:center">Screen Name<td><center><input type = "text" name = "screenName" pattern = "^[a-zA-Z0-9]+$" title = "Screen Name must contain letters and digits only" required></center>
+			<tr><td style = "text-align:center">Screen Rows<td><center><input type = "text" name = "screenRows" pattern="^[1-9]{1}[0-9]{1}$" title="Screen rows should consist digits only and with max 99 rows" required></center>
+			<tr><td style = "text-align:center">Screen Columns<td><center><input type = "text" name = "screenColumns" pattern="^[1-9]{1}[0-9]{1}$" title="Screen columns should consist digits only and with max 99 coulumns"required></center>
+			<tr><td style = "text-align:center">Screen Seat Price<td><center><input type = "text" name = "seatPrice" pattern="^[1-9]{1}[0-9]{1,}$" title="Screen Price should a number" required></center>
+			<!-- <tr colspan="2" align = "centre"><td><input type = "submit" value = "Submit"> -->	
 		</table>
+		<button type = "submit" class="btn"> Submit </button>
 	</form>
+	<div class="footer" style="font-size: 20px">
+<span style="font-size: 15px">&#9400;</span> Copyrights Capgemini
+India Ltd.
+</div>
 </body>
 </html>

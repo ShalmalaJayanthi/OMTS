@@ -12,7 +12,55 @@
 	padding: 0px;
 	margin: 0px;
 }
+.header a {
+	float:right;
+	color: white;
+	padding: 12px;
+	text-decoration: none;
+	line-height: 25px;
+	border-radius: 4px;
+	display: block;
+	color: white;
+	text-align: right;
+	width:0%;
+	padding: 14px 20px;
+	width: 200px;
+	font-size: 180%;
+}
+a {
+	float: left;
 
+}
+
+
+body {
+	margin:0;
+}
+.bgpic {
+	background-image: url("background.jpg");
+	height: 100vh;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.header {
+	overflow: hidden;
+	background-color: #291f04;
+	padding: 0px 0px;
+	opacity: 1;
+
+	height:8%;
+}
+.header a.logout {
+	background-color: #291f04;
+	color: white;
+
+}
+.header logo {
+	weight: 10;
+	color: white;
+	font-size: 40px;
+}
 .bgpic {
 	background-image: url("background.jpg");
 	height: 100vh;
@@ -21,34 +69,10 @@
 	background-size: cover;
 }
 
-ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-}
-
-li {
-	float: left;
-}
-
-li a {
-	display: block;
+.active {
+	background-color: #a89e8a;
 	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	width: 200px;
-	font-size: 60%;
 }
-
-/* Change the link color to #111 (black) on hover */
-li a:hover {
-
-	font-size: 200%;
-}
-
-
 
 .loginform {
 	margin-top: 10%;
@@ -67,50 +91,6 @@ li a:hover {
 	border: 3px solid #f1f1f1;
 }
 
-.header {
-	overflow: hidden;
-	background-color:#291f04;
-	padding: 0px 10px;
-	opacity: 1;
-}
-
-.header a {
-	float: left;
-	color: white;
-	text-align: center;
-	padding: 12px;
-	text-decoration: none;
-	font-size: 28px;
-	line-height: 50px;
-	border-radius: 4px;
-}
-
-.header a.logo {
-	weight: 10;
-	font-size: 50px;
-}
-
-
-
-.header a.active {
-	
-	color: white;
-}
-
-.header-right {
-	float: right;
-}
-
-@media screen and (max-width: 500px) {
-	.header a {
-		float: none;
-		display: block;
-		text-align: left;
-	}
-	.header-right {
-		float: none;
-	}
-}
 
 .input {
 	width: 170px;
@@ -139,9 +119,9 @@ li a:hover {
 .img {
 	width: 5%;
 	height: 5%;
-	margin-left: 95%;
+	margin-left: 0%;
 	border-radius: 10%;
-	position: relative;
+	position: left;
 	cursor: pointer;
 }
 
@@ -170,13 +150,13 @@ li a:hover {
 	left: 0;
 	bottom: 0;
 	color: white;
-	background-color:#291f04;
+	background-color: #a89e8a;
 	margin-top: 100%;
 	width: 100%;
-	height: 6%;
+	height: 5%;
 	font-size: 200%;
 	text-align: center;
-	opacity: 1;
+	opacity: 0.7;
 }
 
 table {
@@ -186,7 +166,7 @@ table {
 }
 
 b {
-	color: white;
+	color: black;
 }
 img{
   width:65%;
@@ -204,8 +184,6 @@ img{
 }
 </style>
 
-<meta charset="ISO-8859-1">
-<title>Home Page</title>
 
 <script type="text/javascript">
 	function login() {
@@ -227,27 +205,24 @@ img{
 
 	<div class="header">
 
-		<ul>
-			<li> <a class="logo"><img src="loggo.PNG" ></img></a></li>
-			<div class="header-right">
-				<li><a href="getstarted.html" class="active"><b>Home </b></a></li>
+		<a class="logo"><img src="loggo.PNG" ></img></a>
+		<a href="index.jsp" class="active"><b>Home </b></a>
 				<% if (session.getAttribute("username") == null) {
-			            %><li> <a class="active" href="register.jsp" > <b>Register</b></a></li> <%
+			            %> <a class="active" href="register.jsp" > <b>Register</b></a><%
 					}  else {%>
 					 <% }%>
 				<% if (session.getAttribute("username") != null) {
 			            int id = (Integer)session.getAttribute("username");
 			            System.out.println("session id "+ id); 
-					%><li><a class="active" href="./LogoutServlet" id="logout"> <b>Logout</b></a></li><%
+					%><a class="active" href="./LogoutServlet" id="logout"> <b>Logout</b></a><%
 					}  else {%>
-					<li><a class="active" href="#" onclick="login()" id="login"> <b>Login
+					<a href="#" onclick="login()" id="login" class="active"> <b>Login
 					 <% }%>
-					</b></a></li>
-				<li><a href="about.html" class="active"><b>About US </b></a></li>
+					</b></a>
+				<a href="about.html" class="active"><b>About US </b></a>
 
-			</div>
-		</ul>
 	</div>
+
 	<%
   response.setHeader("Cache-Control","no-cache");
   response.setHeader("Cache-Control","no-store");
@@ -262,7 +237,6 @@ img{
          }
       } 
 %>
-	
 <% if(request.getAttribute("logout")!=null) {%>
 <h1 style="color:Green;"><%=request.getAttribute("logout") %></h1>
 <%} %>

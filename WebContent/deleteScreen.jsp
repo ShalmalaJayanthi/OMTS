@@ -11,25 +11,72 @@
 	body {
 	margin:0;
 	}
-	.bgpic {
+
+
+	.header a.logout {
+	float:right;
+	color: white;
+	padding: 12px;
+	text-decoration: none;
+	line-height: 25px;
+	border-radius: 4px;
+	display: block;
+	color: white;
+	text-align: right;
+	width:0%;
+	padding: 14px 20px;
+	width: 200px;
+	font-size: 180%;
+}
+
+
+.header a.logout:hover {
+	background-color: #a89e8a;
+
+}
+
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	color: white;
+	background-color:#291f04;
+	margin-top: 100%;
+	width: 100%;
+	height: 6%;
+	font-size: 200%;
+	text-align: center;
+	opacity: 1;
+}
+.bgpic {
 	background-image: url("background.jpg");
 	height: 100vh;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	}
-	.header {
+}
+.header {
 	overflow: hidden;
 	background-color: #291f04;
-	padding: 5px 5px;
+	padding: 0px 0px;
 	opacity: 1;
-	height:9%;
-	}
-	.header.logout {
+
+	height:8%;
+}
+.header a.logout {
 	background-color: #291f04;
 	color: white;
-	left:95%;
-	}
+
+}
+.header logo {
+	weight: 10;
+	color: white;
+	font-size: 40px;
+}
+.header a.back{
+	float : left;
+	padding: 15px 15px;
+}
 	
 	.footer {
 	position: fixed;
@@ -45,21 +92,20 @@
 	opacity: 1;
 	}
 	table {
-	width: 50%;
-	margin-left: 25%;
-	margin-top: 2%;
-	border: 2px;
-	background-color:#e3dddc;
-	style="overflow-y:auto;
-	}
-	th {
-	font-size:30px;
-	}
-	td {
-	font-size:20px;
-	align:center
-	}
-	tr:hover {background-color:#f5f5f5;}
+	background-color: #ffff1a;
+	border-collapse: collapse;
+	width: 40%;
+	height: 20%
+}
+
+th, td {
+	padding: 8px;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+}
+
+
+	
 	.selectclass {
 	width:250px;
 	height:35px;
@@ -67,9 +113,29 @@
 	font-size:15px;
 	background-color:#e3dddc;
 	}
+	
+	.btn {
+  margin-bottom:10%;
+  align: center;
+  background-color: #291f04;
+  border: none;
+  border-radius: 16px;
+  color: white;
+  
+  padding: 12px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 20px 550px;
+  cursor: pointer;
+}
+.btn:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
 	</style>
 </head>
-<body>
+<body class="bgpic">
 <%
   response.setHeader("Cache-Control","no-cache");
   response.setHeader("Cache-Control","no-store");
@@ -89,20 +155,20 @@
 %>
 </form>
 <div class="header">
-	<a href="adminHomePage.jsp" class = "back" align="right">
-		 <img src="back.png" alt="back button" style="width:20px;height:25px;border:0;">
-   </a>
-   <a href="index.jsp" class = "logout" align="right">
-  <img src="logout.png" alt="logout button" style="width:60px;height:55px;border:0;float:right">
-   </a>
-</div>
-
+		   
+		  	
+			<a href="LogoutServlet" class = "logout" align="right"><b>Logout</b></a>
+			<a href="adminHomePage.jsp" class = "back" align="left">
+		  	<img src="backbutton.png" alt="back button" style="width:20px;height:25px;border:0;">
+		    </a>
+	</div> 
+	</br>
 	<form method = "post" action = "DeleteScreenServlet" align = "center">
-	<input type = "text" name = "screenId" placeholder = "Enter Screen ID" pattern="^[4]{1}[0-9]{3}$" title="Screen ID should start with number 4 and of only 4 digits" required></br>
-			<input type = "submit" value = "Submit"></br></br>
+	Screen ID: <input type = "text" name = "screenId" placeholder = "Enter Screen ID" pattern="^[4]{1}[0-9]{3}$" title="Screen ID should start with number 4 and of only 4 digits" required></br>
+			<button type = "submit" class="btn"> Submit </button></br>
 	<c:if test="${displayDetails != null}">
 		<table border="1" align = "center">
-			<caption>Screen Details</caption>
+			<caption><h2>Screen Details</h2></caption>
 			<tr><th>Screen ID<th>Screen Name<th>Theatre ID<th>Theatre Name<th>Theatre City</tr>
 		
 			<c:forEach items="${displayDetails}" var="details">

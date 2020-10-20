@@ -1,5 +1,3 @@
-
-
 <%@page import="com.cg.omts.dto.Booking"%>
 <%@page import="com.cg.omts.dto.Transaction"%>
 <%@page import="java.util.ArrayList"%>
@@ -19,7 +17,7 @@
 body {
 	margin:0;
 }
-.header a {
+.header a.active, a.active, a.logout {
 	float:right;
 	color: white;
 	padding: 12px;
@@ -38,17 +36,23 @@ a {
 	float: left;
 }
 
-.header a:hover {
+.header a.active:hover {
 	background-color: #a89e8a;
 	font-size: 200%;
 }
-
+.header a.logout:hover {
+	font-size: 200%;
+}
 .bgpic {
 	background-image: url("background.jpg");
 	height: 100vh;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+}
+.header a.back{
+	float : left;
+	padding: 15px 15px;
 }
 .header {
 	overflow: hidden;
@@ -114,7 +118,22 @@ a {
 	text-align: center;
 	opacity: 0.7;
 }
+table {
+	background-color: #ffff1a;
+	border-collapse: collapse;
+	width: 70%;
+	height: 20%
+}
 
+th, td {
+	padding: 8px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+	background-color: grey;
+}
 </style>
 
 <body class="bgpic">
@@ -131,11 +150,12 @@ a {
   %> 
  <div class="header">
 	 		
-	 		<a href="index.jsp" class = "logout" align="right"><img src="logout.png" alt="logout button" style="width:20px;height:20px;border:0;float:right"></a>
-		    
+	 		<a href="LogoutServlet" class = "logout" align="right"><b>Logout</b></a>
 			<a href="ViewBookingController" class="active" ><b>My Bookings</b></a>
 		    <a href="userhome.jsp" class="active" ><b>User Home </b></a>
-		  	<a class="logo" style="width:100px;height:20px;border:0;float:left">T-CKT</a>
+		  	<a href="userhome.jsp" class = "back" align="left">
+		  	<img src="backbutton.png" alt="back button" style="width:20px;height:25px;border:0;">
+		    </a>
 		    
 	</div> 
 	
@@ -157,7 +177,8 @@ a {
 		movieNameList = (List<String>)request.getAttribute("movieNameList");
 	%>
 	<br><br><br>
-	<table border="1" align ="center">
+	<h1 align ="center">MY BOOKINGS</h1>
+	<table border="1" align ="center" id="myTable">
 		<tr>
 			
 			<th>TICKETID</th>
@@ -168,7 +189,7 @@ a {
 			<th>SCREEN NAME</th>
 			<th>TOTAL AMOUNT</th>
 			<th>BOOKING DATE</th>
-			<th>SEAT NUMBERS</th>
+			<th>CANCEL TICKET</th>
 			
 		</tr>
 		<%	for(int i = 0; i < ticketList.size(); i++){
@@ -189,7 +210,7 @@ a {
 		<%=request.getAttribute("message")%>
 	<%} %>
 	</table>
-<div class="footer" style="font-size: 20px">
+	<div class="footer" style="font-size: 20px">
 		<span style="font-size: 15px">&#9400;</span> Copyrights Capgemini
 		India Ltd.
 	</div>
