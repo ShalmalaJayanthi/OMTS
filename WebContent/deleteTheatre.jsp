@@ -34,7 +34,7 @@
 <h1>Theatre List</h1>
 Enter Theatre Name:
 <form method="get" action="./DeleteTheatreServlet">
-<input type="text" name="theatreName" required>
+<input type="text" name="theatreName" pattern = "^[a-zA-Z0-9]+$" title = "Theatre Name must contain letters and digits" required>
 <input type="submit" value="search theatre" >
 </form>
 <a href="deleteTheatre.jsp">View All </a>

@@ -112,11 +112,9 @@ a {
 
  <div class="header">
 	 		
-	 		<a href="index.jsp" class = "logout" align="right"><img src="logout.png" alt="logout button" style="width:20px;height:20px;border:0;float:right"></a>
-		    
+	 		<a href="LogoutServlet" class = "logout" align="right"><b>Logout</b></a>
 			<a href="ViewBookingController" class="active" ><b>My Bookings</b></a>
 		    <a href="userhome.jsp" class="active" ><b>User Home </b></a>
-		  	<a class="logo" style="width:100px;height:20px;border:0;float:left">T-CKT</a>
 		    
 	</div>
 <form action ="paymentController" method ="post">
@@ -136,7 +134,7 @@ a {
 <tr><td>Cvv<td><input type="number" name="cvv"  pattern="^[0-9]{3}$" title="CVV should be of 3 digits"required>
 <tr><td>Password<td><input type="password" name="pass" required>
 <tr><td>Total Amount<td><input type = "text" name = "totalPrice" value = <%=request.getAttribute("totalPrice") %> readonly>
-<tr><td><td><input type ="submit" value="PAY">
+<br><br><tr><td><td><input type ="submit" value="PAY">
 </table>
 </form>
 <div class="footer" style="font-size: 20px">

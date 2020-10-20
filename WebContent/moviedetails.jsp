@@ -12,38 +12,34 @@ body {
 }
 
 
-.header {
-	overflow: hidden;
-	background-color: #291f04;
-	padding: 5px 5px;
-	opacity: 1;
-	height:8%;
-	margin-top:0%;
-}
-
-.header a {
-	
+.header a.logout {
+	float:right;
 	color: white;
-	
+	padding: 12px;
+	text-decoration: none;
+	line-height: 25px;
+	border-radius: 4px;
+	display: block;
+	color: white;
+	text-align: right;
+	width:0%;
+	padding: 14px 20px;
+	width: 200px;
 	font-size: 180%;
 }
-.header a.logout {
-	background-color: #291f04;
-	color: white;
+
+
+.header a.logout:hover {
+	background-color: #a89e8a;
 
 }
 
-.header a.logo {
-	weight: 10;
-	color: white;
-	font-size: 30px;
-}
 .footer {
 	position: fixed;
 	left: 0;
 	bottom: 0;
 	color: white;
-	background-color: #291f04;
+	background-color:#291f04;
 	margin-top: 100%;
 	width: 100%;
 	height: 6%;
@@ -51,18 +47,35 @@ body {
 	text-align: center;
 	opacity: 1;
 }
-/*.header {
+.bgpic {
+	background-image: url("background.jpg");
+	height: 100vh;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.header {
 	overflow: hidden;
 	background-color: #291f04;
-	padding: 5px 5px;
+	padding: 0px 0px;
 	opacity: 1;
+
 	height:8%;
 }
-.header.logout {
+.header a.logout {
 	background-color: #291f04;
 	color: white;
 
-}*/
+}
+.header logo {
+	weight: 10;
+	color: white;
+	font-size: 40px;
+}
+.header a.back{
+	float : left;
+	padding: 15px 15px;
+}
 .bgpic {
 	background-image: url("background.jpg");
 	height: 100vh;
@@ -91,29 +104,29 @@ td {
   border: none;
   border-radius: 16px;
   color: white;
+  
   padding: 12px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 20px 550px;
   cursor: pointer;
 }
 .btn:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
+
 </style>
 </head>
 <body class="bgpic">
 	
 	<div class="header">
-		    <a href="userhome.jsp" class = "back" align="right">
-		  	<img src="back.png" alt="back button" style="width:20px;height:25px;border:0;">
-		    </a>
-		    
+		   
 		  	
-			<a href="index.jsp" class = "logout" align="right">
-		  	<img src="logout.png" alt="logout button" style="width:20px;height:20px;border:0;float:right;">
+			<a href="LogoutServlet" class = "logout" align="right"><b>Logout</b></a>
+			<a href="userhome.jsp" class = "back" align="left">
+		  	<img src="backbutton.png" alt="back button" style="width:20px;height:25px;border:0;">
 		    </a>
 	</div> 
 
@@ -129,9 +142,9 @@ td {
 	</table>
 	</div>
 	<br>
-	<div align="center">
+	<center><div align="center">
 		<a href="booking.jsp?movieId=${movie.movieId}" class="btn">BOOK TICKET</a>
-	</div>
+	</div></center>
 	<div class="footer" style="font-size: 20px">
 		<span style="font-size: 15px">&#9400;</span> Copyrights Capgemini
 		India Ltd.

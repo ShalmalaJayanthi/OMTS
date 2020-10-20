@@ -119,11 +119,9 @@ a {
 <body class="bgpic">
  <div class="header">
 	 		
-	 		<a href="index.jsp" class = "logout" align="right"><img src="logout.png" alt="logout button" style="width:20px;height:20px;border:0;float:right"></a>
-		    
+	 		<a href="LogoutServlet" class = "logout" align="right"><b>Logout</b></a>
 			<a href="ViewBookingController" class="active" ><b>My Bookings</b></a>
 		    <a href="userhome.jsp" class="active" ><b>User Home </b></a>
-		  	<a class="logo" style="width:100px;height:20px;border:0;float:left">T-CKT</a>
 		    
 	</div>
 	<div class="footer" style="font-size: 20px">

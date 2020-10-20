@@ -102,7 +102,7 @@
 		<form method = "post" action = "SelectTheatreIdDetails" align = "center">
 		<input type = "hidden" name = "seatPrice" value = <%= request.getAttribute("seatPrice") %>>
 		<input type = "hidden" name = "theatreCity" value = <%=request.getAttribute("theatreCity") %>>
-		<input type = "number" name = "theatreId" placeholder = "Enter Theatre ID" required></br>
+		<input type = "text" name = "theatreId" placeholder = "Enter Theatre ID" pattern="[2]{1}[0-9]{3}" title="Theatre Id should start with number 2 and of only 4 digits" required></br>
 			<input type = "submit" value = "Submit">
 			
 	<c:if test="${theatreDetails != null}">

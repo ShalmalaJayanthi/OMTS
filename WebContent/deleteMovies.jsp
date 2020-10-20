@@ -105,7 +105,7 @@
 	%>
 	
 	<form method = "post" action = "DeleteMovieServlet" align = "center">
-		<input type = "number" name = "movieId" placeholder = "Enter Movie ID" pattern="^[3]{1}[0-9]{3}$" title="Movie Id should start with number 3 and of only 4 digits"required></br>
+		<input type = "text" name = "movieId" placeholder = "Enter Movie ID" pattern="^[3]{1}[0-9]{3}$" title="Movie ID should start with number 3 and of only 4 digits"required></br>
 		<input type = "submit" value = "Submit"></br></br>
 	<c:if test="${displayDetails != null}">
 		<table border="1" align = "center">

@@ -34,7 +34,7 @@
 <br>
 <form method="post" action="./AddShowServlet">
 Enter Show Id : 
-<input type="text" name="showId" pattern="[5]{1}[0-9]{3}" title="Show Id should start with number 4 and of only 4 digit" required>
+<input type="text" name="showId" pattern="[5]{1}[0-9]{3}" title="Show Id should start with number 5 and of only 4 digit" required>
 <br>
 <br>
 Enter Show Name:<select id="showType" name="showName" onchange="myFunction()">
@@ -52,15 +52,15 @@ Enter Show Start Time:
 <br>
 <br>
 Enter Theatre Id:
-<input type="text" name="theatreId" pattern="[2]{1}[0-9]{3}" title="Theatre Id should start with number 2 and of only 4 digits" required>
+<input type="text" name="theatreId" pattern="[2]{1}[0-9]{3}" title="Theatre ID should start with number 2 and of only 4 digits" required>
 <br>
 <br>
 Enter Movie Id :
-<input type="text" name="movieId" pattern="[3]{1}[0-9]{3}" title="Movie Id should start with number 3 and of only 4 digits" required>
+<input type="text" name="movieId" pattern="[3]{1}[0-9]{3}" title="Movie ID should start with number 3 and of only 4 digits" required>
 <br>
 <br>
 Enter Screen Id :
-<input type="text" name="screenId"pattern="[4]{1}[0-9]{3}" title="Screen Id should start with number 4 and of only 4 digits" required>
+<input type="text" name="screenId"pattern="[4]{1}[0-9]{3}" title="Screen ID should start with number 4 and of only 4 digits" required>
 <br>
 <br>
 <input type="submit" value="Enter Show">

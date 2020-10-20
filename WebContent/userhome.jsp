@@ -105,6 +105,8 @@ tr:hover {background-color:#f5f5f5;}
 		 window.location.href="./DisplayMoviesToUser?city="+city;
 	}
 </script>
+
+
 </head>
 <body class="bgpic">
 <%
@@ -127,14 +129,15 @@ tr:hover {background-color:#f5f5f5;}
 </form>
 	 <div class="header">
 	 		
-	 		<a href="LogoutServlet" class = "logout" align="right"><img src="logout.png" alt="logout button" style="width:20px;height:20px;border:0;float:right"></a>
-		    
+	 		<a href="LogoutServlet" class = "logout" align="right"><b>Logout</b></a>
 			<a href="ViewBookingController" class="active" ><b>My Bookings</b></a>
 		    <a href="userhome.jsp" class="active" ><b>User Home </b></a>
-		  	<a class="logo" style="width:100px;height:20px;border:0;float:left">T-CKT</a>
+		  	
 		    
 	</div> 
 	
+	
+
 	<div class="userhome" id="userhome">
 	<form action="/DisplayMoviesToUser" method="get" align="center">
 		<select name="city" id="city" onchange="selectCity()" class="selectclass">
@@ -161,6 +164,6 @@ tr:hover {background-color:#f5f5f5;}
 	<div class="footer" style="font-size: 20px">
 		<span style="font-size: 15px">&#9400;</span> Copyrights Capgemini
 		India Ltd.
-	</div>  
+	</div> 
 </body>
 </html>

@@ -14,7 +14,75 @@
 <head>
 <meta charset="UTF-8">
 <title>Booking</title>
-<style>
+<!-- <style>
+
+.header a {
+	float:right;
+	color: white;
+	padding: 12px;
+	text-decoration: none;
+	line-height: 25px;
+	border-radius: 4px;
+	display: block;
+	color: white;
+	text-align: right;
+	width:0%;
+	padding: 14px 20px;
+	width: 200px;
+	font-size: 180%;
+}
+a {
+	float: left;
+}
+
+.header a:hover {
+	background-color: #a89e8a;
+
+}
+
+body {
+	margin:0;
+}
+.bgpic {
+	background-image: url("background.jpg");
+	height: 100vh;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.header {
+	overflow: hidden;
+	background-color: #291f04;
+	padding: 0px 0px;
+	opacity: 1;
+
+	height:8%;
+}
+.header a.logout {
+	background-color: #291f04;
+	color: white;
+
+}
+.header logo {
+	weight: 10;
+	color: white;
+	font-size: 40px;
+}
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	color: white;
+	background-color:#291f04;
+	margin-top: 100%;
+	width: 100%;
+	height: 6%;
+	font-size: 200%;
+	text-align: center;
+	opacity: 1;
+}
+
+
 ul {
 	list-style-type: none;
 	margin: 0;
@@ -42,9 +110,7 @@ li a:hover {
 	font-size: 200%;
 }
 
-.active {
-	background-color: #a89e8a;
-}
+
 
 .loginform {
 	margin-top: 10%;
@@ -63,29 +129,6 @@ li a:hover {
 	border: 3px solid #f1f1f1;
 }
 
-.header {
-	overflow: hidden;
-	background-color: #a89e8a;
-	padding: 20px 10px;
-	opacity: 0.8;
-}
-
-.header a {
-	float: left;
-	color: white;
-	text-align: center;
-	padding: 12px;
-	text-decoration: none;
-	font-size: 28px;
-	line-height: 25px;
-	border-radius: 4px;
-}
-
-.header a.logo {
-	weight: 10;
-	font-size: 40px;
-}
-
 .header a:hover {
 	background-color: #a89e8a;
 }
@@ -94,11 +137,6 @@ li a:hover {
 	background-color: #a89e8a;
 	color: white;
 }
-
-.header-right {
-	float: right;
-}
-
 @media screen and (max-width: 500px) {
 	.header a {
 		float: none;
@@ -133,7 +171,85 @@ li a:hover {
 }
 
 </style>
-<script type="text/javascript">
+ -->
+ <style>
+
+.header a {
+	float:right;
+	color: white;
+	padding: 12px;
+	text-decoration: none;
+	line-height: 25px;
+	border-radius: 4px;
+	display: block;
+	color: white;
+	text-align: right;
+	width:0%;
+	padding: 14px 20px;
+	width: 200px;
+	font-size: 180%;
+}
+a {
+	float: left;
+}
+
+.header a:hover {
+	background-color: #a89e8a;
+
+}
+
+body {
+	margin:0;
+}
+.bgpic {
+	background-image: url("background.jpg");
+	height: 100vh;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.header {
+	overflow: hidden;
+	background-color: #291f04;
+	padding: 0px 0px;
+	opacity: 1;
+
+	height:8%;
+}
+.header a.logout {
+	background-color: #291f04;
+	color: white;
+
+}
+.header logo {
+	weight: 10;
+	color: white;
+	font-size: 40px;
+}
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	color: white;
+	background-color:#291f04;
+	margin-top: 100%;
+	width: 100%;
+	height: 6%;
+	font-size: 200%;
+	text-align: center;
+	opacity: 1;
+}
+
+.selectclass {
+	width:250px;
+	height:35px;
+	margin-right:81%;
+	font-size:15px;
+	background-color:#e3dddc;
+}
+</style>
+ 
+ <script type="text/javascript">
 
 
 	function changeActionForScreen(){
@@ -160,23 +276,17 @@ li a:hover {
 		}
 </script>
 </head>
-<body>
+<body class="bgpic">
 <div class="header">
-
-		<ul>
-			<li><a class="logo"><b>T-CKT</b></a></li>
-			<div class="header-right">
-				<li><a href="userhome.jsp" class="active"><b>Home </b></a></li>
-				<li><a href="ViewBookingController" class="active"><b>My Bookings</b></a></li>
-				<li><a class="active" href="index.jsp" onclick="login()"><b>Signout
-					</b></a></li>
-				
-			</div>
-		</ul>
-
-
-
-	</div>
+	 		
+	 		<a href="LogoutServlet" class = "logout" align="right"><b>Logout</b></a>
+		    
+			<a href="ViewBookingController" class="active" ><b>My Bookings</b></a>
+		    <a href="userhome.jsp" class="active" ><b>User Home </b></a>
+		  	
+		    
+	</div> 
+	<br><br><br><br><br><br><br><br>
 <center>
 	<form action ="BookingController" method = "post" id = "theatreSelection" name = "bookingForm">
 		<table>
@@ -341,7 +451,7 @@ li a:hover {
 		</Script>
 		
 		
-	</form>
+	</form><br><br><br>
 	<% if((request.getAttribute("theatreId") != null) && (request.getAttribute("screenId") != null) && (request.getAttribute("showId") != null)){ %>
 			<input type="button" id="myBtn" value="Proceed to Pay" onclick="proceedToPay()">
 	<%}else{ %>		
@@ -352,6 +462,6 @@ li a:hover {
 	<div class="footer" style="font-size: 20px">
 		<span style="font-size: 15px">&#9400;</span> Copyrights Capgemini
 		India Ltd.
-	</div>
+	</div> 
 </body>
 </html>

@@ -94,7 +94,6 @@
   <img src="logout.png" alt="logout button" style="width:60px;height:55px;border:0;float:right">
    </a>
 </div>
-	
 	<%
 		String message = (String)request.getAttribute("message");
 		if(message != null)
@@ -103,15 +102,13 @@
 	<form method = "post" action = "AddScreenServlet" align = "center">
 		<table align = "center">
 			<h3><caption>Enter the Screen Details</caption></h3>
-			<tr><td>Screen Id<td><input type="number" name = "screenId" required>
-			<tr><td>Screen Name<td><input type = "text" name = "screenName" required>
-			<tr><td>Screen Rows<td><input type = "number" name = "screenRows" required>
-			<tr><td>Screen Columns<td><input type = "number" name = "screenColumns" required>
-			<tr><td>Screen Seat Price<td><input type = "number" name = "seatPrice" required>
-			<tr colspan="2" align = "centre"><td><input type = "submit" value = "Submit">
-			
+			<tr><td>Screen Id<td><input type="text" name = "screenId"  pattern="^[4]{1}[0-9]{3}$" title="Screen Id should start with number 4 and of only 4 digits" required>
+			<tr><td>Screen Name<td><input type = "text" name = "screenName" pattern = "^[a-zA-Z0-9]+$" title = "Screen Name must contain letters and digits only" required>
+			<tr><td>Screen Rows<td><input type = "text" name = "screenRows" pattern="^[1-9]{1}[0-9]{1}$" title="Screen rows should consist digits only and with max 99 rows" required>
+			<tr><td>Screen Columns<td><input type = "text" name = "screenColumns" pattern="^[1-9]{1}[0-9]{1}$" title="Screen columns should consist digits only and with max 99 coulumns"required>
+			<tr><td>Screen Seat Price<td><input type = "text" name = "seatPrice" pattern="^[1-9]{1}[0-9]{1,}$" title="Screen Price should a number" required>
+			<tr colspan="2" align = "centre"><td><input type = "submit" value = "Submit">	
 		</table>
 	</form>
-
 </body>
 </html>
