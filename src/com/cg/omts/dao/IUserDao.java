@@ -16,81 +16,84 @@ import com.cg.omts.exceptions.OMTSException;
 
 public interface IUserDao {
 	
-	public Movie getMovieDetails(int movieId) throws OMTSException;
+	public Movie getMovieDetails(int movieId) throws OMTSException;//movie 17
 	
-	public List<Integer> getTheatresByMovie(int movieId) throws OMTSException;
+	public List<Integer> getTheatresByMovie(int movieId) throws OMTSException;//movie 18
 	
-	public List<String> getTheatreNames(List<Integer> theatreIdList) throws OMTSException;
+	public List<String> getTheatreNames(List<Integer> theatreIdList) throws OMTSException;//movie 19
 	
-	public List<Theatre> getTheatres(List<Integer> theatreIdList) throws OMTSException;
+	public List<Theatre> getTheatres(List<Integer> theatreIdList) throws OMTSException;//movie 20
 	
-	public int generateTicket(Ticket ticket) throws OMTSException;
+	public int allocateSeat(List<Integer> selectedSeatsList, int screenId) throws OMTSException;//booking
 	
-	public int allocateSeat(List<Integer> selectedSeatsList, int screenId) throws OMTSException;
+	public int assignSeatsToTickets(int ticketId, List<Integer> seatsList) throws OMTSException;//booking
 	
-	public int assignSeatsToTickets(int ticketId, List<Integer> seatsList) throws OMTSException;
+	public int setTicketStatus(int ticketId, String status) throws OMTSException;//booking
 	
-	public int setTicketStatus(int ticketId, String status) throws OMTSException;	
+	public int addTransaction(Transaction transaction, int ticketId) throws OMTSException;//booking
 	
-	public int addTransaction(Transaction transaction, int ticketId) throws OMTSException;
+	public int addBooking(Booking booking, int ticketId, int transactionId) throws OMTSException;//booking
 	
-	public int addBooking(Booking booking, int ticketId, int transactionId) throws OMTSException;
+	public List<Integer> getTheatresByCity(String city) throws OMTSException;//movie 21
 	
-	public List<Integer> getTheatresByCity(String city) throws OMTSException;
+	public List<Movie> getAllMovies() throws OMTSException;//movie 22
 	
-	public List<Movie> getAllMovies() throws OMTSException;
+	public int setSeatStatus(int seatId, String status) throws OMTSException;//booking
 	
-	public int setSeatStatus(int seatId, String status) throws OMTSException;
+	public int deleteBookingDetails(int ticketId) throws OMTSException;//booking
 	
-	public int deleteBookingDetails(int ticketId) throws OMTSException;
+	public List<Integer> getSeatsByTicket(int ticketId) throws OMTSException;//booking
 	
-	public List<Integer> getSeatsByTicket(int ticketId) throws OMTSException;
+	public int deleteAllocatedSeats(int ticketId) throws OMTSException;//cancel
 	
-	public int deleteAllocatedSeats(int ticketId) throws OMTSException;
+	public int deleteSeatDetails(List<Integer> seatList) throws OMTSException;//cancel
 	
-	public int deleteSeatDetails(List<Integer> seatList) throws OMTSException;
+	public Transaction getTransactionDetails(int ticketId) throws OMTSException;//cancel
 	
-	public Transaction getTransactionDetails(int ticketId) throws OMTSException;
+	public int deleteTransaction(int ticketId) throws OMTSException;//cancel
 	
-	public int deleteTransaction(int ticketId) throws OMTSException;
+	public int cancelTicket(int ticketId) throws OMTSException;//cancel
 	
-	public int cancelTicket(int ticketId) throws OMTSException;
+	public int getCurrentBalance(Transaction transaction) throws OMTSException;//cancel
 	
-	public int getCurrentBalance(Transaction transaction) throws OMTSException;
+	public int refundAfterCancellation(Transaction transaction, int currentBalance) throws OMTSException;//cancel
 	
-	public int refundAfterCancellation(Transaction transaction, int currentBalance) throws OMTSException;
+	public Seat getSeatPrice(int screenId) throws OMTSException;//booking
 	
-	public Seat getSeatPrice(int screenId) throws OMTSException;
+	public List<Screen> getScreenByTheatreId(int theatreId) throws OMTSException;//booking
 	
-	public List<Screen> getScreenByTheatreId(int theatreId) throws OMTSException;
+	public String getScreenName(int screenId) throws OMTSException;//booking
 	
-	public String getScreenName(int screenId) throws OMTSException;
-	
-	public String getShowName(int showId) throws OMTSException;
+	public String getShowName(int showId) throws OMTSException;//booking
 
-	List<Show> getShowsByMovieAndTheatre(int screenId, int theatreId, int movieId) throws OMTSException;
+	List<Show> getShowsByMovieAndTheatre(int screenId, int theatreId, int movieId) throws OMTSException;//booking
 
-	Booking getBookingDetails(int ticketId) throws OMTSException;
+	Booking getBookingDetails(int ticketId) throws OMTSException;//booking
 	
-	Booking getBookingById(int bookingId) throws OMTSException;
+	Booking getBookingById(int bookingId) throws OMTSException;//booking
 	
-	int getTransactionIdByBookingId(int bookingId) throws OMTSException;
+	int getTransactionIdByBookingId(int bookingId) throws OMTSException;//booking
 	
-	int getTicketIdByBookingId(int bookingId) throws OMTSException;
+	int getTicketIdByBookingId(int bookingId) throws OMTSException;//booking
 
-	Ticket getTicket(int ticketId) throws OMTSException;
+	Ticket getTicket(int ticketId) throws OMTSException;//booking
 
-	boolean validatePayment(int accountNo, int cvv, String password) throws OMTSException;
+	boolean validatePayment(int accountNo, int cvv, String password) throws OMTSException;//booking
 
-	Seat seatAvailability(int seatId) throws OMTSException;
+	Seat seatAvailability(int seatId) throws OMTSException;//booking
 
-	List<Movie> getMoviesById(List<Integer> movieIdList) throws OMTSException;
+	List<Movie> getMoviesById(List<Integer> movieIdList) throws OMTSException;//movie 23
 	
-	List<Integer> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException;
+	List<Integer> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException;//movie 24
 
+	
+	
+	
+	//booking
+	
 	public List<Ticket> getTicketByIDS(List<Integer> ticketIdList) throws OMTSException;
 	
-	public List<Transaction> getTransactionByTicket(List<Integer> ticketIdList) throws OMTSException;
+	public List<Transaction> getTransactionByTicket(List<Integer> ticketIdList) throws OMTSException;//booking
 	
 	public List<Booking> getBookingByUser(List<Transaction> transactionId) throws OMTSException;
 	
@@ -108,7 +111,7 @@ public interface IUserDao {
 	
 	public Screen getScreen(int screenId) throws OMTSException;
 
-	public String getTheatreNames(int theatreId) throws OMTSException;
+	public String getTheatreNames(int theatreId) throws OMTSException;//movie 25
 
 	public int makePayment(int accountNo, int currentBalance, int totalCost) throws OMTSException;
 }

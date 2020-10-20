@@ -44,11 +44,7 @@ public class UserServiceImpl implements IUserService{
 		return userDao.getAllMovies();
 
 	}
-	@Override
-	public int generateTicket(Ticket ticket) throws OMTSException {
-		// TODO Auto-generated method stub
-		return userDao.generateTicket(ticket);
-	}
+	
 	@Override
 	public int allocateSeat(List<Integer> selectedSeatsList, int screenId) throws OMTSException {
 		// TODO Auto-generated method stub

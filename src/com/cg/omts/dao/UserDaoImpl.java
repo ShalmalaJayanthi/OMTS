@@ -1,11 +1,9 @@
 package com.cg.omts.dao;
 
 import java.sql.Connection; 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.List;
 import com.cg.omts.dto.Booking;
@@ -32,9 +30,7 @@ public class UserDaoImpl implements IUserDao{
 		// TODO Auto-generated method stub
 		Movie movie = null;
 		Boolean isFound = false;
-		try {
-
-			
+		try {			
 			connection = DBConnection.getConnection();
 
 			prepareStatement = connection.prepareStatement(IUserQueryConstants.GET_MOVIE_DETAILS);
@@ -239,31 +235,6 @@ public class UserDaoImpl implements IUserDao{
 		return movieIdList;
 	}
 	
-	@Override
-	public int generateTicket(Ticket ticket) throws OMTSException {
-		// TODO Auto-generated method stub
-		int isGenerated = 0;
-		try {
-			connection = DBConnection.getConnection();
-			prepareStatement = connection.prepareStatement(IUserQueryConstants.GENERATE_TICKET);    
-			prepareStatement.setInt(1, ticket.getTicketId()); 
-			prepareStatement.setInt(2, ticket.getNoOfSeats());
-			prepareStatement.setInt(3, ticket.getScreenId());
-			prepareStatement.setInt(4, ticket.getTheatreId());
-			prepareStatement.setInt(5, ticket.getShowId());
-			prepareStatement.setInt(6, ticket.getMovieId());
-			isGenerated = prepareStatement.executeUpdate();  
-		}catch(SQLException e){ 
-			throw new OMTSException("problem while creating PS object"+e.getMessage());
-		}finally {
-			try {
-				connection.close();
-			}catch(SQLException e) {
-				throw new OMTSException("problem while closing Database");
-			}
-		}
-		return isGenerated;
-	}
 
 	@Override
 	public int allocateSeat(List<Integer> selectedSeatsList, int screenId) throws OMTSException {

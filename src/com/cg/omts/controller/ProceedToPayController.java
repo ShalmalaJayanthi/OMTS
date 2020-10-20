@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.cg.omts.dto.Ticket;
 import com.cg.omts.dto.Ticket.TicketStatus;
 import com.cg.omts.exceptions.OMTSException;
+import com.cg.omts.service.BookingServiceImpl;
+import com.cg.omts.service.IBookingService;
 import com.cg.omts.service.IUserService;
 import com.cg.omts.service.UserServiceImpl;
 
@@ -24,6 +26,7 @@ public class ProceedToPayController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		IUserService userService = new UserServiceImpl();
+		IBookingService bookingService = new BookingServiceImpl();
 		RequestDispatcher dispatcher = null;
 		int movieId = Integer.parseInt(request.getParameter("movieId"));
 		int theatreId = Integer.parseInt(request.getParameter("theatreId"));		
@@ -42,7 +45,7 @@ public class ProceedToPayController extends HttpServlet {
 		int userId = 1;
 		try {
 			Ticket ticket = new Ticket(ticketId, noOfSeats, TicketStatus.INPROCESS, screenId, theatreId, showId, movieId);	
-			int isGenerated = userService.generateTicket(ticket);
+			int isGenerated = bookingService.generateTicket(ticket);
 			userService.assignTicketToUser(ticketId,userId);
 			userService.allocateSeat(selectedSeatsList, screenId);
 			userService.assignSeatsToTickets(ticketId, selectedSeatsList);

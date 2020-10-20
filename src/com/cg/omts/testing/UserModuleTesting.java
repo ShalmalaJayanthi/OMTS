@@ -17,6 +17,8 @@ import com.cg.omts.dto.Seat;
 import com.cg.omts.dto.Ticket;
 import com.cg.omts.dto.Transaction;
 import com.cg.omts.exceptions.OMTSException;
+import com.cg.omts.service.BookingServiceImpl;
+import com.cg.omts.service.IBookingService;
 import com.cg.omts.service.IUserService;
 import com.cg.omts.service.UserServiceImpl;
 import static com.cg.omts.dto.Ticket.TicketStatus;
@@ -24,6 +26,7 @@ import static com.cg.omts.dto.Ticket.TicketStatus;
 public class UserModuleTesting {
 
 	IUserService userService = new UserServiceImpl();
+	IBookingService bookingService = new BookingServiceImpl();
 	
 	@Test
 	public void getMovieDetailsTest() throws OMTSException {
@@ -40,7 +43,7 @@ public class UserModuleTesting {
 	public void generateTicketTest() throws OMTSException {
 		try {
 			Ticket ticket = new Ticket(1, 2, TicketStatus.BOOKED, 1, 1, 1, 1);
-			int isGenerated = userService.generateTicket(ticket); 
+			int isGenerated = bookingService.generateTicket(ticket); 
 			assertTrue(isGenerated > 0);
 		}
 		catch(OMTSException e) {

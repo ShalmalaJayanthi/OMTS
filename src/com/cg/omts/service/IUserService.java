@@ -28,16 +28,7 @@ public interface IUserService {
 
 	public Movie getMovieDetails(int movieId) throws OMTSException;
 	
-	/*******************************
-	 * @description Method to generate ticket
-	 * @author Laxmi Prasanna Pujari
-	 * 
-	 * @param ticketId
-	 * @param ticket
-	 * @return int
-	 * @throws OMTSException
-	 */
-	public int generateTicket(Ticket ticket) throws OMTSException;
+	
 	
 	/*******************************
 	 * @description Method to allocate seat
