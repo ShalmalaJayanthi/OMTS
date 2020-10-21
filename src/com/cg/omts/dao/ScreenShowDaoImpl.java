@@ -160,41 +160,183 @@ public class ScreenShowDaoImpl implements IScreenShowDao, IScreenShowQueryConsta
 		}
 		return false;
 	}
-
+	
 	@Override
 	public List<Show> getShowDetails() throws OMTSException {
 		// TODO Auto-generated method stub
-		return null;
+		List<Show> showList = new ArrayList<Show>();
+		try {
+			connection  = DBConnection.getConnection();
+			statement = connection.createStatement();  
+			resultSet = statement.executeQuery(IAdminQueryConstants.GET_SHOW_DETAILS);  
+			
+			while(resultSet.next())   {
+					Show show = new Show();
+					show.setShowId(resultSet.getInt(1));
+					show.setShowStartTime(resultSet.getTime(2));
+					show.setShowEndTime(resultSet.getTime(3));
+					show.setShowName(resultSet.getString(4));
+					show.setMovieName(resultSet.getString(5));
+					show.setScreenId(resultSet.getInt(6));
+					show.setTheatreId(resultSet.getInt(7));
+					show.setMovieId(resultSet.getInt(8));
+					showList.add(show); 
+			}
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while displaying Show Data from Database");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+			
+		return showList;
+		
 	}
 
 	@Override
 	public int addShow(Show show) throws OMTSException {
-		// TODO Auto-generated method stub
-		return 0;
+		int isInserted = 0;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IAdminQueryConstants.ADD_SHOW);    
+			prepareStatement.setInt(1,show.getShowId()); 
+			prepareStatement.setTime(2, show.getShowStartTime());
+			prepareStatement.setTime(3, show.getShowEndTime());
+			prepareStatement.setString(4, show.getShowName());
+			prepareStatement.setString(5, show.getMovieName());
+			prepareStatement.setInt(6,show.getScreenId());
+			prepareStatement.setInt(7, show.getTheatreId());
+			prepareStatement.setInt(8, show.getMovieId());
+			isInserted = prepareStatement.executeUpdate();  
+			}catch(SQLException e){ 
+				throw new OMTSException("problem inserting Show Details into Database");
+			}finally {
+				try {
+					connection.close();
+				}catch(SQLException e) {
+					throw new OMTSException("problem while closing Database");
+				}
+			}
+		return isInserted;
 	}
 
 	@Override
 	public int deleteShow(int showId) throws OMTSException {
 		// TODO Auto-generated method stub
-		return 0;
+		int isDeleted = 0;
+		try {
+		connection = DBConnection.getConnection();
+		prepareStatement=connection.prepareStatement(IAdminQueryConstants.DELETE_SHOW);    
+		prepareStatement.setInt(1,showId);  
+		isDeleted = prepareStatement.executeUpdate();  
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while deleting Show Details from Database");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+	return isDeleted;
 	}
 
 	@Override
 	public List<Show> getShowByName(String showName) throws OMTSException {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		List<Show> showList = new ArrayList<Show>();
+		try {
+			connection  = DBConnection.getConnection();
+			prepareStatement =connection.prepareStatement(IAdminQueryConstants.GET_SHOW_BY_NAME); 
+			prepareStatement.setString(1, showName);
+			resultSet = prepareStatement.executeQuery();  
+				while(resultSet.next())   {
+					Show show = new Show();
+					show.setShowId(resultSet.getInt(1));
+					show.setShowStartTime(resultSet.getTime(2));
+					show.setShowEndTime(resultSet.getTime(3));
+					show.setShowName(resultSet.getString(4));
+					show.setMovieName(resultSet.getString(5));
+					show.setScreenId(resultSet.getInt(6));
+					show.setTheatreId(resultSet.getInt(7));
+					show.setMovieId(resultSet.getInt(8));
+					showList.add(show); 
+				}
+			}catch(SQLException e){ 
+				throw new OMTSException("problem while displaying Show Data from Database");
+			}finally {
+				try {
+					connection.close();
+				}catch(SQLException e) {
+					throw new OMTSException("problem while closing Database");
+				}
+			}
+				
+		return showList;
 
+	}
+	
 	@Override
 	public List<Integer> getScreenFromMovieAndTheatre(int theatreId, int movieId) throws OMTSException {
 		// TODO Auto-generated method stub
-		return null;
+		List<Integer> screenList = new ArrayList<Integer>();
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IAdminQueryConstants.GET_SCREEN_FROM_MOVIE_AND_THEATRE);
+			prepareStatement.setInt(1, movieId);
+			prepareStatement.setInt(2, theatreId);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			int screenId = 0;
+			while(resultSet.next())   {
+				screenId = resultSet.getInt(1); 
+				screenList.add(screenId);
+			}
+		}catch (SQLException e) {
+			System.out.println("Failed to retrieve screen Id  from movie and theatre");
+		} finally {
+			try {
+				connection.close();
+				prepareStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the database connection" +e);
+			}
+		}
+		return screenList;
 	}
+
 
 	@Override
 	public String checkShowNameandScreenId(String showName, int screenId) throws OMTSException {
 		// TODO Auto-generated method stub
-		return null;
+		String existShowName="";
+		int existScreenId = 0;
+		String exist = "";
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IAdminQueryConstants.CHECK_SHOWNAME_AND_SCREENID);
+			prepareStatement.setString(1, showName);
+			prepareStatement.setInt(2, screenId);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			while(resultSet.next())   {
+				existShowName = resultSet.getString(1);
+				existScreenId = resultSet.getInt(2);
+				exist = existShowName +"" + existScreenId;
+			}
+		}catch (SQLException e) {
+			System.out.println("Failed to retrieve screenId and showname  from showdetails");
+		} finally {
+			try {
+				connection.close();
+				prepareStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the database connection" +e);
+			}
+		}
+			return exist;
 	}
+
 
 }
