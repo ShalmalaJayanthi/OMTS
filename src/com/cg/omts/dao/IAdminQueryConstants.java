@@ -30,23 +30,6 @@ public interface IAdminQueryConstants {
 	String GET_MOVIE_NAME_ID = "select movieId, movieName from movie";
 	String ADD_SCREEN_SEAT_PRICE = "insert into screenseatprice values(?, ?)";
 	
-
-	
-	
-	
-	
-	
-	
-	/*      *********************************************************************************
-	Add all the queries above this 
-	
-	Should remove the below Queries
-	
-	
-			**********************************************************************************
-			*/
-	
-//	
 	String GET_THEATRE_DETAILS_DISPLAY = "select * from theatre";
 	
 	String ADD_THEATRE = "insert into theatre values(?,?,?,?,?)";
@@ -72,5 +55,21 @@ public interface IAdminQueryConstants {
 	String GET_MOVIENAME_BY_FROM_MOVIE = "select movieName from movie where movieId = ?";
 	
 	String CHECK_SHOWNAME_AND_SCREENID = "select showName,screenId from showdetails where showName=? and screenId=?";
+	
+	
+	
+	
+	
+	
+	/*      *********************************************************************************
+	Add all the queries above this 
+	
+	Should remove the below Queries
+	
+	
+			**********************************************************************************
+			*/
+	
+//	
 	
 }
