@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cg.omts.dao.AdminDaoImpl;
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Screen;
 import com.cg.omts.exceptions.OMTSException;
-import com.cg.omts.service.AdminServiceImpl;
-import com.cg.omts.service.IAdminService;
+import com.cg.omts.service.IMovieTheatreService;
+import com.cg.omts.service.IScreenShowService;
+import com.cg.omts.service.IScreenShowServiceImpl;
+import com.cg.omts.service.MovieTheatreServiceImpl;
 
 
 @WebServlet("/SelectTheatreIdDetails")
@@ -24,7 +25,9 @@ public class SelectTheatreIdDetailsController extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IAdminService adminService = new AdminServiceImpl();
+		IMovieTheatreService movieTheatreService = new MovieTheatreServiceImpl();
+		IScreenShowService screenShowService = new IScreenShowServiceImpl();
+		
 		String theatreCity = request.getParameter("theatreCity");
 		int theatreId = Integer.parseInt(request.getParameter("theatreId"));
 		
@@ -38,11 +41,11 @@ public class SelectTheatreIdDetailsController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String message;
 		try {
-			if(adminService.isTheatreIdExists(theatreId) && adminService.checkTheatreIdInCity(theatreId, theatreCity)) {
-				isAdded = adminService.addScreen(screen, theatreId);
+			if(movieTheatreService.isTheatreIdExists(theatreId) && movieTheatreService.checkTheatreIdInCity(theatreId, theatreCity)) {
+				isAdded = screenShowService.addScreen(screen, theatreId);
 				int screenId = screen.getScreenId();
 				System.out.println("Screen Id : "+screenId+"\nSeat price = "+seatPrice);
-				isPriceAdded = adminService.addScreenSeatPrice(screenId, seatPrice);
+				isPriceAdded = screenShowService.addScreenSeatPrice(screenId, seatPrice);
 				if(isAdded && isPriceAdded) {
 					message = "Successfully added screen details with ID: "+ screen.getScreenId();
 					request.setAttribute("message", message);

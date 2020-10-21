@@ -16,6 +16,8 @@ import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.service.AdminServiceImpl;
 import com.cg.omts.service.IAdminService;
+import com.cg.omts.service.IMovieTheatreService;
+import com.cg.omts.service.MovieTheatreServiceImpl;
 
 @WebServlet("/GetTheatreScreenDetailsController")
 public class GetTheatreScreenDetailsController extends HttpServlet {
@@ -31,13 +33,13 @@ public class GetTheatreScreenDetailsController extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String theatreCity = request.getParameter("theatreCity");
-		IAdminService adminService = new AdminServiceImpl();
+		IMovieTheatreService movieTheatreService = new MovieTheatreServiceImpl();
 		
 		ArrayList<Theatre> getTheatres = null;
 		try {
 			request.setAttribute("theatreCity", theatreCity);
 					
-			getTheatres = adminService.getTheatreDetails(theatreCity);
+			getTheatres = movieTheatreService.getTheatreDetails(theatreCity);
 			request.setAttribute("theatreDetails", getTheatres);
 			
 			int seatPrice = Integer.parseInt((String)request.getParameter("seatPrice"));

@@ -13,19 +13,19 @@ import javax.servlet.http.HttpSession;
 
 import com.cg.omts.dto.Movie;
 import com.cg.omts.exceptions.OMTSException;
-import com.cg.omts.service.AdminServiceImpl;
-import com.cg.omts.service.IAdminService;
+import com.cg.omts.service.IMovieTheatreService;
+import com.cg.omts.service.MovieTheatreServiceImpl;
 
 @WebServlet("/DeleteMovieServlet")
 public class DeleteMovieController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IAdminService adminService = new AdminServiceImpl();
+		IMovieTheatreService movieTheatreService = new MovieTheatreServiceImpl();
 		
 		ArrayList<Movie> displayDetails;
 		try {
-			displayDetails = adminService.getMovieDetailsToDelete();
+			displayDetails = movieTheatreService.getMovieDetailsToDelete();
 			HttpSession session = request.getSession();
 			session.setAttribute("displayDetails", displayDetails);
 			request.getRequestDispatcher("deleteMovies.jsp").forward(request, response);
@@ -38,12 +38,12 @@ public class DeleteMovieController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		int movieId = Integer.parseInt(request.getParameter("movieId"));
-		IAdminService adminService = new AdminServiceImpl();
+		IMovieTheatreService movieTheatreService = new MovieTheatreServiceImpl();
 		String message;
 		try {
-			boolean isMIdExists = adminService.isMovieIdExists(movieId);
+			boolean isMIdExists = movieTheatreService.isMovieIdExists(movieId);
 			if(isMIdExists) {
-				int rowsDeleted = adminService.deleteMovie(movieId);
+				int rowsDeleted = movieTheatreService.deleteMovie(movieId);
 				if(rowsDeleted > 0) {
 					message = "Successfully deleted record with movie ID: "+movieId;
 					request.setAttribute("message", message);

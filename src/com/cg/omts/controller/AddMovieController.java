@@ -2,26 +2,22 @@ package com.cg.omts.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-//import java.io.InputStream;
 import java.sql.Date;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-//import javax.servlet.http.Part;
 
 import com.cg.omts.dto.Movie;
 import com.cg.omts.exceptions.OMTSException;
-import com.cg.omts.service.AdminServiceImpl;
-import com.cg.omts.service.IAdminService;
+import com.cg.omts.service.IMovieTheatreService;
+import com.cg.omts.service.MovieTheatreServiceImpl;
 
 
 @WebServlet("/AddMovieServlet")
-@MultipartConfig()
 public class AddMovieController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,11 +32,11 @@ public class AddMovieController extends HttpServlet {
 		String releaseDate = request.getParameter("movieReleaseDate");
 	 
 		Date movieReleaseDate = Date.valueOf(releaseDate);
-		IAdminService adminService = new AdminServiceImpl();
+		IMovieTheatreService movieTheatreService = new MovieTheatreServiceImpl();
 		PrintWriter out = response.getWriter();
 		String message = " ";
 		try {
-			if(adminService.isMovieIdExists(movieId)){
+			if(movieTheatreService.isMovieIdExists(movieId)){
 				message = "Movie with ID: "+movieId+" already exists!!";
 				request.setAttribute("message", message);
 				request.getRequestDispatcher("addMovie.jsp").forward(request, response);
@@ -48,21 +44,16 @@ public class AddMovieController extends HttpServlet {
 				Movie movie = new Movie(movieId, movieName, movieGenre, movieDirector, movieLength, movieLanguage, movieReleaseDate);
 				
 				boolean isMovieAdded = false;
-				try {
-					isMovieAdded = adminService.addMovie(movie);
-					if(isMovieAdded) {
-						message = "Movie details with ID : "+ movie.getMovieId()+ " is successfully added";
-						request.setAttribute("message", message);
-						request.getRequestDispatcher("addMovie.jsp").forward(request, response);
-					}
-					else {
-						message = "Failed to add movie details with ID : "+ movie.getMovieId();
-						request.setAttribute("message", message);
-						request.getRequestDispatcher("addMovie.jsp").forward(request, response);
-					}
-				} catch (OMTSException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				isMovieAdded = movieTheatreService.addMovie(movie);
+				if(isMovieAdded) {
+					message = "Movie details with ID : "+ movie.getMovieId()+ " is successfully added";
+					request.setAttribute("message", message);
+					request.getRequestDispatcher("addMovie.jsp").forward(request, response);
+				}
+				else {
+					message = "Failed to add movie details with ID : "+ movie.getMovieId();
+					request.setAttribute("message", message);
+					request.getRequestDispatcher("addMovie.jsp").forward(request, response);
 				}
 			}
 		} catch (OMTSException e1) {

@@ -11,7 +11,7 @@ public class DBConnection {
 		Connection con = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/OMTS?ssl=true","root","root");			
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/finalMovie?ssl=true","root","jayanthi");			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

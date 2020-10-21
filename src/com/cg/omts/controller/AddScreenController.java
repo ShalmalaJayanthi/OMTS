@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cg.omts.dto.Screen;
 import com.cg.omts.exceptions.OMTSException;
-import com.cg.omts.service.AdminServiceImpl;
-import com.cg.omts.service.IAdminService;
+import com.cg.omts.service.IScreenShowService;
+import com.cg.omts.service.IScreenShowServiceImpl;
 
 @WebServlet("/AddScreenServlet")
 public class AddScreenController extends HttpServlet {
@@ -27,10 +27,10 @@ public class AddScreenController extends HttpServlet {
 		int screenRows = Integer.parseInt(request.getParameter("screenRows"));
 		int screenColumns = Integer.parseInt(request.getParameter("screenColumns"));
 		int seatPrice = Integer.parseInt(request.getParameter("seatPrice"));
-		IAdminService adminService = new AdminServiceImpl();
+		IScreenShowService screenShowService = new IScreenShowServiceImpl();
 		System.out.println("In AddScreenController screenId: "+ screenId);
 		try {
-			if(!adminService.isScreenIdExists(screenId)) {
+			if(!screenShowService.isScreenIdExists(screenId)) {
 				Screen screen = new Screen(screenId, screenName, screenRows, screenColumns);
 				System.out.println("In AddScreenController screen: "+ screen);
 				ServletContext context=getServletContext();
