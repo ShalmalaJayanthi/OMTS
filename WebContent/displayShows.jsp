@@ -1,3 +1,5 @@
+<%@page import="com.cg.omts.service.IScreenShowServiceImpl"%>
+<%@page import="com.cg.omts.service.IScreenShowService"%>
 <%@page import="com.cg.omts.dto.Show"%>
 <%@page import="java.util.List"%>
 <%@page import="com.cg.omts.service.AdminServiceImpl"%>
@@ -39,8 +41,9 @@
 <h1>List of Shows </h1>
 <table  border=1>
 
-<%IAdminService adminService = new AdminServiceImpl();
-List<Show> showList = adminService.getShowDetails();
+<%//IAdminService adminService = new AdminServiceImpl();
+IScreenShowService screenShowService = new IScreenShowServiceImpl();
+List<Show> showList = screenShowService.getShowDetails();
 %>
 <tr>
 <td>

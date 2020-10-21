@@ -1,3 +1,5 @@
+<%@page import="com.cg.omts.service.IScreenShowServiceImpl"%>
+<%@page import="com.cg.omts.service.IScreenShowService"%>
 <%@page import="com.cg.omts.service.AdminServiceImpl"%>
 <%@page import="com.cg.omts.service.IAdminService"%>
 <%@page import="java.util.List"%>
@@ -154,8 +156,9 @@ Movie Id
 Delete
 </td>
 </tr>
-<% IAdminService adminDao = new AdminServiceImpl();
-List<Show> showList = adminDao.getShowDetails();
+<% //IAdminService adminDao = new AdminServiceImpl();
+IScreenShowService screenShowService = new IScreenShowServiceImpl();
+List<Show> showList = screenShowService.getShowDetails();
 for(Show show : showList) {
 %>
 <tr>

@@ -1,3 +1,5 @@
+<%@page import="com.cg.omts.service.MovieTheatreServiceImpl"%>
+<%@page import="com.cg.omts.service.IMovieTheatreService"%>
 <%@page import="com.cg.omts.dto.Theatre"%>
 <%@page import="java.util.List"%>
 <%@page import="com.cg.omts.service.AdminServiceImpl"%>
@@ -84,8 +86,9 @@ if(request.getAttribute("searchTheatreList")!=null) {%>
 </table>
 <% } else { %>
 <table  border=1>
-<%IAdminService adminService = new AdminServiceImpl();
-List<Theatre> theatreList = adminService.getTheatreDetails();
+<%//IAdminService adminService = new AdminServiceImpl();
+IMovieTheatreService movieTheatreService = new MovieTheatreServiceImpl();
+List<Theatre> theatreList = movieTheatreService.getTheatreDetails();
 %>
 <tr>
 <td>Theatre Id</td>
