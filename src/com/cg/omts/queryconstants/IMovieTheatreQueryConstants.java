@@ -22,6 +22,23 @@ public interface IMovieTheatreQueryConstants {
 	
 	String GET_MOVIE_NAME_ID = "select movieId, movieName from movie";
 	
+	String GET_THEATREID = "select theatreId from theatre WHERE theatreCity=?";
+	
+	String GET_THEATRE_BY_ID = "select * from theatre where theatreId = ?";
+
+	String GET_THEATRE_NAME_BY_ID = "select theatreName from theatre where theatreId = ?";
+	
+	String GET_THEATRES_BY_MOVIE = "select theatreId from movietheatre where movieId = ?";
+	
+	String GET_THEATRE_NAME = "select theatreName from theatre where theatreId = ?";
+	
+	String GET_MOVIES_BY_THEATRE_ID = "select movieId from movietheatre where theatreId=?";
+	
+	String GET_MOVIES_BY_ID = "select * from movie where movieId = ?";
+	
+	String GET_ALL_MOVIES = "select * from movie";
+	
+	String GET_MOVIE_DETAILS = "select * from movie where movieId = ?";
 	
 
 }

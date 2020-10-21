@@ -1,6 +1,7 @@
 package com.cg.omts.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.cg.omts.dto.Movie;
 import com.cg.omts.dto.Theatre;
@@ -118,5 +119,77 @@ public interface IMovieTheatreService {
 	 * @return boolean value
 	 * @throws OMTSException
 	 */
+	
+	/*****
+	 * @description Method to get TheatreId by city
+	 * @author Supriya M
+	 * @param city
+	 * @return List<Integer>
+	 * @throws OMTSException
+	 */
+	public List<Integer> getTheatresByCity(String city) throws OMTSException;
+	
+	/*****
+	 * @description Method to return theatre details by theatreID
+	 * @author Supriya M
+	 * @param theatreIdList
+	 * @return List<Theatre>
+	 * @throws OMTSException
+	 */
+	public List<Theatre> getTheatres(List<Integer> theatreIdList) throws OMTSException;
+	
+	/*****
+	 * @description Method to get theatre names by theatreId list
+	 * @author Supriya M
+	 * @param theatreIdList
+	 * @return List<String>
+	 * @throws OMTSException
+	 */
+	public List<String> getTheatreNames(List<Integer> theatreIdList) throws OMTSException;
+	
+	/*****
+	 * @description Method to get theatreId by movieId
+	 * @author Supriya M
+	 * @param movieId
+	 * @return List<Integer>
+	 * @throws OMTSException
+	 */
+	public List<Integer> getTheatresByMovie(int movieId) throws OMTSException;
+	
+	/*****
+	 * @description Method to return theatreNames by theatreId
+	 * @author Supriya M
+	 * @param theatreId
+	 * @return String
+	 * @throws OMTSException
+	 */
+	public String getTheatreNames(int theatreId) throws OMTSException;
+	
+	/*****
+	 * @description Method to return movieId by theatreId List
+	 * @author Supriya M
+	 * @param theatreIdList
+	 * @return List<Integer>
+	 * @throws OMTSException
+	 */
+	public List<Integer> getMoviesByTheatre(List<Integer> theatreIdList) throws OMTSException;
+	
+	/*****
+	 * @description Method to return movie details by movieIdList
+	 * @author Supriya M
+	 * @param movieIdList
+	 * @return List<Movie>
+	 * @throws OMTSException
+	 */
+	public List<Movie> getMoviesById(List<Integer> movieIdList) throws OMTSException;
+	
+	/*****
+	 * @description Method to get all movie details
+	 * @author Supriya M
+	 * @return List<Movie>
+	 * @throws OMTSException
+	 */
+	public List<Movie> getAllMovies() throws OMTSException;
+	
 	
 }
