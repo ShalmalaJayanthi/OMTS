@@ -168,7 +168,7 @@ public class ScreenShowDaoImpl implements IScreenShowDao, IScreenShowQueryConsta
 		try {
 			connection  = DBConnection.getConnection();
 			statement = connection.createStatement();  
-			resultSet = statement.executeQuery(IAdminQueryConstants.GET_SHOW_DETAILS);  
+			resultSet = statement.executeQuery(GET_SHOW_DETAILS);  
 			
 			while(resultSet.next())   {
 					Show show = new Show();
@@ -201,7 +201,7 @@ public class ScreenShowDaoImpl implements IScreenShowDao, IScreenShowQueryConsta
 		int isInserted = 0;
 		try {
 			connection = DBConnection.getConnection();
-			prepareStatement = connection.prepareStatement(IAdminQueryConstants.ADD_SHOW);    
+			prepareStatement = connection.prepareStatement(ADD_SHOW);    
 			prepareStatement.setInt(1,show.getShowId()); 
 			prepareStatement.setTime(2, show.getShowStartTime());
 			prepareStatement.setTime(3, show.getShowEndTime());
@@ -229,7 +229,7 @@ public class ScreenShowDaoImpl implements IScreenShowDao, IScreenShowQueryConsta
 		int isDeleted = 0;
 		try {
 		connection = DBConnection.getConnection();
-		prepareStatement=connection.prepareStatement(IAdminQueryConstants.DELETE_SHOW);    
+		prepareStatement=connection.prepareStatement(DELETE_SHOW);    
 		prepareStatement.setInt(1,showId);  
 		isDeleted = prepareStatement.executeUpdate();  
 		}catch(SQLException e){ 
@@ -250,7 +250,7 @@ public class ScreenShowDaoImpl implements IScreenShowDao, IScreenShowQueryConsta
 		List<Show> showList = new ArrayList<Show>();
 		try {
 			connection  = DBConnection.getConnection();
-			prepareStatement =connection.prepareStatement(IAdminQueryConstants.GET_SHOW_BY_NAME); 
+			prepareStatement =connection.prepareStatement(GET_SHOW_BY_NAME); 
 			prepareStatement.setString(1, showName);
 			resultSet = prepareStatement.executeQuery();  
 				while(resultSet.next())   {
@@ -285,7 +285,7 @@ public class ScreenShowDaoImpl implements IScreenShowDao, IScreenShowQueryConsta
 		List<Integer> screenList = new ArrayList<Integer>();
 		try {
 			connection = DBConnection.getConnection();
-			prepareStatement = connection.prepareStatement(IAdminQueryConstants.GET_SCREEN_FROM_MOVIE_AND_THEATRE);
+			prepareStatement = connection.prepareStatement(GET_SCREEN_FROM_MOVIE_AND_THEATRE);
 			prepareStatement.setInt(1, movieId);
 			prepareStatement.setInt(2, theatreId);
 			ResultSet resultSet = prepareStatement.executeQuery();
@@ -316,7 +316,7 @@ public class ScreenShowDaoImpl implements IScreenShowDao, IScreenShowQueryConsta
 		String exist = "";
 		try {
 			connection = DBConnection.getConnection();
-			prepareStatement = connection.prepareStatement(IAdminQueryConstants.CHECK_SHOWNAME_AND_SCREENID);
+			prepareStatement = connection.prepareStatement(CHECK_SHOWNAME_AND_SCREENID);
 			prepareStatement.setString(1, showName);
 			prepareStatement.setInt(2, screenId);
 			ResultSet resultSet = prepareStatement.executeQuery();

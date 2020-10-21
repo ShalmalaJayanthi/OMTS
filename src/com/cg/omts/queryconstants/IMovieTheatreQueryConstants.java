@@ -40,5 +40,18 @@ public interface IMovieTheatreQueryConstants {
 	
 	String GET_MOVIE_DETAILS = "select * from movie where movieId = ?";
 	
+String GET_THEATRE_DETAILS_DISPLAY = "select * from theatre";
+	
+	String ADD_THEATRE = "insert into theatre values(?,?,?,?,?)";
+	
+	String DELETE_THEATRE = "delete from theatre where theatreId = ?";
+	
+	String GET_THEATRE_BY_NAME = "select * from theatre where theatreName = ?";
+	
+String GET_MOVIELENGTH = "select movieLength from movie where movieId = ?";
+	
+	String GET_MOVIENAME_FROM_MOVIE = "select movieName from movie where movieId = ?";
+	
+	
 
 }

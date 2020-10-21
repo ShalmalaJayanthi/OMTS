@@ -320,7 +320,7 @@ public class MovieTheatreDaoImpl implements IMovieTheatreDao, IMovieTheatreQuery
 		try {
 			connection  = DBConnection.getConnection();
 			statement = connection.createStatement();  
-			resultSet = statement.executeQuery(IAdminQueryConstants.GET_THEATRE_DETAILS_DISPLAY);  
+			resultSet = statement.executeQuery(GET_THEATRE_DETAILS_DISPLAY);  
 
 			while(resultSet.next())   {
 				Theatre theatre = new Theatre();
@@ -350,7 +350,7 @@ public class MovieTheatreDaoImpl implements IMovieTheatreDao, IMovieTheatreQuery
 		int isInserted = 0;
 		try {
 			connection = DBConnection.getConnection();
-			prepareStatement = connection.prepareStatement(IAdminQueryConstants.ADD_THEATRE);    
+			prepareStatement = connection.prepareStatement(ADD_THEATRE);    
 			prepareStatement.setInt(1,theatre.getTheatreId());  
 			prepareStatement.setString(2,theatre.getTheatreName()); 
 			prepareStatement.setString(3, theatre.getTheatreCity());
@@ -375,7 +375,7 @@ public class MovieTheatreDaoImpl implements IMovieTheatreDao, IMovieTheatreQuery
 		try {
 			// TODO Auto-generated method stub
 			connection = DBConnection.getConnection();
-			prepareStatement=connection.prepareStatement(IAdminQueryConstants.DELETE_THEATRE);    
+			prepareStatement=connection.prepareStatement(DELETE_THEATRE);    
 			prepareStatement.setInt(1,theatreId);  
 			isDeleted = prepareStatement.executeUpdate();  
 		}catch(SQLException e){ 
@@ -397,7 +397,7 @@ public class MovieTheatreDaoImpl implements IMovieTheatreDao, IMovieTheatreQuery
 		List<Theatre> theatreList = new ArrayList<Theatre>();
 		try {
 			connection  = DBConnection.getConnection();
-			prepareStatement =connection.prepareStatement(IAdminQueryConstants.GET_THEATRE_BY_NAME); 
+			prepareStatement =connection.prepareStatement(GET_THEATRE_BY_NAME); 
 			prepareStatement.setString(1, theatreName);
 			resultSet = prepareStatement.executeQuery();  
 			while(resultSet.next())   {
@@ -428,7 +428,7 @@ public class MovieTheatreDaoImpl implements IMovieTheatreDao, IMovieTheatreQuery
 		connection = DBConnection.getConnection();
 		int movieLength = 0;
 		try {
-			prepareStatement = connection.prepareStatement(IAdminQueryConstants.GET_MOVIELENGTH);
+			prepareStatement = connection.prepareStatement(GET_MOVIELENGTH);
 			prepareStatement.setInt(1, movieId);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			while(resultSet.next())   {
@@ -453,7 +453,7 @@ public class MovieTheatreDaoImpl implements IMovieTheatreDao, IMovieTheatreQuery
 		String movieName="";
 		try {
 			connection = DBConnection.getConnection();
-			prepareStatement = connection.prepareStatement(IAdminQueryConstants.GET_MOVIENAME_BY_FROM_MOVIE);
+			prepareStatement = connection.prepareStatement(GET_MOVIENAME_FROM_MOVIE);
 			prepareStatement.setInt(1, movieId);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			while(resultSet.next())   {

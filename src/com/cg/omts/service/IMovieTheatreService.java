@@ -191,5 +191,56 @@ public interface IMovieTheatreService {
 	 */
 	public List<Movie> getAllMovies() throws OMTSException;
 	
+	/***********
+	 @Description : This methods returns all Theatres available
+	 @author :  supraja
+	 @return : List of Theatre type
+	 @Exception: throws OMTSException
+	***********/
+	public List<Theatre> getTheatreDetails() throws OMTSException;
 	
+	/**********
+	@Description: To add the newly registered Theatre
+	@author : supraja
+	@param1  : Theatre object
+	@return : Number of theatres added
+	@Exception : throws OMTSException
+	*******/
+	
+	public  int addTheatre(Theatre theatre) throws OMTSException;
+
+	/*******
+	 @Description: To delete specified Theatre
+	 @author : supraja
+	 @param : Theatre Id
+	 @return : No of theatres deleted
+	 @Exception : throws OMTSException
+	********/
+	public int deleteTheatre(int id) throws OMTSException;
+
+	/*********
+	 @Description : To get the list of theatres by specified theatre name 
+	 @author : supraja
+	 @param : theatre name
+	 @return : List of theatre of specified name 
+	  @Exception : throws OMTSException
+	*********/
+	
+	public List<Theatre> getTheatreByName(String theatreName) throws OMTSException;
+	
+	/**@Description : To get the movie length of requested movie
+	 * @author  : supraja
+	 * @param movieId
+	 * @return
+	 * @throws OMTSException
+	 */
+	public int getMovieLength(int movieId) throws OMTSException;
+	/***
+	 * @Description : To get movie name from movie 
+	 * @author  : supraja
+	 * @param movieId
+	 * @return
+	 * @throws OMTSException
+	 */
+	public String getMovieNameById(int movieId) throws OMTSException;
 }
