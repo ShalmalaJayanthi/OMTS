@@ -15,6 +15,8 @@ import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.service.AdminServiceImpl;
 import com.cg.omts.service.IAdminService;
+import com.cg.omts.service.IScreenShowService;
+import com.cg.omts.service.IScreenShowServiceImpl;
 
 
 /**
@@ -39,9 +41,10 @@ public class DeleteShowController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String showName = request.getParameter("showNameSearch");
 		
-		IAdminService adminService = new AdminServiceImpl();
+		//IAdminService adminService = new AdminServiceImpl();
+		IScreenShowService screenShowService = new IScreenShowServiceImpl();
 		try {
-			List<Show> searchShowList = adminService.getShowByName(showName);
+			List<Show> searchShowList = screenShowService.getShowByName(showName);
 			if(searchShowList.size()==0) {
 				request.setAttribute("errorMessage","The Show Name does not exist");
 			}
@@ -62,9 +65,10 @@ public class DeleteShowController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		int showId = Integer.parseInt(request.getParameter("showId"));
-		IAdminService adminDao = new AdminServiceImpl();
+		//IAdminService adminDao = new AdminServiceImpl();
+		IScreenShowService screenShowService = new IScreenShowServiceImpl();
 		try {
-			adminDao.deleteShow(showId);
+			screenShowService.deleteShow(showId);
 		} catch (OMTSException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

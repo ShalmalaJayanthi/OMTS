@@ -13,10 +13,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cg.omts.dao.IMovieTheatreDao;
+import com.cg.omts.dao.IScreenShowDao;
+import com.cg.omts.dao.MovieTheatreDaoImpl;
 import com.cg.omts.dto.Show;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.service.AdminServiceImpl;
 import com.cg.omts.service.IAdminService;
+import com.cg.omts.service.IMovieTheatreService;
+import com.cg.omts.service.IScreenShowService;
+import com.cg.omts.service.IScreenShowServiceImpl;
+import com.cg.omts.service.MovieTheatreServiceImpl;
 
 /**
  * Servlet implementation class AddShowControllern
@@ -47,7 +54,9 @@ public class AddShowController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String message = "";
-		  IAdminService adminService = new AdminServiceImpl();
+		  //IAdminService adminService = new AdminServiceImpl();
+		  IMovieTheatreService movieTheatreService = new MovieTheatreServiceImpl();
+		  IScreenShowService screenShowService = new IScreenShowServiceImpl();
 		  int showId = Integer.parseInt(request.getParameter("showId"));
 		  String showName = request.getParameter("showName");
 		  int movieId = Integer.parseInt(request.getParameter("movieId"));
@@ -58,7 +67,7 @@ public class AddShowController extends HttpServlet {
 		  Show show = new Show();
 		  String movieName="";
 		  try {
-			  movieName = adminService.getMovieNameById(movieId);
+			  movieName = movieTheatreService.getMovieNameById(movieId);
 			  System.out.println(movieName+" Movie name");
 		  }catch (OMTSException e) {
 			  
@@ -69,7 +78,7 @@ public class AddShowController extends HttpServlet {
 			//endTime = new SimpleDateFormat("HH:mm").parse(request.getParameter("etime"));
 			long t = startTime.getTime();
 			//long hours = TimeUnit.MILLISECONDS.toHours(t); 
-			int movieLength = adminService.getMovieLength(movieId);;
+			int movieLength = movieTheatreService.getMovieLength(movieId);;
 			//System.out.println(movieLength);
 			long ONE_MINUTE_IN_MILLIS=60000;
 			Date afterAddingMovieLength=new Date(t + (movieLength * ONE_MINUTE_IN_MILLIS));
@@ -92,14 +101,14 @@ public class AddShowController extends HttpServlet {
 			e1.printStackTrace();
 		}
 		try {
-		  String existShow = adminService.checkShowNameandScreenId(showName, screenId);
+		  String existShow = screenShowService.checkShowNameandScreenId(showName, screenId);
 		  System.out.println("exist show" + existShow);
 		  if(existShow.length()==0) {
 			  System.out.println("You can enter");
 		  }else {
 			message += "Show is already available at this time";  
 		  }
-		 List<Integer> sList = adminService.getScreenFromMovieAndTheatre(theatreId, movieId);
+		 List<Integer> sList = screenShowService.getScreenFromMovieAndTheatre(theatreId, movieId);
 		 System.out.println("sList" + sList +" list contains " + sList.contains(screenId));
 		 if(sList.contains(screenId)) {
 			 System.out.println("screen is there");
@@ -109,7 +118,7 @@ public class AddShowController extends HttpServlet {
 		 System.out.println(sList);
 		 if((sList.contains(screenId) &&(existShow.length()==0))){
 			 System.out.println("all conditions true");
-			 int rowsInserted = adminService.addShow(show);
+			 int rowsInserted = screenShowService.addShow(show);
 			 System.out.println(rowsInserted);
 			 if(rowsInserted > 0) {
 			  request.setAttribute("message", "Successful inserted showId "+showId);

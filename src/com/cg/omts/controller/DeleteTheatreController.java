@@ -14,6 +14,8 @@ import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
 import com.cg.omts.service.AdminServiceImpl;
 import com.cg.omts.service.IAdminService;
+import com.cg.omts.service.IMovieTheatreService;
+import com.cg.omts.service.MovieTheatreServiceImpl;
 
 @WebServlet("/DeleteTheatreServlet")
 public class DeleteTheatreController extends HttpServlet {
@@ -25,9 +27,10 @@ public class DeleteTheatreController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String theatreName = request.getParameter("theatreName");
 		
-		IAdminService adminService = new AdminServiceImpl();
+		//IAdminService adminService = new AdminServiceImpl();
+		IMovieTheatreService movieTheatreService = new MovieTheatreServiceImpl();
 		try {
-			List<Theatre> searchTheatreList = adminService.getTheatreByName(theatreName);
+			List<Theatre> searchTheatreList = movieTheatreService.getTheatreByName(theatreName);
 			if(searchTheatreList.size()==0) {
 				request.setAttribute("errorMessage","The Theatre Name does not exist");
 			}
@@ -49,9 +52,10 @@ public class DeleteTheatreController extends HttpServlet {
 		//doGet(request, response);
 		int rowsDeleted=0;
 		int theatreId = Integer.parseInt(request.getParameter("theatreId"));
-		IAdminService adminService = new AdminServiceImpl();
+		//IAdminService adminService = new AdminServiceImpl();
+		IMovieTheatreService movieTheatreService = new MovieTheatreServiceImpl();
 		try {
-			rowsDeleted = adminService.deleteTheatre(theatreId);
+			rowsDeleted = movieTheatreService.deleteTheatre(theatreId);
 			response.sendRedirect("./deleteTheatre.jsp?message=Successfully Deleted");
 		} catch (OMTSException e) {
 			// TODO Auto-generated catch block
