@@ -312,18 +312,170 @@ public class MovieTheatreDaoImpl implements IMovieTheatreDao, IMovieTheatreQuery
 		}
 		return false;
 	}
+	
+	@Override
+	public List<Theatre> getTheatreDetails() throws OMTSException {
+		// TODO Auto-generated method stub
+		List<Theatre> theatreList = new ArrayList<Theatre>();
+		try {
+			connection  = DBConnection.getConnection();
+			statement = connection.createStatement();  
+			resultSet = statement.executeQuery(IAdminQueryConstants.GET_THEATRE_DETAILS_DISPLAY);  
+			
+			while(resultSet.next())   {
+					Theatre theatre = new Theatre();
+					theatre.setTheatreId(resultSet.getInt(1));
+					theatre.setTheatreName(resultSet.getString(2));
+					theatre.setTheatreCity(resultSet.getString(3));
+					theatre.setManagerName(resultSet.getString(4));
+					theatre.setManagerContact(resultSet.getString(5));
+					theatreList.add(theatre); 
+			}
+		}catch(SQLException e){ 
+			throw new OMTSException("problem while displaying Theatre Data from Database");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+			
+		return theatreList;
+		}
+		
+	@Override
+	public int addTheatre(Theatre theatre) throws OMTSException {
+		// TODO Auto-generated method stub
+		int isInserted = 0;
+		try {
+			connection = DBConnection.getConnection();
+			prepareStatement = connection.prepareStatement(IAdminQueryConstants.ADD_THEATRE);    
+			prepareStatement.setInt(1,theatre.getTheatreId());  
+			prepareStatement.setString(2,theatre.getTheatreName()); 
+			prepareStatement.setString(3, theatre.getTheatreCity());
+			prepareStatement.setString(4, theatre.getManagerName());
+			prepareStatement.setString(5, theatre.getManagerContact());
+			isInserted = prepareStatement.executeUpdate();  
+			}catch(SQLException e){ 
+				throw new OMTSException("problem inserting Theatre Details into Database");
+			}finally {
+				try {
+					connection.close();
+				}catch(SQLException e) {
+					throw new OMTSException("problem while closing Database");
+				}
+			}
+		return isInserted;
+	}
+	
+	@Override
+	public int deleteTheatre(int theatreId) throws OMTSException {
+		int isDeleted = 0;
+		try {
+		// TODO Auto-generated method stub
+		connection = DBConnection.getConnection();
+		prepareStatement=connection.prepareStatement(IAdminQueryConstants.DELETE_THEATRE);    
+		prepareStatement.setInt(1,theatreId);  
+		isDeleted = prepareStatement.executeUpdate();  
+		}catch(SQLException e){ 
+			//System.out.println(e);
+			throw new OMTSException("problem while deleting Theatre Details from Database");
+		}finally {
+			try {
+				connection.close();
+			}catch(SQLException e) {
+				throw new OMTSException("problem while closing Database");
+			}
+		}
+	return isDeleted;
+	}
 
+	@Override
+	public List<Theatre> getTheatreByName(String theatreName) throws OMTSException {
+		// TODO Auto-generated method stub
+		List<Theatre> theatreList = new ArrayList<Theatre>();
+		try {
+			connection  = DBConnection.getConnection();
+			prepareStatement =connection.prepareStatement(IAdminQueryConstants.GET_THEATRE_BY_NAME); 
+			prepareStatement.setString(1, theatreName);
+			resultSet = prepareStatement.executeQuery();  
+				while(resultSet.next())   {
+					Theatre theatre = new Theatre();
+					theatre.setTheatreId(resultSet.getInt(1));
+					theatre.setTheatreName(resultSet.getString(2));
+					theatre.setTheatreCity(resultSet.getString(3));
+					theatre.setManagerName(resultSet.getString(4));
+					theatre.setManagerContact(resultSet.getString(5));
+					theatreList.add(theatre); 
+				}
+			}catch(SQLException e){ 
+				throw new OMTSException("problem while displaying Theatre Data from Database");
+			}finally {
+				try {
+					connection.close();
+				}catch(SQLException e) {
+					throw new OMTSException("problem while closing Database");
+				}
+			}
+				
+		return theatreList;
+	}
+	
 	@Override
 	public int getMovieLength(int movieId) throws OMTSException {
-		// TODO Auto-generated method stub
-		return 0;
+	// TODO Auto-generated method stub
+			connection = DBConnection.getConnection();
+			int movieLength = 0;
+			try {
+				prepareStatement = connection.prepareStatement(IAdminQueryConstants.GET_MOVIELENGTH);
+				prepareStatement.setInt(1, movieId);
+				ResultSet resultSet = prepareStatement.executeQuery();
+				while(resultSet.next())   {
+					movieLength = resultSet.getInt(1);
+				//System.out.println(rs.getInt(1)+"  "+rs.getTime(2)+"  "+rs.getTime(3)+" "+rs.getString(4));  
+				}
+			} catch (SQLException e) {
+				System.out.println("Failed to retrieve movie length from movie "+movieId);
+			} finally {
+				try {
+					connection.close();
+					prepareStatement.close();
+				} catch (SQLException e) {
+					System.out.println("Failed to close the database connection" +e);
+				}
+			}
+			return movieLength;
 	}
+			@Override
+			public String getMovieNameById(int movieId) throws OMTSException{
+				// TODO Auto-generated method stub
+				String movieName="";
+				try {
+					connection = DBConnection.getConnection();
+					prepareStatement = connection.prepareStatement(IAdminQueryConstants.GET_MOVIENAME_BY_FROM_MOVIE);
+					prepareStatement.setInt(1, movieId);
+					ResultSet resultSet = prepareStatement.executeQuery();
+					while(resultSet.next())   {
+						movieName = resultSet.getString(1);
+					}
+				}catch (SQLException e) {
+					System.out.println("Failed to retrieve screen Id  from movie and theatre");
+				} finally {
+					try {
+						connection.close();
+						prepareStatement.close();
+					} catch (SQLException e) {
+						System.out.println("Failed to close the database connection" +e);
+					}
+				}
+			
+				return movieName;
+			}
 
-	@Override
-	public String getMovieNameById(int movieId) throws OMTSException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
+	
 
 	@Override
 	public Movie getMovieDetails(int movieId) throws OMTSException {
@@ -375,30 +527,6 @@ public class MovieTheatreDaoImpl implements IMovieTheatreDao, IMovieTheatreQuery
 
 	@Override
 	public List<Integer> getTheatresByCity(String city) throws OMTSException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Theatre> getTheatreDetails() throws OMTSException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int addTheatre(Theatre theatre) throws OMTSException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteTheatre(int theatreId) throws OMTSException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<Theatre> getTheatreByName(String theatreName) throws OMTSException {
 		// TODO Auto-generated method stub
 		return null;
 	}

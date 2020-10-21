@@ -30,6 +30,9 @@ public interface IAdminQueryConstants {
 	String GET_MOVIE_NAME_ID = "select movieId, movieName from movie";
 	String ADD_SCREEN_SEAT_PRICE = "insert into screenseatprice values(?, ?)";
 	
+
+	
+	
 	
 	
 	
@@ -43,7 +46,8 @@ public interface IAdminQueryConstants {
 			**********************************************************************************
 			*/
 	
-//	String GET_THEATRE_DETAILS = "select * from theatre";
+//	
+	String GET_THEATRE_DETAILS_DISPLAY = "select * from theatre";
 	
 	String ADD_THEATRE = "insert into theatre values(?,?,?,?,?)";
 	
