@@ -1,7 +1,6 @@
 package com.cg.omts.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -13,13 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.cg.omts.dto.Movie;
-import com.cg.omts.dto.Theatre;
 import com.cg.omts.exceptions.OMTSException;
-import com.cg.omts.service.IUserService;
-import com.cg.omts.service.UserServiceImpl;
+import com.cg.omts.service.IMovieTheatreService;
+import com.cg.omts.service.MovieTheatreServiceImpl;
 
 @WebServlet("/DisplayMoviesToUser")
 public class DisplayMoviesToUserServlet extends HttpServlet{
@@ -32,11 +28,9 @@ public class DisplayMoviesToUserServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		PrintWriter out = response.getWriter();
+
 		RequestDispatcher dispatcher = null;
-		IUserService userService = new UserServiceImpl();
-		System.out.println("Inside doGet");
+		IMovieTheatreService movieTheatreService = new MovieTheatreServiceImpl();
 		try {
 			String city = request.getParameter("city");
 			request.setAttribute("city", city);
@@ -45,8 +39,8 @@ public class DisplayMoviesToUserServlet extends HttpServlet{
 				dispatcher.include(request, response);
 			} else {
 				List<Integer> movieIdList = new ArrayList<Integer>();
-				List<Integer> theatreIdList = userService.getTheatresByCity(city);
-				movieIdList = userService.getMoviesByTheatre(theatreIdList);
+				List<Integer> theatreIdList = movieTheatreService.getTheatresByCity(city);
+				movieIdList = movieTheatreService.getMoviesByTheatre(theatreIdList);
 				List<Movie> movieList = new ArrayList<Movie>();
 				Set<Integer> movieIdSet = new HashSet<Integer>();
 				Set<Movie> movieSet = new HashSet<Movie>();
@@ -57,12 +51,10 @@ public class DisplayMoviesToUserServlet extends HttpServlet{
 				for(Integer movieId: movieIdSet) {
 					movieIdList.add(movieId);
 				}
-				movieList = userService.getMoviesById(movieIdList);
+				movieList = movieTheatreService.getMoviesById(movieIdList);
 				for(Movie movie : movieList) {
 					movieSet.add(movie);
 				}
-				//HttpSession session = request.getSession();
-				//request.setAttribute("movie", movieList);
 				request.setAttribute("movie", movieSet);
 			
 				dispatcher = request.getRequestDispatcher("movieoncity.jsp");

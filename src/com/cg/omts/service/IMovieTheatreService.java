@@ -191,6 +191,14 @@ public interface IMovieTheatreService {
 	 */
 	public List<Movie> getAllMovies() throws OMTSException;
 	
+	/*****
+	 * @description Method to get movie details by movieId
+	 * @author Supriya M
+	 * @param movieId
+	 * @return Movie
+	 * @throws OMTSException
+	 */
+	public Movie getMovieDetails(int movieId) throws OMTSException;
 	/***********
 	 @Description : This methods returns all Theatres available
 	 @author :  supraja
@@ -243,4 +251,6 @@ public interface IMovieTheatreService {
 	 * @throws OMTSException
 	 */
 	public String getMovieNameById(int movieId) throws OMTSException;
+
+	
 }

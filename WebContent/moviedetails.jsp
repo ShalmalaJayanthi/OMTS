@@ -145,9 +145,9 @@ tr:hover {
 	</table>
 	</div>
 	<br>
-	<center><div align="center">
+	<div align="center">
 		<a href="booking.jsp?movieId=${movie.movieId}" class="btn">BOOK TICKET</a>
-	</div></center>
+	</div>
 	<div class="footer" style="font-size: 20px">
 		<span style="font-size: 15px">&#9400;</span> Copyrights Capgemini
 		India Ltd.

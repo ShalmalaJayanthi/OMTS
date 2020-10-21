@@ -139,8 +139,14 @@ public class MovieTheatreServiceImpl implements IMovieTheatreService {
 	}
 
 	@Override
+	public Movie getMovieDetails(int movieId) throws OMTSException {
+		movieTheatreDao = new MovieTheatreDaoImpl();
+		Movie movie = movieTheatreDao.getMovieDetails(movieId);
+		return movie;
+	}
+	
+	@Override
 	public List<Theatre> getTheatreDetails() throws OMTSException {
-		// TODO Auto-generated method stub
 		movieTheatreDao = new MovieTheatreDaoImpl();
 		List<Theatre> theatreList = movieTheatreDao.getTheatreDetails();
 		return theatreList;
@@ -148,14 +154,12 @@ public class MovieTheatreServiceImpl implements IMovieTheatreService {
 
 	@Override
 	public int addTheatre(Theatre theatre) throws OMTSException {
-		// TODO Auto-generated method stub
 		movieTheatreDao = new MovieTheatreDaoImpl();
 		return movieTheatreDao.addTheatre(theatre);
 	}
 
 	@Override
 	public int deleteTheatre(int theatreId) throws OMTSException {
-		// TODO Auto-generated method stub
 		movieTheatreDao = new MovieTheatreDaoImpl();
 		return movieTheatreDao.deleteTheatre(theatreId);
 		
@@ -163,23 +167,22 @@ public class MovieTheatreServiceImpl implements IMovieTheatreService {
 
 	@Override
 	public List<Theatre> getTheatreByName(String theatreName) throws OMTSException {
-		// TODO Auto-generated method stub
 		movieTheatreDao = new MovieTheatreDaoImpl();
 		return movieTheatreDao.getTheatreByName(theatreName);
 	}
 
 	@Override
 	public int getMovieLength(int movieId) throws OMTSException {
-		// TODO Auto-generated method stub
 		movieTheatreDao = new MovieTheatreDaoImpl();
 		return movieTheatreDao.getMovieLength(movieId);
 	}
 
 	@Override
 	public String getMovieNameById(int movieId) throws OMTSException {
-		// TODO Auto-generated method stub
 		movieTheatreDao = new MovieTheatreDaoImpl();
 		return movieTheatreDao.getMovieNameById(movieId);
 	}
+
+	
 
 }

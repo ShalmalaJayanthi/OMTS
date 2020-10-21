@@ -1,8 +1,8 @@
 <%@page import="java.util.Set"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="com.cg.omts.service.UserServiceImpl"%>
-<%@page import="com.cg.omts.service.IUserService"%>
+<%@page import="com.cg.omts.service.IMovieTheatreService"%>
+<%@page import="com.cg.omts.service.MovieTheatreServiceImpl"%>
 <%@page import="com.cg.omts.dto.Movie"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -111,8 +111,8 @@ tr:hover {background-color:#f5f5f5;}
 	  		<% 
 	  		}
 	  	}else if(request.getAttribute("movie") == "All Cities"){
-	  		IUserService userService = new UserServiceImpl();
-			List<Movie> moviesList = userService.getAllMovies();
+	  		IMovieTheatreService movieTheatreService = new MovieTheatreServiceImpl();
+			List<Movie> moviesList = movieTheatreService.getAllMovies();
 		for(Movie movie : moviesList) {
 			String movieName = movie.getMovieName();
 			int movId = movie.getMovieId();
